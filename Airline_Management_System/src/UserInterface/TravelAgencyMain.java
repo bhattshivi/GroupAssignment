@@ -39,25 +39,25 @@ public class TravelAgencyMain extends javax.swing.JFrame {
 
         jSplitPane1 = new javax.swing.JSplitPane();
         leftPanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnManageAirlinerMainButton = new javax.swing.JButton();
+        btnManageTravelAgencyMainButton = new javax.swing.JButton();
         rightPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jSplitPane1.setDividerLocation(200);
 
-        jButton1.setText("Manage Airliner");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnManageAirlinerMainButton.setText("Manage Airliner");
+        btnManageAirlinerMainButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnManageAirlinerMainButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Manage Travel Agency");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnManageTravelAgencyMainButton.setText("Manage Travel Agency");
+        btnManageTravelAgencyMainButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnManageTravelAgencyMainButtonActionPerformed(evt);
             }
         });
 
@@ -68,18 +68,18 @@ public class TravelAgencyMain extends javax.swing.JFrame {
             .addGroup(leftPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
+                    .addComponent(btnManageAirlinerMainButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnManageTravelAgencyMainButton, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE))
                 .addContainerGap())
         );
         leftPanelLayout.setVerticalGroup(
             leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(leftPanelLayout.createSequentialGroup()
                 .addGap(51, 51, 51)
-                .addComponent(jButton2)
+                .addComponent(btnManageTravelAgencyMainButton)
                 .addGap(34, 34, 34)
-                .addComponent(jButton1)
-                .addContainerGap(328, Short.MAX_VALUE))
+                .addComponent(btnManageAirlinerMainButton)
+                .addContainerGap(253, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(leftPanel);
@@ -92,19 +92,19 @@ public class TravelAgencyMain extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnManageTravelAgencyMainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageTravelAgencyMainButtonActionPerformed
         ManageTravelAgency travelAgencyPanel = new ManageTravelAgency(this.rightPanel, airlineDirectory);
         this.rightPanel.add(travelAgencyPanel, "ManageTravelAgency");
         CardLayout layout = (CardLayout)this.rightPanel.getLayout();
         layout.next(rightPanel);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnManageTravelAgencyMainButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnManageAirlinerMainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageAirlinerMainButtonActionPerformed
         ManageAirliners airlinerPanel = new ManageAirliners(this.rightPanel, airlineDirectory, airplaneDirectory);
         this.rightPanel.add(airlinerPanel, "ManageAirliners");
         CardLayout layout = (CardLayout)this.rightPanel.getLayout();
         layout.next(rightPanel);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnManageAirlinerMainButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -143,8 +143,8 @@ public class TravelAgencyMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnManageAirlinerMainButton;
+    private javax.swing.JButton btnManageTravelAgencyMainButton;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JPanel leftPanel;
     private javax.swing.JPanel rightPanel;

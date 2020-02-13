@@ -2,28 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/Mayank/Desktop/Group%20Assignment/GroupAssignment/Airline_Management_System/src/UserInterface/ManageAirliner/CreateAirplane.java</file>
-            <file>file:/C:/Users/Mayank/Desktop/Group%20Assignment/GroupAssignment/Airline_Management_System/src/UserInterface/ManageAirliner/CreateFlight.java</file>
-            <file>file:/C:/Users/Mayank/Desktop/Group%20Assignment/GroupAssignment/Airline_Management_System/src/Business/Seat.java</file>
-            <file>file:/C:/Users/Mayank/Desktop/Group%20Assignment/GroupAssignment/Airline_Management_System/src/UserInterface/TravelAgencyMain.java</file>
-            <file>file:/C:/Users/Mayank/Desktop/Group%20Assignment/GroupAssignment/Airline_Management_System/src/Business/Reservation.java</file>
-            <file>file:/C:/Users/Mayank/Desktop/Group%20Assignment/GroupAssignment/Airline_Management_System/src/Business/MasterTravelSchedule.java</file>
-            <file>file:/C:/Users/Mayank/Desktop/Group%20Assignment/GroupAssignment/Airline_Management_System/src/Business/CustomerDirectory.java</file>
-            <file>file:/C:/Users/Mayank/Desktop/Group%20Assignment/GroupAssignment/Airline_Management_System/src/UserInterface/ManageTravelAgency/CreateAirliners.java</file>
-            <file>file:/C:/Users/Mayank/Desktop/Group%20Assignment/GroupAssignment/Airline_Management_System/src/UserInterface/ManageTravelAgency/ManageTravelAgency.java</file>
-            <file>file:/C:/Users/Mayank/Desktop/Group%20Assignment/GroupAssignment/Airline_Management_System/src/Business/Fleet.java</file>
-            <file>file:/C:/Users/Mayank/Desktop/Group%20Assignment/GroupAssignment/Airline_Management_System/src/Business/FlightSchedule.java</file>
-            <file>file:/C:/Users/Mayank/Desktop/Group%20Assignment/GroupAssignment/Airline_Management_System/src/Business/AirplaneDirectory.java</file>
-            <file>file:/C:/Users/Mayank/Desktop/Group%20Assignment/GroupAssignment/Airline_Management_System/src/Business/Airliner.java</file>
-            <file>file:/C:/Users/Mayank/Desktop/Group%20Assignment/GroupAssignment/Airline_Management_System/src/UserInterface/ManageTravelAgency/ManageAirliners.java</file>
-            <file>file:/C:/Users/Mayank/Desktop/Group%20Assignment/GroupAssignment/Airline_Management_System/src/Business/Flight.java</file>
-            <file>file:/C:/Users/Mayank/Desktop/Group%20Assignment/GroupAssignment/Airline_Management_System/src/Business/AirlinerDirectory.java</file>
-            <file>file:/C:/Users/Mayank/Desktop/Group%20Assignment/GroupAssignment/Airline_Management_System/src/Business/Customer.java</file>
-            <file>file:/C:/Users/Mayank/Desktop/Group%20Assignment/GroupAssignment/Airline_Management_System/src/Business/Journey.java</file>
-            <file>file:/C:/Users/Mayank/Desktop/Group%20Assignment/GroupAssignment/Airline_Management_System/src/UserInterface/ManageAirliner/ManageAirliners.java</file>
-            <file>file:/C:/Users/Mayank/Desktop/Group%20Assignment/GroupAssignment/Airline_Management_System/src/Business/Airplane.java</file>
-            <file>file:/C:/Users/Mayank/Desktop/Group%20Assignment/GroupAssignment/Airline_Management_System/src/UserInterface/ManageAirliner/AirlinerFunction.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

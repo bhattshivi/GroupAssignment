@@ -35,12 +35,28 @@ public class ManageTravelAgency extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        btnRegisterAirliners = new javax.swing.JButton();
+        btnBookFlight = new javax.swing.JButton();
+        btnManageCustomer = new javax.swing.JButton();
 
-        jButton1.setText("Register Airliners");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnRegisterAirliners.setText("Register Airliners");
+        btnRegisterAirliners.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnRegisterAirlinersActionPerformed(evt);
+            }
+        });
+
+        btnBookFlight.setText("Book Flight");
+        btnBookFlight.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBookFlightActionPerformed(evt);
+            }
+        });
+
+        btnManageCustomer.setText("Manage Customer");
+        btnManageCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManageCustomerActionPerformed(evt);
             }
         });
 
@@ -49,28 +65,49 @@ public class ManageTravelAgency extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(110, 110, 110)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(159, Short.MAX_VALUE))
+                .addGap(195, 195, 195)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnBookFlight, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRegisterAirliners, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnManageCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
+                .addContainerGap(235, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(jButton1)
-                .addContainerGap(223, Short.MAX_VALUE))
+                .addGap(110, 110, 110)
+                .addComponent(btnRegisterAirliners, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnBookFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnManageCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(146, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnRegisterAirlinersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterAirlinersActionPerformed
         ManageAirliners manageAirlinersPanel = new ManageAirliners(this.panel, airlineDirectory);
         this.panel.add(manageAirlinersPanel, "ManageAirliners");
         CardLayout layout = (CardLayout)this.panel.getLayout();
         layout.next(panel);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnRegisterAirlinersActionPerformed
+
+    private void btnBookFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookFlightActionPerformed
+        // TODO add your handling code here:
+        SearchFlightJPanel searchFlightJPanel = new SearchFlightJPanel(this.panel, airlineDirectory);
+        this.panel.add(searchFlightJPanel, "SearchFlightJPanel");
+        CardLayout layout = (CardLayout)this.panel.getLayout();
+        layout.next(panel);
+    }//GEN-LAST:event_btnBookFlightActionPerformed
+
+    private void btnManageCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageCustomerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnManageCustomerActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnBookFlight;
+    private javax.swing.JButton btnManageCustomer;
+    private javax.swing.JButton btnRegisterAirliners;
     // End of variables declaration//GEN-END:variables
 }

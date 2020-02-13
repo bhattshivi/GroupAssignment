@@ -97,7 +97,7 @@ public class AirlinerFunction extends javax.swing.JPanel {
                             .addComponent(jButton1))
                         .addGap(99, 99, 99)
                         .addComponent(jButton2)))
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,7 +110,7 @@ public class AirlinerFunction extends javax.swing.JPanel {
                     .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
