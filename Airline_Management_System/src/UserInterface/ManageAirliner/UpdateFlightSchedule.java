@@ -17,20 +17,22 @@ import javax.swing.JPanel;
  *
  * @author Mayank
  */
-public class CreateFlightSchedule extends javax.swing.JPanel {
+public class UpdateFlightSchedule extends javax.swing.JPanel {
     private AirlinerDirectory airlineDirectory;
     private AirplaneDirectory airplaneDirectory;
     private JPanel panel;
     private Airliner airliner;
+    private FlightSchedule flightSchedule;
     /**
      * Creates new form CreateFlightSchedule
      */
-    public CreateFlightSchedule(JPanel panel, AirlinerDirectory airlineDirectory, AirplaneDirectory airplaneDirectory, Airliner airliner) {
+    public UpdateFlightSchedule(JPanel panel, AirlinerDirectory airlineDirectory, AirplaneDirectory airplaneDirectory, FlightSchedule flightSchedule) {
         initComponents();
         this.airliner = airliner;
         this.panel = panel;
         this.airlineDirectory = airlineDirectory;
         this.airplaneDirectory = airplaneDirectory;
+        this.flightSchedule = flightSchedule;
     }
 
     /**
@@ -83,7 +85,7 @@ public class CreateFlightSchedule extends javax.swing.JPanel {
         jLabel6.setText("Arrival time");
 
         jLabel7.setFont(new java.awt.Font("Segoe Script", 1, 24)); // NOI18N
-        jLabel7.setText("Create Flight Schedule");
+        jLabel7.setText("Update Flight Schedule");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

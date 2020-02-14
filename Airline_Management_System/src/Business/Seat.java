@@ -11,9 +11,18 @@ package Business;
  */
 public class Seat {
     private String seatId;
+    private String seatName;
     private double price;
     private String type;
     private String status;
+
+    public String getSeatName() {
+        return seatName;
+    }
+
+    public void setSeatName(String seatName) {
+        this.seatName = seatName;
+    }
 
     public String getSeatId() {
         return seatId;

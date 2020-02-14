@@ -8,6 +8,7 @@ package UserInterface.ManageTravelAgency;
 import Business.AirlinerDirectory;
 import Business.Flight;
 import Business.MasterTravelSchedule;
+import Business.Seat;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -42,6 +43,23 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
             row[1]=f.getFlightSchedule().getSource();
             row[2]=f.getFlightSchedule().getDestination();
             dtm.addRow(row);
+            
+            System.out.println("===>> " + f.getFlightId());
+            System.out.println("===>> " + f.getFlightSchedule().getSource());
+            System.out.println("===>> " + f.getFlightSchedule().getSource());
+            System.out.println("===>> " + f.getFlightSchedule().getArrivalDate());
+            System.out.println("===>> " + f.getFlightSchedule().getArrivalTime());
+            System.out.println("===>> " + f.getFlightSchedule().getDepartureDate());
+            System.out.println("===>> " + f.getFlightSchedule().getDepartureTime());
+            System.out.println("===>> " + f.getAirliner().getAirlinerName());
+            System.out.println("===>> " + f.getAirplane().getAirplaneName());
+            for(Seat s : f.getFlightSeatList()) {
+                System.out.println("===>> " + s.getSeatName());
+                System.out.println("===>> " + s.getStatus());
+                System.out.println("===>> " + s.getPrice());
+                System.out.println("===>> " + s.getType());
+            }
+            
         }
     }
 

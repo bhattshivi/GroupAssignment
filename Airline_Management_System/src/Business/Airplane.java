@@ -38,4 +38,9 @@ public class Airplane {
         this.seatRow = seatRow;
     }
     
+    @Override
+    public String toString() {
+        return airplaneName; //To change body of generated methods, choose Tools | Templates.
+    }
+    
 }

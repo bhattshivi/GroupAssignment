@@ -11,6 +11,8 @@ import Business.MasterTravelSchedule;
 import UserInterface.ManageAirliner.ManageAirliners;
 import UserInterface.ManageTravelAgency.ManageTravelAgency;
 import java.awt.CardLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
 /**
  *
@@ -29,6 +31,12 @@ public class TravelAgencyMain extends javax.swing.JFrame {
         airlineDirectory = new AirlinerDirectory();
         airplaneDirectory = new AirplaneDirectory();
         masterTravelSchedule = new MasterTravelSchedule();
+        defaultCenterJFrame();
+    }
+    
+    private void defaultCenterJFrame() {
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
     }
 
     /**
@@ -47,6 +55,8 @@ public class TravelAgencyMain extends javax.swing.JFrame {
         rightPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(950, 650));
+        setResizable(false);
 
         jSplitPane1.setDividerLocation(200);
 
@@ -72,7 +82,7 @@ public class TravelAgencyMain extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnManageAirlinerMainButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnManageTravelAgencyMainButton, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE))
+                    .addComponent(btnManageTravelAgencyMainButton, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
                 .addContainerGap())
         );
         leftPanelLayout.setVerticalGroup(
@@ -82,7 +92,7 @@ public class TravelAgencyMain extends javax.swing.JFrame {
                 .addComponent(btnManageTravelAgencyMainButton)
                 .addGap(34, 34, 34)
                 .addComponent(btnManageAirlinerMainButton)
-                .addContainerGap(253, Short.MAX_VALUE))
+                .addContainerGap(513, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(leftPanel);

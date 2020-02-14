@@ -7,6 +7,7 @@ package Business;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,11 +15,50 @@ import java.time.LocalTime;
  */
 public class Flight {
     private String flightId;
+    private String flightName;
     private boolean isActive;
     private Airliner airliner;
+    private Airplane airplane;
     private Journey journey;
     private FlightSchedule flightSchedule;
+    private ArrayList<Seat> flightSeatList;
+    
+    public Flight() {
+        this.flightSeatList = new ArrayList<>();
+    }
+    public ArrayList<Seat> getFlightSeatList() {
+        return flightSeatList;
+    }
 
+    public void setFlightSeatList(ArrayList<Seat> flightSeatList) {
+        this.flightSeatList = flightSeatList;
+    }
+    
+    public String getFlightName() {
+        return flightName;
+    }
+
+    public void setFlightName(String flightName) {
+        this.flightName = flightName;
+    }
+
+    public boolean isIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
+    public Airplane getAirplane() {
+        return airplane;
+    }
+
+    public void setAirplane(Airplane airplane) {
+        this.airplane = airplane;
+    }
+    
+    
     public String getFlightId() {
         return flightId;
     }

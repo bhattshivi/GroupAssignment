@@ -18,13 +18,23 @@ public class Airliner {
     private String headquarter;
     private ArrayList<FlightSchedule> flightScheduleList;
     private ArrayList<Flight> flightList;
+    private ArrayList<Airplane> airplaneList;
     private int count = 0;
     
     public Airliner() {
-        this.flightScheduleList = new ArrayList<FlightSchedule>();
-        this.flightList = new ArrayList<Flight>();
+        this.flightScheduleList = new ArrayList<>();
+        this.flightList = new ArrayList<>();
+        this.airplaneList = new ArrayList<>();
     }
 
+    public ArrayList<Airplane> getAirplaneList() {
+        return airplaneList;
+    }
+
+    public void setAirplaneList(ArrayList<Airplane> airplaneList) {
+        this.airplaneList = airplaneList;
+    }
+    
     public ArrayList<Flight> getFlightList() {
         return flightList;
     }
@@ -43,6 +53,12 @@ public class Airliner {
         count++;
         flight.setFlightId("Flight" + count);
         flightList.add(flight);
+    }
+    
+    public void addAirplane(Airplane airplane) {
+        count++;
+        //flight.setFlightId("Flight" + count);
+        airplaneList.add(airplane);
     }
 
     public ArrayList<FlightSchedule> getFlightScheduleList() {

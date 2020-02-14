@@ -156,7 +156,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe Script" size="24" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Create Flight Schedule"/>
+        <Property name="text" type="java.lang.String" value="Update Flight Schedule"/>
       </Properties>
     </Component>
   </SubComponents>
