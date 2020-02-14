@@ -16,34 +16,37 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Group type="103" groupAlignment="1" attributes="0">
+
+
+          <Group type="102" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="bkFlightCustomer" min="-2" pref="641" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel10" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="jLabel8" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="jLabel6" max="32767" attributes="0"/>
-                                  <Component id="jLabel12" alignment="1" max="32767" attributes="0"/>
-                              </Group>
-                              <Component id="jLabel4" min="-2" pref="176" max="-2" attributes="0"/>
-                              <Component id="jLabel2" min="-2" pref="176" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="bookFlightNumber" alignment="0" max="32767" attributes="0"/>
-                              <Component id="bookAirplane" alignment="0" max="32767" attributes="0"/>
-                              <Component id="bookSource" alignment="0" max="32767" attributes="0"/>
-                              <Component id="bookDestination" alignment="0" max="32767" attributes="0"/>
-                              <Component id="bookDepartureTime" pref="292" max="32767" attributes="0"/>
-                              <Component id="bookArrivalTime" alignment="0" max="32767" attributes="0"/>
-                          </Group>
+
+
+                  <Component id="jLabel14" alignment="1" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="jLabel12" max="32767" attributes="0"/>
+                          <Component id="jLabel10" pref="187" max="32767" attributes="0"/>
+                          <Component id="jLabel8" max="32767" attributes="0"/>
+                          <Component id="jLabel6" max="32767" attributes="0"/>
+                          <Component id="jLabel4" max="32767" attributes="0"/>
+                          <Component id="jLabel2" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="bookAirplane" max="32767" attributes="0"/>
+                          <Component id="bookFlightNumber" max="32767" attributes="0"/>
+                          <Component id="bookSource" max="32767" attributes="0"/>
+                          <Component id="bookDestination" alignment="0" max="32767" attributes="0"/>
+                          <Component id="bookDepartureTime" alignment="0" pref="284" max="32767" attributes="0"/>
+                          <Component id="bookArrivalTime" alignment="0" max="32767" attributes="0"/>
+
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>

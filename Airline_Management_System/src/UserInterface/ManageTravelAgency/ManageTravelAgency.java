@@ -6,6 +6,8 @@
 package UserInterface.ManageTravelAgency;
 
 import Business.AirlinerDirectory;
+import Business.FlightSchedule;
+import Business.MasterTravelSchedule;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -17,13 +19,15 @@ public class ManageTravelAgency extends javax.swing.JPanel {
     
     private JPanel panel;
     private AirlinerDirectory airlineDirectory;
+    private MasterTravelSchedule masterTravelSchedule;
     /**
      * Creates new form ManageTravelAgency
      */
-    public ManageTravelAgency(JPanel panel, AirlinerDirectory airlineDirectory) {
+    public ManageTravelAgency(JPanel panel, AirlinerDirectory airlineDirectory, MasterTravelSchedule masterTravelSchedule) {
         initComponents();
         this.panel = panel;
         this.airlineDirectory = airlineDirectory;
+        this.masterTravelSchedule = masterTravelSchedule;
     }
 
     /**
@@ -94,7 +98,7 @@ public class ManageTravelAgency extends javax.swing.JPanel {
 
     private void btnBookFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookFlightActionPerformed
         // TODO add your handling code here:
-        SearchFlightJPanel searchFlightJPanel = new SearchFlightJPanel(this.panel, airlineDirectory);
+        SearchFlightJPanel searchFlightJPanel = new SearchFlightJPanel(this.panel, airlineDirectory, masterTravelSchedule);
         this.panel.add(searchFlightJPanel, "SearchFlightJPanel");
         CardLayout layout = (CardLayout)this.panel.getLayout();
         layout.next(panel);

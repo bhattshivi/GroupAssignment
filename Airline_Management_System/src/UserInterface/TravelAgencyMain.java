@@ -7,6 +7,7 @@ package UserInterface;
 
 import Business.AirlinerDirectory;
 import Business.AirplaneDirectory;
+import Business.MasterTravelSchedule;
 import UserInterface.ManageAirliner.ManageAirliners;
 import UserInterface.ManageTravelAgency.ManageTravelAgency;
 import java.awt.CardLayout;
@@ -19,6 +20,7 @@ public class TravelAgencyMain extends javax.swing.JFrame {
     
     private AirlinerDirectory airlineDirectory;
     private AirplaneDirectory airplaneDirectory;
+    private MasterTravelSchedule masterTravelSchedule;
     /**
      * Creates new form MainJFrame
      */
@@ -26,6 +28,7 @@ public class TravelAgencyMain extends javax.swing.JFrame {
         initComponents();
         airlineDirectory = new AirlinerDirectory();
         airplaneDirectory = new AirplaneDirectory();
+        masterTravelSchedule = new MasterTravelSchedule();
     }
 
     /**
@@ -93,14 +96,14 @@ public class TravelAgencyMain extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnManageTravelAgencyMainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageTravelAgencyMainButtonActionPerformed
-        ManageTravelAgency travelAgencyPanel = new ManageTravelAgency(this.rightPanel, airlineDirectory);
+        ManageTravelAgency travelAgencyPanel = new ManageTravelAgency(this.rightPanel, airlineDirectory, masterTravelSchedule);
         this.rightPanel.add(travelAgencyPanel, "ManageTravelAgency");
         CardLayout layout = (CardLayout)this.rightPanel.getLayout();
         layout.next(rightPanel);
     }//GEN-LAST:event_btnManageTravelAgencyMainButtonActionPerformed
 
     private void btnManageAirlinerMainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageAirlinerMainButtonActionPerformed
-        ManageAirliners airlinerPanel = new ManageAirliners(this.rightPanel, airlineDirectory, airplaneDirectory);
+        ManageAirliners airlinerPanel = new ManageAirliners(this.rightPanel, airlineDirectory, airplaneDirectory, masterTravelSchedule);
         this.rightPanel.add(airlinerPanel, "ManageAirliners");
         CardLayout layout = (CardLayout)this.rightPanel.getLayout();
         layout.next(rightPanel);

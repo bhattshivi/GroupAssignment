@@ -5,9 +5,13 @@
  */
 package UserInterface.ManageAirliner;
 
+import Business.Airliner;
 import Business.AirlinerDirectory;
+import Business.FlightSchedule;
 import Business.Airplane;
 import Business.AirplaneDirectory;
+import Business.Flight;
+import Business.MasterTravelSchedule;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.DefaultCellEditor;
@@ -21,14 +25,19 @@ public class CreateFlight extends javax.swing.JPanel {
     private AirplaneDirectory airplaneDirectory;
     private JPanel panel;
     DefaultTableModel dtm;
+    private Airliner airliner;
+    private FlightSchedule f;
+    private MasterTravelSchedule masterTravelSchedule;
     /**
      * Creates new form CreateFlight
      */
-    public CreateFlight(JPanel panel, AirlinerDirectory airlineDirectory, AirplaneDirectory airplaneDirectory) {
+    public CreateFlight(JPanel panel, AirlinerDirectory airlineDirectory, AirplaneDirectory airplaneDirectory, Airliner airliner, MasterTravelSchedule masterTravelSchedule) {
         initComponents();
         this.panel = panel;
         this.airlineDirectory = airlineDirectory;
         this.airplaneDirectory = airplaneDirectory;
+        this.airliner = airliner;
+        this.masterTravelSchedule = masterTravelSchedule;
         populateAirplanes();
         dtm = (DefaultTableModel) jTable1.getModel();
     }
@@ -37,6 +46,12 @@ public class CreateFlight extends javax.swing.JPanel {
         for(Airplane a : airplaneDirectory.getAirplaneList()) {
             jComboBox2.addItem(a.getAirplaneName());
         }
+        
+        for(FlightSchedule s : airliner.getFlightScheduleList()) {
+            jComboBox5.addItem(s);
+        }
+        
+        
     }
 
     /**
@@ -72,6 +87,8 @@ public class CreateFlight extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jComboBox5 = new javax.swing.JComboBox<>();
 
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Economy", "Business" }));
 
@@ -151,6 +168,14 @@ public class CreateFlight extends javax.swing.JPanel {
             }
         });
 
+        jLabel11.setText("Select Flight Schedule");
+
+        jComboBox5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -165,9 +190,6 @@ public class CreateFlight extends javax.swing.JPanel {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(jLabel8)
                                         .addGap(54, 54, 54))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel7)
@@ -178,7 +200,15 @@ public class CreateFlight extends javax.swing.JPanel {
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGap(1, 1, 1)
                                                 .addComponent(jLabel5)))
-                                        .addGap(81, 81, 81)))
+                                        .addGap(81, 81, 81))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel11)
+                                                .addGap(19, 19, 19)
+                                                .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -204,7 +234,7 @@ public class CreateFlight extends javax.swing.JPanel {
                                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(223, 223, 223)
+                        .addGap(230, 230, 230)
                         .addComponent(jButton1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -223,11 +253,15 @@ public class CreateFlight extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(105, 105, 105)
+                .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -264,6 +298,8 @@ public class CreateFlight extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField6ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        /*
+        original
         dtm = (DefaultTableModel) jTable1.getModel();
         int nRow = dtm.getRowCount();
         int nCol = dtm.getColumnCount();
@@ -273,6 +309,7 @@ public class CreateFlight extends javax.swing.JPanel {
             }
             
         }
+        */
         /*
         Object[][] tableData = new Object[nRow][nCol];
         for (int i = 0 ; i < nRow ; i++)
@@ -280,6 +317,12 @@ public class CreateFlight extends javax.swing.JPanel {
                 tableData[i][j] = dtm.getValueAt(i,j);
         */
         //return tableData;
+        Flight f1 = new Flight();
+        f1.setAirliner(airliner);
+        f1.setFlightSchedule(f);
+        
+        airliner.addFlight(f1);
+        masterTravelSchedule.addFLight(f1);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
@@ -293,6 +336,13 @@ public class CreateFlight extends javax.swing.JPanel {
         dtm.setRowCount(totalSeats);
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
+    private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox5ActionPerformed
+        f = (FlightSchedule)jComboBox5.getSelectedItem();
+        jTextField2.setText(f.getSource());
+        jTextField3.setText(f.getDestination());
+        
+    }//GEN-LAST:event_jComboBox5ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -300,8 +350,10 @@ public class CreateFlight extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
+    private javax.swing.JComboBox<FlightSchedule> jComboBox5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

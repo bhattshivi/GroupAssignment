@@ -5,17 +5,33 @@
  */
 package UserInterface.ManageAirliner;
 
+import Business.Airliner;
+import Business.AirlinerDirectory;
+import Business.AirplaneDirectory;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Mayank
  */
 public class FlightSchedule extends javax.swing.JPanel {
-
+    
+    private AirlinerDirectory airlineDirectory;
+    private AirplaneDirectory airplaneDirectory;
+    private JPanel panel;
+    private Airliner airliner;
+    
+    
     /**
      * Creates new form FlightSchedule
      */
-    public FlightSchedule() {
+    public FlightSchedule(JPanel panel, AirlinerDirectory airlineDirectory, AirplaneDirectory airplaneDirectory, Airliner airliner) {
         initComponents();
+        this.airliner = airliner;
+        this.panel = panel;
+        this.airlineDirectory = airlineDirectory;
+        this.airplaneDirectory = airplaneDirectory;
     }
 
     /**
@@ -46,6 +62,11 @@ public class FlightSchedule extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText("Add Schedule");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Update Schedule");
 
@@ -77,6 +98,13 @@ public class FlightSchedule extends javax.swing.JPanel {
                 .addContainerGap(126, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        CreateFlightSchedule createflightSchedulePanel = new CreateFlightSchedule(this.panel, this.airlineDirectory, this.airplaneDirectory, this.airliner);
+        this.panel.add(createflightSchedulePanel, "CreateFlightSchedule");
+        CardLayout layout = (CardLayout)this.panel.getLayout();
+        layout.next(panel);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

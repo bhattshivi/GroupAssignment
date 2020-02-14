@@ -86,4 +86,9 @@ public class FlightSchedule {
     public void setDayTime(String dayTime) {
         this.dayTime = dayTime;
     }
+    
+    @Override
+    public String toString() {
+        return flightScheduleId; //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -6,8 +6,11 @@
 package UserInterface.ManageTravelAgency;
 
 import Business.AirlinerDirectory;
+import Business.Flight;
+import Business.MasterTravelSchedule;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,10 +23,26 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
      */
     private JPanel panel;
     private AirlinerDirectory airlineDirectory;
-    public SearchFlightJPanel(JPanel panel, AirlinerDirectory airlineDirectory) {
+    private MasterTravelSchedule masterTravelSchedule;
+    
+    public SearchFlightJPanel(JPanel panel, AirlinerDirectory airlineDirectory, MasterTravelSchedule masterTravelSchedule) {
         initComponents();
         this.panel = panel;
         this.airlineDirectory = airlineDirectory;
+        this.masterTravelSchedule = masterTravelSchedule;
+        populate();
+    }
+    
+    public void populate() {
+        DefaultTableModel dtm = (DefaultTableModel)tblSearchFlight.getModel();
+        dtm.setRowCount(0);
+        for(Flight f : masterTravelSchedule.getMasterFlightList()){
+            Object[] row = new Object[dtm.getColumnCount()];
+            row[0]=f.getFlightId();
+            row[1]=f.getFlightSchedule().getSource();
+            row[2]=f.getFlightSchedule().getDestination();
+            dtm.addRow(row);
+        }
     }
 
     /**
@@ -148,9 +167,9 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
                     .addComponent(searchFlightNumber)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchSourceLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(searchSourceLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -165,10 +184,12 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
 
     private void bckSearchFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bckSearchFlightActionPerformed
         // TODO add your handling code here:
-        ManageTravelAgency manageTravelAgency = new ManageTravelAgency(this.panel, airlineDirectory);
+
+        /*ManageTravelAgency manageTravelAgency = new ManageTravelAgency(this.panel, airlineDirectory);
+>>>>>>> 0af4737f3e375b9e85ba6c7f8548bb2cfbc992f0
         this.panel.add(manageTravelAgency, "ManageTravelAgency");
         CardLayout layout = (CardLayout)this.panel.getLayout();
-        layout.next(panel);
+        layout.next(panel);*/
     }//GEN-LAST:event_bckSearchFlightActionPerformed
 
     private void btnBookFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookFlightActionPerformed
