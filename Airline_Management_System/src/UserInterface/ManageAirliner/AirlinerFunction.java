@@ -8,6 +8,7 @@ package UserInterface.ManageAirliner;
 import Business.Airliner;
 import Business.AirlinerDirectory;
 import Business.AirplaneDirectory;
+import Business.MasterTravelSchedule;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -21,15 +22,17 @@ public class AirlinerFunction extends javax.swing.JPanel {
     private AirplaneDirectory airplaneDirectory;
     private JPanel panel;
     private Airliner airliner;
+    private MasterTravelSchedule masterTravelSchedule;
     /**
      * Creates new form AirlinerFunction
      */
-    public AirlinerFunction(JPanel panel, AirlinerDirectory airlineDirectory, AirplaneDirectory airplaneDirectory, Airliner airliner) {
+    public AirlinerFunction(JPanel panel, AirlinerDirectory airlineDirectory, AirplaneDirectory airplaneDirectory, Airliner airliner, MasterTravelSchedule masterTravelSchedule) {
         initComponents();
         this.panel = panel;
         this.airlineDirectory = airlineDirectory;
         this.airplaneDirectory = airplaneDirectory;
         this.airliner = airliner;
+        this.masterTravelSchedule = masterTravelSchedule;
     }
 
     /**
@@ -122,14 +125,17 @@ public class AirlinerFunction extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        CreateFlight createFlightPanel = new CreateFlight(this.panel, airlineDirectory, airplaneDirectory);
+        CreateFlight createFlightPanel = new CreateFlight(this.panel, airlineDirectory, airplaneDirectory, airliner, masterTravelSchedule);
         this.panel.add(createFlightPanel, "CreateFlight");
         CardLayout layout = (CardLayout)this.panel.getLayout();
         layout.next(panel);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        FlightSchedule flightSchedulePanel = new FlightSchedule(this.panel, airlineDirectory, airplaneDirectory, airliner);
+        this.panel.add(flightSchedulePanel, "FlightSchedule");
+        CardLayout layout = (CardLayout)this.panel.getLayout();
+        layout.next(panel);
     }//GEN-LAST:event_jButton3ActionPerformed
 
 

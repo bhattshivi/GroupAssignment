@@ -9,8 +9,10 @@ import Business.AirlinerDirectory;
 import Business.Airliner;
 import Business.Airplane;
 import Business.AirplaneDirectory;
+import Business.MasterTravelSchedule;
 import UserInterface.ManageTravelAgency.ManageTravelAgency;
 import java.awt.CardLayout;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
 /**
@@ -21,24 +23,29 @@ public class ManageAirliners extends javax.swing.JPanel {
     
     private AirlinerDirectory airlineDirectory;
     private AirplaneDirectory airplaneDirectory;
-    private Airliner airliner = null;
+    private Airliner airliner;
     private JPanel panel;
+    private MasterTravelSchedule masterTravelSchedule;
     /**
      * Creates new form ManageAirliners
      */
-    public ManageAirliners(JPanel panel, AirlinerDirectory airlineDirectory, AirplaneDirectory airplaneDirectory) {
+    public ManageAirliners(JPanel panel, AirlinerDirectory airlineDirectory, AirplaneDirectory airplaneDirectory, MasterTravelSchedule masterTravelSchedule) {
         initComponents();
         this.panel = panel;
         this.airlineDirectory = airlineDirectory;
         this.airplaneDirectory = airplaneDirectory;
+        this.masterTravelSchedule = masterTravelSchedule;
         populateAirlinersList(airlineDirectory);
     }
     
     public void populateAirlinersList(AirlinerDirectory airlineDirectory){
         System.out.println("===>> " + airlineDirectory.getAirlinerList());
         for(Airliner a : airlineDirectory.getAirlinerList()) {
-            jComboBox1.addItem(a.getAirlinerName());
-            System.out.println("===>> " + a.getAirlinerName());
+            
+            jComboBox1.addItem(a);
+            
+            //jComboBox1.addItem(a.getAirlinerName());
+            //System.out.println("===>> " + a.getAirlinerName());
         }
     }
     /**
@@ -52,8 +59,6 @@ public class ManageAirliners extends javax.swing.JPanel {
 
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jButton1.setText("Continue");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -88,8 +93,8 @@ public class ManageAirliners extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //airliner = jComboBox1.getSelectedItem();
-        AirlinerFunction airlinerFuncPanel = new AirlinerFunction(this.panel, airlineDirectory, airplaneDirectory, airliner);
+        airliner = (Airliner)jComboBox1.getSelectedItem();
+        AirlinerFunction airlinerFuncPanel = new AirlinerFunction(this.panel, airlineDirectory, airplaneDirectory, airliner, masterTravelSchedule);
         this.panel.add(airlinerFuncPanel, "AirlinerFunction");
         CardLayout layout = (CardLayout)this.panel.getLayout();
         layout.next(panel);
@@ -98,6 +103,6 @@ public class ManageAirliners extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<Airliner> jComboBox1;
     // End of variables declaration//GEN-END:variables
 }

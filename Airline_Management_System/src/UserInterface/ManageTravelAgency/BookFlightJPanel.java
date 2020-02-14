@@ -191,10 +191,10 @@ public class BookFlightJPanel extends javax.swing.JPanel {
 
     private void bckBookFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bckBookFlightActionPerformed
         // TODO add your handling code here:
-        SearchFlightJPanel searchFlightJPanel = new SearchFlightJPanel(this.panel, airlineDirectory);
+        /*SearchFlightJPanel searchFlightJPanel = new SearchFlightJPanel(this.panel, airlineDirectory);
         this.panel.add(searchFlightJPanel, "SearchFlightJPanel");
         CardLayout layout = (CardLayout)this.panel.getLayout();
-        layout.next(panel);
+        layout.next(panel);*/
     }//GEN-LAST:event_bckBookFlightActionPerformed
 
 

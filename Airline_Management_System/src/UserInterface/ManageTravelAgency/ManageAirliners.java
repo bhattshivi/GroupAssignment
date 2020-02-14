@@ -6,6 +6,7 @@
 package UserInterface.ManageTravelAgency;
 
 import Business.AirlinerDirectory;
+import Business.MasterTravelSchedule;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -17,6 +18,7 @@ public class ManageAirliners extends javax.swing.JPanel {
     
     private JPanel panel;
     private AirlinerDirectory airlineDirectory;
+    private MasterTravelSchedule masterTravelSchedule;
     /**
      * Creates new form ManageAirliners
      */
@@ -24,6 +26,7 @@ public class ManageAirliners extends javax.swing.JPanel {
         initComponents();
         this.panel = panel;
         this.airlineDirectory = airlineDirectory;
+        //this.masterTravelSchedule = masterTravelSchedule;
     }
 
     /**
@@ -115,10 +118,11 @@ public class ManageAirliners extends javax.swing.JPanel {
 
     private void btnBackManageAirlineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackManageAirlineActionPerformed
         // TODO add your handling code here:
+        /*
         ManageTravelAgency manageTravelAgency = new ManageTravelAgency(this.panel, airlineDirectory);
         this.panel.add(manageTravelAgency, "ManageTravelAgency");
         CardLayout layout = (CardLayout)this.panel.getLayout();
-        layout.next(panel);
+        layout.next(panel);*/
     }//GEN-LAST:event_btnBackManageAirlineActionPerformed
 
 

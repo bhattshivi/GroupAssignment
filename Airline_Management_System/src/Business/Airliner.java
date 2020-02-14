@@ -17,13 +17,32 @@ public class Airliner {
     private int fleetSize;
     private String headquarter;
     private ArrayList<FlightSchedule> flightScheduleList;
+    private ArrayList<Flight> flightList;
+    private int count = 0;
     
     public Airliner() {
         this.flightScheduleList = new ArrayList<FlightSchedule>();
+        this.flightList = new ArrayList<Flight>();
+    }
+
+    public ArrayList<Flight> getFlightList() {
+        return flightList;
+    }
+
+    public void setFlightList(ArrayList<Flight> flightList) {
+        this.flightList = flightList;
     }
     
     public void addFlightSchedule(FlightSchedule flightSchedule) {
+        count++;
+        flightSchedule.setFlightScheduleId("FS" + count);
         flightScheduleList.add(flightSchedule);
+    }
+    
+    public void addFlight(Flight flight) {
+        count++;
+        flight.setFlightId("Flight" + count);
+        flightList.add(flight);
     }
 
     public ArrayList<FlightSchedule> getFlightScheduleList() {
@@ -74,4 +93,15 @@ public class Airliner {
     public void setHeadquarter(String headquarter) {
         this.headquarter = headquarter;
     }
+    
+    public void addFlightScheduleList(FlightSchedule flightSchedule) {
+        flightScheduleList.add(flightSchedule);
+    }
+
+    @Override
+    public String toString() {
+        return airlinerName; //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
 }

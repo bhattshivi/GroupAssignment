@@ -12,14 +12,21 @@ import java.util.ArrayList;
  * @author Mayank
  */
 public class MasterTravelSchedule {
-    private ArrayList<FlightSchedule> masterFlightScheduleList;
-
-    public ArrayList<FlightSchedule> getMasterFlightList() {
-        return masterFlightScheduleList;
-    }
-
-    public void setMasterFlightList(ArrayList<FlightSchedule> masterFlightScheduleList) {
-        this.masterFlightScheduleList = masterFlightScheduleList;
+    private ArrayList<Flight> masterFlightList;
+    
+    public MasterTravelSchedule() {
+        this.masterFlightList = new ArrayList<Flight>();
     }
     
+    public ArrayList<Flight> getMasterFlightList() {
+        return masterFlightList;
+    }
+
+    public void setMasterFlightList(ArrayList<Flight> masterFlightList) {
+        this.masterFlightList = masterFlightList;
+    }
+    
+    public void addFLight(Flight flight) {
+        masterFlightList.add(flight);
+    }
 }
