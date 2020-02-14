@@ -102,6 +102,10 @@ public class ManageTravelAgency extends javax.swing.JPanel {
 
     private void btnManageCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageCustomerActionPerformed
         // TODO add your handling code here:
+        ManageCustomerJPanel manageCustomerJPanel = new ManageCustomerJPanel(this.panel, airlineDirectory);
+        this.panel.add(manageCustomerJPanel, "ManageCustomerJPanel");
+        CardLayout layout = (CardLayout)this.panel.getLayout();
+        layout.next(panel);
     }//GEN-LAST:event_btnManageCustomerActionPerformed
 
 
