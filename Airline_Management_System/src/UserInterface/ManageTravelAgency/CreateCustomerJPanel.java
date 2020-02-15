@@ -6,7 +6,10 @@
 package UserInterface.ManageTravelAgency;
 
 import Business.AirlinerDirectory;
+import Business.Customer;
+import Business.CustomerDirectory;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -20,10 +23,16 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
      */
     private JPanel panel;
     private AirlinerDirectory airlineDirectory;
-    public CreateCustomerJPanel(JPanel panel, AirlinerDirectory airlineDirectory) {
+    private CustomerDirectory custDir;
+    private Customer cust;
+    private String gender;
+    public CreateCustomerJPanel(JPanel panel, AirlinerDirectory airlineDirectory, CustomerDirectory custDir) {
         initComponents();
         this.panel = panel;
         this.airlineDirectory = airlineDirectory;
+        this.custDir=custDir;
+        this.gender = "";
+       
     }
 
     /**
@@ -47,8 +56,8 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         createPassport = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        createGender = new javax.swing.JTextField();
         btnCreateCustomer = new javax.swing.JButton();
+        createGender = new javax.swing.JComboBox<>();
 
         jLabel1.setText("jLabel1");
 
@@ -63,7 +72,7 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("CREATE CUSTOMER");
 
-        jLabel3.setText("First Name");
+        jLabel3.setText("First Name*");
 
         createFirstName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,7 +80,7 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel4.setText("Last Name");
+        jLabel4.setText("Last Name*");
 
         createLastName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,7 +88,7 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel5.setText("Email");
+        jLabel5.setText("Email*");
 
         createEmailID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,7 +96,7 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel6.setText("Passport #");
+        jLabel6.setText("Passport # *");
 
         createPassport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,15 +104,21 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel7.setText("Gender");
+        jLabel7.setText("Gender*");
 
+        btnCreateCustomer.setText("CREATE");
+        btnCreateCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateCustomerActionPerformed(evt);
+            }
+        });
+
+        createGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "[None]", "Male", "Female" }));
         createGender.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 createGenderActionPerformed(evt);
             }
         });
-
-        btnCreateCustomer.setText("CREATE");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -131,11 +146,11 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
                                         .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(34, 34, 34)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(createFirstName)
+                                    .addComponent(createFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
                                     .addComponent(createLastName)
                                     .addComponent(createEmailID)
                                     .addComponent(createPassport)
-                                    .addComponent(createGender, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(createGender, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(135, 135, 135)
                                 .addComponent(btnCreateCustomer)))))
@@ -167,16 +182,16 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(createGender, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(createGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnCreateCustomer)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void bkCreateCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bkCreateCustomerActionPerformed
         // TODO add your handling code here:
-        ManageCustomerJPanel manageCustomerJPanel = new ManageCustomerJPanel(this.panel, airlineDirectory);
+        ManageCustomerJPanel manageCustomerJPanel = new ManageCustomerJPanel(this.panel, airlineDirectory, custDir ,cust);
         this.panel.add(manageCustomerJPanel, "ManageCustomerJPanel");
         CardLayout layout = (CardLayout)this.panel.getLayout();
         layout.next(panel);
@@ -198,8 +213,88 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_createPassportActionPerformed
 
+    private void btnCreateCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateCustomerActionPerformed
+        // TODO add your handling code here:
+        
+        String firstName =createFirstName.getText();
+   
+        if (firstName.isEmpty() ) {
+            JOptionPane.showMessageDialog(null, "First Name Cannot be empty");
+            return;
+        } else {
+            firstName = createFirstName.getText();
+        }
+        //Last Name
+        String lastName = createLastName.getText();
+        if (lastName.isEmpty() ) {
+            JOptionPane.showMessageDialog(null, "Last Name Cannot be empty");
+            return;
+        } else {
+            lastName = createLastName.getText();
+        }
+        //Email 
+        String email = createEmailID.getText();
+     if (email.isEmpty() ) {
+            JOptionPane.showMessageDialog(null, "Email ID Cannot be empty");
+            return;
+        } else {
+            email = createEmailID.getText();
+            
+        }
+        //Passport
+        String passport = createPassport.getText();
+        if (passport.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Passport # Cannot be empty");
+            return;
+        } else {
+            passport = createPassport.getText();
+            
+        }
+        
+   
+        if(gender.isEmpty()){
+              JOptionPane.showMessageDialog(null, "Gender Cannot be empty");
+            return;
+        } 
+        
+        
+        
+      
+        Customer customer = new Customer();
+        //SetValues
+        customer.setFirstName(firstName);
+        customer.setLastName(lastName);
+        customer.setEmailId(email);
+        customer.setPassportNum(passport);
+        customer.setGender(gender);
+        custDir.setCust(customer);
+        custDir.addCustomer(customer);
+        //custDir.addCustomer(customer);
+        
+        System.out.println("customer - " + customer.getFirstName());
+        
+        
+        
+       
+        
+       
+        
+
+        JOptionPane.showMessageDialog(null, "Customer Created Successfully");
+             //Reseting fields
+        createFirstName.setText("");
+        createLastName.setText("");
+        createEmailID.setText("");
+        createPassport.setText("");
+        
+        
+    }//GEN-LAST:event_btnCreateCustomerActionPerformed
+
     private void createGenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createGenderActionPerformed
         // TODO add your handling code here:
+       
+      gender = (String) createGender.getSelectedItem();                                          
+
     }//GEN-LAST:event_createGenderActionPerformed
 
 
@@ -208,7 +303,7 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnCreateCustomer;
     private javax.swing.JTextField createEmailID;
     private javax.swing.JTextField createFirstName;
-    private javax.swing.JTextField createGender;
+    private javax.swing.JComboBox<String> createGender;
     private javax.swing.JTextField createLastName;
     private javax.swing.JTextField createPassport;
     private javax.swing.JLabel jLabel1;

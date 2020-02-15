@@ -6,8 +6,12 @@
 package UserInterface.ManageTravelAgency;
 
 import Business.AirlinerDirectory;
+import Business.Customer;
+import Business.CustomerDirectory;
+
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,10 +24,15 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
      */
     private JPanel panel;
     private AirlinerDirectory airlineDirectory;
-    public ManageCustomerJPanel(JPanel panel, AirlinerDirectory airlineDirectory) {
+    private CustomerDirectory custDir;
+    private Customer cust;
+    public ManageCustomerJPanel(JPanel panel, AirlinerDirectory airlineDirectory, CustomerDirectory custDir, Customer cust) {
         initComponents();
         this.panel = panel;
         this.airlineDirectory = airlineDirectory;
+        this.custDir =custDir;
+        this.cust = cust;
+        populateManageCustomer();
     }
 
     /**
@@ -36,13 +45,13 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblManageCust = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         btnAddCustomer = new javax.swing.JButton();
         btnUpdateCustomer = new javax.swing.JButton();
         btnBackManageCust = new javax.swing.JButton();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblManageCust.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -50,7 +59,7 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
                 "First Name", "Last Name", "Email ID", "Gender"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblManageCust);
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -124,7 +133,7 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
 
     private void btnAddCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCustomerActionPerformed
         // TODO add your handling code here:
-        CreateCustomerJPanel createCustomerJPanel = new CreateCustomerJPanel(this.panel, airlineDirectory);
+        CreateCustomerJPanel createCustomerJPanel = new CreateCustomerJPanel(this.panel, airlineDirectory, custDir);
         this.panel.add(createCustomerJPanel, "CreateCustomerJPanel");
         CardLayout layout = (CardLayout)this.panel.getLayout();
         layout.next(panel);
@@ -132,19 +141,31 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
 
     private void btnUpdateCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCustomerActionPerformed
         // TODO add your handling code here:
-        UpdateCustomerJPanel updateCustomerJPanel = new UpdateCustomerJPanel(this.panel, airlineDirectory);
+        UpdateCustomerJPanel updateCustomerJPanel = new UpdateCustomerJPanel(this.panel, airlineDirectory, custDir, cust);
         this.panel.add(updateCustomerJPanel, "UpdateCustomerJPanel");
         CardLayout layout = (CardLayout)this.panel.getLayout();
         layout.next(panel);
     }//GEN-LAST:event_btnUpdateCustomerActionPerformed
 
-
+public void populateManageCustomer() {
+        DefaultTableModel dtm = (DefaultTableModel)tblManageCust.getModel();
+        dtm.setRowCount(0);
+        for(Customer cust : custDir.getCustomerList()){
+            Object[] row = new Object[dtm.getColumnCount()];
+            row[0] = cust;
+            row[1] = custDir.getCust().getLastName();
+            row[2] = custDir.getCust().getLastName();
+            row[3] = custDir.getCust().getGender(); 
+            dtm.addRow(row);
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddCustomer;
     private javax.swing.JButton btnBackManageCust;
     private javax.swing.JButton btnUpdateCustomer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblManageCust;
     // End of variables declaration//GEN-END:variables
 }

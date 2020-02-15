@@ -50,11 +50,11 @@
                               </Group>
                               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="createFirstName" max="32767" attributes="0"/>
+                                  <Component id="createFirstName" pref="235" max="32767" attributes="0"/>
                                   <Component id="createLastName" max="32767" attributes="0"/>
                                   <Component id="createEmailID" max="32767" attributes="0"/>
                                   <Component id="createPassport" max="32767" attributes="0"/>
-                                  <Component id="createGender" min="-2" pref="235" max="-2" attributes="0"/>
+                                  <Component id="createGender" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -98,11 +98,11 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel7" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
-                  <Component id="createGender" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                  <Component id="createGender" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnCreateCustomer" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="23" max="32767" attributes="0"/>
+              <EmptySpace pref="29" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -127,7 +127,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="First Name"/>
+        <Property name="text" type="java.lang.String" value="First Name*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="createFirstName">
@@ -137,7 +137,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Last Name"/>
+        <Property name="text" type="java.lang.String" value="Last Name*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="createLastName">
@@ -147,7 +147,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Email"/>
+        <Property name="text" type="java.lang.String" value="Email*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="createEmailID">
@@ -157,7 +157,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Passport #"/>
+        <Property name="text" type="java.lang.String" value="Passport # *"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="createPassport">
@@ -167,18 +167,33 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Gender"/>
+        <Property name="text" type="java.lang.String" value="Gender*"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="createGender">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createGenderActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnCreateCustomer">
       <Properties>
         <Property name="text" type="java.lang.String" value="CREATE"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCreateCustomerActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="createGender">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="3">
+            <StringItem index="0" value="[None]"/>
+            <StringItem index="1" value="Male"/>
+            <StringItem index="2" value="Female"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createGenderActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

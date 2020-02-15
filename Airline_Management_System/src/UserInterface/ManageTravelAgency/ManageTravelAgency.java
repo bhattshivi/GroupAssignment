@@ -6,6 +6,8 @@
 package UserInterface.ManageTravelAgency;
 
 import Business.AirlinerDirectory;
+import Business.Customer;
+import Business.CustomerDirectory;
 import Business.FlightSchedule;
 import Business.MasterTravelSchedule;
 import java.awt.CardLayout;
@@ -20,14 +22,18 @@ public class ManageTravelAgency extends javax.swing.JPanel {
     private JPanel panel;
     private AirlinerDirectory airlineDirectory;
     private MasterTravelSchedule masterTravelSchedule;
+    private CustomerDirectory custDir;
+    private Customer cust;
     /**
      * Creates new form ManageTravelAgency
      */
-    public ManageTravelAgency(JPanel panel, AirlinerDirectory airlineDirectory, MasterTravelSchedule masterTravelSchedule) {
+    public ManageTravelAgency(JPanel panel, AirlinerDirectory airlineDirectory, MasterTravelSchedule masterTravelSchedule, CustomerDirectory custDir, Customer cust) {
         initComponents();
         this.panel = panel;
         this.airlineDirectory = airlineDirectory;
         this.masterTravelSchedule = masterTravelSchedule;
+        this.custDir = custDir;
+        this.cust = cust;
     }
 
     /**
@@ -106,7 +112,7 @@ public class ManageTravelAgency extends javax.swing.JPanel {
 
     private void btnManageCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageCustomerActionPerformed
         // TODO add your handling code here:
-        ManageCustomerJPanel manageCustomerJPanel = new ManageCustomerJPanel(this.panel, airlineDirectory);
+        ManageCustomerJPanel manageCustomerJPanel = new ManageCustomerJPanel(this.panel, airlineDirectory, custDir , cust);
         this.panel.add(manageCustomerJPanel, "ManageCustomerJPanel");
         CardLayout layout = (CardLayout)this.panel.getLayout();
         layout.next(panel);
