@@ -11,6 +11,8 @@ import Business.AirlinerDirectory;
 import Business.AirplaneDirectory;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -37,8 +39,9 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
     }
     
     public void populateFlightScheduleDetails() {
-        source.setText(flightSchedule.getSource());
-        destination.setText(flightSchedule.getDestination());
+        
+        sourceCombo.setSelectedItem(flightSchedule.getSource());
+        destinationCombo.setSelectedItem(flightSchedule.getDestination());
         departureDate.setText(flightSchedule.getDepartureDate()+"");
         arrivalDate.setText(flightSchedule.getArrivalDate()+"");
         departureTime.setText(flightSchedule.getDepartureTime()+"");
@@ -55,9 +58,7 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        source = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        destination = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         departureDate = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -68,12 +69,18 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
         arrivalTime = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        sourceCombo = new javax.swing.JComboBox<>();
+        destinationCombo = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
 
-        jLabel1.setText("Source");
+        jLabel1.setText("Source *");
 
-        jLabel2.setText("Destination");
+        jLabel2.setText("Destination *");
 
-        jLabel3.setText("Departure Date");
+        jLabel3.setText("Departure Date *");
 
         departureDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,7 +88,7 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
             }
         });
 
-        jLabel4.setText("Arrival Date");
+        jLabel4.setText("Arrival Date *");
 
         updateFlight.setText("Update");
         updateFlight.addActionListener(new java.awt.event.ActionListener() {
@@ -90,12 +97,24 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
             }
         });
 
-        jLabel5.setText("Departure Time");
+        jLabel5.setText("Departure Time *");
 
-        jLabel6.setText("Arrival time");
+        jLabel6.setText("Arrival time *");
 
         jLabel7.setFont(new java.awt.Font("Segoe Script", 1, 24)); // NOI18N
         jLabel7.setText("Update Flight Schedule");
+
+        sourceCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- None --", "Boston", "San Francisco", "Dallas", "San Jose", "Seattle", "New York", "Las Vegas", "Los Angeles", "Chicago", "Miami" }));
+
+        destinationCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- None --", "Boston", "San Francisco", "Dallas", "San Jose", "Seattle", "New York", "Las Vegas", "Los Angeles", "Chicago", "Miami" }));
+
+        jLabel8.setText("(YYY-MMM-DDD)");
+
+        jLabel9.setText("(YYY-MMM-DDD)");
+
+        jLabel10.setText("(HH:MM)");
+
+        jLabel11.setText("(HH:MM)");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -119,16 +138,27 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
                                     .addComponent(arrivalTime, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(departureTime, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(arrivalDate, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(departureDate, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(destination, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(source, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(departureDate, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(39, 39, 39)
-                                .addComponent(updateFlight))))
+                                .addComponent(updateFlight))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(destinationCombo, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(sourceCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(1, 1, 1))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(jLabel7)))
-                .addContainerGap(237, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel11))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,27 +168,31 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
                 .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(source, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(sourceCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(destination, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(destinationCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(departureDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(departureDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(arrivalDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(arrivalDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(departureTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(departureTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(arrivalTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(arrivalTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
                 .addGap(36, 36, 36)
                 .addComponent(updateFlight)
                 .addContainerGap(206, Short.MAX_VALUE))
@@ -167,16 +201,81 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
 
     private void updateFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateFlightActionPerformed
         
-        FlightSchedule flightSchedule = new FlightSchedule();
-        
+        //FlightSchedule flightSchedule = new FlightSchedule();
+        /*
         flightSchedule.setSource(source.getText());
         flightSchedule.setDestination(destination.getText());
         flightSchedule.setDepartureDate(LocalDate.parse(departureDate.getText()));
         flightSchedule.setArrivalDate(LocalDate.parse(arrivalDate.getText()));
         flightSchedule.setDepartureTime(LocalTime.parse(departureTime.getText()));
         flightSchedule.setArrivalTime(LocalTime.parse(arrivalTime.getText()));
+        */
+        //airliner.addFlightSchedule(flightSchedule);
         
-        airliner.addFlightSchedule(flightSchedule);     
+        if("-- None --".equals(sourceCombo.getSelectedItem())) {
+            JOptionPane.showMessageDialog(null, "Source city is mandatory");
+            
+        }else if("-- None --".equals(destinationCombo.getSelectedItem())) {
+            JOptionPane.showMessageDialog(null, "Destination city is mandatory");
+            
+        }else if("".equals(departureDate.getText())) {
+            JOptionPane.showMessageDialog(null, "Departure date is mandatory");
+            
+        }else if("".equals(arrivalDate.getText())) {
+            JOptionPane.showMessageDialog(null, "Arrival date is mandatory");
+            
+        }else if("".equals(departureTime.getText())) {
+            JOptionPane.showMessageDialog(null, "Departure time is mandatory");
+            
+        }else if("".equals(arrivalTime.getText())) {
+            JOptionPane.showMessageDialog(null, "Arrival time is mandatory");
+            
+        }else if(sourceCombo.getSelectedItem().equals(destinationCombo.getSelectedItem())) {
+            JOptionPane.showMessageDialog(null, "Source and destination city cannot be same");
+            
+        }else {            
+            LocalDate dDate;
+            LocalDate aDate;
+            LocalTime dTime;
+            LocalTime aTime;
+            
+            try{
+                dDate = LocalDate.parse(departureDate.getText());
+            }catch(DateTimeParseException e){
+                JOptionPane.showMessageDialog(null, "Please enter a valid Departure date in YYYY-MM-DD format");
+                return;
+            } 
+            
+            try{
+                aDate = LocalDate.parse(arrivalDate.getText());
+            }catch(DateTimeParseException e){
+                JOptionPane.showMessageDialog(null, "Please enter a valid Arrival date in YYYY-MM-DD format");
+                return;
+            } 
+             
+            try{
+                dTime = LocalTime.parse(departureTime.getText());
+            }catch(DateTimeParseException e){
+                JOptionPane.showMessageDialog(null, "Please enter a valid Departure time in HH:MM format");
+                return;
+            }
+            
+            try{
+                aTime = LocalTime.parse(arrivalTime.getText());
+            }catch(DateTimeParseException e){
+                JOptionPane.showMessageDialog(null, "Please enter a valid Arrival time in HH:MM format");
+                return;
+            } 
+                    
+            flightSchedule.setSource(sourceCombo.getSelectedItem().toString());
+            flightSchedule.setDestination(destinationCombo.getSelectedItem().toString());
+            flightSchedule.setDepartureDate(LocalDate.parse(departureDate.getText()));
+            flightSchedule.setArrivalDate(LocalDate.parse(arrivalDate.getText()));
+            flightSchedule.setDepartureTime(LocalTime.parse(departureTime.getText()));
+            flightSchedule.setArrivalTime(LocalTime.parse(arrivalTime.getText()));
+            
+            JOptionPane.showMessageDialog(null, "Flight schedule is updated successfully");
+        }
         
     }//GEN-LAST:event_updateFlightActionPerformed
 
@@ -190,15 +289,19 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
     private javax.swing.JTextField arrivalTime;
     private javax.swing.JTextField departureDate;
     private javax.swing.JTextField departureTime;
-    private javax.swing.JTextField destination;
+    private javax.swing.JComboBox<String> destinationCombo;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JTextField source;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JComboBox<String> sourceCombo;
     private javax.swing.JButton updateFlight;
     // End of variables declaration//GEN-END:variables
 }

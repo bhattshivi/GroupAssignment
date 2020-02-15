@@ -93,6 +93,7 @@ public class ManageFlightSchedules extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        flightScheduleTbl.setRowHeight(25);
         jScrollPane1.setViewportView(flightScheduleTbl);
         if (flightScheduleTbl.getColumnModel().getColumnCount() > 0) {
             flightScheduleTbl.getColumnModel().getColumn(0).setResizable(false);
@@ -169,7 +170,7 @@ public class ManageFlightSchedules extends javax.swing.JPanel {
             CardLayout layout = (CardLayout)this.panel.getLayout();
             layout.next(panel);
         }else{
-            JOptionPane.showMessageDialog(null, "Please select a Row!!");
+            JOptionPane.showMessageDialog(null, "Please select a Flight Schedule");
         }
     }//GEN-LAST:event_updateScheduleBtnActionPerformed
 

@@ -11,6 +11,7 @@ import Business.AirlinerDirectory;
 import Business.Airplane;
 import Business.AirplaneDirectory;
 import Business.MasterTravelSchedule;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -54,11 +55,11 @@ public class CreateAirplanes extends javax.swing.JPanel {
         createAirplane = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
-        jLabel1.setText("Airplane Name");
+        jLabel1.setText("Airplane Name *");
 
-        jLabel2.setText("# of Rows");
+        jLabel2.setText("# of Rows *");
 
-        jLabel3.setText("# of Columns");
+        jLabel3.setText("# of Columns *");
 
         createAirplane.setText("Create");
         createAirplane.addActionListener(new java.awt.event.ActionListener() {
@@ -95,7 +96,7 @@ public class CreateAirplanes extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(160, 160, 160)
                         .addComponent(jLabel4)))
-                .addContainerGap(144, Short.MAX_VALUE))
+                .addContainerGap(132, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,14 +122,62 @@ public class CreateAirplanes extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void createAirplaneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAirplaneActionPerformed
-        Airplane newAirplane = new Airplane();
-        newAirplane.setAirplaneName(airplaneName.getText());
-        newAirplane.setSeatCol(Integer.parseInt(airplaneCol.getText()));
-        newAirplane.setSeatRow(Integer.parseInt(airplaneRows.getText()));
+        boolean isAirplaneExist = false;
         
-        airliner.addAirplane(newAirplane);
+        if("".equals(airplaneName.getText())) {
+            JOptionPane.showMessageDialog(null, "Airplane Name is mandatory");
+            
+        }else if("".equals(airplaneCol.getText())) {
+            JOptionPane.showMessageDialog(null, "Airplane Seat Columns is mandatory");
+            
+        }else if("".equals(airplaneRows.getText())) {
+            JOptionPane.showMessageDialog(null, "Airplane Seat Rows is mandatory");
+            
+        }else {
+            
+            for(Airplane airplane : airliner.getAirplaneList()) {
+                if(airplaneName.getText().equalsIgnoreCase(airplane.getAirplaneName())) {
+                    isAirplaneExist = true;
+                    JOptionPane.showMessageDialog(null, "Airplane with name \"" + airplane.getAirplaneName() + "\" already exist. Please enter a different name.");
+                    break;
+                }
+            }
+            
+            if(isAirplaneExist == false) {
+                
+                int seatCols = 0;
+                try {
+                    seatCols = Integer.parseInt(airplaneCol.getText());
+                }catch(NumberFormatException e){
+                    JOptionPane.showMessageDialog(null, "Please enter a valid seat column number");
+                    return;
+                }
+
+                int seatRows = 0;
+                try{
+                    seatRows = Integer.parseInt(airplaneRows.getText());
+                }catch(NumberFormatException e){
+                    JOptionPane.showMessageDialog(null, "Please enter a valid seat row number");
+                    return;
+                }
+
+                Airplane newAirplane = new Airplane();
+                
+                newAirplane.setAirplaneName(airplaneName.getText());
+                newAirplane.setSeatCol(seatCols);
+                newAirplane.setSeatRow(seatRows);
+                airliner.addAirplane(newAirplane);
+                clearFields();
+                JOptionPane.showMessageDialog(null, "Airplane Created Successfully"); 
+            }
+        }    
     }//GEN-LAST:event_createAirplaneActionPerformed
 
+    private void clearFields() {
+        airplaneName.setText("");
+        airplaneCol.setText("");
+        airplaneRows.setText("");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField airplaneCol;

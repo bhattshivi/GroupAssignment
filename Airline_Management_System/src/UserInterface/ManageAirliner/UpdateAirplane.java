@@ -11,6 +11,7 @@ import Business.AirlinerDirectory;
 import Business.Airplane;
 import Business.AirplaneDirectory;
 import Business.MasterTravelSchedule;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -61,19 +62,19 @@ public class UpdateAirplane extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         airplaneCol = new javax.swing.JTextField();
-        createAirplane = new javax.swing.JButton();
+        updateAirplane = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
-        jLabel1.setText("Airplane Name");
+        jLabel1.setText("Airplane Name *");
 
-        jLabel2.setText("# of Rows");
+        jLabel2.setText("# of Rows *");
 
-        jLabel3.setText("# of Columns");
+        jLabel3.setText("# of Columns *");
 
-        createAirplane.setText("Update");
-        createAirplane.addActionListener(new java.awt.event.ActionListener() {
+        updateAirplane.setText("Update");
+        updateAirplane.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createAirplaneActionPerformed(evt);
+                updateAirplaneActionPerformed(evt);
             }
         });
 
@@ -99,11 +100,11 @@ public class UpdateAirplane extends javax.swing.JPanel {
                             .addComponent(airplaneCol, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(90, 90, 90)
-                        .addComponent(createAirplane))
+                        .addComponent(updateAirplane))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addComponent(jLabel4)))
-                .addContainerGap(259, Short.MAX_VALUE))
+                .addContainerGap(247, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,27 +124,72 @@ public class UpdateAirplane extends javax.swing.JPanel {
                     .addComponent(jLabel3)
                     .addComponent(airplaneCol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
-                .addComponent(createAirplane)
+                .addComponent(updateAirplane)
                 .addContainerGap(281, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void createAirplaneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAirplaneActionPerformed
-        airplane.setAirplaneName(airplaneName.getText());
-        airplane.setSeatCol(Integer.parseInt(airplaneCol.getText()));
-        airplane.setSeatRow(Integer.parseInt(airplaneRows.getText()));        
-    }//GEN-LAST:event_createAirplaneActionPerformed
+    private void updateAirplaneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateAirplaneActionPerformed
+         
+        boolean isAirplaneExist = false;
+        
+        if("".equals(airplaneName.getText())) {
+            JOptionPane.showMessageDialog(null, "Airplane Name is mandatory");
+            
+        }else if("".equals(airplaneCol.getText())) {
+            JOptionPane.showMessageDialog(null, "Airplane Seat Columns is mandatory");
+            
+        }else if("".equals(airplaneRows.getText())) {
+            JOptionPane.showMessageDialog(null, "Airplane Seat Rows is mandatory");
+            
+        }else {
+            
+            for(Airplane a : airliner.getAirplaneList()) {
+                if(!(airplane.getAirplaneName().equalsIgnoreCase(a.getAirplaneName()))) {
+                    if(airplaneName.getText().equalsIgnoreCase(a.getAirplaneName())) {
+                        isAirplaneExist = true;
+                        JOptionPane.showMessageDialog(null, "Airplane with name \"" + a.getAirplaneName() + "\" already exist. Please enter a different name.");
+                        break;
+                    }
+                }
+            }
+            
+            if(isAirplaneExist == false) {
+                
+                int seatCols = 0;
+                try {
+                    seatCols = Integer.parseInt(airplaneCol.getText());
+                }catch(NumberFormatException e){
+                    JOptionPane.showMessageDialog(null, "Please enter a valid seat column number");
+                    return;
+                }
+
+                int seatRows = 0;
+                try{
+                    seatRows = Integer.parseInt(airplaneRows.getText());
+                }catch(NumberFormatException e){
+                    JOptionPane.showMessageDialog(null, "Please enter a valid seat row number");
+                    return;
+                }
+
+                airplane.setAirplaneName(airplaneName.getText());
+                airplane.setSeatCol(Integer.parseInt(airplaneCol.getText()));
+                airplane.setSeatRow(Integer.parseInt(airplaneRows.getText()));
+                JOptionPane.showMessageDialog(null, "Airplane Updated Successfully"); 
+            }
+        }
+    }//GEN-LAST:event_updateAirplaneActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField airplaneCol;
     private javax.swing.JTextField airplaneName;
     private javax.swing.JTextField airplaneRows;
-    private javax.swing.JButton createAirplane;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JButton updateAirplane;
     // End of variables declaration//GEN-END:variables
 
 }

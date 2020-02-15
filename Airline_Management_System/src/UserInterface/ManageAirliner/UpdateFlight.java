@@ -13,10 +13,12 @@ import Business.AirplaneDirectory;
 import Business.Flight;
 import Business.MasterTravelSchedule;
 import Business.Seat;
+import static java.time.temporal.ChronoUnit.DAYS;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.DefaultCellEditor;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Mayank
@@ -107,6 +109,7 @@ public class UpdateFlight extends javax.swing.JPanel {
     private void initComponents() {
 
         jComboBox4 = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jScrollPane4 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -134,24 +137,24 @@ public class UpdateFlight extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         departureTimeTxt = new javax.swing.JTextField();
         destiationTxt = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        dayTimeCombo = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
         updateFlightBtn = new javax.swing.JButton();
 
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Economy", "Business" }));
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Available", "Not Available" }));
+
         setPreferredSize(new java.awt.Dimension(950, 650));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Flight Details"));
 
-        jLabel1.setText("Flight Name");
+        jLabel1.setText("Flight Name *");
 
-        jLabel10.setText("Status");
+        jLabel10.setText("Status *");
 
         flightStatusCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Cancel" }));
 
-        jLabel9.setText("Airplane");
+        jLabel9.setText("Airplane *");
 
         flightAirplaneCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,7 +172,7 @@ public class UpdateFlight extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Seat #", "Price", "Type", "Status"
+                "Seat # *", "Price *", "Type *", "Status *"
             }
         ) {
             Class[] types = new Class [] {
@@ -183,6 +186,7 @@ public class UpdateFlight extends javax.swing.JPanel {
         flightSeatsTbl.setRowHeight(25);
         flightSeatsTbl.setRowMargin(3);
         flightSeatsTbl.setSelectionBackground(new java.awt.Color(228, 228, 228));
+        flightSeatsTbl.setSelectionForeground(new java.awt.Color(51, 51, 51));
         flightSeatsTbl.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(flightSeatsTbl);
         if (flightSeatsTbl.getColumnModel().getColumnCount() > 0) {
@@ -191,6 +195,7 @@ public class UpdateFlight extends javax.swing.JPanel {
             flightSeatsTbl.getColumnModel().getColumn(2).setResizable(false);
             flightSeatsTbl.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(jComboBox4));
             flightSeatsTbl.getColumnModel().getColumn(3).setResizable(false);
+            flightSeatsTbl.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(jComboBox1));
         }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -206,11 +211,16 @@ public class UpdateFlight extends javax.swing.JPanel {
                     .addComponent(jLabel12))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(flightStatusCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(flightAirplaneCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(flightNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(107, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(flightAirplaneCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(107, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(flightStatusCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(flightNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,7 +246,7 @@ public class UpdateFlight extends javax.swing.JPanel {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Flight Schedule Details"));
 
-        jLabel11.setText("Select Flight Schedule to add to this Flight");
+        jLabel11.setText("Select Flight Schedule to add to this Flight *");
 
         flightScheduleCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -278,10 +288,6 @@ public class UpdateFlight extends javax.swing.JPanel {
 
         destiationTxt.setEditable(false);
 
-        jLabel8.setText("Time of Day");
-
-        dayTimeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Morning", "Evening", "Night" }));
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -304,13 +310,9 @@ public class UpdateFlight extends javax.swing.JPanel {
                                     .addComponent(arrivalDateTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
                                     .addComponent(sourceTxt)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel8))
+                                .addComponent(jLabel5)
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(arrivalTimeTxt)
-                                    .addComponent(dayTimeCombo, 0, 187, Short.MAX_VALUE))))
+                                .addComponent(arrivalTimeTxt)))
                         .addGap(71, 71, 71)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
@@ -321,7 +323,7 @@ public class UpdateFlight extends javax.swing.JPanel {
                             .addComponent(destiationTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(departureDateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(departureTimeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -348,10 +350,6 @@ public class UpdateFlight extends javax.swing.JPanel {
                     .addComponent(arrivalTimeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
                     .addComponent(departureTimeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(dayTimeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -378,11 +376,11 @@ public class UpdateFlight extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(328, 328, 328)
-                        .addComponent(updateFlightBtn))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(281, 281, 281)
-                        .addComponent(jLabel13)))
+                        .addComponent(jLabel13))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(327, 327, 327)
+                        .addComponent(updateFlightBtn)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -394,9 +392,9 @@ public class UpdateFlight extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(27, 27, 27)
                 .addComponent(updateFlightBtn)
-                .addContainerGap())
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         jScrollPane4.setViewportView(jPanel3);
@@ -407,14 +405,14 @@ public class UpdateFlight extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 845, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -424,8 +422,55 @@ public class UpdateFlight extends javax.swing.JPanel {
     }//GEN-LAST:event_departureTimeTxtActionPerformed
 
     private void updateFlightBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateFlightBtnActionPerformed
-        //Flight newFlight = new Flight();
         
+        dtm = (DefaultTableModel) flightSeatsTbl.getModel();
+        int nRow = dtm.getRowCount();
+        ArrayList<Seat> seatList = new ArrayList<>();        
+        
+        if("".equals(flightNameTxt.getText())) {
+            JOptionPane.showMessageDialog(null, "Flight name is mandatory");
+            
+        }else if("-- None --".equals(flightStatusCombo.getSelectedItem())) {
+            JOptionPane.showMessageDialog(null, "Please select a status with respect to the flight");
+            
+        }else {  
+            for(int i=0; i < nRow; i++) {
+                
+                if(null == flightSeatsTbl.getValueAt(i, 0)) {
+                    JOptionPane.showMessageDialog(null, "Please enter seat number at row " + (i+1));
+                    break;
+                }else if(null == flightSeatsTbl.getValueAt(i, 1)) {
+                    JOptionPane.showMessageDialog(null, "Please enter price for the seat at row " + i+1);
+                    break;
+                }
+                else if(null == flightSeatsTbl.getValueAt(i, 2)) {
+                    JOptionPane.showMessageDialog(null, "Please select the seat type at row " + i+1);
+                    break;
+                }else if(null == flightSeatsTbl.getValueAt(i, 3)) {
+                    JOptionPane.showMessageDialog(null, "Please select the availability of seat at row " + i+1);
+                    break;
+                }else {
+                    Seat flightSeat = new Seat();
+                    flightSeat.setSeatName(flightSeatsTbl.getValueAt(i, 0).toString());
+                    flightSeat.setPrice((Double)flightSeatsTbl.getValueAt(i, 1));
+                    flightSeat.setType(flightSeatsTbl.getValueAt(i, 2).toString());
+                    flightSeat.setStatus(flightSeatsTbl.getValueAt(i, 3).toString());
+                    seatList.add(flightSeat);
+                }                
+            }
+            if(!checkForAirplaneOverlap()) {
+                flight.setFlightName(flightNameTxt.getText());
+                flight.setIsActive((flightStatusCombo.getSelectedItem() == "Active"));
+                flight.setFlightSchedule(selectedFlightSchedule);
+                flight.setAirplane(selectedAirplane);    
+                flight.getFlightSeatList().clear();
+                flight.setFlightSeatList(seatList); 
+                
+                JOptionPane.showMessageDialog(null, "Flight is updated successfully");
+            } 
+        }
+        
+        /*
         flight.setFlightName(flightNameTxt.getText());
         flight.setIsActive((flightStatusCombo.getSelectedItem() == "Active"));
         flight.setFlightSchedule(selectedFlightSchedule);
@@ -444,12 +489,56 @@ public class UpdateFlight extends javax.swing.JPanel {
             flightSeat.setStatus(flightSeatsTbl.getValueAt(i, 3).toString());
             seatList.add(flightSeat);
         }
-        flight.setFlightSeatList(seatList);        
+        flight.setFlightSeatList(seatList);   
+        */
         
-        //airliner.addFlight(newFlight);
-        //masterTravelSchedule.addFLight(newFlight);
     }//GEN-LAST:event_updateFlightBtnActionPerformed
 
+    private boolean checkForAirplaneOverlap() {
+        
+        boolean isOverlap = false;
+        Flight oldF = new Flight();
+        
+        for(Flight f : airliner.getFlightList()) {
+            if(f.getAirplane() == selectedAirplane) {                
+                if(selectedFlightSchedule.getDepartureDate().isBefore(f.getFlightSchedule().getArrivalDate()) &&
+                   f.getFlightSchedule().getDepartureDate().isBefore(selectedFlightSchedule.getArrivalDate())) {
+                    isOverlap = true;
+                    oldF = f;
+                }else {                    
+                    long diff1 = DAYS.between(selectedFlightSchedule.getDepartureDate(), selectedFlightSchedule.getArrivalDate());
+                    long diff2 = DAYS.between(f.getFlightSchedule().getDepartureDate(), f.getFlightSchedule().getArrivalDate());
+                    
+                    if(diff2 > diff1) {
+                        if(selectedFlightSchedule.getArrivalTime().isAfter(f.getFlightSchedule().getDepartureTime())) {
+                            isOverlap = true;
+                            oldF = f;
+                        }
+                    }
+                    if(diff1 > diff2) {
+                        if(f.getFlightSchedule().getArrivalTime().isAfter(selectedFlightSchedule.getDepartureTime())) {
+                            isOverlap = true;
+                            oldF = f;
+                        }
+                    }
+                    if(diff1 == diff2) {
+                        if(selectedFlightSchedule.getDepartureTime().isBefore(f.getFlightSchedule().getArrivalTime()) &&
+                            f.getFlightSchedule().getDepartureTime().isBefore(selectedFlightSchedule.getArrivalTime())) {
+                             isOverlap = true;
+                             oldF = f;
+                         }
+                    }
+                }
+            }
+        }
+        
+        if(isOverlap == true) {
+            JOptionPane.showMessageDialog(null, "This airplane is already assigned on Flight " + oldF.getFlightName() + ". Please select a different airplane or modify the flght schedule");
+        }
+        
+        return isOverlap;        
+    }
+    
     private void flightAirplaneComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_flightAirplaneComboActionPerformed
         selectedAirplane = (Airplane)flightAirplaneCombo.getSelectedItem();
         dtm.setRowCount(0);
@@ -489,7 +578,6 @@ public class UpdateFlight extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField arrivalDateTxt;
     private javax.swing.JTextField arrivalTimeTxt;
-    private javax.swing.JComboBox<String> dayTimeCombo;
     private javax.swing.JTextField departureDateTxt;
     private javax.swing.JTextField departureTimeTxt;
     private javax.swing.JTextField destiationTxt;
@@ -498,6 +586,7 @@ public class UpdateFlight extends javax.swing.JPanel {
     private javax.swing.JComboBox<FlightSchedule> flightScheduleCombo;
     private javax.swing.JTable flightSeatsTbl;
     private javax.swing.JComboBox<String> flightStatusCombo;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -510,7 +599,6 @@ public class UpdateFlight extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

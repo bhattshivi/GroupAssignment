@@ -111,6 +111,8 @@ public class AirlinerFunction extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        airlinerFlightTbl.setRowHeight(25);
+        airlinerFlightTbl.setRowMargin(3);
         jScrollPane1.setViewportView(airlinerFlightTbl);
         if (airlinerFlightTbl.getColumnModel().getColumnCount() > 0) {
             airlinerFlightTbl.getColumnModel().getColumn(0).setResizable(false);
@@ -188,10 +190,14 @@ public class AirlinerFunction extends javax.swing.JPanel {
     }//GEN-LAST:event_manageAirplaneBtnActionPerformed
 
     private void addFlightBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addFlightBtnActionPerformed
-        CreateFlight createFlightPanel = new CreateFlight(this.panel, airlineDirectory, airplaneDirectory, airliner, masterTravelSchedule);
-        this.panel.add(createFlightPanel, "CreateFlight");
-        CardLayout layout = (CardLayout)this.panel.getLayout();
-        layout.next(panel);
+        if(airliner.getAirplaneList().isEmpty() || airliner.getFlightScheduleList().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please add atleast one Airplane and FLight Schedule to add or update flight");
+        }else {
+            CreateFlight createFlightPanel = new CreateFlight(this.panel, airlineDirectory, airplaneDirectory, airliner, masterTravelSchedule);
+            this.panel.add(createFlightPanel, "CreateFlight");
+            CardLayout layout = (CardLayout)this.panel.getLayout();
+            layout.next(panel);
+        }
     }//GEN-LAST:event_addFlightBtnActionPerformed
 
     private void manageflightScheduleBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageflightScheduleBtnActionPerformed
@@ -202,16 +208,20 @@ public class AirlinerFunction extends javax.swing.JPanel {
     }//GEN-LAST:event_manageflightScheduleBtnActionPerformed
 
     private void updateFlightBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateFlightBtnActionPerformed
-        int selectedRow = airlinerFlightTbl.getSelectedRow();
-        if(selectedRow>=0){
-            Flight flight = (Flight)airlinerFlightTbl.getValueAt(selectedRow, 0);
-            
-            UpdateFlight updateflightPanel = new UpdateFlight(this.panel, airlineDirectory, airplaneDirectory, airliner, flight);
-            this.panel.add(updateflightPanel, "UpdateFlight");
-            CardLayout layout = (CardLayout)this.panel.getLayout();
-            layout.next(panel);
-        }else{
-            JOptionPane.showMessageDialog(null, "Please select a Row!!");
+        if(airliner.getAirplaneList().isEmpty() || airliner.getFlightScheduleList().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please add atleast one Airplane and FLight Schedule to add or update flight");
+        }else {
+            int selectedRow = airlinerFlightTbl.getSelectedRow();
+            if(selectedRow>=0){
+                Flight flight = (Flight)airlinerFlightTbl.getValueAt(selectedRow, 0);
+
+                UpdateFlight updateflightPanel = new UpdateFlight(this.panel, airlineDirectory, airplaneDirectory, airliner, flight);
+                this.panel.add(updateflightPanel, "UpdateFlight");
+                CardLayout layout = (CardLayout)this.panel.getLayout();
+                layout.next(panel);
+            }else{
+                JOptionPane.showMessageDialog(null, "Please select a Flight to update");
+            }
         }
     }//GEN-LAST:event_updateFlightBtnActionPerformed
 

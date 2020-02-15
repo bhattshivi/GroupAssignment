@@ -90,6 +90,8 @@ public class ManageAirplanes extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        airplaneTbl.setRowHeight(25);
+        airplaneTbl.setRowMargin(3);
         jScrollPane1.setViewportView(airplaneTbl);
         if (airplaneTbl.getColumnModel().getColumnCount() > 0) {
             airplaneTbl.getColumnModel().getColumn(0).setResizable(false);
@@ -168,7 +170,7 @@ public class ManageAirplanes extends javax.swing.JPanel {
             CardLayout layout = (CardLayout)this.panel.getLayout();
             layout.next(panel);
         }else{
-            JOptionPane.showMessageDialog(null, "Please select a Row!!");
+            JOptionPane.showMessageDialog(null, "Please select an Airplane");
         } 
         
         /*UpdateAirplane updateAirplanePanel = new UpdateAirplane(this.panel, airlineDirectory, airplaneDirectory, airliner);

@@ -34,14 +34,14 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
-                      <Component id="createAirplane" min="-2" max="-2" attributes="0"/>
+                      <Component id="updateAirplane" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="259" max="32767" attributes="0"/>
+              <EmptySpace pref="247" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -66,7 +66,7 @@
                   <Component id="airplaneCol" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-              <Component id="createAirplane" min="-2" max="-2" attributes="0"/>
+              <Component id="updateAirplane" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="281" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -75,7 +75,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Airplane Name"/>
+        <Property name="text" type="java.lang.String" value="Airplane Name *"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="airplaneName">
@@ -84,22 +84,22 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="# of Rows"/>
+        <Property name="text" type="java.lang.String" value="# of Rows *"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="# of Columns"/>
+        <Property name="text" type="java.lang.String" value="# of Columns *"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="airplaneCol">
     </Component>
-    <Component class="javax.swing.JButton" name="createAirplane">
+    <Component class="javax.swing.JButton" name="updateAirplane">
       <Properties>
         <Property name="text" type="java.lang.String" value="Update"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createAirplaneActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateAirplaneActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">

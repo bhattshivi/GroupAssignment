@@ -13,6 +13,7 @@ import Business.MasterTravelSchedule;
 import UserInterface.ManageTravelAgency.ManageTravelAgency;
 import java.awt.CardLayout;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -113,10 +114,15 @@ public class ManageAirliners extends javax.swing.JPanel {
 
     private void continueBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continueBtnActionPerformed
         airliner = (Airliner)airlinerComboBox.getSelectedItem();
-        AirlinerFunction airlinerFuncPanel = new AirlinerFunction(this.panel, airlineDirectory, airplaneDirectory, airliner, masterTravelSchedule);
-        this.panel.add(airlinerFuncPanel, "AirlinerFunction");
-        CardLayout layout = (CardLayout)this.panel.getLayout();
-        layout.next(panel);
+        
+        if(airliner == null) {
+            JOptionPane.showMessageDialog(null, "Please select an airline to continue.");
+        }else {
+            AirlinerFunction airlinerFuncPanel = new AirlinerFunction(this.panel, airlineDirectory, airplaneDirectory, airliner, masterTravelSchedule);
+            this.panel.add(airlinerFuncPanel, "AirlinerFunction");
+            CardLayout layout = (CardLayout)this.panel.getLayout();
+            layout.next(panel);
+        }        
     }//GEN-LAST:event_continueBtnActionPerformed
 
 
