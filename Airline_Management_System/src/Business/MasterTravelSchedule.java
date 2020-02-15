@@ -6,6 +6,7 @@
 package Business;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -28,5 +29,29 @@ public class MasterTravelSchedule {
     
     public void addFLight(Flight flight) {
         masterFlightList.add(flight);
+    }
+    
+    public ArrayList<Flight> searchFlight(String flightNumber,String source, String destination) {
+        System.out.println("FLIGHT NO :  **" + flightNumber);
+        System.out.println("SOURCE NO :  **" + source);
+        System.out.println("DESTINATION NO :  **" + destination);
+        System.out.println();
+        ArrayList<Flight> list = new ArrayList<Flight>();
+        for (Flight flight : this.masterFlightList) {
+            if(((flightNumber.isEmpty() || flight.getFlightId().equalsIgnoreCase(flightNumber))
+                    && (source.isEmpty() || flight.getFlightSchedule().getSource().equalsIgnoreCase(source))
+                   && (destination.isEmpty() ||flight.getFlightSchedule().getDestination().equalsIgnoreCase(destination)))){
+                  System.out.println("Flight Number# ,Source, Destination Location  matched");
+                   list.add(flight);
+            }
+                //else if(flight.getFlightSchedule().getSource().equalsIgnoreCase(source) && ){
+                        
+                        
+               
+                //return prod;
+            //}
+        }
+        
+        return list;
     }
 }
