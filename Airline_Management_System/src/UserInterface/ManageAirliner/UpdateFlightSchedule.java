@@ -33,8 +33,18 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
         this.airlineDirectory = airlineDirectory;
         this.airplaneDirectory = airplaneDirectory;
         this.flightSchedule = flightSchedule;
+        populateFlightScheduleDetails();
     }
-
+    
+    public void populateFlightScheduleDetails() {
+        source.setText(flightSchedule.getSource());
+        destination.setText(flightSchedule.getDestination());
+        departureDate.setText(flightSchedule.getDepartureDate()+"");
+        arrivalDate.setText(flightSchedule.getArrivalDate()+"");
+        departureTime.setText(flightSchedule.getDepartureTime()+"");
+        arrivalTime.setText(flightSchedule.getArrivalTime()+"");
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -52,7 +62,7 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
         departureDate = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         arrivalDate = new javax.swing.JTextField();
-        createFlight = new javax.swing.JButton();
+        updateFlight = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         departureTime = new javax.swing.JTextField();
         arrivalTime = new javax.swing.JTextField();
@@ -73,10 +83,10 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
 
         jLabel4.setText("Arrival Date");
 
-        createFlight.setText("Create");
-        createFlight.addActionListener(new java.awt.event.ActionListener() {
+        updateFlight.setText("Update");
+        updateFlight.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createFlightActionPerformed(evt);
+                updateFlightActionPerformed(evt);
             }
         });
 
@@ -114,7 +124,7 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
                                     .addComponent(source, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(39, 39, 39)
-                                .addComponent(createFlight))))
+                                .addComponent(updateFlight))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(jLabel7)))
@@ -150,12 +160,12 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
                     .addComponent(jLabel6)
                     .addComponent(arrivalTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
-                .addComponent(createFlight)
+                .addComponent(updateFlight)
                 .addContainerGap(206, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void createFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createFlightActionPerformed
+    private void updateFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateFlightActionPerformed
         
         FlightSchedule flightSchedule = new FlightSchedule();
         
@@ -168,7 +178,7 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
         
         airliner.addFlightSchedule(flightSchedule);     
         
-    }//GEN-LAST:event_createFlightActionPerformed
+    }//GEN-LAST:event_updateFlightActionPerformed
 
     private void departureDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departureDateActionPerformed
         // TODO add your handling code here:
@@ -178,7 +188,6 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField arrivalDate;
     private javax.swing.JTextField arrivalTime;
-    private javax.swing.JButton createFlight;
     private javax.swing.JTextField departureDate;
     private javax.swing.JTextField departureTime;
     private javax.swing.JTextField destination;
@@ -190,5 +199,6 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField source;
+    private javax.swing.JButton updateFlight;
     // End of variables declaration//GEN-END:variables
 }

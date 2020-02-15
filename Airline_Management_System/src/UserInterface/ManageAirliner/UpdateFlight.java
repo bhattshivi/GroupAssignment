@@ -21,7 +21,7 @@ import javax.swing.DefaultCellEditor;
  *
  * @author Mayank
  */
-public class CreateFlight extends javax.swing.JPanel {
+public class UpdateFlight extends javax.swing.JPanel {
     
     private AirlinerDirectory airlineDirectory;
     private AirplaneDirectory airplaneDirectory;
@@ -31,27 +31,69 @@ public class CreateFlight extends javax.swing.JPanel {
     private FlightSchedule selectedFlightSchedule;
     private Airplane selectedAirplane;
     private MasterTravelSchedule masterTravelSchedule;
+    private Flight flight;
     /**
      * Creates new form CreateFlight
      */
-    public CreateFlight(JPanel panel, AirlinerDirectory airlineDirectory, AirplaneDirectory airplaneDirectory, Airliner airliner, MasterTravelSchedule masterTravelSchedule) {
+    public UpdateFlight(JPanel panel, AirlinerDirectory airlineDirectory, AirplaneDirectory airplaneDirectory, Airliner airliner, Flight flight) {
         initComponents();
         this.panel = panel;
         this.airlineDirectory = airlineDirectory;
         this.airplaneDirectory = airplaneDirectory;
         this.airliner = airliner;
         this.masterTravelSchedule = masterTravelSchedule;
+        this.flight = flight;
+        this.airliner = airliner;
         dtm = (DefaultTableModel) flightSeatsTbl.getModel();
         populateAirplanes();
+        populateFlightSchedules();
+        populateFlightDetails();
         
     }
     
     public void populateAirplanes() {
+        int count = 0, index = 0;
+        
         for(Airplane a : airliner.getAirplaneList()) {
             flightAirplaneCombo.addItem(a);
-        }        
+            if(a == flight.getAirplane()) {
+                index = count;
+            }
+            count++;
+        }          
+        flightAirplaneCombo.setSelectedIndex(index);
+    }
+    
+    public void populateFlightSchedules() {
+        int count = 0, index = 0;
+        
         for(FlightSchedule s : airliner.getFlightScheduleList()) {
             flightScheduleCombo.addItem(s);
+            if(s == flight.getFlightSchedule()) {
+                index = count;
+            }
+            count++;
+        }
+        flightScheduleCombo.setSelectedIndex(index);
+    }
+    
+    public void populateFlightDetails() {
+        flightNameTxt.setText(flight.getFlightName());
+        if(flight.isIsActive()) {
+            flightStatusCombo.setSelectedIndex(0);
+        }else {
+            flightStatusCombo.setSelectedIndex(1);
+        }       
+        
+        dtm = (DefaultTableModel)flightSeatsTbl.getModel();
+        dtm.setRowCount(0);
+        for(Seat s : flight.getFlightSeatList()){
+            Object[] row = new Object[dtm.getColumnCount()];
+            row[0]=s.getSeatName();
+            row[1]=s.getPrice();
+            row[2]=s.getType();
+            row[3]=s.getStatus();
+            dtm.addRow(row);
         }
     }
 
@@ -95,7 +137,7 @@ public class CreateFlight extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         dayTimeCombo = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
-        addFlightBtn = new javax.swing.JButton();
+        updateFlightBtn = new javax.swing.JButton();
 
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Economy", "Business" }));
 
@@ -314,12 +356,12 @@ public class CreateFlight extends javax.swing.JPanel {
         );
 
         jLabel13.setFont(new java.awt.Font("Segoe Script", 1, 24)); // NOI18N
-        jLabel13.setText("Add a Flight");
+        jLabel13.setText("Update a Flight");
 
-        addFlightBtn.setText("Add Flight");
-        addFlightBtn.addActionListener(new java.awt.event.ActionListener() {
+        updateFlightBtn.setText("Update Flight");
+        updateFlightBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addFlightBtnActionPerformed(evt);
+                updateFlightBtnActionPerformed(evt);
             }
         });
 
@@ -332,12 +374,12 @@ public class CreateFlight extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addGap(0, 189, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(328, 328, 328)
-                        .addComponent(addFlightBtn))
+                        .addComponent(updateFlightBtn))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(281, 281, 281)
                         .addComponent(jLabel13)))
@@ -353,7 +395,7 @@ public class CreateFlight extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(addFlightBtn)
+                .addComponent(updateFlightBtn)
                 .addContainerGap())
         );
 
@@ -365,14 +407,14 @@ public class CreateFlight extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 749, Short.MAX_VALUE)
+                .addComponent(jScrollPane4)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -381,14 +423,16 @@ public class CreateFlight extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_departureTimeTxtActionPerformed
 
-    private void addFlightBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addFlightBtnActionPerformed
-        Flight newFlight = new Flight();
-        newFlight.setFlightName(flightNameTxt.getText());
-        newFlight.setIsActive((flightStatusCombo.getSelectedItem() == "Active"));
-        newFlight.setAirliner(airliner);
-        newFlight.setFlightSchedule(selectedFlightSchedule);
-        newFlight.setAirplane(selectedAirplane);
+    private void updateFlightBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateFlightBtnActionPerformed
+        //Flight newFlight = new Flight();
         
+        flight.setFlightName(flightNameTxt.getText());
+        flight.setIsActive((flightStatusCombo.getSelectedItem() == "Active"));
+        flight.setFlightSchedule(selectedFlightSchedule);
+        flight.setAirplane(selectedAirplane);
+        
+        flight.getFlightSeatList().clear();
+                
         ArrayList<Seat> seatList = new ArrayList<>();
         dtm = (DefaultTableModel) flightSeatsTbl.getModel();
         int nRow = dtm.getRowCount();
@@ -400,17 +444,30 @@ public class CreateFlight extends javax.swing.JPanel {
             flightSeat.setStatus(flightSeatsTbl.getValueAt(i, 3).toString());
             seatList.add(flightSeat);
         }
-        newFlight.setFlightSeatList(seatList);        
+        flight.setFlightSeatList(seatList);        
         
-        airliner.addFlight(newFlight);
-        masterTravelSchedule.addFLight(newFlight);
-    }//GEN-LAST:event_addFlightBtnActionPerformed
+        //airliner.addFlight(newFlight);
+        //masterTravelSchedule.addFLight(newFlight);
+    }//GEN-LAST:event_updateFlightBtnActionPerformed
 
     private void flightAirplaneComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_flightAirplaneComboActionPerformed
         selectedAirplane = (Airplane)flightAirplaneCombo.getSelectedItem();
+        dtm.setRowCount(0);
+        if(selectedAirplane == flight.getAirplane()) {
+            dtm = (DefaultTableModel)flightSeatsTbl.getModel();            
+            for(Seat s : flight.getFlightSeatList()){
+                Object[] row = new Object[dtm.getColumnCount()];
+                row[0]=s.getSeatName();
+                row[1]=s.getPrice();
+                row[2]=s.getType();
+                row[3]=s.getStatus();
+                dtm.addRow(row);
+            } 
+        }else {
+            int totalSeats = (selectedAirplane.getSeatCol() * selectedAirplane.getSeatRow());
+            dtm.setRowCount(totalSeats);
+        }
         
-        int totalSeats = (selectedAirplane.getSeatCol() * selectedAirplane.getSeatRow());
-        dtm.setRowCount(totalSeats);
     }//GEN-LAST:event_flightAirplaneComboActionPerformed
 
     private void flightScheduleComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_flightScheduleComboActionPerformed
@@ -430,7 +487,6 @@ public class CreateFlight extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addFlightBtn;
     private javax.swing.JTextField arrivalDateTxt;
     private javax.swing.JTextField arrivalTimeTxt;
     private javax.swing.JComboBox<String> dayTimeCombo;
@@ -462,5 +518,6 @@ public class CreateFlight extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextField sourceTxt;
+    private javax.swing.JButton updateFlightBtn;
     // End of variables declaration//GEN-END:variables
 }

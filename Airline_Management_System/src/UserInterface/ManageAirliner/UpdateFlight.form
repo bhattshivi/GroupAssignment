@@ -38,7 +38,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane4" pref="749" max="32767" attributes="0"/>
+              <Component id="jScrollPane4" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -47,7 +47,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane4" pref="624" max="32767" attributes="0"/>
+              <Component id="jScrollPane4" pref="616" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -69,13 +69,13 @@
                           <Component id="jPanel2" max="32767" attributes="0"/>
                           <Component id="jPanel1" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="12" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="189" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="328" max="-2" attributes="0"/>
-                              <Component id="addFlightBtn" min="-2" max="-2" attributes="0"/>
+                              <Component id="updateFlightBtn" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="281" max="-2" attributes="0"/>
@@ -96,7 +96,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="addFlightBtn" min="-2" max="-2" attributes="0"/>
+                      <Component id="updateFlightBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -481,15 +481,15 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe Script" size="24" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Add a Flight"/>
+                <Property name="text" type="java.lang.String" value="Update a Flight"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="addFlightBtn">
+            <Component class="javax.swing.JButton" name="updateFlightBtn">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Add Flight"/>
+                <Property name="text" type="java.lang.String" value="Update Flight"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addFlightBtnActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateFlightBtnActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

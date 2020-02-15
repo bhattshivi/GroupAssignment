@@ -42,7 +42,7 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                              <Component id="createFlight" min="-2" max="-2" attributes="0"/>
+                              <Component id="updateFlight" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -91,7 +91,7 @@
                   <Component id="arrivalTime" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-              <Component id="createFlight" min="-2" max="-2" attributes="0"/>
+              <Component id="updateFlight" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="206" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -129,12 +129,12 @@
     </Component>
     <Component class="javax.swing.JTextField" name="arrivalDate">
     </Component>
-    <Component class="javax.swing.JButton" name="createFlight">
+    <Component class="javax.swing.JButton" name="updateFlight">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Create"/>
+        <Property name="text" type="java.lang.String" value="Update"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createFlightActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateFlightActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">

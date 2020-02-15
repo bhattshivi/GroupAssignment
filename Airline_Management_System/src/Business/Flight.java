@@ -91,7 +91,8 @@ public class Flight {
         this.flightSchedule = flightSchedule;
     }
     
-    
-    
-    
+    @Override
+    public String toString() {
+        return flightId; //To change body of generated methods, choose Tools | Templates.
+    }
 }

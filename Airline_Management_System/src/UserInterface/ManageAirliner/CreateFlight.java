@@ -13,10 +13,12 @@ import Business.AirplaneDirectory;
 import Business.Flight;
 import Business.MasterTravelSchedule;
 import Business.Seat;
+import static java.time.temporal.ChronoUnit.DAYS;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.DefaultCellEditor;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Mayank
@@ -382,30 +384,75 @@ public class CreateFlight extends javax.swing.JPanel {
     }//GEN-LAST:event_departureTimeTxtActionPerformed
 
     private void addFlightBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addFlightBtnActionPerformed
-        Flight newFlight = new Flight();
-        newFlight.setFlightName(flightNameTxt.getText());
-        newFlight.setIsActive((flightStatusCombo.getSelectedItem() == "Active"));
-        newFlight.setAirliner(airliner);
-        newFlight.setFlightSchedule(selectedFlightSchedule);
-        newFlight.setAirplane(selectedAirplane);
         
-        ArrayList<Seat> seatList = new ArrayList<>();
-        dtm = (DefaultTableModel) flightSeatsTbl.getModel();
-        int nRow = dtm.getRowCount();
-        for(int i=0; i < nRow; i++) {
-            Seat flightSeat = new Seat();
-            flightSeat.setSeatName(flightSeatsTbl.getValueAt(i, 0).toString());
-            flightSeat.setPrice((Double)flightSeatsTbl.getValueAt(i, 1));
-            flightSeat.setType(flightSeatsTbl.getValueAt(i, 2).toString());
-            flightSeat.setStatus(flightSeatsTbl.getValueAt(i, 3).toString());
-            seatList.add(flightSeat);
-        }
-        newFlight.setFlightSeatList(seatList);        
-        
-        airliner.addFlight(newFlight);
-        masterTravelSchedule.addFLight(newFlight);
-    }//GEN-LAST:event_addFlightBtnActionPerformed
+        if(!checkForAirplaneOverlap()) {
+            Flight newFlight = new Flight();
+            newFlight.setFlightName(flightNameTxt.getText());
+            newFlight.setIsActive((flightStatusCombo.getSelectedItem() == "Active"));
+            newFlight.setAirliner(airliner);
+            newFlight.setFlightSchedule(selectedFlightSchedule);
+            newFlight.setAirplane(selectedAirplane);
 
+            ArrayList<Seat> seatList = new ArrayList<>();
+            dtm = (DefaultTableModel) flightSeatsTbl.getModel();
+            int nRow = dtm.getRowCount();
+            for(int i=0; i < nRow; i++) {
+                Seat flightSeat = new Seat();
+                flightSeat.setSeatName(flightSeatsTbl.getValueAt(i, 0).toString());
+                flightSeat.setPrice((Double)flightSeatsTbl.getValueAt(i, 1));
+                flightSeat.setType(flightSeatsTbl.getValueAt(i, 2).toString());
+                flightSeat.setStatus(flightSeatsTbl.getValueAt(i, 3).toString());
+                seatList.add(flightSeat);
+            }
+            newFlight.setFlightSeatList(seatList);        
+
+            airliner.addFlight(newFlight);
+            masterTravelSchedule.addFLight(newFlight);
+        }
+        
+        
+    }//GEN-LAST:event_addFlightBtnActionPerformed
+    
+    private boolean checkForAirplaneOverlap() {
+        boolean isOverlap = false;
+        Flight oldF = new Flight();
+        
+        for(Flight f : airliner.getFlightList()) {
+            if(f.getAirplane() == selectedAirplane) {                
+                if(selectedFlightSchedule.getDepartureDate().isBefore(f.getFlightSchedule().getArrivalDate()) &&
+                   f.getFlightSchedule().getDepartureDate().isBefore(selectedFlightSchedule.getArrivalDate())) {
+                    //JOptionPane.showMessageDialog(null, "This airplane is already assigned on Flight " + f.getFlightName() + ". Please select a different airplane or modify the flght schedule");
+                    isOverlap = true;
+                    oldF = f;
+                }else {                    
+                    long diff1 = DAYS.between(selectedFlightSchedule.getDepartureDate(), selectedFlightSchedule.getArrivalDate());
+                    long diff2 = DAYS.between(f.getFlightSchedule().getDepartureDate(), f.getFlightSchedule().getArrivalDate());
+                    
+                    if(diff2 > diff1) {
+                        if(selectedFlightSchedule.getArrivalTime().isAfter(f.getFlightSchedule().getDepartureTime())) {
+                            //JOptionPane.showMessageDialog(null, "This airplane is already assigned on Flight " + f.getFlightName() + ". Please select a different airplane or modify the flght schedule");
+                            isOverlap = true;
+                            oldF = f;
+                        }
+                    }
+                    if(diff1 > diff2) {
+                        if(f.getFlightSchedule().getArrivalTime().isAfter(selectedFlightSchedule.getDepartureTime())) {
+                            //JOptionPane.showMessageDialog(null, "This airplane is already assigned on Flight " + f.getFlightName() + ". Please select a different airplane or modify the flght schedule");
+                            isOverlap = true;
+                            oldF = f;
+                        }
+                    }
+                }
+            }
+        }
+        
+        if(isOverlap == true) {
+            JOptionPane.showMessageDialog(null, "This airplane is already assigned on Flight " + oldF.getFlightName() + ". Please select a different airplane or modify the flght schedule");
+        }
+        
+        return isOverlap;        
+    }
+    
     private void flightAirplaneComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_flightAirplaneComboActionPerformed
         selectedAirplane = (Airplane)flightAirplaneCombo.getSelectedItem();
         

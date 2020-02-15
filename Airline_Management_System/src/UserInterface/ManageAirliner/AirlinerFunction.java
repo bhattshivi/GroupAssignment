@@ -9,8 +9,10 @@ import Business.Airliner;
 import Business.AirlinerDirectory;
 import Business.AirplaneDirectory;
 import Business.Flight;
+import Business.FlightSchedule;
 import Business.MasterTravelSchedule;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -43,7 +45,7 @@ public class AirlinerFunction extends javax.swing.JPanel {
         dtm.setRowCount(0);
         for(Flight f : airliner.getFlightList()){
             Object[] row = new Object[dtm.getColumnCount()];
-            row[0]=f.getFlightId();
+            row[0]=f; //f.getFlightId();
             row[1]=f.getFlightSchedule().getSource();
             row[2]=f.getFlightSchedule().getDestination();
             row[4]=f.getAirplane();
@@ -200,7 +202,17 @@ public class AirlinerFunction extends javax.swing.JPanel {
     }//GEN-LAST:event_manageflightScheduleBtnActionPerformed
 
     private void updateFlightBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateFlightBtnActionPerformed
-        // TODO add your handling code here:
+        int selectedRow = airlinerFlightTbl.getSelectedRow();
+        if(selectedRow>=0){
+            Flight flight = (Flight)airlinerFlightTbl.getValueAt(selectedRow, 0);
+            
+            UpdateFlight updateflightPanel = new UpdateFlight(this.panel, airlineDirectory, airplaneDirectory, airliner, flight);
+            this.panel.add(updateflightPanel, "UpdateFlight");
+            CardLayout layout = (CardLayout)this.panel.getLayout();
+            layout.next(panel);
+        }else{
+            JOptionPane.showMessageDialog(null, "Please select a Row!!");
+        }
     }//GEN-LAST:event_updateFlightBtnActionPerformed
 
 
