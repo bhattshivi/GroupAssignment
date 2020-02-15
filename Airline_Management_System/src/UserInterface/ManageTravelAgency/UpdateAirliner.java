@@ -15,20 +15,29 @@ import javax.swing.JPanel;
  *
  * @author Mayank
  */
-public class CreateAirliners extends javax.swing.JPanel {
+public class UpdateAirliner extends javax.swing.JPanel {
     
     private JPanel panel;
-    private AirlinerDirectory airlineDirectory;
+    private Airliner airliner;
+    private AirlinerDirectory airlinerDirectory;
     
     /**
      * Creates new form CreateAirliners
      */
-    public CreateAirliners(JPanel panel, AirlinerDirectory airlineDirectory) {
+    public UpdateAirliner(JPanel panel, AirlinerDirectory airlinerDirectory, Airliner airliner) {
         initComponents();
         this.panel = panel;
-        this.airlineDirectory = airlineDirectory;
+        this.airliner = airliner;
+        this.airlinerDirectory = airlinerDirectory;
+        populateAirlinerDetails();
     }
-
+    
+    public void populateAirlinerDetails() {
+        airlinerName.setText(airliner.getAirlinerName());
+        airlinerHeadquarters.setText(airliner.getHeadquarter());
+        airlinerFleetSize.setText(airliner.getFleetSize()+"");
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,7 +53,7 @@ public class CreateAirliners extends javax.swing.JPanel {
         airlinerFleetSize = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         airlinerHeadquarters = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        updateAirlinerBtn = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
         jLabel1.setText("Airliner Name *");
@@ -53,22 +62,22 @@ public class CreateAirliners extends javax.swing.JPanel {
 
         jLabel3.setText("Headquarter *");
 
-        jButton1.setText("Create");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        updateAirlinerBtn.setText("Update");
+        updateAirlinerBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                updateAirlinerBtnActionPerformed(evt);
             }
         });
 
         jLabel4.setFont(new java.awt.Font("Segoe Print", 1, 24)); // NOI18N
-        jLabel4.setText("Create Airliner");
+        jLabel4.setText("Update Airliner");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(187, 187, 187)
+                .addGap(197, 197, 197)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -80,7 +89,7 @@ public class CreateAirliners extends javax.swing.JPanel {
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton1)
+                                    .addComponent(updateAirlinerBtn)
                                     .addComponent(airlinerHeadquarters, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel1)
@@ -89,13 +98,13 @@ public class CreateAirliners extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(69, 69, 69)
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(205, 205, 205))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(195, 195, 195))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(120, 120, 120)
+                .addGap(128, 128, 128)
                 .addComponent(jLabel4)
                 .addGap(59, 59, 59)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -110,13 +119,12 @@ public class CreateAirliners extends javax.swing.JPanel {
                     .addComponent(jLabel3)
                     .addComponent(airlinerHeadquarters, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
-                .addComponent(jButton1)
-                .addContainerGap(264, Short.MAX_VALUE))
+                .addComponent(updateAirlinerBtn)
+                .addContainerGap(256, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+    private void updateAirlinerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateAirlinerBtnActionPerformed
         
         boolean isAirlinerExist = false;
         
@@ -131,11 +139,13 @@ public class CreateAirliners extends javax.swing.JPanel {
             
         }else {
             
-            for(Airliner a : airlineDirectory.getAirlinerList()) {
-                if(airlinerName.getText().equalsIgnoreCase(a.getAirlinerName())) {
-                    isAirlinerExist = true;
-                    JOptionPane.showMessageDialog(null, "Airliner with name \"" + a.getAirlinerName() + "\" already exist. Please enter a different name.");
-                    break;
+            for(Airliner a : airlinerDirectory.getAirlinerList()) {                
+                if(!(airliner.getAirlinerName().equalsIgnoreCase(a.getAirlinerName()))) {
+                    if(airlinerName.getText().equalsIgnoreCase(a.getAirlinerName())) {
+                        isAirlinerExist = true;
+                        JOptionPane.showMessageDialog(null, "Airliner with name \"" + a.getAirlinerName() + "\" already exist. Please enter a different name.");
+                        break;
+                    }
                 }
             }
             
@@ -149,31 +159,23 @@ public class CreateAirliners extends javax.swing.JPanel {
                     return;
                 }
 
-                Airliner airliner = new Airliner();
                 airliner.setAirlinerName(airlinerName.getText());
                 airliner.setHeadquarter(airlinerHeadquarters.getText());
                 airliner.setFleetSize(Integer.parseInt(airlinerFleetSize.getText()));
-                airlineDirectory.addAirliner(airliner);
-                clearFields();
-                JOptionPane.showMessageDialog(null, "Airline Created Successfully"); 
+                JOptionPane.showMessageDialog(null, "Airline Updated Successfully"); 
             }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_updateAirlinerBtnActionPerformed
     
-    public void clearFields() {
-        airlinerName.setText("");
-        airlinerHeadquarters.setText("");
-        airlinerFleetSize.setText("");
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField airlinerFleetSize;
     private javax.swing.JTextField airlinerHeadquarters;
     private javax.swing.JTextField airlinerName;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JButton updateAirlinerBtn;
     // End of variables declaration//GEN-END:variables
 }
