@@ -48,6 +48,7 @@ public class ManageTravelAgency extends javax.swing.JPanel {
         btnRegisterAirliners = new javax.swing.JButton();
         btnBookFlight = new javax.swing.JButton();
         btnManageCustomer = new javax.swing.JButton();
+        btnManageBooking = new javax.swing.JButton();
 
         btnRegisterAirliners.setText("Register Airliners");
         btnRegisterAirliners.addActionListener(new java.awt.event.ActionListener() {
@@ -70,16 +71,25 @@ public class ManageTravelAgency extends javax.swing.JPanel {
             }
         });
 
+        btnManageBooking.setText("Manage Booking");
+        btnManageBooking.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManageBookingActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(195, 195, 195)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnBookFlight, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnRegisterAirliners, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnManageCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnManageBooking, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnBookFlight, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnRegisterAirliners, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnManageCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)))
                 .addContainerGap(235, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -91,7 +101,9 @@ public class ManageTravelAgency extends javax.swing.JPanel {
                 .addComponent(btnBookFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnManageCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(146, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnManageBooking, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(92, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -118,9 +130,18 @@ public class ManageTravelAgency extends javax.swing.JPanel {
         layout.next(panel);
     }//GEN-LAST:event_btnManageCustomerActionPerformed
 
+    private void btnManageBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageBookingActionPerformed
+        // TODO add your handling code here:
+        ManageBookingJPanel manageBookingJPanel = new ManageBookingJPanel(this.panel, airlineDirectory,masterTravelSchedule,custDir,cust );
+        this.panel.add(manageBookingJPanel, "ManageBookingJPanel");
+        CardLayout layout = (CardLayout)this.panel.getLayout();
+        layout.next(panel);
+    }//GEN-LAST:event_btnManageBookingActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBookFlight;
+    private javax.swing.JButton btnManageBooking;
     private javax.swing.JButton btnManageCustomer;
     private javax.swing.JButton btnRegisterAirliners;
     // End of variables declaration//GEN-END:variables
