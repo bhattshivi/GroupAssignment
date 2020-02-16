@@ -45,11 +45,12 @@ public class AirlinerFunction extends javax.swing.JPanel {
         dtm.setRowCount(0);
         for(Flight f : airliner.getFlightList()){
             Object[] row = new Object[dtm.getColumnCount()];
-            row[0]=f; //f.getFlightId();
-            row[1]=f.getFlightSchedule().getSource();
-            row[2]=f.getFlightSchedule().getDestination();
-            row[4]=f.getAirplane();
-            row[5]=(f.isIsActive()? "Active" : "Cancelled");
+            row[0]= f;
+            row[1]= f.getFlightSchedule().getSource();
+            row[2]= f.getFlightSchedule().getDestination();
+            row[3]= f.getFlightSchedule().getDepartureDate();
+            row[4]= f.getAirplane();
+            row[5]= (f.isIsActive()? "Active" : "Cancelled");
             dtm.addRow(row);
         }
     }
@@ -93,7 +94,7 @@ public class AirlinerFunction extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Flight #", "Source", "Destination", "Date", "Airplane", "Status"
+                "Flight #", "Source", "Destination", "Departure Date", "Airplane", "Status"
             }
         ) {
             Class[] types = new Class [] {
@@ -145,12 +146,10 @@ public class AirlinerFunction extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
