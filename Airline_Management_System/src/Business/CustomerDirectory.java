@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class CustomerDirectory {
     private ArrayList<Customer> customerList;
     private Customer cust;
-
+    private int count = 0;
     
    public CustomerDirectory(){
         this.customerList = new ArrayList<Customer>();
@@ -30,7 +30,8 @@ public class CustomerDirectory {
     
     
     public void addCustomer(Customer cust) {
-        
+        count++;
+        cust.setCustomerId("Customer"+count);
         customerList.add(cust);
        
         

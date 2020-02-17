@@ -15,7 +15,20 @@ public class Seat {
     private double price;
     private String type;
     private String status;
+    private boolean isBooked;
+    
+    public Seat() {
+        this.isBooked = false;
+    }
+    
+    public boolean isIsBooked() {
+        return isBooked;
+    }
 
+    public void setIsBooked(boolean isBooked) {
+        this.isBooked = isBooked;
+    }
+    
     public String getSeatName() {
         return seatName;
     }
@@ -54,6 +67,11 @@ public class Seat {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+    
+    @Override
+    public String toString() {
+        return seatName; //To change body of generated methods, choose Tools | Templates.
     }
     
 }

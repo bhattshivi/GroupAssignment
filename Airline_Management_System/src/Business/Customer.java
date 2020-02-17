@@ -75,6 +75,7 @@ public class Customer {
     }
     @Override
     public String toString() {
-        return this.getFirstName(); //To change body of generated methods, choose Tools | Templates.
+        //return this.getFirstName(); //To change body of generated methods, choose Tools | Templates.
+        return this.customerId; //To change body of generated methods, choose Tools | Templates.
     }
 }

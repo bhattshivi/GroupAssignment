@@ -5,6 +5,7 @@
  */
 package Business;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -30,6 +31,58 @@ public class MasterTravelSchedule {
     public void addFLight(Flight flight) {
         masterFlightList.add(flight);
     }
+    
+    public ArrayList<Flight> searchOneWayFlight(String source, String destination, LocalDate dDate) {
+        
+        ArrayList<Flight> oneWayFlightList = new ArrayList<Flight>();
+        
+        for (Flight flight : this.masterFlightList) {
+            if(flight.getFlightSchedule().getSource().equals(source) &&
+                flight.getFlightSchedule().getDestination().equals(destination) &&
+                    flight.getFlightSchedule().getDepartureDate().equals(dDate)) {
+                
+                oneWayFlightList.add(flight);          
+            }
+        }
+        return oneWayFlightList;        
+    }
+    
+    public ArrayList<Flight> searchRoundTripFlight(String source, String destination, LocalDate dDate, LocalDate aDate) {
+        
+        ArrayList<Flight> roundTripFlightList = new ArrayList<Flight>();
+        
+        for (Flight flight : this.masterFlightList) {
+            
+            if(aDate == null) {
+                if(flight.getFlightSchedule().getSource().equals(source) &&
+                    flight.getFlightSchedule().getDestination().equals(destination) &&
+                        flight.getFlightSchedule().getDepartureDate().equals(dDate)) {
+
+                    roundTripFlightList.add(flight);          
+                }
+            }
+            if(dDate == null){
+                if(flight.getFlightSchedule().getSource().equals(source) &&
+                    flight.getFlightSchedule().getDestination().equals(destination) &&
+                        flight.getFlightSchedule().getArrivalDate().equals(aDate)) {
+
+                    roundTripFlightList.add(flight);          
+                }
+            }
+            
+            /*
+            if(flight.getFlightSchedule().getSource().equals(destination) &&
+                flight.getFlightSchedule().getDestination().equals(source) &&
+                    flight.getFlightSchedule().getArrivalDate().equals(aDate)) {
+                
+                roundTripFlightList.add(flight);          
+            }
+            */
+        }
+        return roundTripFlightList;        
+    }
+    
+    
     
     public ArrayList<Flight> searchFlight(String flightNumber,String source, String destination) {
         System.out.println("FLIGHT NO :  **" + flightNumber);

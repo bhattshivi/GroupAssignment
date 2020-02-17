@@ -10,6 +10,7 @@ import Business.AirplaneDirectory;
 import Business.Customer;
 import Business.CustomerDirectory;
 import Business.MasterTravelSchedule;
+import Business.ReservationDirectory;
 import UserInterface.ManageAirliner.ManageAirliners;
 import UserInterface.ManageTravelAgency.ManageTravelAgency;
 import java.awt.CardLayout;
@@ -24,9 +25,10 @@ public class TravelAgencyMain extends javax.swing.JFrame {
     
     private AirlinerDirectory airlineDirectory;
     private AirplaneDirectory airplaneDirectory;
+    private ReservationDirectory reservationDirectory;
     private MasterTravelSchedule masterTravelSchedule;
-     private CustomerDirectory custDir;
-     private Customer cust;
+    private CustomerDirectory custDir;
+    private Customer cust;
     /**
      * Creates new form MainJFrame
      */
@@ -35,6 +37,7 @@ public class TravelAgencyMain extends javax.swing.JFrame {
         airlineDirectory = new AirlinerDirectory();
         airplaneDirectory = new AirplaneDirectory();
         masterTravelSchedule = new MasterTravelSchedule();
+        reservationDirectory = new ReservationDirectory();
         custDir = new CustomerDirectory();
         cust = new Customer();
         defaultCenterJFrame();
@@ -62,7 +65,6 @@ public class TravelAgencyMain extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(950, 650));
-        setResizable(false);
 
         jSplitPane1.setDividerLocation(200);
 
@@ -112,7 +114,7 @@ public class TravelAgencyMain extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnManageTravelAgencyMainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageTravelAgencyMainButtonActionPerformed
-        ManageTravelAgency travelAgencyPanel = new ManageTravelAgency(this.rightPanel, airlineDirectory, masterTravelSchedule, custDir, cust);
+        ManageTravelAgency travelAgencyPanel = new ManageTravelAgency(this.rightPanel, airlineDirectory, masterTravelSchedule, custDir, cust, reservationDirectory);
         this.rightPanel.add(travelAgencyPanel, "ManageTravelAgency");
         CardLayout layout = (CardLayout)this.rightPanel.getLayout();
         layout.next(rightPanel);
