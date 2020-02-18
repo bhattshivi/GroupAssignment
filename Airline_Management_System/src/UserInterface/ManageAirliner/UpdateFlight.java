@@ -37,7 +37,7 @@ public class UpdateFlight extends javax.swing.JPanel {
     /**
      * Creates new form CreateFlight
      */
-    public UpdateFlight(JPanel panel, AirlinerDirectory airlineDirectory, AirplaneDirectory airplaneDirectory, Airliner airliner, Flight flight) {
+    public UpdateFlight(JPanel panel, AirlinerDirectory airlineDirectory, AirplaneDirectory airplaneDirectory, Airliner airliner, Flight flight, MasterTravelSchedule masterTravelSchedule) {
         initComponents();
         this.panel = panel;
         this.airlineDirectory = airlineDirectory;
@@ -50,7 +50,7 @@ public class UpdateFlight extends javax.swing.JPanel {
         populateAirplanes();
         populateFlightSchedules();
         populateFlightDetails();
-        
+        //populateSeatDetails();
     }
     
     public void populateAirplanes() {
@@ -87,8 +87,12 @@ public class UpdateFlight extends javax.swing.JPanel {
             flightStatusCombo.setSelectedIndex(1);
         }       
         
-        dtm = (DefaultTableModel)flightSeatsTbl.getModel();
-        dtm.setRowCount(0);
+        //commenting dtm = (DefaultTableModel)flightSeatsTbl.getModel();
+        //commenting dtm.setRowCount(0);
+        
+        /*Airplane a = (Airplane)flightAirplaneCombo.getSelectedItem();
+        
+        
         for(Seat s : flight.getFlightSeatList()){
             Object[] row = new Object[dtm.getColumnCount()];
             row[0]=s.getSeatName();
@@ -96,6 +100,25 @@ public class UpdateFlight extends javax.swing.JPanel {
             row[2]=s.getType();
             row[3]=s.getStatus();
             dtm.addRow(row);
+        }
+        if((a.getSeatCol()*a.getSeatRow()) > flight.getFlightSeatList().size()) {
+            dtm.setRowCount((a.getSeatCol()*a.getSeatRow())-flight.getFlightSeatList().size());
+        }*/
+        
+    }
+    
+    public void populateSeatDetails() {
+        Airplane a = (Airplane)flightAirplaneCombo.getSelectedItem();
+        for(Seat s : flight.getFlightSeatList()){
+            Object[] row = new Object[dtm.getColumnCount()];
+            row[0]=s.getSeatName();
+            row[1]=s.getPrice();
+            row[2]=s.getType();
+            row[3]=s.getStatus();
+            dtm.addRow(row);
+        }
+        if((a.getSeatCol()*a.getSeatRow()) > flight.getFlightSeatList().size()) {
+            dtm.setRowCount((a.getSeatCol()*a.getSeatRow())-flight.getFlightSeatList().size());
         }
     }
 
@@ -166,10 +189,7 @@ public class UpdateFlight extends javax.swing.JPanel {
 
         flightSeatsTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Seat # *", "Price *", "Type *", "Status *"
@@ -211,16 +231,11 @@ public class UpdateFlight extends javax.swing.JPanel {
                     .addComponent(jLabel12))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(flightAirplaneCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(107, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(flightStatusCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(flightNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(flightAirplaneCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(flightStatusCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(flightNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -423,7 +438,9 @@ public class UpdateFlight extends javax.swing.JPanel {
 
     private void updateFlightBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateFlightBtnActionPerformed
         
-        dtm = (DefaultTableModel) flightSeatsTbl.getModel();
+        boolean isFlightExist = false;
+        boolean seatCreated = false;
+        //commenting dtm = (DefaultTableModel) flightSeatsTbl.getModel();
         int nRow = dtm.getRowCount();
         ArrayList<Seat> seatList = new ArrayList<>();        
         
@@ -434,40 +451,57 @@ public class UpdateFlight extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please select a status with respect to the flight");
             
         }else {  
-            for(int i=0; i < nRow; i++) {
-                
-                if(null == flightSeatsTbl.getValueAt(i, 0)) {
-                    JOptionPane.showMessageDialog(null, "Please enter seat number at row " + (i+1));
-                    break;
-                }else if(null == flightSeatsTbl.getValueAt(i, 1)) {
-                    JOptionPane.showMessageDialog(null, "Please enter price for the seat at row " + i+1);
-                    break;
+            
+            for(Flight f : masterTravelSchedule.getMasterFlightList()) {
+                if(!(flight.getFlightName().equalsIgnoreCase(f.getFlightName()))) {
+                    if(flightNameTxt.getText().equalsIgnoreCase(f.getFlightName())) {
+                        isFlightExist = true;
+                        JOptionPane.showMessageDialog(null, "Flight with name \"" + f.getFlightName() + "\" already exist. Please enter a different name.");
+                        break;
+                    }
                 }
-                else if(null == flightSeatsTbl.getValueAt(i, 2)) {
-                    JOptionPane.showMessageDialog(null, "Please select the seat type at row " + i+1);
-                    break;
-                }else if(null == flightSeatsTbl.getValueAt(i, 3)) {
-                    JOptionPane.showMessageDialog(null, "Please select the availability of seat at row " + i+1);
-                    break;
-                }else {
-                    Seat flightSeat = new Seat();
-                    flightSeat.setSeatName(flightSeatsTbl.getValueAt(i, 0).toString());
-                    flightSeat.setPrice((Double)flightSeatsTbl.getValueAt(i, 1));
-                    flightSeat.setType(flightSeatsTbl.getValueAt(i, 2).toString());
-                    flightSeat.setStatus(flightSeatsTbl.getValueAt(i, 3).toString());
-                    seatList.add(flightSeat);
-                }                
             }
-            if(!checkForAirplaneOverlap()) {
-                flight.setFlightName(flightNameTxt.getText());
-                flight.setIsActive((flightStatusCombo.getSelectedItem() == "Active"));
-                flight.setFlightSchedule(selectedFlightSchedule);
-                flight.setAirplane(selectedAirplane);    
-                flight.getFlightSeatList().clear();
-                flight.setFlightSeatList(seatList); 
+            
+            if(!isFlightExist) {
+                for(int i=0; i < nRow; i++) {
                 
-                JOptionPane.showMessageDialog(null, "Flight is updated successfully");
-            } 
+                    if(null == flightSeatsTbl.getValueAt(i, 0) || "".equals(flightSeatsTbl.getValueAt(i, 0))) {
+                        JOptionPane.showMessageDialog(null, "Please enter seat number at row " + (i+1));
+                        break;
+                    }else if(null == flightSeatsTbl.getValueAt(i, 1) || "".equals(flightSeatsTbl.getValueAt(i, 1))) {
+                        JOptionPane.showMessageDialog(null, "Please enter price for the seat at row " + (i+1));
+                        break;
+                    }
+                    else if(null == flightSeatsTbl.getValueAt(i, 2) || "".equals(flightSeatsTbl.getValueAt(i, 2))) {
+                        JOptionPane.showMessageDialog(null, "Please select the seat type at row " + (i+1));
+                        break;
+                    }else if(null == flightSeatsTbl.getValueAt(i, 3) || "".equals(flightSeatsTbl.getValueAt(i, 3))) {
+                        JOptionPane.showMessageDialog(null, "Please select the availability of seat at row " + (i+1));
+                        break;
+                    }else {
+                        seatCreated = true;
+                        Seat flightSeat = new Seat();
+                        flightSeat.setSeatName(flightSeatsTbl.getValueAt(i, 0).toString());
+                        flightSeat.setPrice((Double)flightSeatsTbl.getValueAt(i, 1));
+                        flightSeat.setType(flightSeatsTbl.getValueAt(i, 2).toString());
+                        flightSeat.setStatus(flightSeatsTbl.getValueAt(i, 3).toString());
+                        seatList.add(flightSeat);
+                    }                
+                }
+                if(!checkForAirplaneOverlap() && seatCreated) {
+                    flight.setFlightName(flightNameTxt.getText());
+                    flight.setIsActive((flightStatusCombo.getSelectedItem() == "Active"));
+                    flight.setFlightSchedule(selectedFlightSchedule);
+                    flight.setAirplane(selectedAirplane);    
+                    flight.getFlightSeatList().clear();
+                    flight.setFlightSeatList(seatList); 
+
+                    JOptionPane.showMessageDialog(null, "Flight is updated successfully");
+                } 
+            }
+            
+            
+            
         }
         
         /*
@@ -500,12 +534,16 @@ public class UpdateFlight extends javax.swing.JPanel {
         Flight oldF = new Flight();
         
         for(Flight f : airliner.getFlightList()) {
-            if(f.getAirplane() == selectedAirplane) {                
+            if(f.getAirplane() == selectedAirplane && f != flight) {                
                 if(selectedFlightSchedule.getDepartureDate().isBefore(f.getFlightSchedule().getArrivalDate()) &&
                    f.getFlightSchedule().getDepartureDate().isBefore(selectedFlightSchedule.getArrivalDate())) {
                     isOverlap = true;
                     oldF = f;
-                }else {                    
+                }else if((f.getFlightSchedule().getArrivalDate().equals(selectedFlightSchedule.getArrivalDate()) && 
+                          f.getFlightSchedule().getDepartureDate().equals(selectedFlightSchedule.getDepartureDate())) ||
+                        f.getFlightSchedule().getArrivalDate().equals(selectedFlightSchedule.getDepartureDate()) ||
+                        f.getFlightSchedule().getDepartureDate().equals(selectedFlightSchedule.getArrivalDate())
+                        ){                    
                     long diff1 = DAYS.between(selectedFlightSchedule.getDepartureDate(), selectedFlightSchedule.getArrivalDate());
                     long diff2 = DAYS.between(f.getFlightSchedule().getDepartureDate(), f.getFlightSchedule().getArrivalDate());
                     
@@ -540,10 +578,31 @@ public class UpdateFlight extends javax.swing.JPanel {
     }
     
     private void flightAirplaneComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_flightAirplaneComboActionPerformed
+        
+        /*selectedAirplane = (Airplane)flightAirplaneCombo.getSelectedItem();
+        int totalSeats = (selectedAirplane.getSeatCol() * selectedAirplane.getSeatRow());
+        dtm.setRowCount(totalSeats);
+        if(selectedAirplane == flight.getAirplane()) {
+            //commenting dtm = (DefaultTableModel)flightSeatsTbl.getModel();           
+            for(Seat s : flight.getFlightSeatList()){
+                Object[] row = new Object[dtm.getColumnCount()];
+                row[0]=s.getSeatName();
+                row[1]=s.getPrice();
+                row[2]=s.getType();
+                row[3]=s.getStatus();
+                dtm.addRow(row);
+            }
+            
+            if((selectedAirplane.getSeatCol()*selectedAirplane.getSeatRow()) > flight.getFlightSeatList().size()) {
+                dtm.setRowCount((selectedAirplane.getSeatCol()*selectedAirplane.getSeatRow())-flight.getFlightSeatList().size());
+            }
+        }  
+        */    
+        
         selectedAirplane = (Airplane)flightAirplaneCombo.getSelectedItem();
         dtm.setRowCount(0);
         if(selectedAirplane == flight.getAirplane()) {
-            dtm = (DefaultTableModel)flightSeatsTbl.getModel();            
+            dtm = (DefaultTableModel)flightSeatsTbl.getModel();           
             for(Seat s : flight.getFlightSeatList()){
                 Object[] row = new Object[dtm.getColumnCount()];
                 row[0]=s.getSeatName();
@@ -552,6 +611,14 @@ public class UpdateFlight extends javax.swing.JPanel {
                 row[3]=s.getStatus();
                 dtm.addRow(row);
             } 
+            System.out.println("!!!!!!! " + selectedAirplane.getSeatCol());
+            System.out.println("!!!!!!! " + selectedAirplane.getSeatRow());
+            System.out.println("!!!!!!! " + flight.getFlightSeatList().size());
+            
+            if((selectedAirplane.getSeatCol()*selectedAirplane.getSeatRow()) > flight.getFlightSeatList().size()) {
+                System.out.println("inside()()()()");
+                dtm.setRowCount((selectedAirplane.getSeatCol()*selectedAirplane.getSeatRow()));
+            }
         }else {
             int totalSeats = (selectedAirplane.getSeatCol() * selectedAirplane.getSeatRow());
             dtm.setRowCount(totalSeats);

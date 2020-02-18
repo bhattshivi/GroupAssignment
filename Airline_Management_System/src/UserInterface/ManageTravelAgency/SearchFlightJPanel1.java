@@ -15,7 +15,10 @@ import Business.Seat;
 import UserInterface.ManageAirliner.UpdateAirplane;
 import java.awt.CardLayout;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import javax.swing.DefaultCellEditor;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -40,31 +43,74 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
     private CustomerDirectory custDir;
     private String searchType;
     private ReservationDirectory reservationDirectory;
-
+    
+    private DefaultTableModel dtmMultiCity;
+    private DefaultTableModel dtmOneWay;
+    private DefaultTableModel dtmRoundTrip;
+    private int multicityRowCount;
+    
     public SearchFlightJPanel1(JPanel panel, AirlinerDirectory airlineDirectory, MasterTravelSchedule masterTravelSchedule, CustomerDirectory custDir, ReservationDirectory reservationDirectory) {
         initComponents();
         searchType = "one-way";
+        multicityRowCount = 1;
         this.panel = panel;
         this.airlineDirectory = airlineDirectory;
         this.masterTravelSchedule = masterTravelSchedule;
         this.custDir = custDir;
         this.reservationDirectory = reservationDirectory;
+        deleteRow.setEnabled(false);
         populate();
-        hideFields();
+        hideRoundTripFields();
+        hideMulticityFields();
         
     }
     
-    public void hideFields() {
+    public void hideRoundTripFields() {
         returningDate.setVisible(false);
         returningDateLbl.setVisible(false);
         tblSearchRoundTripFlights.setVisible(false);
         jScrollPane2.setVisible(false);
         jLabel2.setVisible(false);
     }
-    public void showFields() {
+    
+    public void showRoundTripFields() {
         returningDate.setVisible(true);
         returningDateLbl.setVisible(true);
+        tblSearchRoundTripFlights.setVisible(true);
+        jScrollPane2.setVisible(true);
+        jLabel2.setVisible(true);
+    }
+    
+    public void hideMulticityFields() {
+        jPanel2.setVisible(false); 
+    }
+    
+    public void showMulticityFields() {
+        jPanel2.setVisible(true); 
+    }
+    
+    public void hideonewayFields() {
+        jPanel1.setVisible(false); 
+    }
+    
+    public void showonewayFields() {
+        jPanel1.setVisible(true); 
+    }
+    
+    
+    
+    public void hideFields() {
         
+        
+        jPanel2.setVisible(false);        
+        tblSearchRoundTripFlights.setVisible(false);
+        jScrollPane2.setVisible(false);
+        jLabel2.setVisible(false);
+    }
+    
+    public void showFields() {
+        returningDate.setVisible(true);
+        returningDateLbl.setVisible(true);        
     }
     
     public void populate() {
@@ -76,7 +122,8 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
             row[0] = f;
             row[1] = f.getFlightSchedule().getSource();
             row[2] = f.getFlightSchedule().getDestination();
-            row[3] = f.getFlightSchedule().getDepartureDate();
+            row[3] = f.getFlightSchedule().getDepartureDate() + "; " + f.getFlightSchedule().getDepartureTime();
+            row[4] = f.getFlightSchedule().getArrivalDate()+ "; " + f.getFlightSchedule().getArrivalTime();
             dtm.addRow(row);
         }
         
@@ -92,17 +139,11 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
     private void initComponents() {
 
         flightSearchOptions = new javax.swing.ButtonGroup();
+        sourceCombo1 = new javax.swing.JComboBox<>();
+        destinationCombo1 = new javax.swing.JComboBox<>();
         oneWayRB = new javax.swing.JRadioButton();
         multiCityRB = new javax.swing.JRadioButton();
         roundTripRB = new javax.swing.JRadioButton();
-        jLabel7 = new javax.swing.JLabel();
-        sourceCombo = new javax.swing.JComboBox<>();
-        jLabel8 = new javax.swing.JLabel();
-        destinationCombo = new javax.swing.JComboBox<>();
-        departingDate = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        returningDateLbl = new javax.swing.JLabel();
-        returningDate = new javax.swing.JTextField();
         searchFlight = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblSearchFlight = new javax.swing.JTable();
@@ -111,6 +152,24 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblSearchRoundTripFlights = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        sourceCombo = new javax.swing.JComboBox<>();
+        departingDate = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        returningDateLbl = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        destinationCombo = new javax.swing.JComboBox<>();
+        returningDate = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblMultiCity = new javax.swing.JTable();
+        addRow = new javax.swing.JButton();
+        deleteRow = new javax.swing.JButton();
+
+        sourceCombo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boston", "San Francisco", "Dallas", "San Jose", "Seattle", "New York", "Las Vegas", "Los Angeles", "Chicago", "Miami" }));
+
+        destinationCombo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boston", "San Francisco", "Dallas", "San Jose", "Seattle", "New York", "Las Vegas", "Los Angeles", "Chicago", "Miami" }));
 
         flightSearchOptions.add(oneWayRB);
         oneWayRB.setSelected(true);
@@ -122,7 +181,7 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
         });
 
         flightSearchOptions.add(multiCityRB);
-        multiCityRB.setText("Multi-city");
+        multiCityRB.setText("Multi-destination");
         multiCityRB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 multiCityRBActionPerformed(evt);
@@ -136,18 +195,6 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
                 roundTripRBActionPerformed(evt);
             }
         });
-
-        jLabel7.setText("Departing from?");
-
-        sourceCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- None --", "Boston", "San Francisco", "Dallas", "San Jose", "Seattle", "New York", "Las Vegas", "Los Angeles", "Chicago", "Miami" }));
-
-        jLabel8.setText("Going to?");
-
-        destinationCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- None --", "Boston", "San Francisco", "Dallas", "San Jose", "Seattle", "New York", "Las Vegas", "Los Angeles", "Chicago", "Miami" }));
-
-        jLabel9.setText("Departing Date");
-
-        returningDateLbl.setText("Returning Date");
 
         searchFlight.setText("Search");
         searchFlight.addActionListener(new java.awt.event.ActionListener() {
@@ -182,6 +229,7 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tblSearchFlight.setRowHeight(25);
         jScrollPane1.setViewportView(tblSearchFlight);
         if (tblSearchFlight.getColumnModel().getColumnCount() > 0) {
             tblSearchFlight.getColumnModel().getColumn(0).setResizable(false);
@@ -190,6 +238,10 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
             tblSearchFlight.getColumnModel().getColumn(3).setResizable(false);
             tblSearchFlight.getColumnModel().getColumn(4).setResizable(false);
         }
+
+        jLabel1.setText("Flights List");
+
+        jLabel2.setText("Returning Flights List");
 
         tblSearchRoundTripFlights.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -217,6 +269,7 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tblSearchRoundTripFlights.setRowHeight(25);
         jScrollPane2.setViewportView(tblSearchRoundTripFlights);
         if (tblSearchRoundTripFlights.getColumnModel().getColumnCount() > 0) {
             tblSearchRoundTripFlights.getColumnModel().getColumn(0).setResizable(false);
@@ -233,6 +286,129 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
             }
         });
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel7.setText("Departing from?");
+
+        sourceCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- None --", "Boston", "San Francisco", "Dallas", "San Jose", "Seattle", "New York", "Las Vegas", "Los Angeles", "Chicago", "Miami" }));
+
+        jLabel9.setText("Departing Date");
+
+        returningDateLbl.setText("Returning Date");
+
+        jLabel8.setText("Going to?");
+
+        destinationCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- None --", "Boston", "San Francisco", "Dallas", "San Jose", "Seattle", "New York", "Las Vegas", "Los Angeles", "Chicago", "Miami" }));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel9))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(departingDate)
+                    .addComponent(sourceCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(returningDateLbl)
+                    .addComponent(jLabel8))
+                .addGap(27, 27, 27)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(destinationCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(returningDate, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(sourceCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(destinationCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(departingDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(returningDateLbl)
+                    .addComponent(returningDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        tblMultiCity.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null}
+            },
+            new String [] {
+                "Source", "Destination", "Departing Date"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        tblMultiCity.setRowHeight(25);
+        jScrollPane3.setViewportView(tblMultiCity);
+        if (tblMultiCity.getColumnModel().getColumnCount() > 0) {
+            tblMultiCity.getColumnModel().getColumn(0).setResizable(false);
+            tblMultiCity.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(sourceCombo1));
+            tblMultiCity.getColumnModel().getColumn(1).setResizable(false);
+            tblMultiCity.getColumnModel().getColumn(1).setCellEditor(new DefaultCellEditor(destinationCombo1));
+            tblMultiCity.getColumnModel().getColumn(2).setResizable(false);
+        }
+
+        addRow.setText("Add Row");
+        addRow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addRowActionPerformed(evt);
+            }
+        });
+
+        deleteRow.setText("Delete Row");
+        deleteRow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteRowActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(deleteRow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addRow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(addRow)
+                        .addGap(18, 18, 18)
+                        .addComponent(deleteRow)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -247,39 +423,22 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(multiCityRB))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
+                        .addContainerGap()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel9))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 808, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 808, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(310, 310, 310)
+                        .addComponent(searchFlight)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(departingDate)
-                            .addComponent(sourceCombo, 0, 144, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(returningDateLbl)
-                            .addComponent(jLabel8))
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(destinationCombo, 0, 144, Short.MAX_VALUE)
-                            .addComponent(returningDate)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(251, 251, 251)
-                        .addComponent(searchFlight))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 808, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 808, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(332, 332, 332)
                         .addComponent(jButton1)))
                 .addContainerGap(109, Short.MAX_VALUE))
         );
@@ -291,31 +450,23 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
                     .addComponent(oneWayRB)
                     .addComponent(roundTripRB)
                     .addComponent(multiCityRB))
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(sourceCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(destinationCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(departingDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(returningDateLbl)
-                    .addComponent(returningDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addComponent(searchFlight)
-                .addGap(28, 28, 28)
+                    .addComponent(searchFlight)
+                    .addComponent(jButton1))
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap(2362, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(1879, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -325,97 +476,316 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
         System.out.println(roundTripRB.isSelected());
         
         if(oneWayRB.isSelected()) {
+            
             jLabel1.setText("Flights from " + sourceCombo.getSelectedItem() + " to " + destinationCombo.getSelectedItem());
             String source = (String)sourceCombo.getSelectedItem();
             String destination = (String)destinationCombo.getSelectedItem();
-            LocalDate dDate = LocalDate.parse(departingDate.getText());
-            //LocalDate rDate = LocalDate.parse(returningDate.getText());
-        
-            DefaultTableModel dtm = (DefaultTableModel) tblSearchFlight.getModel();
-            dtm.setRowCount(0);
-            for (Flight f : masterTravelSchedule.searchOneWayFlight(source, destination, dDate)) {
-                Object[] row = new Object[dtm.getColumnCount()];
-                row[0] = f;
-                row[1] = f.getFlightSchedule().getSource();
-                row[2] = f.getFlightSchedule().getDestination();
-                row[3] = f.getFlightSchedule().getDepartureDate();
-                dtm.addRow(row);
+            LocalDate dDate;// = LocalDate.parse(departingDate.getText());
+            
+            if("".equals(source)) {
+                JOptionPane.showMessageDialog(null, "Please select source city");
+            }else if("".equals(destination)) {
+                JOptionPane.showMessageDialog(null, "Please select destination city");
+            }else if(source.equals(destination)) {
+                JOptionPane.showMessageDialog(null, "Source and destination city cannot be same");
+            }else if("".equals(departingDate.getText())) {
+                JOptionPane.showMessageDialog(null, "Please enter departing date");
+            }else {
+                
+                try{
+                    dDate = LocalDate.parse(departingDate.getText());
+                }catch(DateTimeParseException e){
+                    JOptionPane.showMessageDialog(null, "Please enter a valid Departure date in YYYY-MM-DD format");
+                    return;
+                }
+                
+                if(dDate.isBefore(LocalDate.now())) {
+                    JOptionPane.showMessageDialog(null, "Departure Date can not be the past date");
+                }else {
+                    //DefaultTableModel dtm = (DefaultTableModel) tblSearchFlight.getModel();
+                    dtmOneWay.setRowCount(0);
+                    for (Flight f : masterTravelSchedule.searchOneWayFlight(source, destination, dDate)) {
+                        Object[] row = new Object[dtmOneWay.getColumnCount()];
+                        row[0] = f;
+                        row[1] = f.getFlightSchedule().getSource();
+                        row[2] = f.getFlightSchedule().getDestination();
+                        row[3] = f.getFlightSchedule().getDepartureDate() + "; " + f.getFlightSchedule().getDepartureTime();
+                        row[4] = f.getFlightSchedule().getArrivalDate()+ "; " + f.getFlightSchedule().getArrivalTime();
+                        dtmOneWay.addRow(row);
+                    }
+
+                    if(masterTravelSchedule.searchOneWayFlight(source, destination, dDate).isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "There are no matching flights. Please modify the criteria");
+                    }
+                }
             }
         }
         
         if(roundTripRB.isSelected()) {
-            tblSearchRoundTripFlights.setVisible(true);
-            jScrollPane2.setVisible(true);
-            jLabel2.setVisible(true);
+            
+            //tblSearchRoundTripFlights.setVisible(true);
+            //jScrollPane2.setVisible(true);
+            //jLabel2.setVisible(true);
             
             jLabel1.setText("Flights from " + sourceCombo.getSelectedItem() + " to " + destinationCombo.getSelectedItem());
             String source = (String)sourceCombo.getSelectedItem();
             String destination = (String)destinationCombo.getSelectedItem();
-            LocalDate dDate = LocalDate.parse(departingDate.getText());
-            LocalDate rDate = LocalDate.parse(returningDate.getText());
-        
-            DefaultTableModel dtm = (DefaultTableModel) tblSearchFlight.getModel();
-            dtm.setRowCount(0);
-            for (Flight f : masterTravelSchedule.searchRoundTripFlight(source, destination, dDate, null)) {
-                Object[] row = new Object[dtm.getColumnCount()];
-                row[0] = f;
-                row[1] = f.getFlightSchedule().getSource();
-                row[2] = f.getFlightSchedule().getDestination();
-                row[3] = f.getFlightSchedule().getDepartureDate();
-                dtm.addRow(row);
+            LocalDate dDate;
+            LocalDate rDate;
+            
+            if("".equals(source)) {
+                JOptionPane.showMessageDialog(null, "Please select source city");
+            }else if("".equals(destination)) {
+                JOptionPane.showMessageDialog(null, "Please select destination city");
+            }else if(source.equals(destination)) {
+                JOptionPane.showMessageDialog(null, "Source and destination city cannot be same");
+            }else if("".equals(departingDate.getText())) {
+                JOptionPane.showMessageDialog(null, "Please enter departing date");
+            }else if("".equals(returningDate.getText())) {
+                JOptionPane.showMessageDialog(null, "Please select returning date");
+            }else {
+                
+                try{
+                    dDate = LocalDate.parse(departingDate.getText());
+                }catch(DateTimeParseException e){
+                    JOptionPane.showMessageDialog(null, "Please enter a valid Departure date in YYYY-MM-DD format");
+                    return;
+                } 
+
+                try{
+                    rDate = LocalDate.parse(returningDate.getText());
+                }catch(DateTimeParseException e){
+                    JOptionPane.showMessageDialog(null, "Please enter a valid Returning date in YYYY-MM-DD format");
+                    return;
+                } 
+                
+                if(dDate.isBefore(LocalDate.now())) {
+                    JOptionPane.showMessageDialog(null, "Departure Date can not be the past date");
+                }else if(rDate.isBefore(LocalDate.now())) {
+                    JOptionPane.showMessageDialog(null, "Returning Date can not be the past date");
+                }else if(dDate.isAfter(rDate)) {
+                    JOptionPane.showMessageDialog(null, "Departure Date should not be greater than Returning Date");
+                }else {
+                    dtmOneWay.setRowCount(0);
+                    for (Flight f : masterTravelSchedule.searchRoundTripFlight(source, destination, dDate, null)) {
+                        Object[] row = new Object[dtmOneWay.getColumnCount()];
+                        row[0] = f;
+                        row[1] = f.getFlightSchedule().getSource();
+                        row[2] = f.getFlightSchedule().getDestination();
+                        row[3] = f.getFlightSchedule().getDepartureDate() + "; " + f.getFlightSchedule().getDepartureTime();
+                        row[4] = f.getFlightSchedule().getArrivalDate()+ "; " + f.getFlightSchedule().getArrivalTime();
+                        dtmOneWay.addRow(row);
+                    }
+
+                    jLabel2.setText("Flights from " + destinationCombo.getSelectedItem() + " to " + sourceCombo.getSelectedItem());
+                    //DefaultTableModel dtm1 = (DefaultTableModel) tblSearchRoundTripFlights.getModel();
+                    dtmRoundTrip.setRowCount(0);
+                    for (Flight f : masterTravelSchedule.searchRoundTripFlight(destination, source, null, rDate)) {
+                        Object[] row = new Object[dtmRoundTrip.getColumnCount()];
+                        row[0] = f;
+                        row[1] = f.getFlightSchedule().getSource();
+                        row[2] = f.getFlightSchedule().getDestination();
+                        row[3] = f.getFlightSchedule().getDepartureDate() + "; " + f.getFlightSchedule().getDepartureTime();
+                        row[4] = f.getFlightSchedule().getArrivalDate()+ "; " + f.getFlightSchedule().getArrivalTime();
+                        dtmRoundTrip.addRow(row);
+                    }
+
+                    if(masterTravelSchedule.searchRoundTripFlight(source, destination, dDate, null).isEmpty() &&
+                            masterTravelSchedule.searchRoundTripFlight(destination, source, null, rDate).isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "There are no matching flights. Please modify the criteria");
+                    }else if(masterTravelSchedule.searchRoundTripFlight(source, destination, dDate, null).isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "There are no matching departing flights. Please modify the criteria or select one-way option to book a single flight");
+                    }else if(masterTravelSchedule.searchRoundTripFlight(destination, source, null, rDate).isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "There are no matching returning flights. Please modify the criteria or select one-way option to book a single flight");
+                    }
+                }
             }
             
-            jLabel2.setText("Flights from " + destinationCombo.getSelectedItem() + " to " + sourceCombo.getSelectedItem());
-            DefaultTableModel dtm1 = (DefaultTableModel) tblSearchRoundTripFlights.getModel();
-            dtm1.setRowCount(0);
-            for (Flight f : masterTravelSchedule.searchRoundTripFlight(destination, source, null, rDate)) {
-                Object[] row = new Object[dtm.getColumnCount()];
-                row[0] = f;
-                row[1] = f.getFlightSchedule().getSource();
-                row[2] = f.getFlightSchedule().getDestination();
-                row[3] = f.getFlightSchedule().getDepartureDate();
-                dtm1.addRow(row);
-            }
+            
+            
+            
+            //DefaultTableModel dtm = (DefaultTableModel) tblSearchFlight.getModel();
+            
         }
         
         if(multiCityRB.isSelected()) {
-            String source = (String)sourceCombo.getSelectedItem();
+            
+            boolean isError = false;
+            
+            int nRow = dtmMultiCity.getRowCount();
+            ArrayList<Flight> multiCityFlights = new ArrayList<>();
+            ArrayList<Flight> f1 = new ArrayList<>();
+            
+            for(int i=0; i < nRow; i++) {
+                
+                if(null == tblMultiCity.getValueAt(i, 0)) {
+                    isError = true;
+                    JOptionPane.showMessageDialog(null, "Please select source city at row " + (i+1));
+                    break;
+                }else if(null == tblMultiCity.getValueAt(i, 1)) {
+                    isError = true;
+                    JOptionPane.showMessageDialog(null, "Please select destination city at row " + (i+1));
+                    break;
+                }else if(tblMultiCity.getValueAt(i, 0).toString().equals(tblMultiCity.getValueAt(i, 1).toString())) {
+                    isError = true;
+                    JOptionPane.showMessageDialog(null, "Source and destination city cannot be same at row " + (i+1));
+                }else if(null == tblMultiCity.getValueAt(i, 2) || "".equals(tblMultiCity.getValueAt(i, 2))) {
+                    isError = true;
+                    JOptionPane.showMessageDialog(null, "Please enter departing date at row " + (i+1));
+                    break;
+                }else {
+                    LocalDate dDate;
+                    try{
+                        dDate = LocalDate.parse(tblMultiCity.getValueAt(i, 2).toString());
+                    }catch(DateTimeParseException e){
+                        isError = true;
+                        JOptionPane.showMessageDialog(null, "Please enter a valid Departure date in YYYY-MM-DD format at row " + (i+1));
+                        return;
+                    } 
+                    
+                    if(dDate.isBefore(LocalDate.now())) {
+                        isError = true;
+                        JOptionPane.showMessageDialog(null, "Departure Date can not be the past date");
+                    }else if(i>0) {
+                        if(LocalDate.parse(tblMultiCity.getValueAt(i, 2).toString()).isBefore(LocalDate.parse(tblMultiCity.getValueAt((i-1), 2).toString()))) {
+                            isError = true;
+                            JOptionPane.showMessageDialog(null, "Dates should be in chronological order");
+                        }else {
+                            f1 = masterTravelSchedule.searchOneWayFlight(tblMultiCity.getValueAt(i, 0).toString(), tblMultiCity.getValueAt(i, 1).toString(), dDate);
+                            multiCityFlights.addAll(f1);
+                        }
+                    }else {
+                        f1 = masterTravelSchedule.searchOneWayFlight(tblMultiCity.getValueAt(i, 0).toString(), tblMultiCity.getValueAt(i, 1).toString(), dDate);
+                        multiCityFlights.addAll(f1);
+                    }
+                }                
+            }
+            
+            /*String source = (String)sourceCombo.getSelectedItem();
             String destination = (String)destinationCombo.getSelectedItem();
             LocalDate dDate = LocalDate.parse(departingDate.getText());
-            LocalDate rDate = LocalDate.parse(returningDate.getText());
+            LocalDate rDate = LocalDate.parse(returningDate.getText());*/
         
-            DefaultTableModel dtm = (DefaultTableModel) tblSearchFlight.getModel();
-            dtm.setRowCount(0);
-            for (Flight f : masterTravelSchedule.searchOneWayFlight(source, destination, dDate)) {
-                Object[] row = new Object[dtm.getColumnCount()];
-                row[0] = f;
-                row[1] = f.getFlightSchedule().getSource();
-                row[2] = f.getFlightSchedule().getDestination();
-                row[3] = f.getFlightSchedule().getDepartureDate();
-                dtm.addRow(row);
+            
+            
+            //DefaultTableModel dtm = (DefaultTableModel) tblSearchFlight.getModel();
+            if(!isError) {
+                dtmOneWay.setRowCount(0);
+                for (Flight f : multiCityFlights) {
+                    Object[] row = new Object[dtmOneWay.getColumnCount()];
+                    row[0] = f;
+                    row[1] = f.getFlightSchedule().getSource();
+                    row[2] = f.getFlightSchedule().getDestination();
+                    row[3] = f.getFlightSchedule().getDepartureDate() + "; " + f.getFlightSchedule().getDepartureTime();
+                    row[4] = f.getFlightSchedule().getArrivalDate()+ "; " + f.getFlightSchedule().getArrivalTime();
+                    dtmOneWay.addRow(row);
+                }
+
+                if(multiCityFlights.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "There are no matching flights. Please modify the criteria");
+                }
             }
+            
+            
         }
         
     }//GEN-LAST:event_searchFlightActionPerformed
 
     private void oneWayRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_oneWayRBActionPerformed
         System.out.println(oneWayRB.isSelected());
-        hideFields();
-        
+        dtmOneWay = (DefaultTableModel) tblSearchFlight.getModel();
+        //multicityRowCount = 0;
+        hideRoundTripFields();
+        hideMulticityFields();
+        showonewayFields();
     }//GEN-LAST:event_oneWayRBActionPerformed
 
     private void multiCityRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiCityRBActionPerformed
-        System.out.println(multiCityRB.isSelected());
-        hideFields();
+        dtmMultiCity = (DefaultTableModel) tblMultiCity.getModel();
+        dtmMultiCity.setRowCount(1);
+        dtmOneWay = (DefaultTableModel) tblSearchFlight.getModel();
+        hideRoundTripFields();
+        showMulticityFields();
+        hideonewayFields();
     }//GEN-LAST:event_multiCityRBActionPerformed
 
     private void roundTripRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roundTripRBActionPerformed
-        System.out.println(roundTripRB.isSelected());
-        showFields();
+        dtmOneWay = (DefaultTableModel) tblSearchFlight.getModel();
+        dtmRoundTrip = (DefaultTableModel) tblSearchRoundTripFlights.getModel();
+        showRoundTripFields();
+        hideMulticityFields();
+        showonewayFields();
     }//GEN-LAST:event_roundTripRBActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
+        ArrayList<Flight> flightToBook = new ArrayList<>();
+        
+        if(oneWayRB.isSelected()) {
+            int selectedRow1 = tblSearchFlight.getSelectedRow();
+            
+            
+            if(selectedRow1<0) {
+                JOptionPane.showMessageDialog(null, "Please select a flight to book");
+            }else {
+                Flight f = (Flight)tblSearchFlight.getValueAt(selectedRow1, 0);
+                flightToBook.add(f);
+                //BookFlightJPanel1 searchFlightJPanel = new BookFlightJPanel1(this.panel, airlineDirectory, masterTravelSchedule, flightToBook, custDir, reservationDirectory);
+                //this.panel.add(searchFlightJPanel, "SearchFlightJPanel");
+                //CardLayout layout = (CardLayout)this.panel.getLayout();
+                //layout.next(panel);
+            }
+        }
+        
+        if(roundTripRB.isSelected()) {
+            int selectedRow1 = tblSearchFlight.getSelectedRow();
+            int selectedRow2 = tblSearchRoundTripFlights.getSelectedRow();
+            //ArrayList<Flight> flightToBook = new ArrayList<>();
+            
+            if(selectedRow1<0) {
+                JOptionPane.showMessageDialog(null, "Please select one departing flight from both the flight tables");
+            }
+            else if(selectedRow2<0 && roundTripRB.isSelected()) {
+                JOptionPane.showMessageDialog(null, "Please select one returning flight from both the flight tables");
+            }
+            else {
+                Flight f1;
+                Flight f = (Flight)tblSearchFlight.getValueAt(selectedRow1, 0);
+                if(roundTripRB.isSelected()) {
+                    f1 = (Flight)tblSearchRoundTripFlights.getValueAt(selectedRow2, 0);
+                    flightToBook.add(f1);
+                }
+                flightToBook.add(f);
+
+                
+            }
+        }
+        
+        if(multiCityRB.isSelected()) {
+            int selectedRow1 = tblSearchFlight.getSelectedRow();
+            //ArrayList<Flight> flightToBook = new ArrayList<>();
+            
+            if(selectedRow1 < 0) {
+                JOptionPane.showMessageDialog(null, "Please select atleast one flight");
+            }else {
+                int[] selectedRows = tblSearchFlight.getSelectedRows();
+                for (int i = 0; i < selectedRows.length; i++) {
+                    
+                    Flight f = (Flight)tblSearchFlight.getValueAt(selectedRows[i], 0);
+                    
+                    
+                    flightToBook.add(f);
+                }
+            }
+        }
+        
+        BookFlightJPanel1 searchFlightJPanel = new BookFlightJPanel1(this.panel, airlineDirectory, masterTravelSchedule, flightToBook, custDir, reservationDirectory);
+        this.panel.add(searchFlightJPanel, "SearchFlightJPanel");
+        CardLayout layout = (CardLayout)this.panel.getLayout();
+        layout.next(panel);
+        
+        
+        /*
         int selectedRow1 = tblSearchFlight.getSelectedRow();
         int selectedRow2 = tblSearchRoundTripFlights.getSelectedRow();
         ArrayList<Flight> flightToBook = new ArrayList<>();
@@ -440,12 +810,36 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
             CardLayout layout = (CardLayout)this.panel.getLayout();
             layout.next(panel);
         }
-        
+        */
         
         
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void addRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRowActionPerformed
+        dtmMultiCity.setRowCount(dtmMultiCity.getRowCount() + 1);
+        if(dtmMultiCity.getRowCount() == 1) {
+            deleteRow.setEnabled(false);
+        }else {
+            deleteRow.setEnabled(true);
+        }
+    }//GEN-LAST:event_addRowActionPerformed
+
+    private void deleteRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteRowActionPerformed
+        int selectedRow = tblMultiCity.getSelectedRow();
+        if(dtmMultiCity.getRowCount() == 2) {
+            deleteRow.setEnabled(false);
+        }else {
+            deleteRow.setEnabled(true);
+        }
+        
+        if(selectedRow>=0){
+            dtmMultiCity.removeRow(selectedRow);
+        }else{
+            JOptionPane.showMessageDialog(null, "Please select a row to remove");
+        }
+    }//GEN-LAST:event_deleteRowActionPerformed
     
     private void populateSearch() {
         /*DefaultTableModel dtm = (DefaultTableModel) tblSearchFlight.getModel();
@@ -464,8 +858,11 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addRow;
+    private javax.swing.JButton deleteRow;
     private javax.swing.JTextField departingDate;
     private javax.swing.JComboBox<String> destinationCombo;
+    private javax.swing.JComboBox<String> destinationCombo1;
     private javax.swing.ButtonGroup flightSearchOptions;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -473,8 +870,11 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JRadioButton multiCityRB;
     private javax.swing.JRadioButton oneWayRB;
     private javax.swing.JTextField returningDate;
@@ -482,6 +882,8 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
     private javax.swing.JRadioButton roundTripRB;
     private javax.swing.JButton searchFlight;
     private javax.swing.JComboBox<String> sourceCombo;
+    private javax.swing.JComboBox<String> sourceCombo1;
+    private javax.swing.JTable tblMultiCity;
     private javax.swing.JTable tblSearchFlight;
     private javax.swing.JTable tblSearchRoundTripFlights;
     // End of variables declaration//GEN-END:variables

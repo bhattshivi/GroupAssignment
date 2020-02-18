@@ -6,6 +6,7 @@
 package UserInterface.ManageTravelAgency;
 
 import Business.AirlinerDirectory;
+import Business.Airplane;
 import Business.Customer;
 import Business.CustomerDirectory;
 import Business.Flight;
@@ -13,6 +14,7 @@ import Business.MasterTravelSchedule;
 import Business.Reservation;
 import Business.ReservationDirectory;
 import Business.Seat;
+import UserInterface.ManageAirliner.UpdateAirplane;
 import java.awt.CardLayout;
 import static java.time.temporal.ChronoUnit.DAYS;
 import java.util.ArrayList;
@@ -39,7 +41,9 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
     private ArrayList<Flight> flightSelectedList;
     private CustomerDirectory custDir;
     private ReservationDirectory reservationDirectory;
-            
+    private DefaultTableModel dtm;// = (DefaultTableModel) jTable1.getModel();
+    private int indexCount;
+   
     public BookFlightJPanel1(JPanel panel, AirlinerDirectory airlineDirectory,  MasterTravelSchedule masterTravelSchedule, ArrayList<Flight> flightSelectedList, CustomerDirectory custDir, ReservationDirectory reservationDirectory) {
         initComponents();
         this.panel = panel;
@@ -48,7 +52,9 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
         this.flightSelectedList = flightSelectedList;
         this.custDir = custDir;
         this.reservationDirectory = reservationDirectory;
-        populateFlightCombo();
+        dtm = (DefaultTableModel) jTable1.getModel();
+        indexCount = 0;
+        populateFlightCombo(); 
         populateUserCombo();
         populateFlightDetails();
         populateCustomerDetails();
@@ -67,9 +73,13 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
     }
     
     public void populateFlightDetails() {
-        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+        //DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+        //dtm = (DefaultTableModel) jTable1.getModel();
         dtm.setRowCount(0);
         Flight f = (Flight)selectedFlightCombo.getSelectedItem();
+        indexCount = selectedFlightCombo.getSelectedIndex();
+        System.out.println( "inde count in 1--" + indexCount);
+        System.out.println( "flight"+f.getFlightName()+"Seat Lock1---> " + f.getSeatLock());
         
         flightNumTxt.setText(f.getFlightName());
         carrierTxt.setText(f.getAirliner().getAirlinerName());
@@ -81,18 +91,15 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
         aTimeTxt.setText(f.getFlightSchedule().getArrivalTime()+"");
         
         for (Seat s : f.getFlightSeatList()) {
-            System.out.println("===>>>??? " + s.getStatus());
-            
+            System.out.println("Seat Lock2---> " + (f.getSeatLock() == s));
             if("Available".equals(s.getStatus())) {
                 Object[] row = new Object[dtm.getColumnCount()];
                 row[0] = s;
                 row[1] = s.getPrice();
                 row[2] = s.getType();
-                //row[3] = "Available".equals(s.getStatus());//s.isIsBooked();
+                row[3] = f.getSeatLock() == s;
                 dtm.addRow(row);
             }
-            
-            
         }
     } 
     
@@ -285,7 +292,7 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
                 .addGap(23, 23, 23))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Seat Selection"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Available Seats Selection"));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -295,7 +302,7 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Seat #", "Price", "Type", "Select Seat"
             }
         ) {
             Class[] types = new Class [] {
@@ -313,6 +320,7 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.setRowHeight(25);
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
@@ -335,7 +343,7 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         jLabel10.setText("Select customer");
@@ -415,12 +423,13 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
                     .addComponent(jLabel14)
                     .addComponent(passportTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(genderTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel16)
-                        .addComponent(custIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(custIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel15)
+                        .addComponent(genderTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -472,7 +481,7 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(customerCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -499,9 +508,111 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
     private void customerComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerComboActionPerformed
         populateCustomerDetails();
     }//GEN-LAST:event_customerComboActionPerformed
-
+    
+    public boolean isSeatSelected(Flight f) {
+        int nRow = jTable1.getRowCount();
+        int count1 = 0;
+        boolean s = true;
+        
+        for(int i=0; i < nRow; i++) {           
+            if(null != jTable1.getValueAt(i, 3)) {
+                if((Boolean)jTable1.getValueAt(i, 3) == false) {
+                    count1++;
+                }
+            }
+        }        
+        if(count1 == nRow) {
+            s = false;
+            JOptionPane.showMessageDialog(null, "Please select a seat");
+        }
+        return s;
+    }
+    
+    public boolean isOnlyOneSeatSelected(Flight f) {
+        int nRow = jTable1.getRowCount();
+        int count2 = 0;
+        int rowCount = 0;
+        boolean s = true;
+        
+        for(int i=0; i < nRow; i++) {           
+            if(null != jTable1.getValueAt(i, 3)) {
+                if((Boolean)jTable1.getValueAt(i, 3) == true) {
+                    rowCount = i;
+                    count2++;
+                }
+            }
+        }        
+        if(count2 == nRow && nRow > 1) {
+            s = false;
+            JOptionPane.showMessageDialog(null, "Please select only one seat");
+        }else {
+            
+            Seat s1 = (Seat)jTable1.getValueAt(rowCount, 0);
+            if(f.getSeatLock() == null) {
+                f.setSeatLock(s1);
+            }
+            
+            System.out.println("---seat lock while booking --- " );
+            System.out.println( "flight"+f.getFlightName()+"Seat Lock1---> " + f.getSeatLock());
+            System.out.println("---eat lock while booking --- " );
+        }
+        return s;
+    }
+    
     private void selectedFlightComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectedFlightComboActionPerformed
+        
+        //selectedFlightCombo.getItemAt(indexCount);
+        System.out.println("---calling---");
+        int nRow = jTable1.getRowCount();
+        int count1 = 0;
+        int count2 = 0;
+        int rowCount = 0;
+        
+        for(int i=0; i < nRow; i++) {           
+            if(null == jTable1.getValueAt(i, 3)) {
+                //count1++;
+            }else {
+                if((Boolean)jTable1.getValueAt(i, 3) == false) {
+                    count1++;
+                }
+            }
+            
+            if(null == jTable1.getValueAt(i, 3)) {
+                //count1++;
+            }else {
+                if((Boolean)jTable1.getValueAt(i, 3) == true) {
+                    rowCount = i;
+                    count2++;
+                }
+            }
+        }
+        
+        if(count1 == nRow) {
+            JOptionPane.showMessageDialog(null, "Please select a seat before procedding to next flight");
+            selectedFlightCombo.setSelectedIndex(indexCount);
+        }else if(count2 == nRow && nRow > 1) {
+            JOptionPane.showMessageDialog(null, "Please select only one seat");
+            selectedFlightCombo.setSelectedIndex(indexCount);
+        }else {
+            Seat s = (Seat)jTable1.getValueAt(rowCount, 0);
+            System.out.println( "inde count in 2--" + indexCount);
+            Flight f = (Flight)selectedFlightCombo.getItemAt(indexCount);
+            f.setSeatLock(s);
+            populateFlightDetails();
+        }
+        
+        /*
+        int n = jTable1.getSelectedRow();        
+        if(n>=0){
+            
+            
+            
+            Seat s = (Seat)jTable1.getValueAt(n, 0);
+            Flight f = (Flight)selectedFlightCombo.getItemAt(indexCount);
+            f.setSeatLock(s);
+        }        
         populateFlightDetails();
+        */
     }//GEN-LAST:event_selectedFlightComboActionPerformed
     
     private boolean isOverlap(Flight f) {
@@ -516,7 +627,11 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
                         f.getFlightSchedule().getDepartureDate().isBefore(r.getFlight().getFlightSchedule().getArrivalDate())) {
                     overlap = true;
                     flightMatched = r.getFlight();
-                }else {                    
+                }else if((f.getFlightSchedule().getArrivalDate().equals(r.getFlight().getFlightSchedule().getArrivalDate()) && 
+                          f.getFlightSchedule().getDepartureDate().equals(r.getFlight().getFlightSchedule().getDepartureDate())) ||
+                        f.getFlightSchedule().getArrivalDate().equals(r.getFlight().getFlightSchedule().getDepartureDate()) ||
+                        f.getFlightSchedule().getDepartureDate().equals(r.getFlight().getFlightSchedule().getArrivalDate())
+                        ) {                    
                     long diff1 = DAYS.between(r.getFlight().getFlightSchedule().getDepartureDate(), r.getFlight().getFlightSchedule().getArrivalDate());
                     long diff2 = DAYS.between(f.getFlightSchedule().getDepartureDate(), f.getFlightSchedule().getArrivalDate());
                     
@@ -552,35 +667,102 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
         
         boolean overlapVal = false;
         
-        for(Flight f : flightSelectedList) {            
+        /*for(Flight f : flightSelectedList) {            
             //overlapVal = isOverlap(f);
             if(isOverlap(f)) {
                 overlapVal = true;
                 break;
             }
-        }
+        }*/
         
-        if(!overlapVal) {
-           for(Flight f : flightSelectedList) {
-            Reservation r = new Reservation();
-              r.setFlight(f);
-              r.setCustomer((Customer)customerCombo.getSelectedItem());
+        //if(!overlapVal) {
+            
+            boolean seatSelected = true;
+            boolean oneSeatSelected = true;
+            
+            for(Flight f : flightSelectedList) {
+                
+                //System.out
+                
+                if(isOverlap(f)) {
+                    overlapVal = true;
+                    break;
+                }             
+                
+                if(!isSeatSelected(f)) {
+                    seatSelected = false;
+                    break;
+                }
+                
+                if(!isOnlyOneSeatSelected(f)) {
+                    seatSelected = false;
+                    break;
+                }
+                
+                /*
+                if(f.getSeatLock() == null) {
+                    JOptionPane.showMessageDialog(null,"Please select a seat on flight " + f.getFlightName() +" to make booking");
+                    seatSelected = false;
+                    break;
+                }
+                */
+            }           
+            //!overlapVal && 
+            if(seatSelected && !overlapVal && oneSeatSelected) {
+                for(Flight f : flightSelectedList) {
+                    
+                    Reservation r = new Reservation();
+                    r.setFlight(f);
+                    r.setCustomer((Customer)customerCombo.getSelectedItem());
+                    //r.setSeat(f.getSeatLock());
+                    Seat seatVal = f.getSeatLock();
+                    System.out.println("inside---- " + seatVal.getSeatName() + "--" + seatVal.getStatus());
+                    seatVal.setStatus("Not Available");
+                    r.setSeat(seatVal);  
+                    
+                    
+                    
+                    reservationDirectory.addReservation(r);
+                }
+                JOptionPane.showMessageDialog(null,"Flight has been booked successfully. Go to Manage Booking panel to manage all the bookings.");
+            }
+        //}
+            
+            /*
+            for(Flight f : flightSelectedList) {
+                int emptyCheck = 0;
+                Reservation r = new Reservation();
+                r.setFlight(f);
+                r.setCustomer((Customer)customerCombo.getSelectedItem());
 
-              DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
-              int nRow = dtm.getRowCount();
-
-              for(int i=0; i < nRow; i++) {  
-                  if(null != jTable1.getValueAt(i, 3)) {
-                    if((boolean)jTable1.getValueAt(i, 3) == true) {
-                        Seat seatVal = (Seat)jTable1.getValueAt(i, 0);
-                        seatVal.setStatus("Not Available");
-                        r.setSeat(seatVal);                    
+                DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+                int nRow = dtm.getRowCount();
+                
+                
+                for(int i=0; i < nRow; i++) {  
+                    if(null != jTable1.getValueAt(i, 3)) {
+                      if((boolean)jTable1.getValueAt(i, 3) == true) {
+                          Seat seatVal = (Seat)jTable1.getValueAt(i, 0);
+                          seatVal.setStatus("Not Available");
+                          r.setSeat(seatVal);                    
+                      }
+                    }else {
+                        emptyCheck++;
                     }
-                  }
-              }
-              reservationDirectory.addReservation(r);
-          } 
-        }
+                }
+                
+                
+                if(emptyCheck == nRow) {
+                    JOptionPane.showMessageDialog(null,"Please select a seat to make booking");
+                }else {
+                    reservationDirectory.addReservation(r);
+                    JOptionPane.showMessageDialog(null,"Flight has been booked successfully. Go to Manage Booking panel to manage all the bookings.");
+                }
+                
+            } 
+            */
+            
+        
         
         
         for(Reservation r : reservationDirectory.getReservationList()) {

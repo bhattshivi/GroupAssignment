@@ -214,7 +214,7 @@ public class AirlinerFunction extends javax.swing.JPanel {
             if(selectedRow>=0){
                 Flight flight = (Flight)airlinerFlightTbl.getValueAt(selectedRow, 0);
 
-                UpdateFlight updateflightPanel = new UpdateFlight(this.panel, airlineDirectory, airplaneDirectory, airliner, flight);
+                UpdateFlight updateflightPanel = new UpdateFlight(this.panel, airlineDirectory, airplaneDirectory, airliner, flight, masterTravelSchedule);
                 this.panel.add(updateflightPanel, "UpdateFlight");
                 CardLayout layout = (CardLayout)this.panel.getLayout();
                 layout.next(panel);

@@ -22,6 +22,16 @@ public class Flight {
     private Journey journey;
     private FlightSchedule flightSchedule;
     private ArrayList<Seat> flightSeatList;
+    private Seat seatLock;
+
+    public Seat getSeatLock() {
+        return seatLock;
+    }
+
+    public void setSeatLock(Seat seatLock) {
+        this.seatLock = seatLock;
+    }
+    
     
     public Flight() {
         this.flightSeatList = new ArrayList<>();

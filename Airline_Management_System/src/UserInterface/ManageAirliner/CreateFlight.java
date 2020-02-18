@@ -376,8 +376,23 @@ public class CreateFlight extends javax.swing.JPanel {
     private void departureTimeTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departureTimeTxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_departureTimeTxtActionPerformed
-
+    
+    public void clearFields() {
+        flightNameTxt.setText("");
+        flightStatusCombo.setSelectedItem("-- None --");
+        dtm = (DefaultTableModel) flightSeatsTbl.getModel();
+        int nRow = dtm.getRowCount();
+        for(int i=0; i < nRow; i++) {                
+            flightSeatsTbl.setValueAt(null, i, 0);
+            flightSeatsTbl.setValueAt(null, i, 1);
+            flightSeatsTbl.setValueAt(null, i, 2);
+            flightSeatsTbl.setValueAt(null, i, 3);               
+        }
+    }
+    
     private void addFlightBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addFlightBtnActionPerformed
+        
+        boolean isFlightExist = false;
         
         dtm = (DefaultTableModel) flightSeatsTbl.getModel();
         int nRow = dtm.getRowCount();
@@ -390,44 +405,67 @@ public class CreateFlight extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please select a status with respect to the flight");
             
         }else {  
-            for(int i=0; i < nRow; i++) {
-                
-                if(null == flightSeatsTbl.getValueAt(i, 0)) {
-                    JOptionPane.showMessageDialog(null, "Please enter seat number at row " + (i+1));
-                    break;
-                }else if(null == flightSeatsTbl.getValueAt(i, 1)) {
-                    JOptionPane.showMessageDialog(null, "Please enter price for the seat at row " + i+1);
+            
+            
+            for(Flight f : masterTravelSchedule.getMasterFlightList()) {
+                if(flightNameTxt.getText().equalsIgnoreCase(f.getFlightName())) {
+                    isFlightExist = true;
+                    JOptionPane.showMessageDialog(null, "Flight with name \"" + f.getFlightName() + "\" already exist. Please enter a different name.");
                     break;
                 }
-                else if(null == flightSeatsTbl.getValueAt(i, 2)) {
-                    JOptionPane.showMessageDialog(null, "Please select the seat type at row " + i+1);
-                    break;
-                }else if(null == flightSeatsTbl.getValueAt(i, 3)) {
-                    JOptionPane.showMessageDialog(null, "Please select the availability of seat at row " + i+1);
-                    break;
-                }else {
-                    createFlight = true;
-                    Seat flightSeat = new Seat();
-                    flightSeat.setSeatName(flightSeatsTbl.getValueAt(i, 0).toString());
-                    flightSeat.setPrice((Double)flightSeatsTbl.getValueAt(i, 1));
-                    flightSeat.setType(flightSeatsTbl.getValueAt(i, 2).toString());
-                    flightSeat.setStatus(flightSeatsTbl.getValueAt(i, 3).toString());
-                    seatList.add(flightSeat);
-                }                
             }
-            if(!checkForAirplaneOverlap() && createFlight == true) {
-                Flight newFlight = new Flight();
-                newFlight.setFlightName(flightNameTxt.getText());
-                newFlight.setIsActive((flightStatusCombo.getSelectedItem() == "Active"));
-                newFlight.setAirliner(airliner);
-                newFlight.setFlightSchedule(selectedFlightSchedule);
-                newFlight.setAirplane(selectedAirplane);
-                newFlight.setFlightSeatList(seatList);        
+            
+            if(!isFlightExist) {
+                for(int i=0; i < nRow; i++) {
+                
+                    if(null == flightSeatsTbl.getValueAt(i, 0) || "".equals(flightSeatsTbl.getValueAt(i, 0))) {
+                        JOptionPane.showMessageDialog(null, "Please enter seat number at row " + (i+1));
+                        break;
+                    }else if(null == flightSeatsTbl.getValueAt(i, 1) || "".equals(flightSeatsTbl.getValueAt(i, 1))) {
+                        JOptionPane.showMessageDialog(null, "Please enter price for the seat at row " + (i+1));
+                        break;
+                    }
+                    else if(null == flightSeatsTbl.getValueAt(i, 2) || "".equals(flightSeatsTbl.getValueAt(i, 2))) {
+                        JOptionPane.showMessageDialog(null, "Please select the seat type at row " + (i+1));
+                        break;
+                    }else if(null == flightSeatsTbl.getValueAt(i, 3)|| "".equals(flightSeatsTbl.getValueAt(i, 3))) {
+                        JOptionPane.showMessageDialog(null, "Please select the availability of seat at row " + (i+1));
+                        break;
+                    }else {
+                        createFlight = true;
+                        Seat flightSeat = new Seat();
+                        flightSeat.setSeatName(flightSeatsTbl.getValueAt(i, 0).toString());
+                        flightSeat.setPrice((Double)flightSeatsTbl.getValueAt(i, 1));
+                        flightSeat.setType(flightSeatsTbl.getValueAt(i, 2).toString());
+                        flightSeat.setStatus(flightSeatsTbl.getValueAt(i, 3).toString());
+                        seatList.add(flightSeat);
+                    }                
+                }
+                if(!checkForAirplaneOverlap() && createFlight == true) {
+                    Flight newFlight = new Flight();
+                    newFlight.setFlightName(flightNameTxt.getText());
+                    newFlight.setIsActive((flightStatusCombo.getSelectedItem() == "Active"));
+                    newFlight.setAirliner(airliner);
+                    newFlight.setFlightSchedule(selectedFlightSchedule);
+                    newFlight.setAirplane(selectedAirplane);
+                    newFlight.setFlightSeatList(seatList);        
 
-                airliner.addFlight(newFlight);
-                masterTravelSchedule.addFLight(newFlight);
-                JOptionPane.showMessageDialog(null, "Flight is created successfully");
-            } 
+                    airliner.addFlight(newFlight);
+                    masterTravelSchedule.addFLight(newFlight);
+                    clearFields();
+                    JOptionPane.showMessageDialog(null, "Flight is created successfully");
+                } 
+            }
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
         }
         
         /*
@@ -472,7 +510,11 @@ public class CreateFlight extends javax.swing.JPanel {
                    f.getFlightSchedule().getDepartureDate().isBefore(selectedFlightSchedule.getArrivalDate())) {
                     isOverlap = true;
                     oldF = f;
-                }else {                    
+                }else if((f.getFlightSchedule().getArrivalDate().equals(selectedFlightSchedule.getArrivalDate()) && 
+                          f.getFlightSchedule().getDepartureDate().equals(selectedFlightSchedule.getDepartureDate())) ||
+                        f.getFlightSchedule().getArrivalDate().equals(selectedFlightSchedule.getDepartureDate()) ||
+                        f.getFlightSchedule().getDepartureDate().equals(selectedFlightSchedule.getArrivalDate())
+                        ){                    
                     long diff1 = DAYS.between(selectedFlightSchedule.getDepartureDate(), selectedFlightSchedule.getArrivalDate());
                     long diff2 = DAYS.between(f.getFlightSchedule().getDepartureDate(), f.getFlightSchedule().getArrivalDate());
                     

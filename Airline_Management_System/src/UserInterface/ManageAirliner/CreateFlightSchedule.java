@@ -254,7 +254,11 @@ public class CreateFlightSchedule extends javax.swing.JPanel {
                 return;
             } 
             
-            if(dDate.isAfter(aDate)) {
+            if(dDate.isBefore(LocalDate.now())) {
+                JOptionPane.showMessageDialog(null, "Departure Date can not be the past date");
+            }else if(aDate.isBefore(LocalDate.now())) {
+                JOptionPane.showMessageDialog(null, "Arrival Date can not be the past date");
+            }else if(dDate.isAfter(aDate)) {
                 JOptionPane.showMessageDialog(null, "Departure Date should not be greater than Arrival Date");
             }else if(dDate.equals(aDate) && dTime.isAfter(aTime)) {
                 JOptionPane.showMessageDialog(null, "Departure Time should not be greater than Arrival Time");
