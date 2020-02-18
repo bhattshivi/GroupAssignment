@@ -10,6 +10,7 @@ import Business.AirlinerDirectory;
 import Business.Airplane;
 import Business.AirplaneDirectory;
 import Business.FlightSchedule;
+import Business.MasterTravelSchedule;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -25,17 +26,18 @@ public class ManageFlightSchedules extends javax.swing.JPanel {
     private AirplaneDirectory airplaneDirectory;
     private JPanel panel;
     private Airliner airliner;
-    
+    private MasterTravelSchedule masterTravelSchedule;
     
     /**
      * Creates new form FlightSchedule
      */
-    public ManageFlightSchedules(JPanel panel, AirlinerDirectory airlineDirectory, AirplaneDirectory airplaneDirectory, Airliner airliner) {
+    public ManageFlightSchedules(JPanel panel, AirlinerDirectory airlineDirectory, AirplaneDirectory airplaneDirectory, Airliner airliner,MasterTravelSchedule masterTravelSchedule) {
         initComponents();
-        this.airliner = airliner;
         this.panel = panel;
         this.airlineDirectory = airlineDirectory;
         this.airplaneDirectory = airplaneDirectory;
+        this.airliner = airliner;
+        this.masterTravelSchedule = masterTravelSchedule;
         populateFlightSchedules();
     }
     
@@ -66,6 +68,7 @@ public class ManageFlightSchedules extends javax.swing.JPanel {
         addScheduleBtn = new javax.swing.JButton();
         updateScheduleBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        backFlightSchedule = new javax.swing.JButton();
 
         flightScheduleTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -119,29 +122,45 @@ public class ManageFlightSchedules extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Flight Schedules");
 
+        backFlightSchedule.setText("<<Back");
+        backFlightSchedule.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backFlightScheduleActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(207, 207, 207)
+                                .addComponent(addScheduleBtn)
+                                .addGap(27, 27, 27)
+                                .addComponent(updateScheduleBtn))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(backFlightSchedule)))
+                        .addGap(0, 258, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(207, 207, 207)
-                .addComponent(addScheduleBtn)
-                .addGap(27, 27, 27)
-                .addComponent(updateScheduleBtn)
-                .addContainerGap(264, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(62, 62, 62)
+                .addGap(15, 15, 15)
+                .addComponent(backFlightSchedule)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -154,7 +173,7 @@ public class ManageFlightSchedules extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addScheduleBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addScheduleBtnActionPerformed
-        CreateFlightSchedule createflightSchedulePanel = new CreateFlightSchedule(this.panel, this.airlineDirectory, this.airplaneDirectory, this.airliner);
+        CreateFlightSchedule createflightSchedulePanel = new CreateFlightSchedule(this.panel, this.airlineDirectory, this.airplaneDirectory, this.airliner,this.masterTravelSchedule);
         this.panel.add(createflightSchedulePanel, "CreateFlightSchedule");
         CardLayout layout = (CardLayout)this.panel.getLayout();
         layout.next(panel);
@@ -165,7 +184,7 @@ public class ManageFlightSchedules extends javax.swing.JPanel {
         if(selectedRow>=0){
             FlightSchedule flightSchedule = (FlightSchedule)flightScheduleTbl.getValueAt(selectedRow, 0);
             
-            UpdateFlightSchedule updateflightSchedulePanel = new UpdateFlightSchedule(this.panel, airlineDirectory, airplaneDirectory, flightSchedule);
+            UpdateFlightSchedule updateflightSchedulePanel = new UpdateFlightSchedule( this.panel,  this.airlineDirectory,  this.airplaneDirectory, this.airliner, flightSchedule, this.masterTravelSchedule);
             this.panel.add(updateflightSchedulePanel, "UpdateFlightSchedule");
             CardLayout layout = (CardLayout)this.panel.getLayout();
             layout.next(panel);
@@ -174,9 +193,18 @@ public class ManageFlightSchedules extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_updateScheduleBtnActionPerformed
 
+    private void backFlightScheduleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backFlightScheduleActionPerformed
+        // TODO add your handling code here:
+        AirlinerFunction airLinerFunction = new AirlinerFunction(this.panel,  airlineDirectory,  airplaneDirectory,  airliner,  masterTravelSchedule);
+        this.panel.add(airLinerFunction, "AirlinerFunction");
+        CardLayout layout = (CardLayout)this.panel.getLayout();
+        layout.next(panel);
+    }//GEN-LAST:event_backFlightScheduleActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addScheduleBtn;
+    private javax.swing.JButton backFlightSchedule;
     private javax.swing.JTable flightScheduleTbl;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

@@ -11,6 +11,7 @@ import Business.AirlinerDirectory;
 import Business.Airplane;
 import Business.AirplaneDirectory;
 import Business.MasterTravelSchedule;
+import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -27,14 +28,17 @@ public class CreateAirplanes extends javax.swing.JPanel {
     DefaultTableModel dtm;
     private Airliner airliner;
     private Business.FlightSchedule f;
+    private MasterTravelSchedule masterTravelSchedule;
+    
     
     /** Creates new form CreateAirplanes */
-    public CreateAirplanes(JPanel panel, AirlinerDirectory airlineDirectory, AirplaneDirectory airplaneDirectory, Airliner airliner) {
+    public CreateAirplanes(JPanel panel, AirlinerDirectory airlineDirectory, AirplaneDirectory airplaneDirectory, Airliner airliner,MasterTravelSchedule masterTravelSchedule) {
         initComponents();
         this.panel = panel;
         this.airlineDirectory = airlineDirectory;
         this.airplaneDirectory = airplaneDirectory;
         this.airliner = airliner;
+        this.masterTravelSchedule = masterTravelSchedule;
     }
 
     /** This method is called from within the constructor to
@@ -54,6 +58,7 @@ public class CreateAirplanes extends javax.swing.JPanel {
         airplaneCol = new javax.swing.JTextField();
         createAirplane = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        backCreateAirplane = new javax.swing.JButton();
 
         jLabel1.setText("Airplane Name *");
 
@@ -70,6 +75,13 @@ public class CreateAirplanes extends javax.swing.JPanel {
 
         jLabel4.setFont(new java.awt.Font("Segoe Print", 1, 24)); // NOI18N
         jLabel4.setText("Create Airplane");
+
+        backCreateAirplane.setText("<<<Back");
+        backCreateAirplane.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backCreateAirplaneActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -95,13 +107,16 @@ public class CreateAirplanes extends javax.swing.JPanel {
                                 .addComponent(createAirplane))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(160, 160, 160)
-                        .addComponent(jLabel4)))
+                        .addComponent(jLabel4))
+                    .addComponent(backCreateAirplane))
                 .addContainerGap(132, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addGap(9, 9, 9)
+                .addComponent(backCreateAirplane)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -173,6 +188,14 @@ public class CreateAirplanes extends javax.swing.JPanel {
         }    
     }//GEN-LAST:event_createAirplaneActionPerformed
 
+    private void backCreateAirplaneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backCreateAirplaneActionPerformed
+        // TODO add your handling code here:
+        ManageAirplanes createAirplanePanel = new ManageAirplanes(this.panel,  airlineDirectory,  airplaneDirectory,  airliner,  masterTravelSchedule);
+        this.panel.add(createAirplanePanel, "CreateAirplane");
+        CardLayout layout = (CardLayout)this.panel.getLayout();
+        layout.next(panel);
+    }//GEN-LAST:event_backCreateAirplaneActionPerformed
+
     private void clearFields() {
         airplaneName.setText("");
         airplaneCol.setText("");
@@ -183,6 +206,7 @@ public class CreateAirplanes extends javax.swing.JPanel {
     private javax.swing.JTextField airplaneCol;
     private javax.swing.JTextField airplaneName;
     private javax.swing.JTextField airplaneRows;
+    private javax.swing.JButton backCreateAirplane;
     private javax.swing.JButton createAirplane;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

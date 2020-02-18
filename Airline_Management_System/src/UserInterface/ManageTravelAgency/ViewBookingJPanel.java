@@ -9,6 +9,8 @@ import Business.AirlinerDirectory;
 import Business.Customer;
 import Business.CustomerDirectory;
 import Business.MasterTravelSchedule;
+import Business.Reservation;
+import Business.ReservationDirectory;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -26,13 +28,36 @@ public class ViewBookingJPanel extends javax.swing.JPanel {
     private MasterTravelSchedule masterTravelSchedule;
     private CustomerDirectory custDir;
     private Customer cust;
-    public ViewBookingJPanel(JPanel panel, AirlinerDirectory airlineDirectory,MasterTravelSchedule masterTravelSchedule, CustomerDirectory custDir, Customer cust) {
-         this.panel = panel;
+    private ReservationDirectory reservationDirectory;
+    private Reservation reservation;
+    public ViewBookingJPanel(JPanel panel, AirlinerDirectory airlineDirectory,MasterTravelSchedule masterTravelSchedule, CustomerDirectory custDir, Customer cust, Reservation reservation) {
+        this.panel = panel;
         this.airlineDirectory = airlineDirectory;
         this.masterTravelSchedule = masterTravelSchedule;
         this.custDir = custDir;
         this.cust = cust;
+        this.reservation = reservation;
         initComponents();
+        displayBooking();
+    }
+    
+    private void displayBooking(){
+        
+        viewFirstName.setText(reservation.getCustomer().getFirstName() + "");
+        viewLastName.setText(reservation.getCustomer().getLastName() + "");
+        viewEmailID.setText(reservation.getCustomer().getEmailId()+ "");
+        viewPassportNum.setText(reservation.getCustomer().getPassportNum()+ "");
+        viewGender.setText(reservation.getCustomer().getGender() + "");
+        
+        //Flight Details
+        viewFlightNumber.setText(reservation.getFlight().getFlightId() + "");
+        viewReservationNum.setText(reservation.getReservationId() + "");
+        viewSource.setText(reservation.getFlight().getFlightSchedule().getSource());
+        viewDestination.setText(reservation.getFlight().getFlightSchedule().getDestination());
+        viewDate.setText(reservation.getFlight().getFlightSchedule().getDepartureDate().toString());
+        viewTime.setText(reservation.getFlight().getFlightSchedule().getDepartureTime().toString());
+        
+        
     }
 
     /**
@@ -275,6 +300,7 @@ public class ViewBookingJPanel extends javax.swing.JPanel {
 
     private void cancelFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelFlightActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_cancelFlightActionPerformed
 
 

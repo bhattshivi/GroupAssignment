@@ -6,10 +6,12 @@
 package UserInterface.ManageTravelAgency;
 
 import Business.AirlinerDirectory;
+import Business.AirplaneDirectory;
 import Business.Customer;
 import Business.CustomerDirectory;
 import Business.FlightSchedule;
 import Business.MasterTravelSchedule;
+import Business.Reservation;
 import Business.ReservationDirectory;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
@@ -26,10 +28,12 @@ public class ManageTravelAgency extends javax.swing.JPanel {
     private CustomerDirectory custDir;
     private Customer cust;
     private ReservationDirectory reservationDirectory;
+    private Reservation reservation;
+    private AirplaneDirectory airplaneDirectory;
     /**
      * Creates new form ManageTravelAgency
      */
-    public ManageTravelAgency(JPanel panel, AirlinerDirectory airlineDirectory, MasterTravelSchedule masterTravelSchedule, CustomerDirectory custDir, Customer cust, ReservationDirectory reservationDirectory) {
+    public ManageTravelAgency(JPanel panel, AirlinerDirectory airlineDirectory,AirplaneDirectory airplaneDirectory, MasterTravelSchedule masterTravelSchedule, CustomerDirectory custDir, Customer cust, ReservationDirectory reservationDirectory, Reservation reservation) {
         initComponents();
         this.panel = panel;
         this.airlineDirectory = airlineDirectory;
@@ -37,6 +41,8 @@ public class ManageTravelAgency extends javax.swing.JPanel {
         this.custDir = custDir;
         this.cust = cust;
         this.reservationDirectory = reservationDirectory;
+        this.reservation = reservation;
+        this.airplaneDirectory = airplaneDirectory;
     }
 
     /**
@@ -111,8 +117,8 @@ public class ManageTravelAgency extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegisterAirlinersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterAirlinersActionPerformed
-        ManageAirliners manageAirlinersPanel = new ManageAirliners(this.panel, airlineDirectory);
-        this.panel.add(manageAirlinersPanel, "ManageAirliners");
+        AddAirline addAirline = new AddAirline(this.panel,  airlineDirectory,  airplaneDirectory,  masterTravelSchedule);
+        this.panel.add(addAirline, "AddAirline");
         CardLayout layout = (CardLayout)this.panel.getLayout();
         layout.next(panel);
     }//GEN-LAST:event_btnRegisterAirlinersActionPerformed
@@ -135,7 +141,7 @@ public class ManageTravelAgency extends javax.swing.JPanel {
 
     private void btnManageBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageBookingActionPerformed
         // TODO add your handling code here:
-        ManageBookingJPanel manageBookingJPanel = new ManageBookingJPanel(this.panel, airlineDirectory,masterTravelSchedule,custDir,cust );
+        ManageBookingJPanel manageBookingJPanel = new ManageBookingJPanel(this.panel, airlineDirectory,masterTravelSchedule,custDir,cust,reservationDirectory, reservation );
         this.panel.add(manageBookingJPanel, "ManageBookingJPanel");
         CardLayout layout = (CardLayout)this.panel.getLayout();
         layout.next(panel);

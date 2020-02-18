@@ -46,5 +46,10 @@ public class Reservation {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
+     @Override
+    public String toString() {
+        //return this.getFirstName(); //To change body of generated methods, choose Tools | Templates.
+        return this.reservationId; //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

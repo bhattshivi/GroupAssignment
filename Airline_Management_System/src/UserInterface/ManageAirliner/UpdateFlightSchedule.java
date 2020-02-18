@@ -9,6 +9,8 @@ import Business.Airliner;
 import Business.FlightSchedule;
 import Business.AirlinerDirectory;
 import Business.AirplaneDirectory;
+import Business.MasterTravelSchedule;
+import java.awt.CardLayout;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
@@ -25,16 +27,18 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
     private JPanel panel;
     private Airliner airliner;
     private FlightSchedule flightSchedule;
+    private MasterTravelSchedule masterTravelSchedule;
     /**
      * Creates new form CreateFlightSchedule
      */
-    public UpdateFlightSchedule(JPanel panel, AirlinerDirectory airlineDirectory, AirplaneDirectory airplaneDirectory, FlightSchedule flightSchedule) {
+    public UpdateFlightSchedule(JPanel panel, AirlinerDirectory airlineDirectory, AirplaneDirectory airplaneDirectory, Airliner airliner, FlightSchedule flightSchedule,MasterTravelSchedule masterTravelSchedule) {
         initComponents();
         this.airliner = airliner;
         this.panel = panel;
         this.airlineDirectory = airlineDirectory;
         this.airplaneDirectory = airplaneDirectory;
         this.flightSchedule = flightSchedule;
+        this.masterTravelSchedule= masterTravelSchedule;
         populateFlightScheduleDetails();
     }
     
@@ -75,6 +79,7 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        backUpdateFS = new javax.swing.JButton();
 
         jLabel1.setText("Source *");
 
@@ -115,6 +120,13 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
         jLabel10.setText("(HH:MM)");
 
         jLabel11.setText("(HH:MM)");
+
+        backUpdateFS.setText("<<<Back");
+        backUpdateFS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backUpdateFSActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -159,11 +171,17 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
                     .addComponent(jLabel10)
                     .addComponent(jLabel11))
                 .addContainerGap(112, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(backUpdateFS)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(75, 75, 75)
+                .addContainerGap()
+                .addComponent(backUpdateFS)
+                .addGap(40, 40, 40)
                 .addComponent(jLabel7)
                 .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -283,10 +301,19 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_departureDateActionPerformed
 
+    private void backUpdateFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backUpdateFSActionPerformed
+        // TODO add your handling code here:
+        ManageFlightSchedules flightSchedulePanel = new ManageFlightSchedules(this.panel, airlineDirectory, airplaneDirectory, airliner,masterTravelSchedule);
+        this.panel.add(flightSchedulePanel, "FlightSchedule");
+        CardLayout layout = (CardLayout)this.panel.getLayout();
+        layout.next(panel);
+    }//GEN-LAST:event_backUpdateFSActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField arrivalDate;
     private javax.swing.JTextField arrivalTime;
+    private javax.swing.JButton backUpdateFS;
     private javax.swing.JTextField departureDate;
     private javax.swing.JTextField departureTime;
     private javax.swing.JComboBox<String> destinationCombo;

@@ -154,7 +154,7 @@ public void populateManageCustomer() {
             Object[] row = new Object[dtm.getColumnCount()];
             row[0] = cust;
             row[1] = custDir.getCust().getLastName();
-            row[2] = custDir.getCust().getLastName();
+            row[2] = custDir.getCust().getEmailId();
             row[3] = custDir.getCust().getGender(); 
             dtm.addRow(row);
         }

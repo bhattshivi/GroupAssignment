@@ -8,6 +8,9 @@ package UserInterface.ManageTravelAgency;
 import Business.AirlinerDirectory;
 import Business.Airliner;
 import Business.Airplane;
+import Business.AirplaneDirectory;
+import Business.MasterTravelSchedule;
+import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -19,16 +22,20 @@ public class UpdateAirliner extends javax.swing.JPanel {
     
     private JPanel panel;
     private Airliner airliner;
-    private AirlinerDirectory airlinerDirectory;
+    private AirlinerDirectory airlineDirectory;
+    private AirplaneDirectory airplaneDirectory;
+    private MasterTravelSchedule masterTravelSchedule;
     
     /**
-     * Creates new form CreateAirliners
+     * Creates new form Update Airliner
      */
-    public UpdateAirliner(JPanel panel, AirlinerDirectory airlinerDirectory, Airliner airliner) {
+    public UpdateAirliner(JPanel panel, AirlinerDirectory airlineDirectory, AirplaneDirectory airplaneDirectory, MasterTravelSchedule masterTravelSchedule ,Airliner airliner) {
         initComponents();
         this.panel = panel;
+        this.airlineDirectory = airlineDirectory;
+        this.airplaneDirectory = airplaneDirectory;
+        this.masterTravelSchedule = masterTravelSchedule;
         this.airliner = airliner;
-        this.airlinerDirectory = airlinerDirectory;
         populateAirlinerDetails();
     }
     
@@ -55,6 +62,7 @@ public class UpdateAirliner extends javax.swing.JPanel {
         airlinerHeadquarters = new javax.swing.JTextField();
         updateAirlinerBtn = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        backUpdateAirliner = new javax.swing.JButton();
 
         jLabel1.setText("Airliner Name *");
 
@@ -71,6 +79,13 @@ public class UpdateAirliner extends javax.swing.JPanel {
 
         jLabel4.setFont(new java.awt.Font("Segoe Print", 1, 24)); // NOI18N
         jLabel4.setText("Update Airliner");
+
+        backUpdateAirliner.setText("<<Back");
+        backUpdateAirliner.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backUpdateAirlinerActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -100,11 +115,17 @@ public class UpdateAirliner extends javax.swing.JPanel {
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(195, 195, 195))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(backUpdateAirliner)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(128, 128, 128)
+                .addContainerGap()
+                .addComponent(backUpdateAirliner)
+                .addGap(93, 93, 93)
                 .addComponent(jLabel4)
                 .addGap(59, 59, 59)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -139,7 +160,7 @@ public class UpdateAirliner extends javax.swing.JPanel {
             
         }else {
             
-            for(Airliner a : airlinerDirectory.getAirlinerList()) {                
+            for(Airliner a : airlineDirectory.getAirlinerList()) {                
                 if(!(airliner.getAirlinerName().equalsIgnoreCase(a.getAirlinerName()))) {
                     if(airlinerName.getText().equalsIgnoreCase(a.getAirlinerName())) {
                         isAirlinerExist = true;
@@ -166,12 +187,21 @@ public class UpdateAirliner extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_updateAirlinerBtnActionPerformed
+
+    private void backUpdateAirlinerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backUpdateAirlinerActionPerformed
+        // TODO add your handling code here:
+        AddAirline addAirline = new AddAirline(this.panel,  airlineDirectory,  airplaneDirectory,  masterTravelSchedule);
+        this.panel.add(addAirline, "AddAirline");
+        CardLayout layout = (CardLayout)this.panel.getLayout();
+        layout.next(panel);
+    }//GEN-LAST:event_backUpdateAirlinerActionPerformed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField airlinerFleetSize;
     private javax.swing.JTextField airlinerHeadquarters;
     private javax.swing.JTextField airlinerName;
+    private javax.swing.JButton backUpdateAirliner;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

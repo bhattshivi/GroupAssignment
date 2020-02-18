@@ -13,6 +13,7 @@ import Business.AirplaneDirectory;
 import Business.Flight;
 import Business.MasterTravelSchedule;
 import Business.Seat;
+import java.awt.CardLayout;
 import static java.time.temporal.ChronoUnit.DAYS;
 import java.util.ArrayList;
 import javax.swing.JPanel;
@@ -162,6 +163,7 @@ public class UpdateFlight extends javax.swing.JPanel {
         destiationTxt = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         updateFlightBtn = new javax.swing.JButton();
+        btnBackUpdateFlight = new javax.swing.JButton();
 
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Economy", "Business" }));
 
@@ -235,7 +237,7 @@ public class UpdateFlight extends javax.swing.JPanel {
                     .addComponent(flightAirplaneCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(flightStatusCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(flightNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -378,6 +380,13 @@ public class UpdateFlight extends javax.swing.JPanel {
             }
         });
 
+        btnBackUpdateFlight.setText("<<<Back");
+        btnBackUpdateFlight.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackUpdateFlightActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -391,7 +400,9 @@ public class UpdateFlight extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(281, 281, 281)
+                        .addContainerGap()
+                        .addComponent(btnBackUpdateFlight)
+                        .addGap(178, 178, 178)
                         .addComponent(jLabel13))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(327, 327, 327)
@@ -402,7 +413,9 @@ public class UpdateFlight extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel13)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13)
+                    .addComponent(btnBackUpdateFlight))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -641,10 +654,19 @@ public class UpdateFlight extends javax.swing.JPanel {
         
     }//GEN-LAST:event_arrivalDateTxtActionPerformed
 
+    private void btnBackUpdateFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackUpdateFlightActionPerformed
+        // TODO add your handling code here:
+        AirlinerFunction airLinerFunction = new AirlinerFunction(this.panel,  airlineDirectory,  airplaneDirectory,  airliner,  masterTravelSchedule);
+        this.panel.add(airLinerFunction, "AirlinerFunction");
+        CardLayout layout = (CardLayout)this.panel.getLayout();
+        layout.next(panel);
+    }//GEN-LAST:event_btnBackUpdateFlightActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField arrivalDateTxt;
     private javax.swing.JTextField arrivalTimeTxt;
+    private javax.swing.JButton btnBackUpdateFlight;
     private javax.swing.JTextField departureDateTxt;
     private javax.swing.JTextField departureTimeTxt;
     private javax.swing.JTextField destiationTxt;

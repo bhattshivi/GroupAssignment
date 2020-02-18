@@ -9,8 +9,11 @@ import Business.AirlinerDirectory;
 import Business.Customer;
 import Business.CustomerDirectory;
 import Business.MasterTravelSchedule;
+import Business.Reservation;
+import Business.ReservationDirectory;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,18 +26,23 @@ public class ManageBookingJPanel extends javax.swing.JPanel {
      */
     private JPanel panel;
     private AirlinerDirectory airlineDirectory;
-     private MasterTravelSchedule masterTravelSchedule;
+    private MasterTravelSchedule masterTravelSchedule;
     private CustomerDirectory custDir;
     private Customer cust;
+    private ReservationDirectory reservationDirectory;
+    private Reservation reservation;
  
-    public ManageBookingJPanel(JPanel panel, AirlinerDirectory airlineDirectory,MasterTravelSchedule masterTravelSchedule, CustomerDirectory custDir, Customer cust) {
+    public ManageBookingJPanel(JPanel panel, AirlinerDirectory airlineDirectory,MasterTravelSchedule masterTravelSchedule, CustomerDirectory custDir, Customer cust, ReservationDirectory reservationDirectory, Reservation reservation) {
        
         this.panel = panel;
         this.airlineDirectory = airlineDirectory;
         this.masterTravelSchedule = masterTravelSchedule;
         this.custDir = custDir;
         this.cust = cust;
+        this.reservationDirectory= reservationDirectory;
+        this.reservation = reservation;
          initComponents();
+         populateManageBooking();
     }
 
     /**
@@ -49,7 +57,7 @@ public class ManageBookingJPanel extends javax.swing.JPanel {
         bckBooking = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblManageBooking = new javax.swing.JTable();
         btnViewBooking = new javax.swing.JButton();
 
         bckBooking.setText("<Back");
@@ -63,15 +71,15 @@ public class ManageBookingJPanel extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("MANAGE BOOKING");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblManageBooking.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Customer Name", "Reservation ID", "Flight Number"
+                "Reservation ID", "Customer Name", "Flight Number"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblManageBooking);
 
         btnViewBooking.setText("VIEW BOOKING");
         btnViewBooking.addActionListener(new java.awt.event.ActionListener() {
@@ -123,18 +131,28 @@ public class ManageBookingJPanel extends javax.swing.JPanel {
 
     private void btnViewBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewBookingActionPerformed
         // TODO add your handling code here:
-         ViewBookingJPanel viewBookingJPanel = new ViewBookingJPanel(this.panel, airlineDirectory, masterTravelSchedule,custDir,cust );
+         ViewBookingJPanel viewBookingJPanel = new ViewBookingJPanel(this.panel, airlineDirectory, masterTravelSchedule,custDir,cust, reservation);
         this.panel.add(viewBookingJPanel, "ViewBookingJPanel");
         CardLayout layout = (CardLayout)this.panel.getLayout();
         layout.next(panel);
     }//GEN-LAST:event_btnViewBookingActionPerformed
-
+ public void populateManageBooking() {
+        DefaultTableModel dtm = (DefaultTableModel)tblManageBooking.getModel();
+        dtm.setRowCount(0);
+        for(Reservation reservation :reservationDirectory.getReservationList() ){
+            Object[] row = new Object[dtm.getColumnCount()];
+            row[0] = reservation;
+            row[1] = reservation.getCustomer().getFirstName() + " " +reservation.getCustomer().getLastName();
+            row[2] = reservation.getFlight().getFlightId();
+            dtm.addRow(row);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bckBooking;
     private javax.swing.JButton btnViewBooking;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblManageBooking;
     // End of variables declaration//GEN-END:variables
 }

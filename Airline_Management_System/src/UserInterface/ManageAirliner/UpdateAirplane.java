@@ -11,6 +11,7 @@ import Business.AirlinerDirectory;
 import Business.Airplane;
 import Business.AirplaneDirectory;
 import Business.MasterTravelSchedule;
+import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -28,15 +29,17 @@ public class UpdateAirplane extends javax.swing.JPanel {
     private Airliner airliner;
     private Business.FlightSchedule f;
     private Airplane airplane;
+    private MasterTravelSchedule masterTravelSchedule;
     
     /** Creates new form CreateAirplanes */
-    public UpdateAirplane(JPanel panel, AirlinerDirectory airlineDirectory, AirplaneDirectory airplaneDirectory, Airliner airliner, Airplane airplane) {
+    public UpdateAirplane(JPanel panel, AirlinerDirectory airlineDirectory, AirplaneDirectory airplaneDirectory, Airliner airliner, Airplane airplane,MasterTravelSchedule masterTravelSchedule) {
         initComponents();
         this.panel = panel;
         this.airlineDirectory = airlineDirectory;
         this.airplaneDirectory = airplaneDirectory;
         this.airliner = airliner;
         this.airplane = airplane;
+        this.masterTravelSchedule= masterTravelSchedule;
         populateAirplaneDetails();
     }
     
@@ -64,6 +67,7 @@ public class UpdateAirplane extends javax.swing.JPanel {
         airplaneCol = new javax.swing.JTextField();
         updateAirplane = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        backUpdateAirplane = new javax.swing.JButton();
 
         jLabel1.setText("Airplane Name *");
 
@@ -81,35 +85,49 @@ public class UpdateAirplane extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Segoe Print", 1, 24)); // NOI18N
         jLabel4.setText("Update Airplane");
 
+        backUpdateAirplane.setText("<<<Back");
+        backUpdateAirplane.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backUpdateAirplaneActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(217, 217, 217)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(217, 217, 217)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(airplaneRows)
-                            .addComponent(airplaneName)
-                            .addComponent(airplaneCol, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(airplaneRows)
+                                    .addComponent(airplaneName)
+                                    .addComponent(airplaneCol, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(90, 90, 90)
+                                .addComponent(updateAirplane))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(37, 37, 37)
+                                .addComponent(jLabel4))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addComponent(updateAirplane))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jLabel4)))
+                        .addGap(15, 15, 15)
+                        .addComponent(backUpdateAirplane)))
                 .addContainerGap(247, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(117, 117, 117)
+                .addGap(14, 14, 14)
+                .addComponent(backUpdateAirplane)
+                .addGap(74, 74, 74)
                 .addComponent(jLabel4)
                 .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -180,11 +198,20 @@ public class UpdateAirplane extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_updateAirplaneActionPerformed
 
+    private void backUpdateAirplaneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backUpdateAirplaneActionPerformed
+        // TODO add your handling code here:
+        ManageAirplanes createAirplanePanel = new ManageAirplanes(this.panel,  airlineDirectory,  airplaneDirectory,  airliner,  masterTravelSchedule);
+        this.panel.add(createAirplanePanel, "CreateAirplane");
+        CardLayout layout = (CardLayout)this.panel.getLayout();
+        layout.next(panel);
+    }//GEN-LAST:event_backUpdateAirplaneActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField airplaneCol;
     private javax.swing.JTextField airplaneName;
     private javax.swing.JTextField airplaneRows;
+    private javax.swing.JButton backUpdateAirplane;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

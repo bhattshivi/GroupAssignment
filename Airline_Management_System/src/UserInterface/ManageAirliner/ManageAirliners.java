@@ -62,6 +62,7 @@ public class ManageAirliners extends javax.swing.JPanel {
         continueBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        btnBackTravelAgency = new javax.swing.JButton();
 
         continueBtn.setText("Continue");
         continueBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -75,6 +76,13 @@ public class ManageAirliners extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("Segoe Script", 1, 24)); // NOI18N
         jLabel2.setText("Welcome to Airline Management");
+
+        btnBackTravelAgency.setText("<Back");
+        btnBackTravelAgency.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackTravelAgencyActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -94,13 +102,18 @@ public class ManageAirliners extends javax.swing.JPanel {
                             .addComponent(jLabel1)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(257, 257, 257)
-                        .addComponent(airlinerComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(airlinerComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnBackTravelAgency)))
                 .addContainerGap(175, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(76, 76, 76)
+                .addGap(16, 16, 16)
+                .addComponent(btnBackTravelAgency)
+                .addGap(31, 31, 31)
                 .addComponent(jLabel2)
                 .addGap(50, 50, 50)
                 .addComponent(jLabel1)
@@ -125,9 +138,15 @@ public class ManageAirliners extends javax.swing.JPanel {
         }        
     }//GEN-LAST:event_continueBtnActionPerformed
 
+    private void btnBackTravelAgencyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackTravelAgencyActionPerformed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_btnBackTravelAgencyActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<Airliner> airlinerComboBox;
+    private javax.swing.JButton btnBackTravelAgency;
     private javax.swing.JButton continueBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

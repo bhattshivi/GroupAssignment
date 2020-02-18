@@ -10,6 +10,8 @@ import Business.FlightSchedule;
 import Business.AirlinerDirectory;
 import Business.Airplane;
 import Business.AirplaneDirectory;
+import Business.MasterTravelSchedule;
+import java.awt.CardLayout;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
@@ -25,15 +27,17 @@ public class CreateFlightSchedule extends javax.swing.JPanel {
     private AirplaneDirectory airplaneDirectory;
     private JPanel panel;
     private Airliner airliner;
+    private MasterTravelSchedule masterTravelSchedule;
     /**
      * Creates new form CreateFlightSchedule
      */
-    public CreateFlightSchedule(JPanel panel, AirlinerDirectory airlineDirectory, AirplaneDirectory airplaneDirectory, Airliner airliner) {
+    public CreateFlightSchedule(JPanel panel, AirlinerDirectory airlineDirectory, AirplaneDirectory airplaneDirectory, Airliner airliner,MasterTravelSchedule masterTravelSchedule) {
         initComponents();
         this.airliner = airliner;
         this.panel = panel;
         this.airlineDirectory = airlineDirectory;
         this.airplaneDirectory = airplaneDirectory;
+        this.masterTravelSchedule = masterTravelSchedule;
     }
 
     /**
@@ -63,6 +67,7 @@ public class CreateFlightSchedule extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        backCreateFlightSchedule = new javax.swing.JButton();
 
         jLabel1.setText("Source *");
 
@@ -90,6 +95,7 @@ public class CreateFlightSchedule extends javax.swing.JPanel {
         jLabel6.setText("Arrival time *");
 
         jLabel7.setFont(new java.awt.Font("Segoe Script", 1, 24)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Create Flight Schedule");
 
         sourceCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- None --", "Boston", "San Francisco", "Dallas", "San Jose", "Seattle", "New York", "Las Vegas", "Los Angeles", "Chicago", "Miami" }));
@@ -103,6 +109,13 @@ public class CreateFlightSchedule extends javax.swing.JPanel {
         jLabel10.setText("(HH:MM)");
 
         jLabel11.setText("(HH:MM)");
+
+        backCreateFlightSchedule.setText("<<<Back");
+        backCreateFlightSchedule.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backCreateFlightScheduleActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -135,22 +148,27 @@ public class CreateFlightSchedule extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGap(55, 55, 55)
+                                .addGap(47, 47, 47)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(sourceCombo, 0, 200, Short.MAX_VALUE)
-                                    .addComponent(destinationCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(destinationCombo, 0, 203, Short.MAX_VALUE)
+                                    .addComponent(sourceCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
                                 .addComponent(jLabel7))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(325, 325, 325)
-                        .addComponent(createFlight)))
+                        .addComponent(createFlight))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(backCreateFlightSchedule)))
                 .addContainerGap(123, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(75, 75, 75)
+                .addContainerGap()
+                .addComponent(backCreateFlightSchedule)
+                .addGap(40, 40, 40)
                 .addComponent(jLabel7)
                 .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -327,10 +345,19 @@ public class CreateFlightSchedule extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_departureDateActionPerformed
 
+    private void backCreateFlightScheduleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backCreateFlightScheduleActionPerformed
+        // TODO add your handling code here:
+        ManageFlightSchedules flightSchedulePanel = new ManageFlightSchedules(this.panel, airlineDirectory, airplaneDirectory, airliner,masterTravelSchedule);
+        this.panel.add(flightSchedulePanel, "FlightSchedule");
+        CardLayout layout = (CardLayout)this.panel.getLayout();
+        layout.next(panel);
+    }//GEN-LAST:event_backCreateFlightScheduleActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField arrivalDate;
     private javax.swing.JTextField arrivalTime;
+    private javax.swing.JButton backCreateFlightSchedule;
     private javax.swing.JButton createFlight;
     private javax.swing.JTextField departureDate;
     private javax.swing.JTextField departureTime;

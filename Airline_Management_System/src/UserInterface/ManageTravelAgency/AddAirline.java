@@ -8,29 +8,35 @@ package UserInterface.ManageTravelAgency;
 import Business.Airliner;
 import Business.AirlinerDirectory;
 import Business.Airplane;
+import Business.AirplaneDirectory;
 import Business.MasterTravelSchedule;
 import UserInterface.ManageAirliner.UpdateAirplane;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
-
+import UserInterface.ManageAirliner.ManageAirliners;
 /**
  *
  * @author Mayank
  */
-public class ManageAirliners extends javax.swing.JPanel {
+public class AddAirline extends javax.swing.JPanel {
     
     private JPanel panel;
     private AirlinerDirectory airlineDirectory;
     private MasterTravelSchedule masterTravelSchedule;
+    private AirplaneDirectory airplaneDirectory;
+    private Airliner airliner;
     /**
      * Creates new form ManageAirliners
      */
-    public ManageAirliners(JPanel panel, AirlinerDirectory airlineDirectory) {
+    public AddAirline(JPanel panel, AirlinerDirectory airlineDirectory, AirplaneDirectory airplaneDirectory, MasterTravelSchedule masterTravelSchedule) {
         initComponents();
         this.panel = panel;
         this.airlineDirectory = airlineDirectory;
+        this.airplaneDirectory = airplaneDirectory;
+        this.masterTravelSchedule = masterTravelSchedule;
+        this.airliner = airliner;
         populateAirliners();
     }
     
@@ -155,7 +161,7 @@ public class ManageAirliners extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCreateAirlinerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAirlinerActionPerformed
-        CreateAirliners createAirlinersPanel = new CreateAirliners(this.panel, airlineDirectory);
+        CreateAirliners createAirlinersPanel = new CreateAirliners(this.panel, airlineDirectory,  airplaneDirectory,  masterTravelSchedule);
         this.panel.add(createAirlinersPanel, "CreateAirliners");
         CardLayout layout = (CardLayout)this.panel.getLayout();
         layout.next(panel);
@@ -168,6 +174,11 @@ public class ManageAirliners extends javax.swing.JPanel {
         this.panel.add(manageTravelAgency, "ManageTravelAgency");
         CardLayout layout = (CardLayout)this.panel.getLayout();
         layout.next(panel);*/
+        
+        ManageAirliners manageAirliners = new ManageAirliners(this.panel,  airlineDirectory,  airplaneDirectory,  masterTravelSchedule);
+        this.panel.add(manageAirliners, "ManageAirliners");
+        CardLayout layout = (CardLayout)this.panel.getLayout();
+        layout.next(panel);
     }//GEN-LAST:event_btnBackManageAirlineActionPerformed
 
     private void updateAirlineBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateAirlineBtnActionPerformed
@@ -175,7 +186,7 @@ public class ManageAirliners extends javax.swing.JPanel {
         if(selectedRow>=0){
             Airliner airliner = (Airliner)tblManageAirliners.getValueAt(selectedRow, 0);
             
-            UpdateAirliner updateAirlinerPanel = new UpdateAirliner(this.panel, airlineDirectory, airliner);
+            UpdateAirliner updateAirlinerPanel = new UpdateAirliner(this.panel,  airlineDirectory,  airplaneDirectory,  masterTravelSchedule, airliner);
             this.panel.add(updateAirlinerPanel, "UpdateAirliner");
             CardLayout layout = (CardLayout)this.panel.getLayout();
             layout.next(panel);

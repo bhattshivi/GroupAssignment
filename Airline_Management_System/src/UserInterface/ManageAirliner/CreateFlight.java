@@ -13,6 +13,7 @@ import Business.AirplaneDirectory;
 import Business.Flight;
 import Business.MasterTravelSchedule;
 import Business.Seat;
+import java.awt.CardLayout;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
@@ -100,6 +101,7 @@ public class CreateFlight extends javax.swing.JPanel {
         destiationTxt = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         addFlightBtn = new javax.swing.JButton();
+        btnBackAddFlight = new javax.swing.JButton();
 
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Economy", "Business" }));
 
@@ -319,6 +321,13 @@ public class CreateFlight extends javax.swing.JPanel {
             }
         });
 
+        btnBackAddFlight.setText("<<<Back");
+        btnBackAddFlight.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackAddFlightActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -335,7 +344,8 @@ public class CreateFlight extends javax.swing.JPanel {
                         .addGap(328, 328, 328)
                         .addComponent(addFlightBtn))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(281, 281, 281)
+                        .addComponent(btnBackAddFlight)
+                        .addGap(184, 184, 184)
                         .addComponent(jLabel13)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -343,7 +353,9 @@ public class CreateFlight extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel13)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13)
+                    .addComponent(btnBackAddFlight))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -570,11 +582,20 @@ public class CreateFlight extends javax.swing.JPanel {
         
     }//GEN-LAST:event_arrivalDateTxtActionPerformed
 
+    private void btnBackAddFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackAddFlightActionPerformed
+        // TODO add your handling code here:
+        AirlinerFunction airLinerFunction = new AirlinerFunction(this.panel,  airlineDirectory,  airplaneDirectory,  airliner,  masterTravelSchedule);
+        this.panel.add(airLinerFunction, "AirlinerFunction");
+        CardLayout layout = (CardLayout)this.panel.getLayout();
+        layout.next(panel);
+    }//GEN-LAST:event_btnBackAddFlightActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addFlightBtn;
     private javax.swing.JTextField arrivalDateTxt;
     private javax.swing.JTextField arrivalTimeTxt;
+    private javax.swing.JButton btnBackAddFlight;
     private javax.swing.JTextField departureDateTxt;
     private javax.swing.JTextField departureTimeTxt;
     private javax.swing.JTextField destiationTxt;
