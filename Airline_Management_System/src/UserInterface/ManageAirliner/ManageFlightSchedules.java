@@ -49,7 +49,8 @@ public class ManageFlightSchedules extends javax.swing.JPanel {
             row[0] = fs;
             row[1] = fs.getSource();
             row[2] = fs.getDestination();
-            row[3] = fs.getDepartureDate();
+            row[3] = fs.getDepartureDate() + "; " + fs.getDepartureTime();
+            row[4] = fs.getDepartureDate() + "; " + fs.getArrivalTime();
             dtm.addRow(row);
         }
     }
@@ -72,20 +73,20 @@ public class ManageFlightSchedules extends javax.swing.JPanel {
 
         flightScheduleTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Flight Schedule Id", "Source", "Destination", "Travel Date"
+                "Flight Schedule Id", "Source", "Destination", "Departure Date & Time", "Arrival Date & Time"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -103,6 +104,7 @@ public class ManageFlightSchedules extends javax.swing.JPanel {
             flightScheduleTbl.getColumnModel().getColumn(1).setResizable(false);
             flightScheduleTbl.getColumnModel().getColumn(2).setResizable(false);
             flightScheduleTbl.getColumnModel().getColumn(3).setResizable(false);
+            flightScheduleTbl.getColumnModel().getColumn(4).setResizable(false);
         }
 
         addScheduleBtn.setText("Add Schedule");

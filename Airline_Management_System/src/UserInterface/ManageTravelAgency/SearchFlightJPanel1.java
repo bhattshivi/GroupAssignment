@@ -52,6 +52,7 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
     public SearchFlightJPanel1(JPanel panel, AirlinerDirectory airlineDirectory, MasterTravelSchedule masterTravelSchedule, CustomerDirectory custDir, ReservationDirectory reservationDirectory) {
         initComponents();
         searchType = "one-way";
+        dtmOneWay = (DefaultTableModel) tblSearchFlight.getModel();
         multicityRowCount = 1;
         this.panel = panel;
         this.airlineDirectory = airlineDirectory;
@@ -60,6 +61,7 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
         this.reservationDirectory = reservationDirectory;
         deleteRow.setEnabled(false);
         populate();
+        hideTables();
         hideRoundTripFields();
         hideMulticityFields();
         
@@ -69,16 +71,16 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
         returningDate.setVisible(false);
         returningDateLbl.setVisible(false);
         tblSearchRoundTripFlights.setVisible(false);
-        jScrollPane2.setVisible(false);
-        jLabel2.setVisible(false);
+        //jScrollPane2.setVisible(false);
+        //jLabel2.setVisible(false);
     }
     
     public void showRoundTripFields() {
         returningDate.setVisible(true);
         returningDateLbl.setVisible(true);
         tblSearchRoundTripFlights.setVisible(true);
-        jScrollPane2.setVisible(true);
-        jLabel2.setVisible(true);
+        //jScrollPane2.setVisible(true);
+        //jLabel2.setVisible(true);
     }
     
     public void hideMulticityFields() {
@@ -97,6 +99,22 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
         jPanel1.setVisible(true); 
     }
     
+    public void hideTables() {
+        jScrollPane1.setVisible(false);
+        jLabel1.setVisible(false);
+        jScrollPane2.setVisible(false);
+        jLabel2.setVisible(false);        
+    }
+    
+    public void showDepartingTable() {
+        jScrollPane1.setVisible(true);
+        jLabel1.setVisible(true);
+    }
+    
+    public void showReturningTable() {
+        jScrollPane2.setVisible(true);
+        jLabel2.setVisible(true);
+    }
     
     
     public void hideFields() {
@@ -205,20 +223,20 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
 
         tblSearchFlight.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Flight #", "Source", "Destination", "Departing Date and Time", "Arrival Date and Time"
+                "Flight Id", "Flight #", "Airline", "Airplane", "Source", "Destination", "Departing Date and Time", "Arrival Date and Time"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, true, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -233,10 +251,12 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tblSearchFlight);
         if (tblSearchFlight.getColumnModel().getColumnCount() > 0) {
             tblSearchFlight.getColumnModel().getColumn(0).setResizable(false);
-            tblSearchFlight.getColumnModel().getColumn(1).setResizable(false);
             tblSearchFlight.getColumnModel().getColumn(2).setResizable(false);
             tblSearchFlight.getColumnModel().getColumn(3).setResizable(false);
             tblSearchFlight.getColumnModel().getColumn(4).setResizable(false);
+            tblSearchFlight.getColumnModel().getColumn(5).setResizable(false);
+            tblSearchFlight.getColumnModel().getColumn(6).setResizable(false);
+            tblSearchFlight.getColumnModel().getColumn(7).setResizable(false);
         }
 
         jLabel1.setText("Flights List");
@@ -245,20 +265,20 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
 
         tblSearchRoundTripFlights.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Flight #", "Source", "Destination", "Departing Date and Time", "Arrival Date and Time"
+                "Flight Id", "Flight #", "Airline", "Airplane", "Source", "Destination", "Departing Date and Time", "Arrival Date and Time"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -277,6 +297,9 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
             tblSearchRoundTripFlights.getColumnModel().getColumn(2).setResizable(false);
             tblSearchRoundTripFlights.getColumnModel().getColumn(3).setResizable(false);
             tblSearchRoundTripFlights.getColumnModel().getColumn(4).setResizable(false);
+            tblSearchRoundTripFlights.getColumnModel().getColumn(5).setResizable(false);
+            tblSearchRoundTripFlights.getColumnModel().getColumn(6).setResizable(false);
+            tblSearchRoundTripFlights.getColumnModel().getColumn(7).setResizable(false);
         }
 
         jButton1.setText("Book");
@@ -427,11 +450,11 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 808, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 808, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 808, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 808, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -482,9 +505,9 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
             String destination = (String)destinationCombo.getSelectedItem();
             LocalDate dDate;// = LocalDate.parse(departingDate.getText());
             
-            if("".equals(source)) {
+            if("-- None --".equals(source)) {
                 JOptionPane.showMessageDialog(null, "Please select source city");
-            }else if("".equals(destination)) {
+            }else if("-- None --".equals(destination)) {
                 JOptionPane.showMessageDialog(null, "Please select destination city");
             }else if(source.equals(destination)) {
                 JOptionPane.showMessageDialog(null, "Source and destination city cannot be same");
@@ -503,14 +526,28 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Departure Date can not be the past date");
                 }else {
                     //DefaultTableModel dtm = (DefaultTableModel) tblSearchFlight.getModel();
+                    showDepartingTable();
                     dtmOneWay.setRowCount(0);
                     for (Flight f : masterTravelSchedule.searchOneWayFlight(source, destination, dDate)) {
                         Object[] row = new Object[dtmOneWay.getColumnCount()];
+                        
+                        row[0]= f;
+                        row[1]= f.getFlightName();
+                        row[2]= f.getAirliner();
+                        row[3]= f.getAirplane();
+                        row[4]= f.getFlightSchedule().getSource();
+                        row[5]= f.getFlightSchedule().getDestination();
+                        row[6]= f.getFlightSchedule().getDepartureDate() + "; " + f.getFlightSchedule().getDepartureTime();
+                        row[7]= f.getFlightSchedule().getArrivalDate() + "; " + f.getFlightSchedule().getArrivalTime();
+                        
+                        
+                        /*
                         row[0] = f;
                         row[1] = f.getFlightSchedule().getSource();
                         row[2] = f.getFlightSchedule().getDestination();
                         row[3] = f.getFlightSchedule().getDepartureDate() + "; " + f.getFlightSchedule().getDepartureTime();
                         row[4] = f.getFlightSchedule().getArrivalDate()+ "; " + f.getFlightSchedule().getArrivalTime();
+                        */
                         dtmOneWay.addRow(row);
                     }
 
@@ -566,14 +603,26 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
                 }else if(dDate.isAfter(rDate)) {
                     JOptionPane.showMessageDialog(null, "Departure Date should not be greater than Returning Date");
                 }else {
+                    showDepartingTable();
+                    showReturningTable();
                     dtmOneWay.setRowCount(0);
                     for (Flight f : masterTravelSchedule.searchRoundTripFlight(source, destination, dDate, null)) {
                         Object[] row = new Object[dtmOneWay.getColumnCount()];
+                        row[0]= f;
+                        row[1]= f.getFlightName();
+                        row[2]= f.getAirliner();
+                        row[3]= f.getAirplane();
+                        row[4]= f.getFlightSchedule().getSource();
+                        row[5]= f.getFlightSchedule().getDestination();
+                        row[6]= f.getFlightSchedule().getDepartureDate() + "; " + f.getFlightSchedule().getDepartureTime();
+                        row[7]= f.getFlightSchedule().getArrivalDate() + "; " + f.getFlightSchedule().getArrivalTime();
+                        /*
                         row[0] = f;
                         row[1] = f.getFlightSchedule().getSource();
                         row[2] = f.getFlightSchedule().getDestination();
                         row[3] = f.getFlightSchedule().getDepartureDate() + "; " + f.getFlightSchedule().getDepartureTime();
                         row[4] = f.getFlightSchedule().getArrivalDate()+ "; " + f.getFlightSchedule().getArrivalTime();
+                        */
                         dtmOneWay.addRow(row);
                     }
 
@@ -582,11 +631,21 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
                     dtmRoundTrip.setRowCount(0);
                     for (Flight f : masterTravelSchedule.searchRoundTripFlight(destination, source, null, rDate)) {
                         Object[] row = new Object[dtmRoundTrip.getColumnCount()];
+                        row[0]= f;
+                        row[1]= f.getFlightName();
+                        row[2]= f.getAirliner();
+                        row[3]= f.getAirplane();
+                        row[4]= f.getFlightSchedule().getSource();
+                        row[5]= f.getFlightSchedule().getDestination();
+                        row[6]= f.getFlightSchedule().getDepartureDate() + "; " + f.getFlightSchedule().getDepartureTime();
+                        row[7]= f.getFlightSchedule().getArrivalDate() + "; " + f.getFlightSchedule().getArrivalTime();
+                        /*
                         row[0] = f;
                         row[1] = f.getFlightSchedule().getSource();
                         row[2] = f.getFlightSchedule().getDestination();
                         row[3] = f.getFlightSchedule().getDepartureDate() + "; " + f.getFlightSchedule().getDepartureTime();
                         row[4] = f.getFlightSchedule().getArrivalDate()+ "; " + f.getFlightSchedule().getArrivalTime();
+                        */
                         dtmRoundTrip.addRow(row);
                     }
 
@@ -670,14 +729,26 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
             
             //DefaultTableModel dtm = (DefaultTableModel) tblSearchFlight.getModel();
             if(!isError) {
+                showDepartingTable();
                 dtmOneWay.setRowCount(0);
                 for (Flight f : multiCityFlights) {
                     Object[] row = new Object[dtmOneWay.getColumnCount()];
+                    row[0]= f;
+                    row[1]= f.getFlightName();
+                    row[2]= f.getAirliner();
+                    row[3]= f.getAirplane();
+                    row[4]= f.getFlightSchedule().getSource();
+                    row[5]= f.getFlightSchedule().getDestination();
+                    row[6]= f.getFlightSchedule().getDepartureDate() + "; " + f.getFlightSchedule().getDepartureTime();
+                    row[7]= f.getFlightSchedule().getArrivalDate() + "; " + f.getFlightSchedule().getArrivalTime();
+                    
+                        /*
                     row[0] = f;
                     row[1] = f.getFlightSchedule().getSource();
                     row[2] = f.getFlightSchedule().getDestination();
                     row[3] = f.getFlightSchedule().getDepartureDate() + "; " + f.getFlightSchedule().getDepartureTime();
                     row[4] = f.getFlightSchedule().getArrivalDate()+ "; " + f.getFlightSchedule().getArrivalTime();
+                        */
                     dtmOneWay.addRow(row);
                 }
 
@@ -695,6 +766,7 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
         System.out.println(oneWayRB.isSelected());
         dtmOneWay = (DefaultTableModel) tblSearchFlight.getModel();
         //multicityRowCount = 0;
+        hideTables();
         hideRoundTripFields();
         hideMulticityFields();
         showonewayFields();
@@ -704,6 +776,7 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
         dtmMultiCity = (DefaultTableModel) tblMultiCity.getModel();
         dtmMultiCity.setRowCount(1);
         dtmOneWay = (DefaultTableModel) tblSearchFlight.getModel();
+        hideTables();
         hideRoundTripFields();
         showMulticityFields();
         hideonewayFields();
@@ -712,6 +785,7 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
     private void roundTripRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roundTripRBActionPerformed
         dtmOneWay = (DefaultTableModel) tblSearchFlight.getModel();
         dtmRoundTrip = (DefaultTableModel) tblSearchRoundTripFlights.getModel();
+        hideTables();
         showRoundTripFields();
         hideMulticityFields();
         showonewayFields();
@@ -719,71 +793,75 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        ArrayList<Flight> flightToBook = new ArrayList<>();
+        if(!custDir.getCustomerList().isEmpty()) {
         
-        if(oneWayRB.isSelected()) {
-            int selectedRow1 = tblSearchFlight.getSelectedRow();
-            
-            
-            if(selectedRow1<0) {
-                JOptionPane.showMessageDialog(null, "Please select a flight to book");
-            }else {
-                Flight f = (Flight)tblSearchFlight.getValueAt(selectedRow1, 0);
-                flightToBook.add(f);
-                //BookFlightJPanel1 searchFlightJPanel = new BookFlightJPanel1(this.panel, airlineDirectory, masterTravelSchedule, flightToBook, custDir, reservationDirectory);
-                //this.panel.add(searchFlightJPanel, "SearchFlightJPanel");
-                //CardLayout layout = (CardLayout)this.panel.getLayout();
-                //layout.next(panel);
-            }
-        }
-        
-        if(roundTripRB.isSelected()) {
-            int selectedRow1 = tblSearchFlight.getSelectedRow();
-            int selectedRow2 = tblSearchRoundTripFlights.getSelectedRow();
-            //ArrayList<Flight> flightToBook = new ArrayList<>();
-            
-            if(selectedRow1<0) {
-                JOptionPane.showMessageDialog(null, "Please select one departing flight from both the flight tables");
-            }
-            else if(selectedRow2<0 && roundTripRB.isSelected()) {
-                JOptionPane.showMessageDialog(null, "Please select one returning flight from both the flight tables");
-            }
-            else {
-                Flight f1;
-                Flight f = (Flight)tblSearchFlight.getValueAt(selectedRow1, 0);
-                if(roundTripRB.isSelected()) {
-                    f1 = (Flight)tblSearchRoundTripFlights.getValueAt(selectedRow2, 0);
-                    flightToBook.add(f1);
-                }
-                flightToBook.add(f);
+            ArrayList<Flight> flightToBook = new ArrayList<>();
 
-                
-            }
-        }
-        
-        if(multiCityRB.isSelected()) {
-            int selectedRow1 = tblSearchFlight.getSelectedRow();
-            //ArrayList<Flight> flightToBook = new ArrayList<>();
-            
-            if(selectedRow1 < 0) {
-                JOptionPane.showMessageDialog(null, "Please select atleast one flight");
-            }else {
-                int[] selectedRows = tblSearchFlight.getSelectedRows();
-                for (int i = 0; i < selectedRows.length; i++) {
-                    
-                    Flight f = (Flight)tblSearchFlight.getValueAt(selectedRows[i], 0);
-                    
-                    
+            if(oneWayRB.isSelected()) {
+                int selectedRow1 = tblSearchFlight.getSelectedRow();
+
+
+                if(selectedRow1<0) {
+                    JOptionPane.showMessageDialog(null, "Please select a flight to book");
+                }else {
+                    Flight f = (Flight)tblSearchFlight.getValueAt(selectedRow1, 0);
                     flightToBook.add(f);
+                    BookFlightJPanel1 searchFlightJPanel = new BookFlightJPanel1(this.panel, airlineDirectory, masterTravelSchedule, flightToBook, custDir, reservationDirectory);
+                    this.panel.add(searchFlightJPanel, "SearchFlightJPanel");
+                    CardLayout layout = (CardLayout)this.panel.getLayout();
+                    layout.next(panel);
                 }
             }
+
+            if(roundTripRB.isSelected()) {
+                int selectedRow1 = tblSearchFlight.getSelectedRow();
+                int selectedRow2 = tblSearchRoundTripFlights.getSelectedRow();
+                //ArrayList<Flight> flightToBook = new ArrayList<>();
+
+                if(selectedRow1<0) {
+                    JOptionPane.showMessageDialog(null, "Please select one departing flight");
+                }
+                else if(selectedRow2<0 && roundTripRB.isSelected()) {
+                    JOptionPane.showMessageDialog(null, "Please select one returning flight");
+                }
+                else {
+                    Flight f1;
+                    Flight f = (Flight)tblSearchFlight.getValueAt(selectedRow1, 0);
+                    if(roundTripRB.isSelected()) {
+                        f1 = (Flight)tblSearchRoundTripFlights.getValueAt(selectedRow2, 0);
+                        flightToBook.add(f1);
+                    }
+                    flightToBook.add(f);
+                    BookFlightJPanel1 searchFlightJPanel = new BookFlightJPanel1(this.panel, airlineDirectory, masterTravelSchedule, flightToBook, custDir, reservationDirectory);
+                    this.panel.add(searchFlightJPanel, "SearchFlightJPanel");
+                    CardLayout layout = (CardLayout)this.panel.getLayout();
+                    layout.next(panel);
+
+                }
+            }
+
+            if(multiCityRB.isSelected()) {
+                int selectedRow1 = tblSearchFlight.getSelectedRow();
+                //ArrayList<Flight> flightToBook = new ArrayList<>();
+
+                if(selectedRow1 < 0) {
+                    JOptionPane.showMessageDialog(null, "Please select atleast one flight");
+                }else {
+                    int[] selectedRows = tblSearchFlight.getSelectedRows();
+                    for (int i = 0; i < selectedRows.length; i++) {
+
+                        Flight f = (Flight)tblSearchFlight.getValueAt(selectedRows[i], 0);
+                        flightToBook.add(f);
+                        BookFlightJPanel1 searchFlightJPanel = new BookFlightJPanel1(this.panel, airlineDirectory, masterTravelSchedule, flightToBook, custDir, reservationDirectory);
+                        this.panel.add(searchFlightJPanel, "SearchFlightJPanel");
+                        CardLayout layout = (CardLayout)this.panel.getLayout();
+                        layout.next(panel);
+                    }
+                }
+            }
+        }else {
+            JOptionPane.showMessageDialog(null, "Please create a customer before booking a flight");
         }
-        
-        BookFlightJPanel1 searchFlightJPanel = new BookFlightJPanel1(this.panel, airlineDirectory, masterTravelSchedule, flightToBook, custDir, reservationDirectory);
-        this.panel.add(searchFlightJPanel, "SearchFlightJPanel");
-        CardLayout layout = (CardLayout)this.panel.getLayout();
-        layout.next(panel);
-        
         
         /*
         int selectedRow1 = tblSearchFlight.getSelectedRow();

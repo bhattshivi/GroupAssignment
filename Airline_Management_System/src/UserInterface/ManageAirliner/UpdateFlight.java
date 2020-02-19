@@ -476,6 +476,7 @@ public class UpdateFlight extends javax.swing.JPanel {
             }
             
             if(!isFlightExist) {
+                int count = 0;
                 for(int i=0; i < nRow; i++) {
                 
                     if(null == flightSeatsTbl.getValueAt(i, 0) || "".equals(flightSeatsTbl.getValueAt(i, 0))) {
@@ -493,6 +494,7 @@ public class UpdateFlight extends javax.swing.JPanel {
                         break;
                     }else {
                         seatCreated = true;
+                        count++;
                         Seat flightSeat = new Seat();
                         flightSeat.setSeatName(flightSeatsTbl.getValueAt(i, 0).toString());
                         flightSeat.setPrice((Double)flightSeatsTbl.getValueAt(i, 1));
@@ -501,7 +503,7 @@ public class UpdateFlight extends javax.swing.JPanel {
                         seatList.add(flightSeat);
                     }                
                 }
-                if(!checkForAirplaneOverlap() && seatCreated) {
+                if(!checkForAirplaneOverlap() && count == nRow) {
                     flight.setFlightName(flightNameTxt.getText());
                     flight.setIsActive((flightStatusCombo.getSelectedItem() == "Active"));
                     flight.setFlightSchedule(selectedFlightSchedule);

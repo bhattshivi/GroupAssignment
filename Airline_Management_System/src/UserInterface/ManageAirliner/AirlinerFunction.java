@@ -46,11 +46,14 @@ public class AirlinerFunction extends javax.swing.JPanel {
         for(Flight f : airliner.getFlightList()){
             Object[] row = new Object[dtm.getColumnCount()];
             row[0]= f;
-            row[1]= f.getFlightSchedule().getSource();
-            row[2]= f.getFlightSchedule().getDestination();
-            row[3]= f.getFlightSchedule().getDepartureDate();
-            row[4]= f.getAirplane();
-            row[5]= (f.isIsActive()? "Active" : "Cancelled");
+            row[1]= f.getFlightName();
+            row[2]= f.getAirliner();
+            row[3]= f.getAirplane();
+            row[4]= f.getFlightSchedule().getSource();
+            row[5]= f.getFlightSchedule().getDestination();
+            row[6]= f.getFlightSchedule().getDepartureDate() + "; " + f.getFlightSchedule().getDepartureTime();
+            row[7]= f.getFlightSchedule().getArrivalDate() + "; " + f.getFlightSchedule().getArrivalTime();
+            row[8]= (f.isIsActive()? "Active" : "Cancelled");
             dtm.addRow(row);
         }
     }
@@ -89,20 +92,20 @@ public class AirlinerFunction extends javax.swing.JPanel {
 
         airlinerFlightTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Flight #", "Source", "Destination", "Departure Date", "Airplane", "Status"
+                "Flight Id", "Flight #", "Airline", "Airplane", "Source", "Destination", "Departure Date & Time", "Arrival Date & Time", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -115,6 +118,7 @@ public class AirlinerFunction extends javax.swing.JPanel {
         });
         airlinerFlightTbl.setRowHeight(25);
         airlinerFlightTbl.setRowMargin(3);
+        airlinerFlightTbl.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(airlinerFlightTbl);
         if (airlinerFlightTbl.getColumnModel().getColumnCount() > 0) {
             airlinerFlightTbl.getColumnModel().getColumn(0).setResizable(false);
@@ -123,6 +127,9 @@ public class AirlinerFunction extends javax.swing.JPanel {
             airlinerFlightTbl.getColumnModel().getColumn(3).setResizable(false);
             airlinerFlightTbl.getColumnModel().getColumn(4).setResizable(false);
             airlinerFlightTbl.getColumnModel().getColumn(5).setResizable(false);
+            airlinerFlightTbl.getColumnModel().getColumn(6).setResizable(false);
+            airlinerFlightTbl.getColumnModel().getColumn(7).setResizable(false);
+            airlinerFlightTbl.getColumnModel().getColumn(8).setResizable(false);
         }
 
         manageflightScheduleBtn.setText("ManageFlight Schedule");

@@ -203,7 +203,25 @@ public class CreateFlightSchedule extends javax.swing.JPanel {
                 .addContainerGap(199, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    public boolean checkForExistingFlightSchedules() {
+        boolean isFSExists = false;
+        for(FlightSchedule fs : airliner.getFlightScheduleList()) {
+            if(fs.getSource().equals(sourceCombo.getSelectedItem()) &&
+                fs.getDestination().equals(destinationCombo.getSelectedItem()) &&
+                fs.getDepartureDate().equals(LocalDate.parse(departureDate.getText())) &&
+                fs.getArrivalDate().equals(LocalDate.parse(arrivalDate.getText())) &&
+                fs.getDepartureTime().equals(LocalTime.parse(departureTime.getText())) &&    
+                fs.getArrivalTime().equals(LocalTime.parse(arrivalTime.getText()))                    
+                ) {
+                isFSExists = true;
+                JOptionPane.showMessageDialog(null, "A flight schedule " + fs.getFlightScheduleId() + " already exists with the same details.");
+                break;
+            }
+        }
+        return isFSExists;
+    }
+    
     private void createFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createFlightActionPerformed
         
         /*FlightSchedule flightSchedule = new FlightSchedule();
@@ -223,6 +241,9 @@ public class CreateFlightSchedule extends javax.swing.JPanel {
         }else if("-- None --".equals(destinationCombo.getSelectedItem())) {
             JOptionPane.showMessageDialog(null, "Destination city is mandatory");
             
+        }else if(sourceCombo.getSelectedItem().equals(destinationCombo.getSelectedItem())) {
+            JOptionPane.showMessageDialog(null, "Source and destination city cannot be same");
+            
         }else if("".equals(departureDate.getText())) {
             JOptionPane.showMessageDialog(null, "Departure date is mandatory");
             
@@ -234,9 +255,6 @@ public class CreateFlightSchedule extends javax.swing.JPanel {
             
         }else if("".equals(arrivalTime.getText())) {
             JOptionPane.showMessageDialog(null, "Arrival time is mandatory");
-            
-        }else if(sourceCombo.getSelectedItem().equals(destinationCombo.getSelectedItem())) {
-            JOptionPane.showMessageDialog(null, "Source and destination city cannot be same");
             
         }else {            
             LocalDate dDate;
@@ -282,6 +300,8 @@ public class CreateFlightSchedule extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Departure Time should not be greater than Arrival Time");
             }else if(dDate.equals(aDate) && dTime.equals(aTime)) {
                 JOptionPane.showMessageDialog(null, "Departure Time should not be same as Arrival Time");
+            }else if(checkForExistingFlightSchedules()) {
+                
             }else {
                 FlightSchedule flightSchedule = new FlightSchedule();
         

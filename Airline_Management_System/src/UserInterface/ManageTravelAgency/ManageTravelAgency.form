@@ -19,7 +19,8 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="195" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnManageBooking" min="-2" pref="170" max="-2" attributes="0"/>
+                  <Component id="btnManageBooking1" min="-2" pref="170" max="-2" attributes="0"/>
+                  <Component id="viewFlightsBtn" min="-2" pref="170" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="btnBookFlight" max="32767" attributes="0"/>
                       <Component id="btnRegisterAirliners" max="32767" attributes="0"/>
@@ -39,9 +40,11 @@
               <Component id="btnBookFlight" min="-2" pref="42" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="btnManageCustomer" min="-2" pref="42" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="btnManageBooking" min="-2" pref="42" max="-2" attributes="0"/>
-              <EmptySpace pref="92" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="btnManageBooking1" min="-2" pref="42" max="-2" attributes="0"/>
+              <EmptySpace pref="20" max="32767" attributes="0"/>
+              <Component id="viewFlightsBtn" min="-2" pref="42" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -71,12 +74,20 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManageCustomerActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnManageBooking">
+    <Component class="javax.swing.JButton" name="viewFlightsBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="View Flights"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewFlightsBtnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnManageBooking1">
       <Properties>
         <Property name="text" type="java.lang.String" value="Manage Booking"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManageBookingActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManageBooking1ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

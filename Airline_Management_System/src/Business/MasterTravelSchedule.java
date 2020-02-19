@@ -6,7 +6,9 @@
 package Business;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import javax.swing.JOptionPane;
 
 /**
@@ -39,9 +41,20 @@ public class MasterTravelSchedule {
         ArrayList<Flight> oneWayFlightList = new ArrayList<Flight>();
         
         for (Flight flight : this.masterFlightList) {
+            
+            int seatCount = 0;
+            
+            for(Seat s : flight.getFlightSeatList()) {
+                if(s.getStatus().equals("Not Available")) {
+                    seatCount++;
+                }
+            }
+            
             if(flight.getFlightSchedule().getSource().equals(source) &&
                 flight.getFlightSchedule().getDestination().equals(destination) &&
-                    flight.getFlightSchedule().getDepartureDate().equals(dDate)) {
+                    flight.getFlightSchedule().getDepartureDate().equals(dDate) &&
+                        seatCount != flight.getFlightSeatList().size() &&
+                            flight.isIsActive()) {
                 
                 oneWayFlightList.add(flight);          
             }
@@ -55,10 +68,20 @@ public class MasterTravelSchedule {
         
         for (Flight flight : this.masterFlightList) {
             
+            int seatCount = 0;
+            
+            for(Seat s : flight.getFlightSeatList()) {
+                if(s.getStatus().equals("Not Available")) {
+                    seatCount++;
+                }
+            }
+            
             if(aDate == null) {
                 if(flight.getFlightSchedule().getSource().equals(source) &&
                     flight.getFlightSchedule().getDestination().equals(destination) &&
-                        flight.getFlightSchedule().getDepartureDate().equals(dDate)) {
+                        flight.getFlightSchedule().getDepartureDate().equals(dDate) &&
+                            seatCount != flight.getFlightSeatList().size() &&
+                                flight.isIsActive()) {
 
                     roundTripFlightList.add(flight);          
                 }
@@ -66,7 +89,9 @@ public class MasterTravelSchedule {
             if(dDate == null){
                 if(flight.getFlightSchedule().getSource().equals(source) &&
                     flight.getFlightSchedule().getDestination().equals(destination) &&
-                        flight.getFlightSchedule().getArrivalDate().equals(aDate)) {
+                        flight.getFlightSchedule().getArrivalDate().equals(aDate) &&
+                            seatCount != flight.getFlightSeatList().size() &&
+                                flight.isIsActive()) {
 
                     roundTripFlightList.add(flight);          
                 }
@@ -86,25 +111,104 @@ public class MasterTravelSchedule {
     
     
     
-    public ArrayList<Flight> searchFlight(String flightNumber,String source, String destination) {
+    public ArrayList<Flight> searchFlight(String flightNumber, String source, String destination, LocalDate dDate, LocalDate aDate, String price, String depDay, String arrDay, Airliner airlineName, String fStatus, int notBlankCount) {
         System.out.println("FLIGHT NO :  **" + flightNumber);
         System.out.println("SOURCE NO :  **" + source);
         System.out.println("DESTINATION NO :  **" + destination);
         System.out.println();
+        
         ArrayList<Flight> list = new ArrayList<Flight>();
+        String[] priceRange = null;
+        LocalTime t1 = null;
+        LocalTime t2 = null;
+        boolean flStatus = false;
+        
+        if(!("".equals(price))) {
+            priceRange = price.split(" ");
+            System.out.println("~~~~~~ " + priceRange[0] + "===" + priceRange[2]);
+        }
+        
+        if(depDay.equals("Morning") || arrDay.equals("Morning")) {
+            t1 = LocalTime.parse("05:00");
+            t2 = LocalTime.parse("11:59");
+        }else if(depDay.equals("Afternoon") || arrDay.equals("Morning")) {
+            t1 = LocalTime.parse("12:00");
+            t2 = LocalTime.parse("16:59");
+        }else if(depDay.equals("Evening") || arrDay.equals("Morning")) {
+            t1 = LocalTime.parse("17:00");
+            t2 = LocalTime.parse("20:59");
+        }else if(depDay.equals("Night") || arrDay.equals("Morning")) {
+            t1 = LocalTime.parse("21:00");
+            t2 = LocalTime.parse("04:59");
+        }
+        
+        if(fStatus.equals("Active")) {
+            flStatus = true;
+        }else {
+            flStatus = false;
+        }
+        
         for (Flight flight : this.masterFlightList) {
-            if(((flightNumber.isEmpty() || flight.getFlightId().equalsIgnoreCase(flightNumber))
-                    && (source.isEmpty() || flight.getFlightSchedule().getSource().equalsIgnoreCase(source))
-                   && (destination.isEmpty() ||flight.getFlightSchedule().getDestination().equalsIgnoreCase(destination)))){
-                  System.out.println("Flight Number# ,Source, Destination Location  matched");
-                   list.add(flight);
+            int count = 0;
+            
+            ArrayList<Double> seatPriceList = new ArrayList<>();            
+            for(Seat s : flight.getFlightSeatList()) {
+                seatPriceList.add(s.getPrice());
+            }            
+            double n = Collections.min(seatPriceList);
+            
+            if(flightNumber.equals(flight.getFlightName())) {
+                count++;
             }
-                //else if(flight.getFlightSchedule().getSource().equalsIgnoreCase(source) && ){
-                        
-                        
-               
-                //return prod;
-            //}
+            if(source.equals(flight.getFlightSchedule().getSource())) {
+                count++;
+            }
+            if(destination.equals(flight.getFlightSchedule().getDestination())) {
+                count++;
+            }
+            if(null != dDate && dDate.equals(flight.getFlightSchedule().getDepartureDate())) {
+                count++;
+            }
+            if(null != aDate && aDate.equals(flight.getFlightSchedule().getArrivalDate())) {
+                count++;
+            }
+            if(!("".equals(price)) && n >= Double.parseDouble(priceRange[0]) && n <= Double.parseDouble(priceRange[1])) {
+                count++;
+            }
+            if(!("".equals(depDay)) && flight.getFlightSchedule().getDepartureTime().isAfter(t1) && flight.getFlightSchedule().getDepartureTime().isBefore(t2)) {
+                count++;
+            }
+            if(!("".equals(arrDay)) && flight.getFlightSchedule().getArrivalTime().isAfter(t1) && flight.getFlightSchedule().getArrivalTime().isBefore(t2)) {
+                count++;
+            }
+            if(null != airlineName && flight.getAirliner() == airlineName) {
+                count++;
+            }
+            if(flight.isIsActive() == flStatus) {
+                count++;
+            }
+            
+            System.out.println("COUNT2 >>>> " + notBlankCount);
+            System.out.println("COUNT3 >>>> " + count);
+            
+            if(notBlankCount == count) {
+                list.add(flight);
+            }
+            
+            /*
+            if(flightNumber.equals(flight.getFlightName()) ||
+                source.equals(flight.getFlightSchedule().getSource()) ||
+                destination.equals(flight.getFlightSchedule().getDestination()) ||   
+                dDate.equals(flight.getFlightSchedule().getDepartureDate()) ||
+                aDate.equals(flight.getFlightSchedule().getArrivalDate()) ||
+                aDate.equals(flight.getFlightSchedule().getArrivalDate()) ||
+                (n >= Double.parseDouble(priceRange[0]) && n <= Double.parseDouble(priceRange[0])) || 
+                  
+                    
+                    ) {
+                
+            }
+            */
         }
         
         return list;

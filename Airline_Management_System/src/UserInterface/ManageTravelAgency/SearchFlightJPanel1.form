@@ -78,11 +78,11 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane1" alignment="0" min="-2" pref="808" max="-2" attributes="0"/>
-                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPane2" alignment="0" min="-2" pref="808" max="-2" attributes="0"/>
-                          <Component id="jLabel1" alignment="0" min="-2" pref="77" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jScrollPane1" alignment="0" pref="808" max="32767" attributes="0"/>
+                          <Component id="jScrollPane2" alignment="0" pref="808" max="32767" attributes="0"/>
+                          <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -184,8 +184,11 @@
         <Component class="javax.swing.JTable" name="tblSearchFlight">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="5" rowCount="4">
-                <Column editable="false" title="Flight #" type="java.lang.String"/>
+              <Table columnCount="8" rowCount="4">
+                <Column editable="false" title="Flight Id" type="java.lang.String"/>
+                <Column editable="true" title="Flight #" type="java.lang.Object"/>
+                <Column editable="false" title="Airline" type="java.lang.String"/>
+                <Column editable="false" title="Airplane" type="java.lang.String"/>
                 <Column editable="false" title="Source" type="java.lang.String"/>
                 <Column editable="false" title="Destination" type="java.lang.String"/>
                 <Column editable="false" title="Departing Date and Time" type="java.lang.String"/>
@@ -194,6 +197,21 @@
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                   <Title/>
                   <Editor/>
@@ -249,8 +267,11 @@
         <Component class="javax.swing.JTable" name="tblSearchRoundTripFlights">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="5" rowCount="4">
+              <Table columnCount="8" rowCount="4">
+                <Column editable="false" title="Flight Id" type="java.lang.String"/>
                 <Column editable="false" title="Flight #" type="java.lang.String"/>
+                <Column editable="false" title="Airline" type="java.lang.String"/>
+                <Column editable="false" title="Airplane" type="java.lang.Object"/>
                 <Column editable="false" title="Source" type="java.lang.String"/>
                 <Column editable="false" title="Destination" type="java.lang.String"/>
                 <Column editable="false" title="Departing Date and Time" type="java.lang.String"/>
@@ -259,6 +280,21 @@
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                   <Title/>
                   <Editor/>

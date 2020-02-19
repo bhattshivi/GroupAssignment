@@ -94,7 +94,7 @@ public class TravelAgencyMain extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnManageAirlinerMainButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnManageTravelAgencyMainButton, javax.swing.GroupLayout.PREFERRED_SIZE, 175, Short.MAX_VALUE))
+                    .addComponent(btnManageTravelAgencyMainButton, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
                 .addContainerGap())
         );
         leftPanelLayout.setVerticalGroup(

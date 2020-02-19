@@ -428,6 +428,8 @@ public class CreateFlight extends javax.swing.JPanel {
             }
             
             if(!isFlightExist) {
+                int count = 0;
+                
                 for(int i=0; i < nRow; i++) {
                 
                     if(null == flightSeatsTbl.getValueAt(i, 0) || "".equals(flightSeatsTbl.getValueAt(i, 0))) {
@@ -437,6 +439,10 @@ public class CreateFlight extends javax.swing.JPanel {
                         JOptionPane.showMessageDialog(null, "Please enter price for the seat at row " + (i+1));
                         break;
                     }
+                    else if(0 >= (Double)flightSeatsTbl.getValueAt(i, 1)) {
+                        JOptionPane.showMessageDialog(null, "Price for the seat cannot be less than or equals to 0 at row " + (i+1));
+                        break;
+                    }
                     else if(null == flightSeatsTbl.getValueAt(i, 2) || "".equals(flightSeatsTbl.getValueAt(i, 2))) {
                         JOptionPane.showMessageDialog(null, "Please select the seat type at row " + (i+1));
                         break;
@@ -444,6 +450,7 @@ public class CreateFlight extends javax.swing.JPanel {
                         JOptionPane.showMessageDialog(null, "Please select the availability of seat at row " + (i+1));
                         break;
                     }else {
+                        count++;
                         createFlight = true;
                         Seat flightSeat = new Seat();
                         flightSeat.setSeatName(flightSeatsTbl.getValueAt(i, 0).toString());
@@ -453,7 +460,7 @@ public class CreateFlight extends javax.swing.JPanel {
                         seatList.add(flightSeat);
                     }                
                 }
-                if(!checkForAirplaneOverlap() && createFlight == true) {
+                if(!checkForAirplaneOverlap() && count == nRow) {
                     Flight newFlight = new Flight();
                     newFlight.setFlightName(flightNameTxt.getText());
                     newFlight.setIsActive((flightStatusCombo.getSelectedItem() == "Active"));

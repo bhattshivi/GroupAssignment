@@ -5,11 +5,13 @@
  */
 package UserInterface.ManageTravelAgency;
 
+import Business.Airliner;
 import Business.AirlinerDirectory;
 import Business.Flight;
 import Business.MasterTravelSchedule;
 import Business.Seat;
 import java.awt.CardLayout;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -44,29 +46,18 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
     public void populate() {
         DefaultTableModel dtm = (DefaultTableModel) tblSearchFlight.getModel();
         dtm.setRowCount(0);
-        for (Flight f : masterTravelSchedule.getMasterFlightList()) {
+        for(Flight f : masterTravelSchedule.getMasterFlightList()) {
             Object[] row = new Object[dtm.getColumnCount()];
-            row[0] = f.getFlightId();
-            row[1] = f.getFlightSchedule().getSource();
-            row[2] = f.getFlightSchedule().getDestination();
+            row[0]= f;
+            row[1]= f.getFlightName();
+            row[2]= f.getAirliner();
+            row[3]= f.getAirplane();
+            row[4]= f.getFlightSchedule().getSource();
+            row[5]= f.getFlightSchedule().getDestination();
+            row[6]= f.getFlightSchedule().getDepartureDate() + "; " + f.getFlightSchedule().getDepartureTime();
+            row[7]= f.getFlightSchedule().getArrivalDate() + "; " + f.getFlightSchedule().getArrivalTime();
+            row[8]= (f.isIsActive()? "Active" : "Cancelled");
             dtm.addRow(row);
-
-            System.out.println("===>> " + f.getFlightId());
-            System.out.println("===>> " + f.getFlightSchedule().getSource());
-            System.out.println("===>> " + f.getFlightSchedule().getSource());
-            System.out.println("===>> " + f.getFlightSchedule().getArrivalDate());
-            System.out.println("===>> " + f.getFlightSchedule().getArrivalTime());
-            System.out.println("===>> " + f.getFlightSchedule().getDepartureDate());
-            System.out.println("===>> " + f.getFlightSchedule().getDepartureTime());
-            System.out.println("===>> " + f.getAirliner().getAirlinerName());
-            System.out.println("===>> " + f.getAirplane().getAirplaneName());
-            for (Seat s : f.getFlightSeatList()) {
-                System.out.println("===>> " + s.getSeatName());
-                System.out.println("===>> " + s.getStatus());
-                System.out.println("===>> " + s.getPrice());
-                System.out.println("===>> " + s.getType());
-            }
-
         }
     }
 
@@ -87,13 +78,25 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         searchFlightNumber = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        searchSourceLocation = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        searchDestinationLocation = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        searchFlightDay = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         btnSearchFlight = new javax.swing.JButton();
+        sourceCombo = new javax.swing.JComboBox<>();
+        destinationCombo = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        dDate = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        aDate = new javax.swing.JTextField();
+        priceCombo = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        dDay = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        aDay = new javax.swing.JComboBox<>();
+        airlineCombo = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        flightStatus = new javax.swing.JComboBox<>();
 
         tblSearchFlight.setBackground(new java.awt.Color(255, 237, 218));
         tblSearchFlight.setFont(new java.awt.Font("Lucida Grande", 1, 12)); // NOI18N
@@ -102,10 +105,38 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Flight Number", "Source", "Destination", "Flight Time and Day"
+                "Flight Id", "Flight #", "Airline", "Airplane", "Source", "Destination", "Departure Date & Time", "Arrival Date & Time", "Flight Status"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblSearchFlight.setRowHeight(25);
+        tblSearchFlight.setRowMargin(3);
         jScrollPane1.setViewportView(tblSearchFlight);
+        if (tblSearchFlight.getColumnModel().getColumnCount() > 0) {
+            tblSearchFlight.getColumnModel().getColumn(0).setResizable(false);
+            tblSearchFlight.getColumnModel().getColumn(1).setResizable(false);
+            tblSearchFlight.getColumnModel().getColumn(2).setResizable(false);
+            tblSearchFlight.getColumnModel().getColumn(3).setResizable(false);
+            tblSearchFlight.getColumnModel().getColumn(4).setResizable(false);
+            tblSearchFlight.getColumnModel().getColumn(5).setResizable(false);
+            tblSearchFlight.getColumnModel().getColumn(6).setResizable(false);
+            tblSearchFlight.getColumnModel().getColumn(7).setResizable(false);
+            tblSearchFlight.getColumnModel().getColumn(8).setResizable(false);
+        }
 
         bckSearchFlight.setText("<<Back");
         bckSearchFlight.addActionListener(new java.awt.event.ActionListener() {
@@ -125,7 +156,6 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Search Flight Based on Below Options");
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Flight Number");
 
         searchFlightNumber.addActionListener(new java.awt.event.ActionListener() {
@@ -134,18 +164,13 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Source");
 
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Destination");
-
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setText("Flight Day");
 
         jLabel6.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("SEARCH FLIGHT");
+        jLabel6.setText("Master Flights List");
 
         btnSearchFlight.setText("Search Flight");
         btnSearchFlight.addActionListener(new java.awt.event.ActionListener() {
@@ -154,6 +179,32 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
             }
         });
 
+        sourceCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- None --", "Boston", "San Francisco", "Dallas", "San Jose", "Seattle", "New York", "Las Vegas", "Los Angeles", "Chicago", "Miami" }));
+
+        destinationCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- None --", "Boston", "San Francisco", "Dallas", "San Jose", "Seattle", "New York", "Las Vegas", "Los Angeles", "Chicago", "Miami" }));
+
+        jLabel5.setText("Departure Date");
+
+        jLabel7.setText("Arrival Date");
+
+        priceCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- None --", "0 - 299", "300 - 599", "600 - 899", "900 - 1199", "1200 - 1499", "1500+" }));
+
+        jLabel8.setText("Price Range");
+
+        jLabel9.setText("Preferred Day of Departure Date");
+
+        dDay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- None --", "Morning", "Afternoon", "Evening", "Night" }));
+
+        jLabel10.setText("Airline");
+
+        aDay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- None --", "Morning", "Afternoon", "Evening", "Night" }));
+
+        jLabel11.setText("Preferred Day of Arrival Date");
+
+        jLabel12.setText("Flight Status");
+
+        flightStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- None --", "Active", "Cancelled" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -161,67 +212,121 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(bckSearchFlight)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(6, 6, 6))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(searchFlightNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(searchSourceLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(searchFlightDay, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(searchDestinationLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnSearchFlight, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnBookFlight, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 72, Short.MAX_VALUE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(246, 246, 246)
+                                .addComponent(jLabel1)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(248, 248, 248)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(searchFlightNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel7)
+                                            .addComponent(jLabel8))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(sourceCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(destinationCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(dDate)
+                                            .addComponent(aDate)
+                                            .addComponent(priceCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(149, 149, 149)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel10)
+                                            .addComponent(jLabel9)
+                                            .addComponent(jLabel11)
+                                            .addComponent(jLabel12))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(airlineCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(dDay, 0, 194, Short.MAX_VALUE)
+                                            .addComponent(aDay, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(flightStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(20, 20, 20)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btnBookFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btnSearchFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(333, 333, 333)
+                                .addComponent(jLabel6))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(bckSearchFlight)))
+                        .addGap(0, 145, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(bckSearchFlight)
-                    .addComponent(jLabel6))
-                .addGap(14, 14, 14)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bckSearchFlight)
+                .addGap(32, 32, 32)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchFlightNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchSourceLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(sourceCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchDestinationLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(destinationCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchFlightDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(aDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(priceCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(aDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(airlineCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(flightStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
                 .addComponent(btnSearchFlight)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnBookFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -251,6 +356,75 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
     private void btnSearchFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchFlightActionPerformed
         // TODO add your handling code here:
         //Flight Number
+        
+        int notBlankCount = 0;
+        String fNum, sourceCity, destCity, price, depDay, arrDay, fStatus = "";
+        
+        fNum = searchFlightNumber.getText();
+        sourceCity = sourceCombo.getSelectedItem().toString();
+        destCity = destinationCombo.getSelectedItem().toString();
+        LocalDate depDate = LocalDate.parse(dDate.getText());
+        LocalDate arrDate = LocalDate.parse(aDate.getText());
+        price = priceCombo.getSelectedItem().toString();
+        depDay = dDay.getSelectedItem().toString();
+        arrDay = aDay.getSelectedItem().toString();
+        Airliner airlineName = (Airliner) airlineCombo.getSelectedItem();
+        fStatus = flightStatus.getSelectedItem().toString();
+        
+        if(!("".equals(fNum))) {
+            System.out.println("INSIDE1>>>>");
+            notBlankCount++;
+        }
+        if(!("-- None --".equals(sourceCity))) {
+            System.out.println("INSIDE2>>>>");
+            notBlankCount++;
+        }
+        if(!("-- None --".equals(destCity))) {
+            System.out.println("INSIDE3>>>>");
+            notBlankCount++;
+        }
+        if(!("".equals(dDate.getText()))) {
+            System.out.println("INSIDE4>>>>");
+            notBlankCount++;
+        }
+        if(!("".equals(aDate.getText()))) {
+            System.out.println("INSIDE5>>>>");
+            notBlankCount++;
+        }
+        if(!("-- None --".equals(priceCombo.getSelectedItem().toString()))) {
+            System.out.println("INSIDE6>>>>");
+            notBlankCount++;
+        }
+        if(!("-- None --".equals(dDay.getSelectedItem().toString()))) {
+            System.out.println("INSIDE7>>>>");
+            notBlankCount++;
+        }
+        if(!("-- None --".equals(aDay.getSelectedItem().toString()))) {
+            System.out.println("INSIDE8>>>>");
+            notBlankCount++;
+        }
+        if(null != airlineCombo.getSelectedItem()) {
+            System.out.println("INSIDE9>>>>");
+            notBlankCount++;
+        }
+        if(!("-- None --".equals(flightStatus.getSelectedItem().toString()))) {
+            System.out.println("INSIDE10>>>>");
+            notBlankCount++;
+        }
+        
+        System.out.println("COUNT1 >>>> " + notBlankCount);
+        
+        masterFlightList = masterTravelSchedule.searchFlight(fNum, sourceCity, destCity, depDate, arrDate, price, depDay, arrDay, airlineName, fStatus, notBlankCount);
+        DefaultTableModel dtm = (DefaultTableModel) tblSearchFlight.getModel();
+        dtm.setRowCount(0);
+        for (Flight f : masterFlightList) {
+            Object[] row = new Object[dtm.getColumnCount()];
+            row[0] = f;
+            row[1] = f.getFlightSchedule().getSource();
+            row[2] = f.getFlightSchedule().getDestination();
+            dtm.addRow(row);
+        }
+        /*
          searchTxtFlight = searchFlightNumber.getText();
          source = searchSourceLocation.getText();
          destination = searchDestinationLocation.getText();
@@ -267,9 +441,10 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
         } else {
             populateSearch();
         }
+        */
     }//GEN-LAST:event_btnSearchFlightActionPerformed
     private void populateSearch() {
-        DefaultTableModel dtm = (DefaultTableModel) tblSearchFlight.getModel();
+        /*DefaultTableModel dtm = (DefaultTableModel) tblSearchFlight.getModel();
         dtm.setRowCount(0);
         for (Flight f : masterTravelSchedule.searchFlight(searchTxtFlight, source, destination)) {
             Object[] row = new Object[dtm.getColumnCount()];
@@ -293,25 +468,37 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
         }
           System.out.println("---------SEARCHED FLIGHTS------------");
           System.out.println("===>> SEARCHED FLIGHT" + masterTravelSchedule.searchFlight(searchTxtFlight, source, destination));
-           
+           */
 
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField aDate;
+    private javax.swing.JComboBox<String> aDay;
+    private javax.swing.JComboBox<Airliner> airlineCombo;
     private javax.swing.JButton bckSearchFlight;
     private javax.swing.JButton btnBookFlight;
     private javax.swing.JButton btnSearchFlight;
+    private javax.swing.JTextField dDate;
+    private javax.swing.JComboBox<String> dDay;
+    private javax.swing.JComboBox<String> destinationCombo;
+    private javax.swing.JComboBox<String> flightStatus;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField searchDestinationLocation;
-    private javax.swing.JTextField searchFlightDay;
+    private javax.swing.JComboBox<String> priceCombo;
     private javax.swing.JTextField searchFlightNumber;
-    private javax.swing.JTextField searchSourceLocation;
+    private javax.swing.JComboBox<String> sourceCombo;
     private javax.swing.JTable tblSearchFlight;
     // End of variables declaration//GEN-END:variables
 }

@@ -236,6 +236,9 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
         }else if("-- None --".equals(destinationCombo.getSelectedItem())) {
             JOptionPane.showMessageDialog(null, "Destination city is mandatory");
             
+        }else if(sourceCombo.getSelectedItem().equals(destinationCombo.getSelectedItem())) {
+            JOptionPane.showMessageDialog(null, "Source and destination city cannot be same");
+            
         }else if("".equals(departureDate.getText())) {
             JOptionPane.showMessageDialog(null, "Departure date is mandatory");
             
@@ -247,9 +250,6 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
             
         }else if("".equals(arrivalTime.getText())) {
             JOptionPane.showMessageDialog(null, "Arrival time is mandatory");
-            
-        }else if(sourceCombo.getSelectedItem().equals(destinationCombo.getSelectedItem())) {
-            JOptionPane.showMessageDialog(null, "Source and destination city cannot be same");
             
         }else {            
             LocalDate dDate;

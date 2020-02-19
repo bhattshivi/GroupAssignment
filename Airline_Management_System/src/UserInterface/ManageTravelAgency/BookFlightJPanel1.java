@@ -562,43 +562,46 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
     private void selectedFlightComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectedFlightComboActionPerformed
         
         //selectedFlightCombo.getItemAt(indexCount);
-        System.out.println("---calling---");
-        int nRow = jTable1.getRowCount();
-        int count1 = 0;
-        int count2 = 0;
-        int rowCount = 0;
         
-        for(int i=0; i < nRow; i++) {           
-            if(null == jTable1.getValueAt(i, 3)) {
-                //count1++;
-            }else {
-                if((Boolean)jTable1.getValueAt(i, 3) == false) {
-                    count1++;
+        if(flightSelectedList.size() > 1) {
+            System.out.println("---calling---");
+            int nRow = jTable1.getRowCount();
+            int count1 = 0;
+            int count2 = 0;
+            int rowCount = 0;
+
+            for(int i=0; i < nRow; i++) {           
+                if(null == jTable1.getValueAt(i, 3)) {
+                    //count1++;
+                }else {
+                    if((Boolean)jTable1.getValueAt(i, 3) == false) {
+                        count1++;
+                    }
+                }
+
+                if(null == jTable1.getValueAt(i, 3)) {
+                    //count1++;
+                }else {
+                    if((Boolean)jTable1.getValueAt(i, 3) == true) {
+                        rowCount = i;
+                        count2++;
+                    }
                 }
             }
-            
-            if(null == jTable1.getValueAt(i, 3)) {
-                //count1++;
+
+            if(count1 == nRow) {
+                JOptionPane.showMessageDialog(null, "Please select a seat before procedding to next flight");
+                selectedFlightCombo.setSelectedIndex(indexCount);
+            }else if(count2 == nRow && nRow > 1) {
+                JOptionPane.showMessageDialog(null, "Please select only one seat");
+                selectedFlightCombo.setSelectedIndex(indexCount);
             }else {
-                if((Boolean)jTable1.getValueAt(i, 3) == true) {
-                    rowCount = i;
-                    count2++;
-                }
+                Seat s = (Seat)jTable1.getValueAt(rowCount, 0);
+                System.out.println( "inde count in 2--" + indexCount);
+                Flight f = (Flight)selectedFlightCombo.getItemAt(indexCount);
+                f.setSeatLock(s);
+                populateFlightDetails();
             }
-        }
-        
-        if(count1 == nRow) {
-            JOptionPane.showMessageDialog(null, "Please select a seat before procedding to next flight");
-            selectedFlightCombo.setSelectedIndex(indexCount);
-        }else if(count2 == nRow && nRow > 1) {
-            JOptionPane.showMessageDialog(null, "Please select only one seat");
-            selectedFlightCombo.setSelectedIndex(indexCount);
-        }else {
-            Seat s = (Seat)jTable1.getValueAt(rowCount, 0);
-            System.out.println( "inde count in 2--" + indexCount);
-            Flight f = (Flight)selectedFlightCombo.getItemAt(indexCount);
-            f.setSeatLock(s);
-            populateFlightDetails();
         }
         
         /*
