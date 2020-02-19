@@ -12,6 +12,7 @@ import Business.MasterTravelSchedule;
 import Business.Seat;
 import java.awt.CardLayout;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -44,6 +45,11 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
     }
 
     public void populate() {
+        airlineCombo.addItem("-- None --");
+        for(Airliner a : airlineDirectory.getAirlinerList()) {
+            airlineCombo.addItem(a.getAirlinerName());
+        }
+        
         DefaultTableModel dtm = (DefaultTableModel) tblSearchFlight.getModel();
         dtm.setRowCount(0);
         for(Flight f : masterTravelSchedule.getMasterFlightList()) {
@@ -363,12 +369,12 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
         fNum = searchFlightNumber.getText();
         sourceCity = sourceCombo.getSelectedItem().toString();
         destCity = destinationCombo.getSelectedItem().toString();
-        LocalDate depDate = LocalDate.parse(dDate.getText());
-        LocalDate arrDate = LocalDate.parse(aDate.getText());
+        LocalDate aDate1 = null;
+        LocalDate dDate1 = null;
         price = priceCombo.getSelectedItem().toString();
         depDay = dDay.getSelectedItem().toString();
         arrDay = aDay.getSelectedItem().toString();
-        Airliner airlineName = (Airliner) airlineCombo.getSelectedItem();
+        String airlineName = airlineCombo.getSelectedItem().toString();
         fStatus = flightStatus.getSelectedItem().toString();
         
         if(!("".equals(fNum))) {
@@ -384,12 +390,26 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
             notBlankCount++;
         }
         if(!("".equals(dDate.getText()))) {
-            System.out.println("INSIDE4>>>>");
-            notBlankCount++;
+            
+            try{
+                dDate1 = LocalDate.parse(dDate.getText());
+                System.out.println("INSIDE4>>>>");
+                notBlankCount++;
+            }catch(DateTimeParseException e){
+                JOptionPane.showMessageDialog(null, "Please enter a valid Departure date in YYYY-MM-DD format");
+                return;
+            } 
         }
         if(!("".equals(aDate.getText()))) {
-            System.out.println("INSIDE5>>>>");
-            notBlankCount++;
+            
+            try{
+                aDate1 = LocalDate.parse(aDate.getText());
+                System.out.println("INSIDE5>>>>");
+                notBlankCount++;
+            }catch(DateTimeParseException e){
+                JOptionPane.showMessageDialog(null, "Please enter a valid Arrival date in YYYY-MM-DD format");
+                return;
+            } 
         }
         if(!("-- None --".equals(priceCombo.getSelectedItem().toString()))) {
             System.out.println("INSIDE6>>>>");
@@ -403,7 +423,7 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
             System.out.println("INSIDE8>>>>");
             notBlankCount++;
         }
-        if(null != airlineCombo.getSelectedItem()) {
+        if(!("-- None --".equals(airlineCombo.getSelectedItem().toString()))) {
             System.out.println("INSIDE9>>>>");
             notBlankCount++;
         }
@@ -412,18 +432,42 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
             notBlankCount++;
         }
         
-        System.out.println("COUNT1 >>>> " + notBlankCount);
         
-        masterFlightList = masterTravelSchedule.searchFlight(fNum, sourceCity, destCity, depDate, arrDate, price, depDay, arrDay, airlineName, fStatus, notBlankCount);
+        
+        
+
+        
+        
+        System.out.println("COUNT1 >>>> " + notBlankCount);
+        System.out.println("MMMM1 >>>> " + fNum);
+        System.out.println("MMMM1 >>>> " + sourceCity);
+        System.out.println("MMMM1 >>>> " + destCity);
+        System.out.println("MMMM1 >>>> " + dDate1);
+        System.out.println("MMMM1 >>>> " + aDate1);
+        System.out.println("MMMM1 >>>> " + price);
+        System.out.println("MMMM1 >>>> " + depDay);
+        System.out.println("MMMM1 >>>> " + arrDay);
+        System.out.println("MMMM1 >>>> " + airlineName);
+        System.out.println("MMMM1 >>>> " + fStatus);
+        
+        
+        masterFlightList = masterTravelSchedule.searchFlight(fNum, sourceCity, destCity, dDate1, aDate1, price, depDay, arrDay, airlineName, fStatus, notBlankCount);
         DefaultTableModel dtm = (DefaultTableModel) tblSearchFlight.getModel();
         dtm.setRowCount(0);
         for (Flight f : masterFlightList) {
             Object[] row = new Object[dtm.getColumnCount()];
-            row[0] = f;
-            row[1] = f.getFlightSchedule().getSource();
-            row[2] = f.getFlightSchedule().getDestination();
+            row[0]= f;
+            row[1]= f.getFlightName();
+            row[2]= f.getAirliner();
+            row[3]= f.getAirplane();
+            row[4]= f.getFlightSchedule().getSource();
+            row[5]= f.getFlightSchedule().getDestination();
+            row[6]= f.getFlightSchedule().getDepartureDate() + "; " + f.getFlightSchedule().getDepartureTime();
+            row[7]= f.getFlightSchedule().getArrivalDate() + "; " + f.getFlightSchedule().getArrivalTime();
+            row[8]= (f.isIsActive()? "Active" : "Cancelled");
             dtm.addRow(row);
         }
+        
         /*
          searchTxtFlight = searchFlightNumber.getText();
          source = searchSourceLocation.getText();
@@ -475,7 +519,7 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField aDate;
     private javax.swing.JComboBox<String> aDay;
-    private javax.swing.JComboBox<Airliner> airlineCombo;
+    private javax.swing.JComboBox<String> airlineCombo;
     private javax.swing.JButton bckSearchFlight;
     private javax.swing.JButton btnBookFlight;
     private javax.swing.JButton btnSearchFlight;

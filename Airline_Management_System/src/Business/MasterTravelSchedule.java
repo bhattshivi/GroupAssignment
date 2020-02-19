@@ -111,7 +111,7 @@ public class MasterTravelSchedule {
     
     
     
-    public ArrayList<Flight> searchFlight(String flightNumber, String source, String destination, LocalDate dDate, LocalDate aDate, String price, String depDay, String arrDay, Airliner airlineName, String fStatus, int notBlankCount) {
+    public ArrayList<Flight> searchFlight(String flightNumber, String source, String destination, LocalDate dDate, LocalDate aDate, String price, String depDay, String arrDay, String airlineName, String fStatus, int notBlankCount) {
         System.out.println("FLIGHT NO :  **" + flightNumber);
         System.out.println("SOURCE NO :  **" + source);
         System.out.println("DESTINATION NO :  **" + destination);
@@ -123,7 +123,7 @@ public class MasterTravelSchedule {
         LocalTime t2 = null;
         boolean flStatus = false;
         
-        if(!("".equals(price))) {
+        if(!("-- None --".equals(price))) {
             priceRange = price.split(" ");
             System.out.println("~~~~~~ " + priceRange[0] + "===" + priceRange[2]);
         }
@@ -172,19 +172,19 @@ public class MasterTravelSchedule {
             if(null != aDate && aDate.equals(flight.getFlightSchedule().getArrivalDate())) {
                 count++;
             }
-            if(!("".equals(price)) && n >= Double.parseDouble(priceRange[0]) && n <= Double.parseDouble(priceRange[1])) {
+            if(!("-- None --".equals(price)) && n >= Double.parseDouble(priceRange[0]) && n <= Double.parseDouble(priceRange[2])) {
                 count++;
             }
-            if(!("".equals(depDay)) && flight.getFlightSchedule().getDepartureTime().isAfter(t1) && flight.getFlightSchedule().getDepartureTime().isBefore(t2)) {
+            if(!("-- None --".equals(depDay)) && flight.getFlightSchedule().getDepartureTime().isAfter(t1) && flight.getFlightSchedule().getDepartureTime().isBefore(t2)) {
                 count++;
             }
-            if(!("".equals(arrDay)) && flight.getFlightSchedule().getArrivalTime().isAfter(t1) && flight.getFlightSchedule().getArrivalTime().isBefore(t2)) {
+            if(!("-- None --".equals(arrDay)) && flight.getFlightSchedule().getArrivalTime().isAfter(t1) && flight.getFlightSchedule().getArrivalTime().isBefore(t2)) {
                 count++;
             }
-            if(null != airlineName && flight.getAirliner() == airlineName) {
+            if(!("-- None --".equals(airlineName)) && flight.getAirliner().getAirlinerName().equals(airlineName)) {
                 count++;
             }
-            if(flight.isIsActive() == flStatus) {
+            if(!("-- None --".equals(flStatus)) && flight.isIsActive() == flStatus) {
                 count++;
             }
             

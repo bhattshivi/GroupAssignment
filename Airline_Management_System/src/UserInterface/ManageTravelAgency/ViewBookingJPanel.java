@@ -37,15 +37,16 @@ public class ViewBookingJPanel extends javax.swing.JPanel {
     private ReservationDirectory reservationDirectory;
     private Reservation reservation;
     private AirplaneDirectory airplaneDirectory;
+    
     public ViewBookingJPanel(JPanel panel, AirlinerDirectory airlineDirectory,AirplaneDirectory airplaneDirectory,MasterTravelSchedule masterTravelSchedule, CustomerDirectory custDir, Customer cust, ReservationDirectory reservationDirectory, Reservation reservation) {
         this.panel = panel;
         this.airlineDirectory = airlineDirectory;
         this.masterTravelSchedule = masterTravelSchedule;
         this.custDir = custDir;
         this.cust = cust;
-        this.reservationDirectory= reservationDirectory;
+        this.reservationDirectory = reservationDirectory;
         this.reservation = reservation;
-        this.airplaneDirectory= this.airplaneDirectory;
+        this.airplaneDirectory= airplaneDirectory;
         initComponents();
         displayBooking();
     }
@@ -403,6 +404,11 @@ public class ViewBookingJPanel extends javax.swing.JPanel {
 
     private void cancelFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelFlightActionPerformed
         // TODO add your handling code here:
+        
+        
+        
+        
+        
         if(reservation.isIsBooked()){
             System.out.println("Seat Status : ## "+reservation.isIsBooked());
            Seat s =  reservation.getSeat();

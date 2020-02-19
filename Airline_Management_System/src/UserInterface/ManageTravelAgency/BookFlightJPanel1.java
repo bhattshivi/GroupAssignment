@@ -54,10 +54,17 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
         this.reservationDirectory = reservationDirectory;
         dtm = (DefaultTableModel) jTable1.getModel();
         indexCount = 0;
+        resetSeatLock();
         populateFlightCombo(); 
         populateUserCombo();
         populateFlightDetails();
         populateCustomerDetails();
+    }
+    
+    public void resetSeatLock() {
+        for(Flight f : flightSelectedList) {
+            f.setSeatLock(new Seat());
+        }
     }
     
     public void populateFlightCombo() {
@@ -719,11 +726,11 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
                     r.setCustomer((Customer)customerCombo.getSelectedItem());
                     //r.setSeat(f.getSeatLock());
                     Seat seatVal = f.getSeatLock();
-                    System.out.println("inside---- " + seatVal.getSeatName() + "--" + seatVal.getStatus());
+                    System.out.println("inside MMMMM MMMM ---- " + seatVal.getSeatName() + "--" + seatVal.getStatus());
                     seatVal.setStatus("Not Available");
                     r.setSeat(seatVal);  
                     
-                    
+                    f.setSeatLock(new Seat());
                     
                     reservationDirectory.addReservation(r);
                 }
@@ -769,11 +776,14 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
         
         
         for(Reservation r : reservationDirectory.getReservationList()) {
+            System.out.println("------ RESERVATION ----------");
             System.out.println(r.getFlight().getFlightName());
             System.out.println(r.getFlight().getFlightSchedule().getSource());
             System.out.println(r.getFlight().getFlightSchedule().getDestination());
             System.out.println(r.getSeat().getSeatName());
             System.out.println(r.getReservationId());
+            System.out.println(r.isIsBooked());
+            System.out.println("------ RESERVATION END ----------");
             //System.out.println(r);
             //System.out.println(r);
             //System.out.println(r);
