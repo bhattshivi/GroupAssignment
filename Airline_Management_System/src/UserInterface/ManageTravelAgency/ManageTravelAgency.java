@@ -158,7 +158,11 @@ public class ManageTravelAgency extends javax.swing.JPanel {
     }//GEN-LAST:event_viewFlightsBtnActionPerformed
 
     private void btnManageBooking1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageBooking1ActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here
+        ManageBookingJPanel manageBookingJPanel = new ManageBookingJPanel( this.panel,  airlineDirectory,airplaneDirectory, masterTravelSchedule,  custDir,  cust,  reservationDirectory,  reservation);
+        this.panel.add(manageBookingJPanel, "ManageBookingJPanel");
+        CardLayout layout = (CardLayout) panel.getLayout();
+        layout.next(panel);
     }//GEN-LAST:event_btnManageBooking1ActionPerformed
 
 

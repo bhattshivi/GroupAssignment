@@ -6,12 +6,14 @@
 package UserInterface.ManageTravelAgency;
 
 import Business.AirlinerDirectory;
+import Business.AirplaneDirectory;
 import Business.Customer;
 import Business.CustomerDirectory;
 import Business.MasterTravelSchedule;
 import Business.Reservation;
 import Business.ReservationDirectory;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -31,9 +33,10 @@ public class ManageBookingJPanel extends javax.swing.JPanel {
     private Customer cust;
     private ReservationDirectory reservationDirectory;
     private Reservation reservation;
+    private AirplaneDirectory airplaneDirectory;
  
-    public ManageBookingJPanel(JPanel panel, AirlinerDirectory airlineDirectory,MasterTravelSchedule masterTravelSchedule, CustomerDirectory custDir, Customer cust, ReservationDirectory reservationDirectory, Reservation reservation) {
-       
+    public ManageBookingJPanel(JPanel panel, AirlinerDirectory airlineDirectory,AirplaneDirectory airplaneDirectory,MasterTravelSchedule masterTravelSchedule, CustomerDirectory custDir, Customer cust, ReservationDirectory reservationDirectory, Reservation reservation) {
+        
         this.panel = panel;
         this.airlineDirectory = airlineDirectory;
         this.masterTravelSchedule = masterTravelSchedule;
@@ -41,8 +44,10 @@ public class ManageBookingJPanel extends javax.swing.JPanel {
         this.cust = cust;
         this.reservationDirectory= reservationDirectory;
         this.reservation = reservation;
-         initComponents();
-         populateManageBooking();
+        this.airplaneDirectory =airplaneDirectory;
+        initComponents();
+        populateManageBooking();
+         
     }
 
     /**
@@ -76,7 +81,7 @@ public class ManageBookingJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Reservation ID", "Customer Name", "Flight Number"
+                "Reservation ID", "Customer Name", "Flight Number", "Booking Status"
             }
         ));
         jScrollPane1.setViewportView(tblManageBooking);
@@ -124,17 +129,30 @@ public class ManageBookingJPanel extends javax.swing.JPanel {
 
     private void bckBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bckBookingActionPerformed
         // TODO add your handling code here:
-        CardLayout layout = (CardLayout) panel.getLayout();
-        panel.remove(this);
-        layout.previous(panel);
+        ManageTravelAgency manageTravelAgency = new ManageTravelAgency( this.panel,  airlineDirectory, airplaneDirectory,  masterTravelSchedule,  custDir,  cust,  reservationDirectory,  reservation);
+        this.panel.add(manageTravelAgency, "ManageTravelAgency");
+        CardLayout layout = (CardLayout)this.panel.getLayout();
+        layout.next(panel);
     }//GEN-LAST:event_bckBookingActionPerformed
 
     private void btnViewBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewBookingActionPerformed
         // TODO add your handling code here:
-         ViewBookingJPanel viewBookingJPanel = new ViewBookingJPanel(this.panel, airlineDirectory, masterTravelSchedule,custDir,cust, reservation);
-        this.panel.add(viewBookingJPanel, "ViewBookingJPanel");
-        CardLayout layout = (CardLayout)this.panel.getLayout();
-        layout.next(panel);
+        
+          int selectedRow = tblManageBooking.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a Row to View Details!!", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+            Reservation reservation = (Reservation) tblManageBooking.getValueAt(selectedRow, 0);
+            ViewBookingJPanel viewBookingJPanel = new ViewBookingJPanel(this.panel,  airlineDirectory,airplaneDirectory, masterTravelSchedule,  custDir,  cust,  reservationDirectory,  reservation);
+            panel.add("ViewBookingJPanel", viewBookingJPanel);
+            CardLayout layout = (CardLayout) panel.getLayout();
+            layout.next(panel);
+
+        }
+//         ViewBookingJPanel viewBookingJPanel = new ViewBookingJPanel(this.panel, airlineDirectory, masterTravelSchedule,custDir,cust, reservation);
+//        this.panel.add(viewBookingJPanel, "ViewBookingJPanel");
+//        CardLayout layout = (CardLayout)this.panel.getLayout();
+//        layout.next(panel);
     }//GEN-LAST:event_btnViewBookingActionPerformed
  public void populateManageBooking() {
         DefaultTableModel dtm = (DefaultTableModel)tblManageBooking.getModel();
@@ -144,6 +162,12 @@ public class ManageBookingJPanel extends javax.swing.JPanel {
             row[0] = reservation;
             row[1] = reservation.getCustomer().getFirstName() + " " +reservation.getCustomer().getLastName();
             row[2] = reservation.getFlight().getFlightId();
+             if(reservation.getSeat().getStatus().equalsIgnoreCase("Not Available")){
+             row[3] = "Active";
+            }else if(reservation.getSeat().getStatus().equalsIgnoreCase("Available")){
+                 row[3] = "Cancelled";
+             }
+        
             dtm.addRow(row);
         }
     }

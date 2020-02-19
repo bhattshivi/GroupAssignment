@@ -10,10 +10,23 @@ package Business;
  * @author Mayank
  */
 public class Reservation {
+    private boolean isBooked;
     private Seat seat;
     private Flight flight;
     private String reservationId;
     private Customer customer;
+    
+    public Reservation(){
+        this.isBooked = true;
+    }
+
+    public boolean isIsBooked() {
+        return isBooked;
+    }
+
+    public void setIsBooked(boolean isBooked) {
+        this.isBooked = isBooked;
+    }
 
     public Seat getSeat() {
         return seat;
