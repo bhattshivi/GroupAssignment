@@ -119,7 +119,7 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
             }
         });
 
-        createGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--None--", "Male", "Female" }));
+        createGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- None --", "Male", "Female" }));
         createGender.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 createGenderActionPerformed(evt);
@@ -228,7 +228,32 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
 
     private void btnCreateCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateCustomerActionPerformed
         // TODO add your handling code here:
-
+        
+        if("".equals(createFirstName.getText())) {
+            JOptionPane.showMessageDialog(null, "First Name Cannot be empty");            
+        }else if("".equals(createLastName.getText())) {
+            JOptionPane.showMessageDialog(null, "Last Name Cannot be empty");
+        }else if("".equals(createEmailID.getText())) {
+            JOptionPane.showMessageDialog(null, "Email ID Cannot be empty");
+        }else if("".equals(createPassport.getText())) {
+            JOptionPane.showMessageDialog(null, "Passport # Cannot be empty");
+        }else if("-- None --".equals(createGender.getSelectedItem())) {
+            JOptionPane.showMessageDialog(null, "Please Select a Gender");
+        }else {
+            Customer customer = new Customer();
+            customer.setFirstName(createFirstName.getText());
+            customer.setLastName(createLastName.getText());
+            customer.setEmailId(createEmailID.getText());
+            customer.setPassportNum(createPassport.getText());
+            customer.setGender(createGender.getSelectedItem().toString());
+            custDir.addCustomer(customer);
+            JOptionPane.showMessageDialog(null, "Customer Created Successfully");
+            clearFields();
+        }
+        
+        
+        
+        /*
        String firstName =createFirstName.getText();
    
         if (firstName.isEmpty() ) {
@@ -282,7 +307,7 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
         
         JOptionPane.showMessageDialog(null, "Customer Created Successfully");
         clearFields();
-  
+  */
 
 
     }//GEN-LAST:event_btnCreateCustomerActionPerformed
@@ -293,15 +318,13 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
         createLastName.setText("");
         createEmailID.setText("");
         createPassport.setText("");
-        //gender.replace(gender, "-- None --");
-        //gender.contains("-- None --");
-        createGender.setSelectedItem(gender);
+        createGender.setSelectedItem("-- None --");
     }
 
     private void createGenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createGenderActionPerformed
         // TODO add your handling code here:
 
-         gender = (String) createGender.getSelectedItem();                                          
+         //gender = (String) createGender.getSelectedItem();                                          
 
     }//GEN-LAST:event_createGenderActionPerformed
 

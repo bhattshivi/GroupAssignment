@@ -6,6 +6,7 @@
 package UserInterface.ManageTravelAgency;
 
 import Business.AirlinerDirectory;
+import Business.Airplane;
 import Business.Customer;
 import Business.CustomerDirectory;
 
@@ -187,10 +188,12 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
         if (selectedRow < 0) {
             JOptionPane.showMessageDialog(null, "Please select a Row to Update Details!!", "Warning", JOptionPane.WARNING_MESSAGE);
         } else {
-        UpdateCustomerJPanel updateCustomerJPanel = new UpdateCustomerJPanel(this.panel, airlineDirectory, custDir, cust);
-        this.panel.add(updateCustomerJPanel, "UpdateCustomerJPanel");
-        CardLayout layout = (CardLayout)this.panel.getLayout();
-        layout.next(panel);
+            Customer customer = (Customer)tblManageCust.getValueAt(selectedRow, 0);
+            
+            UpdateCustomerJPanel updateCustomerJPanel = new UpdateCustomerJPanel(this.panel, airlineDirectory, custDir, customer);
+            this.panel.add(updateCustomerJPanel, "UpdateCustomerJPanel");
+            CardLayout layout = (CardLayout)this.panel.getLayout();
+            layout.next(panel);
         }
     }//GEN-LAST:event_btnUpdateCustomerActionPerformed
 
