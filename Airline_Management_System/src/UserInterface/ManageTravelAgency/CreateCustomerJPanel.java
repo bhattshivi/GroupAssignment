@@ -228,7 +228,7 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
 
     private void btnCreateCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateCustomerActionPerformed
         // TODO add your handling code here:
-//
+
        String firstName =createFirstName.getText();
    
         if (firstName.isEmpty() ) {
