@@ -190,10 +190,13 @@ public class UpdateAirliner extends javax.swing.JPanel {
 
     private void backUpdateAirlinerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backUpdateAirlinerActionPerformed
         // TODO add your handling code here:
-        AddAirline addAirline = new AddAirline(this.panel,  airlineDirectory,  airplaneDirectory,  masterTravelSchedule);
-        this.panel.add(addAirline, "AddAirline");
-        CardLayout layout = (CardLayout)this.panel.getLayout();
-        layout.next(panel);
+//        AddAirline addAirline = new AddAirline(this.panel,  airlineDirectory,  airplaneDirectory,  masterTravelSchedule);
+//        this.panel.add(addAirline, "AddAirline");
+//        CardLayout layout = (CardLayout)this.panel.getLayout();
+//        layout.next(panel);
+        this.panel.remove(this);
+        CardLayout layout = (CardLayout) this.panel.getLayout();
+        layout.previous(panel);
     }//GEN-LAST:event_backUpdateAirlinerActionPerformed
     
 

@@ -191,10 +191,13 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
 
     private void bkCreateCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bkCreateCustomerActionPerformed
         // TODO add your handling code here:
-        ManageCustomerJPanel manageCustomerJPanel = new ManageCustomerJPanel(this.panel, airlineDirectory, custDir ,cust);
-        this.panel.add(manageCustomerJPanel, "ManageCustomerJPanel");
-        CardLayout layout = (CardLayout)this.panel.getLayout();
-        layout.next(panel);
+//        ManageCustomerJPanel manageCustomerJPanel = new ManageCustomerJPanel(this.panel, airlineDirectory, custDir ,cust);
+//        this.panel.add(manageCustomerJPanel, "ManageCustomerJPanel");
+//        CardLayout layout = (CardLayout)this.panel.getLayout();
+//        layout.next(panel);
+        this.panel.remove(this);
+        CardLayout layout = (CardLayout) this.panel.getLayout();
+        layout.previous(panel);
     }//GEN-LAST:event_bkCreateCustomerActionPerformed
 
     private void createFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createFirstNameActionPerformed

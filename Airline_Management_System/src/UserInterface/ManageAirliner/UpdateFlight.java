@@ -381,6 +381,15 @@ public class UpdateFlight extends javax.swing.JPanel {
         });
 
         btnBackUpdateFlight.setText("<<<Back");
+        btnBackUpdateFlight.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                btnBackUpdateFlightAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         btnBackUpdateFlight.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackUpdateFlightActionPerformed(evt);
@@ -658,11 +667,22 @@ public class UpdateFlight extends javax.swing.JPanel {
 
     private void btnBackUpdateFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackUpdateFlightActionPerformed
         // TODO add your handling code here:
-        AirlinerFunction airLinerFunction = new AirlinerFunction(this.panel,  airlineDirectory,  airplaneDirectory,  airliner,  masterTravelSchedule);
-        this.panel.add(airLinerFunction, "AirlinerFunction");
-        CardLayout layout = (CardLayout)this.panel.getLayout();
-        layout.next(panel);
+//        AirlinerFunction airLinerFunction = new AirlinerFunction(this.panel,  airlineDirectory,  airplaneDirectory,  airliner,  masterTravelSchedule);
+//        this.panel.add(airLinerFunction, "AirlinerFunction");
+//        CardLayout layout = (CardLayout)this.panel.getLayout();
+//        layout.next(panel);
+        this.panel.remove(this);
+        CardLayout layout = (CardLayout) this.panel.getLayout();
+        layout.previous(panel);
+
     }//GEN-LAST:event_btnBackUpdateFlightActionPerformed
+
+    private void btnBackUpdateFlightAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_btnBackUpdateFlightAncestorAdded
+        // TODO add your handling code here:
+        populateAirplanes();
+        populateFlightSchedules();
+        populateFlightDetails();
+    }//GEN-LAST:event_btnBackUpdateFlightAncestorAdded
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -67,6 +67,16 @@ public class AddAirline extends javax.swing.JPanel {
         updateAirlineBtn = new javax.swing.JButton();
         btnBackManageAirline = new javax.swing.JButton();
 
+        addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                formAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
         tblManageAirliners.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -175,10 +185,13 @@ public class AddAirline extends javax.swing.JPanel {
         CardLayout layout = (CardLayout)this.panel.getLayout();
         layout.next(panel);*/
         
-        ManageAirliners manageAirliners = new ManageAirliners(this.panel,  airlineDirectory,  airplaneDirectory,  masterTravelSchedule);
-        this.panel.add(manageAirliners, "ManageAirliners");
-        CardLayout layout = (CardLayout)this.panel.getLayout();
-        layout.next(panel);
+//        ManageAirliners manageAirliners = new ManageAirliners(this.panel,  airlineDirectory,  airplaneDirectory,  masterTravelSchedule);
+//        this.panel.add(manageAirliners, "ManageAirliners");
+//        CardLayout layout = (CardLayout)this.panel.getLayout();
+//        layout.next(panel);
+        this.panel.remove(this);
+        CardLayout layout = (CardLayout) this.panel.getLayout();
+        layout.previous(panel);
     }//GEN-LAST:event_btnBackManageAirlineActionPerformed
 
     private void updateAirlineBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateAirlineBtnActionPerformed
@@ -194,6 +207,11 @@ public class AddAirline extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please select an Airliner");
         }
     }//GEN-LAST:event_updateAirlineBtnActionPerformed
+
+    private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
+        // TODO add your handling code here:
+        populateAirliners();
+    }//GEN-LAST:event_formAncestorAdded
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

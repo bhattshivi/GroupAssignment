@@ -190,10 +190,13 @@ public class CreateAirplanes extends javax.swing.JPanel {
 
     private void backCreateAirplaneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backCreateAirplaneActionPerformed
         // TODO add your handling code here:
-        ManageAirplanes createAirplanePanel = new ManageAirplanes(this.panel,  airlineDirectory,  airplaneDirectory,  airliner,  masterTravelSchedule);
-        this.panel.add(createAirplanePanel, "CreateAirplane");
-        CardLayout layout = (CardLayout)this.panel.getLayout();
-        layout.next(panel);
+//        ManageAirplanes createAirplanePanel = new ManageAirplanes(this.panel,  airlineDirectory,  airplaneDirectory,  airliner,  masterTravelSchedule);
+//        this.panel.add(createAirplanePanel, "CreateAirplane");
+//        CardLayout layout = (CardLayout)this.panel.getLayout();
+//        layout.next(panel);
+        this.panel.remove(this);
+        CardLayout layout = (CardLayout) this.panel.getLayout();
+        layout.previous(panel);
     }//GEN-LAST:event_backCreateAirplaneActionPerformed
 
     private void clearFields() {

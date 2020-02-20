@@ -24,21 +24,14 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="232" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="airlinerComboBox" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                               <Component id="continueBtn" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="257" max="-2" attributes="0"/>
-                      <Component id="airlinerComboBox" min="-2" pref="159" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnBackTravelAgency" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="175" max="32767" attributes="0"/>
@@ -48,9 +41,7 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-              <Component id="btnBackTravelAgency" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -97,14 +88,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Welcome to Airline Management"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnBackTravelAgency">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="&lt;Back"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBackTravelAgencyActionPerformed"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -108,6 +108,15 @@ public class CreateFlight extends javax.swing.JPanel {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Available", "Not Available" }));
 
         setPreferredSize(new java.awt.Dimension(950, 650));
+        addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                formAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Flight Details"));
 
@@ -591,11 +600,19 @@ public class CreateFlight extends javax.swing.JPanel {
 
     private void btnBackAddFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackAddFlightActionPerformed
         // TODO add your handling code here:
-        AirlinerFunction airLinerFunction = new AirlinerFunction(this.panel,  airlineDirectory,  airplaneDirectory,  airliner,  masterTravelSchedule);
-        this.panel.add(airLinerFunction, "AirlinerFunction");
-        CardLayout layout = (CardLayout)this.panel.getLayout();
-        layout.next(panel);
+//        AirlinerFunction airLinerFunction = new AirlinerFunction(this.panel,  airlineDirectory,  airplaneDirectory,  airliner,  masterTravelSchedule);
+//        this.panel.add(airLinerFunction, "AirlinerFunction");
+//        CardLayout layout = (CardLayout)this.panel.getLayout();
+//        layout.next(panel);
+        this.panel.remove(this);
+        CardLayout layout = (CardLayout) this.panel.getLayout();
+        layout.previous(panel);
     }//GEN-LAST:event_btnBackAddFlightActionPerformed
+
+    private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
+        // TODO add your handling code here:
+        populateAirplanes();
+    }//GEN-LAST:event_formAncestorAdded
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

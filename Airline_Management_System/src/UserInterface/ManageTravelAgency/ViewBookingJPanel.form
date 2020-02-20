@@ -68,6 +68,7 @@
         <Property name="text" type="java.lang.String" value="&lt;&lt;Back"/>
       </Properties>
       <Events>
+        <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="bckViewBookingAncestorAdded"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bckViewBookingActionPerformed"/>
       </Events>
     </Component>

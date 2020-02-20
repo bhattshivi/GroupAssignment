@@ -74,6 +74,15 @@ public class UpdateCustomerJPanel extends javax.swing.JPanel {
         updateGender = new javax.swing.JComboBox<>();
 
         bkUpdateCustomer.setText("<<Back");
+        bkUpdateCustomer.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                bkUpdateCustomerAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         bkUpdateCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bkUpdateCustomerActionPerformed(evt);
@@ -231,10 +240,13 @@ public class UpdateCustomerJPanel extends javax.swing.JPanel {
 
     private void bkUpdateCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bkUpdateCustomerActionPerformed
         // TODO add your handling code here:
-        ManageCustomerJPanel manageCustomerJPanel = new ManageCustomerJPanel(this.panel, airlineDirectory, custDir, cust);
-        this.panel.add(manageCustomerJPanel, "ManageCustomerJPanel");
-        CardLayout layout = (CardLayout)this.panel.getLayout();
-        layout.next(panel);
+//        ManageCustomerJPanel manageCustomerJPanel = new ManageCustomerJPanel(this.panel, airlineDirectory, custDir, cust);
+//        this.panel.add(manageCustomerJPanel, "ManageCustomerJPanel");
+//        CardLayout layout = (CardLayout)this.panel.getLayout();
+//        layout.next(panel);
+         this.panel.remove(this);
+        CardLayout layout = (CardLayout) this.panel.getLayout();
+        layout.previous(panel);
     }//GEN-LAST:event_bkUpdateCustomerActionPerformed
 
     private void btnUpdateCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCustomerActionPerformed
@@ -309,6 +321,11 @@ public class UpdateCustomerJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         gender = (String) updateGender.getSelectedItem();   
     }//GEN-LAST:event_updateGenderActionPerformed
+
+    private void bkUpdateCustomerAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_bkUpdateCustomerAncestorAdded
+        // TODO add your handling code here:
+        displayProduct();
+    }//GEN-LAST:event_bkUpdateCustomerAncestorAdded
 
      private void setAllEnabled(boolean b) {
         updateFirstName.setEnabled(b);

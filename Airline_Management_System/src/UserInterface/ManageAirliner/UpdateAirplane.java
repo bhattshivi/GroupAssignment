@@ -69,6 +69,16 @@ public class UpdateAirplane extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         backUpdateAirplane = new javax.swing.JButton();
 
+        addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                formAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
         jLabel1.setText("Airplane Name *");
 
         jLabel2.setText("# of Rows *");
@@ -200,11 +210,19 @@ public class UpdateAirplane extends javax.swing.JPanel {
 
     private void backUpdateAirplaneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backUpdateAirplaneActionPerformed
         // TODO add your handling code here:
-        ManageAirplanes createAirplanePanel = new ManageAirplanes(this.panel,  airlineDirectory,  airplaneDirectory,  airliner,  masterTravelSchedule);
-        this.panel.add(createAirplanePanel, "CreateAirplane");
-        CardLayout layout = (CardLayout)this.panel.getLayout();
-        layout.next(panel);
+//        ManageAirplanes createAirplanePanel = new ManageAirplanes(this.panel,  airlineDirectory,  airplaneDirectory,  airliner,  masterTravelSchedule);
+//        this.panel.add(createAirplanePanel, "CreateAirplane");
+//        CardLayout layout = (CardLayout)this.panel.getLayout();
+//        layout.next(panel);
+        this.panel.remove(this);
+        CardLayout layout = (CardLayout) this.panel.getLayout();
+        layout.previous(panel);
     }//GEN-LAST:event_backUpdateAirplaneActionPerformed
+
+    private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
+        // TODO add your handling code here:
+         populateAirplaneDetails();
+    }//GEN-LAST:event_formAncestorAdded
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

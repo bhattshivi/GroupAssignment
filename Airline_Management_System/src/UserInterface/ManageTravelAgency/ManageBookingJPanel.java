@@ -66,6 +66,15 @@ public class ManageBookingJPanel extends javax.swing.JPanel {
         btnViewBooking = new javax.swing.JButton();
 
         bckBooking.setText("<Back");
+        bckBooking.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                bckBookingAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         bckBooking.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bckBookingActionPerformed(evt);
@@ -129,10 +138,13 @@ public class ManageBookingJPanel extends javax.swing.JPanel {
 
     private void bckBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bckBookingActionPerformed
         // TODO add your handling code here:
-        ManageTravelAgency manageTravelAgency = new ManageTravelAgency( this.panel,  airlineDirectory, airplaneDirectory,  masterTravelSchedule,  custDir,  cust,  reservationDirectory,  reservation);
-        this.panel.add(manageTravelAgency, "ManageTravelAgency");
-        CardLayout layout = (CardLayout)this.panel.getLayout();
-        layout.next(panel);
+//        ManageTravelAgency manageTravelAgency = new ManageTravelAgency( this.panel,  airlineDirectory, airplaneDirectory,  masterTravelSchedule,  custDir,  cust,  reservationDirectory,  reservation);
+//        this.panel.add(manageTravelAgency, "ManageTravelAgency");
+//        CardLayout layout = (CardLayout)this.panel.getLayout();
+//        layout.next(panel);
+        this.panel.remove(this);
+        CardLayout layout = (CardLayout) this.panel.getLayout();
+        layout.previous(panel);
     }//GEN-LAST:event_bckBookingActionPerformed
 
     private void btnViewBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewBookingActionPerformed
@@ -154,6 +166,11 @@ public class ManageBookingJPanel extends javax.swing.JPanel {
 //        CardLayout layout = (CardLayout)this.panel.getLayout();
 //        layout.next(panel);
     }//GEN-LAST:event_btnViewBookingActionPerformed
+
+    private void bckBookingAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_bckBookingAncestorAdded
+        // TODO add your handling code here:
+        populateManageBooking();
+    }//GEN-LAST:event_bckBookingAncestorAdded
  public void populateManageBooking() {
         DefaultTableModel dtm = (DefaultTableModel)tblManageBooking.getModel();
         dtm.setRowCount(0);

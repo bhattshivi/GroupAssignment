@@ -127,6 +127,15 @@ public class ViewBookingJPanel extends javax.swing.JPanel {
         viewSeatStatus = new javax.swing.JLabel();
 
         bckViewBooking.setText("<<Back");
+        bckViewBooking.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                bckViewBookingAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         bckViewBooking.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bckViewBookingActionPerformed(evt);
@@ -396,10 +405,14 @@ public class ViewBookingJPanel extends javax.swing.JPanel {
 //        layout.previous(panel);
 
         //panel.remove(this);
-         ManageBookingJPanel manageBookingJPanel1 = new ManageBookingJPanel( this.panel,  airlineDirectory,airplaneDirectory, masterTravelSchedule,  custDir,  cust,  reservationDirectory,  reservation);
-        this.panel.add(manageBookingJPanel1, "ManageBookingJPanel1");
-        CardLayout layout = (CardLayout) panel.getLayout();
-        layout.next(panel);
+//         ManageBookingJPanel manageBookingJPanel1 = new ManageBookingJPanel( this.panel,  airlineDirectory,airplaneDirectory, masterTravelSchedule,  custDir,  cust,  reservationDirectory,  reservation);
+//        this.panel.add(manageBookingJPanel1, "ManageBookingJPanel1");
+//        CardLayout layout = (CardLayout) panel.getLayout();
+//        layout.next(panel);
+
+         this.panel.remove(this);
+        CardLayout layout = (CardLayout) this.panel.getLayout();
+        layout.previous(panel);
     }//GEN-LAST:event_bckViewBookingActionPerformed
 
     private void cancelFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelFlightActionPerformed
@@ -424,6 +437,11 @@ public class ViewBookingJPanel extends javax.swing.JPanel {
         this.viewBooking.setFont(new Font("Lucida Grande", Font.BOLD, 14));
          JOptionPane.showMessageDialog(null, "Booking Cancelled Successfully", "Warning", JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_cancelFlightActionPerformed
+
+    private void bckViewBookingAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_bckViewBookingAncestorAdded
+        // TODO add your handling code here:
+        displayBooking();
+    }//GEN-LAST:event_bckViewBookingAncestorAdded
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

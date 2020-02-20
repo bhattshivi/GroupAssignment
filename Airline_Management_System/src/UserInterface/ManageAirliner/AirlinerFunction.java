@@ -76,6 +76,16 @@ public class AirlinerFunction extends javax.swing.JPanel {
         updateFlightBtn = new javax.swing.JButton();
         backFlightList = new javax.swing.JButton();
 
+        addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                formAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
         manageAirplaneBtn.setText("Manage Airplane");
         manageAirplaneBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -250,11 +260,19 @@ public class AirlinerFunction extends javax.swing.JPanel {
 
     private void backFlightListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backFlightListActionPerformed
         // TODO add your handling code here:
-        ManageAirliners manageAirliners = new ManageAirliners(this.panel,  airlineDirectory,  airplaneDirectory,  masterTravelSchedule);
-        this.panel.add(manageAirliners, "ManageAirliners");
-        CardLayout layout = (CardLayout)this.panel.getLayout();
-        layout.next(panel);
+//        ManageAirliners manageAirliners = new ManageAirliners(this.panel,  airlineDirectory,  airplaneDirectory,  masterTravelSchedule);
+//        this.panel.add(manageAirliners, "ManageAirliners");
+//        CardLayout layout = (CardLayout)this.panel.getLayout();
+//        layout.next(panel);
+        this.panel.remove(this);
+        CardLayout layout = (CardLayout) this.panel.getLayout();
+        layout.previous(panel);
     }//GEN-LAST:event_backFlightListActionPerformed
+
+    private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
+        // TODO add your handling code here:
+        populateAirlineFlights();
+    }//GEN-LAST:event_formAncestorAdded
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

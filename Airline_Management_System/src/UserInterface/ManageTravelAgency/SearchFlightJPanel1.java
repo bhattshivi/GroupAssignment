@@ -194,10 +194,22 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
         tblMultiCity = new javax.swing.JTable();
         addRow = new javax.swing.JButton();
         deleteRow = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        btnBackSearchFlights = new javax.swing.JButton();
 
         sourceCombo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boston", "San Francisco", "Dallas", "San Jose", "Seattle", "New York", "Las Vegas", "Los Angeles", "Chicago", "Miami" }));
 
         destinationCombo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boston", "San Francisco", "Dallas", "San Jose", "Seattle", "New York", "Las Vegas", "Los Angeles", "Chicago", "Miami" }));
+
+        addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                formAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         flightSearchOptions.add(oneWayRB);
         oneWayRB.setSelected(true);
@@ -442,12 +454,23 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("FIND FLIGHTS");
+
+        btnBackSearchFlights.setText("<Back");
+        btnBackSearchFlights.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackSearchFlightsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(131, 131, 131)
                         .addComponent(oneWayRB)
@@ -472,13 +495,22 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
                         .addGap(310, 310, 310)
                         .addComponent(searchFlight)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)))
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnBackSearchFlights)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(109, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(73, 73, 73)
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3)
+                    .addComponent(btnBackSearchFlights))
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(oneWayRB)
                     .addComponent(roundTripRB)
@@ -499,7 +531,7 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1879, Short.MAX_VALUE))
+                .addContainerGap(1878, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -929,6 +961,22 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please select a row to remove");
         }
     }//GEN-LAST:event_deleteRowActionPerformed
+
+    private void btnBackSearchFlightsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackSearchFlightsActionPerformed
+        // TODO add your handling code here:
+        this.panel.remove(this);
+        CardLayout layout = (CardLayout) this.panel.getLayout();
+        layout.previous(panel);
+        
+    }//GEN-LAST:event_btnBackSearchFlightsActionPerformed
+
+    private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
+        // TODO add your handling code here:
+        populate();
+        hideTables();
+        hideRoundTripFields();
+        hideMulticityFields();
+    }//GEN-LAST:event_formAncestorAdded
     
     private void populateSearch() {
         /*DefaultTableModel dtm = (DefaultTableModel) tblSearchFlight.getModel();
@@ -948,6 +996,7 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addRow;
+    private javax.swing.JButton btnBackSearchFlights;
     private javax.swing.JButton deleteRow;
     private javax.swing.JTextField departingDate;
     private javax.swing.JComboBox<String> destinationCombo;
@@ -956,6 +1005,7 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;

@@ -175,6 +175,18 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
         jLabel16 = new javax.swing.JLabel();
         custIdTxt = new javax.swing.JTextField();
         bookTicket = new javax.swing.JButton();
+        btnBackBookFlight = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
+
+        addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                formAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         selectedFlightCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -454,6 +466,17 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
             }
         });
 
+        btnBackBookFlight.setText("<<Back");
+        btnBackBookFlight.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackBookFlightActionPerformed(evt);
+            }
+        });
+
+        jLabel17.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setText("BOOK FLIGHT ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -481,17 +504,25 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(363, 363, 363)
                                 .addComponent(bookTicket)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnBackBookFlight)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBackBookFlight)
+                    .addComponent(jLabel17))
+                .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(selectedFlightCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
+                .addGap(30, 30, 30)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -503,7 +534,7 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(bookTicket)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -807,11 +838,28 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
         
     }//GEN-LAST:event_bookTicketActionPerformed
 
+    private void btnBackBookFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackBookFlightActionPerformed
+        // TODO add your handling code here:
+        this.panel.remove(this);
+        CardLayout layout = (CardLayout) this.panel.getLayout();
+        layout.previous(panel);
+    }//GEN-LAST:event_btnBackBookFlightActionPerformed
+
+    private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
+        // TODO add your handling code here:
+        resetSeatLock();
+        populateFlightCombo(); 
+        populateUserCombo();
+        populateFlightDetails();
+        populateCustomerDetails();
+    }//GEN-LAST:event_formAncestorAdded
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField aDateTxt;
     private javax.swing.JTextField aTimeTxt;
     private javax.swing.JButton bookTicket;
+    private javax.swing.JButton btnBackBookFlight;
     private javax.swing.JTextField carrierTxt;
     private javax.swing.JTextField custIdTxt;
     private javax.swing.JComboBox<Customer> customerCombo;
@@ -830,6 +878,7 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

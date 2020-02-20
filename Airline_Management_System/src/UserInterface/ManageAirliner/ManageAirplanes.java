@@ -68,6 +68,16 @@ public class ManageAirplanes extends javax.swing.JPanel {
         updateAirplaneBtn = new javax.swing.JButton();
         backAirplaneList = new javax.swing.JButton();
 
+        addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                formAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
         airplaneTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -198,11 +208,19 @@ public class ManageAirplanes extends javax.swing.JPanel {
 
     private void backAirplaneListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backAirplaneListActionPerformed
         // TODO add your handling code here
-        AirlinerFunction airLinerFunction = new AirlinerFunction(this.panel,  airlineDirectory,  airplaneDirectory,  airliner,  masterTravelSchedule);
-        this.panel.add(airLinerFunction, "AirlinerFunction");
-        CardLayout layout = (CardLayout)this.panel.getLayout();
-        layout.next(panel);
+//        AirlinerFunction airLinerFunction = new AirlinerFunction(this.panel,  airlineDirectory,  airplaneDirectory,  airliner,  masterTravelSchedule);
+//        this.panel.add(airLinerFunction, "AirlinerFunction");
+//        CardLayout layout = (CardLayout)this.panel.getLayout();
+//        layout.next(panel);
+        this.panel.remove(this);
+        CardLayout layout = (CardLayout) this.panel.getLayout();
+        layout.previous(panel);
     }//GEN-LAST:event_backAirplaneListActionPerformed
+
+    private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
+        // TODO add your handling code here:
+        populateAiplaneTable();
+    }//GEN-LAST:event_formAncestorAdded
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -71,6 +71,16 @@ public class ManageFlightSchedules extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         backFlightSchedule = new javax.swing.JButton();
 
+        addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                formAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
         flightScheduleTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -197,11 +207,19 @@ public class ManageFlightSchedules extends javax.swing.JPanel {
 
     private void backFlightScheduleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backFlightScheduleActionPerformed
         // TODO add your handling code here:
-        AirlinerFunction airLinerFunction = new AirlinerFunction(this.panel,  airlineDirectory,  airplaneDirectory,  airliner,  masterTravelSchedule);
-        this.panel.add(airLinerFunction, "AirlinerFunction");
-        CardLayout layout = (CardLayout)this.panel.getLayout();
-        layout.next(panel);
+//        AirlinerFunction airLinerFunction = new AirlinerFunction(this.panel,  airlineDirectory,  airplaneDirectory,  airliner,  masterTravelSchedule);
+//        this.panel.add(airLinerFunction, "AirlinerFunction");
+//        CardLayout layout = (CardLayout)this.panel.getLayout();
+//        layout.next(panel);
+        this.panel.remove(this);
+        CardLayout layout = (CardLayout) this.panel.getLayout();
+        layout.previous(panel);
     }//GEN-LAST:event_backFlightScheduleActionPerformed
+
+    private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
+        // TODO add your handling code here:
+        populateFlightSchedules();
+    }//GEN-LAST:event_formAncestorAdded
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

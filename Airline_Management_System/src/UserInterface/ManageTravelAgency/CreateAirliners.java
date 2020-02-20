@@ -55,6 +55,16 @@ public class CreateAirliners extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         bckCreateAirliner = new javax.swing.JButton();
 
+        addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                formAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
         jLabel1.setText("Airliner Name *");
 
         jLabel2.setText("Fleet Size *");
@@ -183,11 +193,20 @@ public class CreateAirliners extends javax.swing.JPanel {
 
     private void bckCreateAirlinerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bckCreateAirlinerActionPerformed
         // TODO add your handling code here:
-        AddAirline addAirline = new AddAirline(this.panel,  airlineDirectory,  airplaneDirectory,  masterTravelSchedule);
-        this.panel.add(addAirline, "AddAirline");
-        CardLayout layout = (CardLayout)this.panel.getLayout();
-        layout.next(panel);
+//        AddAirline addAirline = new AddAirline(this.panel,  airlineDirectory,  airplaneDirectory,  masterTravelSchedule);
+//        this.panel.add(addAirline, "AddAirline");
+//        CardLayout layout = (CardLayout)this.panel.getLayout();
+//        layout.next(panel);
+        this.panel.remove(this);
+        CardLayout layout = (CardLayout) this.panel.getLayout();
+        layout.previous(panel);
     }//GEN-LAST:event_bckCreateAirlinerActionPerformed
+
+    private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
+        // TODO add your handling code here:
+       
+        
+    }//GEN-LAST:event_formAncestorAdded
     
     public void clearFields() {
         airlinerName.setText("");

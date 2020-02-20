@@ -80,6 +80,15 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
         });
 
         btnBackManageCust.setText("<Back");
+        btnBackManageCust.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                btnBackManageCustAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         btnBackManageCust.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackManageCustActionPerformed(evt);
@@ -129,6 +138,9 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
 //        this.panel.add(manageTravelAgency, "ManageTravelAgency");
 //        CardLayout layout = (CardLayout)this.panel.getLayout();
 //        layout.next(panel);
+        this.panel.remove(this);
+        CardLayout layout = (CardLayout) this.panel.getLayout();
+        layout.previous(panel);
     }//GEN-LAST:event_btnBackManageCustActionPerformed
 
     private void btnAddCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCustomerActionPerformed
@@ -146,6 +158,11 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout)this.panel.getLayout();
         layout.next(panel);
     }//GEN-LAST:event_btnUpdateCustomerActionPerformed
+
+    private void btnBackManageCustAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_btnBackManageCustAncestorAdded
+        // TODO add your handling code here:
+        populateManageCustomer();
+    }//GEN-LAST:event_btnBackManageCustAncestorAdded
 
 public void populateManageCustomer() {
         DefaultTableModel dtm = (DefaultTableModel)tblManageCust.getModel();

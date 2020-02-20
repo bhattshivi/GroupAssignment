@@ -122,6 +122,15 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
         jLabel11.setText("(HH:MM)");
 
         backUpdateFS.setText("<<<Back");
+        backUpdateFS.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                backUpdateFSAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         backUpdateFS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backUpdateFSActionPerformed(evt);
@@ -303,11 +312,19 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
 
     private void backUpdateFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backUpdateFSActionPerformed
         // TODO add your handling code here:
-        ManageFlightSchedules flightSchedulePanel = new ManageFlightSchedules(this.panel, airlineDirectory, airplaneDirectory, airliner,masterTravelSchedule);
-        this.panel.add(flightSchedulePanel, "FlightSchedule");
-        CardLayout layout = (CardLayout)this.panel.getLayout();
-        layout.next(panel);
+//        ManageFlightSchedules flightSchedulePanel = new ManageFlightSchedules(this.panel, airlineDirectory, airplaneDirectory, airliner,masterTravelSchedule);
+//        this.panel.add(flightSchedulePanel, "FlightSchedule");
+//        CardLayout layout = (CardLayout)this.panel.getLayout();
+//        layout.next(panel);
+        this.panel.remove(this);
+        CardLayout layout = (CardLayout) this.panel.getLayout();
+        layout.previous(panel);
     }//GEN-LAST:event_backUpdateFSActionPerformed
+
+    private void backUpdateFSAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_backUpdateFSAncestorAdded
+        // TODO add your handling code here:
+         populateFlightScheduleDetails();
+    }//GEN-LAST:event_backUpdateFSAncestorAdded
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
