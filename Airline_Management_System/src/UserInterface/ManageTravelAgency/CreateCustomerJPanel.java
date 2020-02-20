@@ -9,6 +9,7 @@ import Business.AirlinerDirectory;
 import Business.Customer;
 import Business.CustomerDirectory;
 import java.awt.CardLayout;
+import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -195,9 +196,21 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
 //        this.panel.add(manageCustomerJPanel, "ManageCustomerJPanel");
 //        CardLayout layout = (CardLayout)this.panel.getLayout();
 //        layout.next(panel);
+//        this.panel.remove(this);
+//        CardLayout layout = (CardLayout) this.panel.getLayout();
+//        layout.previous(panel);
+
+
         this.panel.remove(this);
-        CardLayout layout = (CardLayout) this.panel.getLayout();
-        layout.previous(panel);
+        CardLayout layout = (CardLayout)this.panel.getLayout();
+        Component[] comps = this.panel.getComponents();
+        for (Component comp : comps){
+            if(comp instanceof ManageCustomerJPanel){
+                ManageCustomerJPanel rePopulateTable = (ManageCustomerJPanel) comp;
+                rePopulateTable.populateManageCustomer();
+            }
+        }
+        layout.previous(this.panel);
     }//GEN-LAST:event_bkCreateCustomerActionPerformed
 
     private void createFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createFirstNameActionPerformed

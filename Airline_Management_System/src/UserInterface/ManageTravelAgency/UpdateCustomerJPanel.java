@@ -9,6 +9,7 @@ import Business.AirlinerDirectory;
 import Business.Customer;
 import Business.CustomerDirectory;
 import java.awt.CardLayout;
+import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -244,9 +245,19 @@ public class UpdateCustomerJPanel extends javax.swing.JPanel {
 //        this.panel.add(manageCustomerJPanel, "ManageCustomerJPanel");
 //        CardLayout layout = (CardLayout)this.panel.getLayout();
 //        layout.next(panel);
-         this.panel.remove(this);
-        CardLayout layout = (CardLayout) this.panel.getLayout();
-        layout.previous(panel);
+//         this.panel.remove(this);
+//        CardLayout layout = (CardLayout) this.panel.getLayout();
+//        layout.previous(panel);
+this.panel.remove(this);
+        CardLayout layout = (CardLayout)this.panel.getLayout();
+        Component[] comps = this.panel.getComponents();
+        for (Component comp : comps){
+            if(comp instanceof ManageCustomerJPanel){
+                ManageCustomerJPanel rePopulateTable = (ManageCustomerJPanel) comp;
+                rePopulateTable.populateManageCustomer();
+            }
+        }
+        layout.previous(this.panel);
     }//GEN-LAST:event_bkUpdateCustomerActionPerformed
 
     private void btnUpdateCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCustomerActionPerformed
@@ -324,7 +335,7 @@ public class UpdateCustomerJPanel extends javax.swing.JPanel {
 
     private void bkUpdateCustomerAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_bkUpdateCustomerAncestorAdded
         // TODO add your handling code here:
-        displayProduct();
+   
     }//GEN-LAST:event_bkUpdateCustomerAncestorAdded
 
      private void setAllEnabled(boolean b) {

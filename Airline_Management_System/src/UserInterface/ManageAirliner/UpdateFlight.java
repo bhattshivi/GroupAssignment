@@ -14,6 +14,7 @@ import Business.Flight;
 import Business.MasterTravelSchedule;
 import Business.Seat;
 import java.awt.CardLayout;
+import java.awt.Component;
 import static java.time.temporal.ChronoUnit.DAYS;
 import java.util.ArrayList;
 import javax.swing.JPanel;
@@ -671,17 +672,25 @@ public class UpdateFlight extends javax.swing.JPanel {
 //        this.panel.add(airLinerFunction, "AirlinerFunction");
 //        CardLayout layout = (CardLayout)this.panel.getLayout();
 //        layout.next(panel);
-        this.panel.remove(this);
-        CardLayout layout = (CardLayout) this.panel.getLayout();
-        layout.previous(panel);
+//        this.panel.remove(this);
+//        CardLayout layout = (CardLayout) this.panel.getLayout();
+//        layout.previous(panel);
+     this.panel.remove(this);
+        CardLayout layout = (CardLayout)this.panel.getLayout();
+        Component[] comps = this.panel.getComponents();
+        for (Component comp : comps){
+            if(comp instanceof AirlinerFunction){
+                AirlinerFunction rePopulateTable = (AirlinerFunction) comp;
+                rePopulateTable.populateAirlineFlights();
+            }
+        }
+        layout.previous(this.panel);
 
     }//GEN-LAST:event_btnBackUpdateFlightActionPerformed
 
     private void btnBackUpdateFlightAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_btnBackUpdateFlightAncestorAdded
         // TODO add your handling code here:
-        populateAirplanes();
-        populateFlightSchedules();
-        populateFlightDetails();
+    
     }//GEN-LAST:event_btnBackUpdateFlightAncestorAdded
 
 

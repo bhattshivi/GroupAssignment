@@ -11,6 +11,7 @@ import Business.Airplane;
 import Business.AirplaneDirectory;
 import Business.MasterTravelSchedule;
 import java.awt.CardLayout;
+import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -197,9 +198,21 @@ public class CreateAirliners extends javax.swing.JPanel {
 //        this.panel.add(addAirline, "AddAirline");
 //        CardLayout layout = (CardLayout)this.panel.getLayout();
 //        layout.next(panel);
-        this.panel.remove(this);
-        CardLayout layout = (CardLayout) this.panel.getLayout();
-        layout.previous(panel);
+//        this.panel.remove(this);
+//        CardLayout layout = (CardLayout) this.panel.getLayout();
+//        layout.previous(panel);
+         this.panel.remove(this);
+        CardLayout layout = (CardLayout)this.panel.getLayout();
+        Component[] comps = this.panel.getComponents();
+        for (Component comp : comps){
+            if(comp instanceof AddAirline){
+                AddAirline rePopulateTable = (AddAirline) comp;
+                rePopulateTable.populateAirliners();
+            }
+        }
+        layout.previous(this.panel);
+
+
     }//GEN-LAST:event_bckCreateAirlinerActionPerformed
 
     private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded

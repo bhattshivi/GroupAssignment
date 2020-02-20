@@ -12,6 +12,7 @@ import Business.Airplane;
 import Business.AirplaneDirectory;
 import Business.MasterTravelSchedule;
 import java.awt.CardLayout;
+import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -214,14 +215,21 @@ public class UpdateAirplane extends javax.swing.JPanel {
 //        this.panel.add(createAirplanePanel, "CreateAirplane");
 //        CardLayout layout = (CardLayout)this.panel.getLayout();
 //        layout.next(panel);
-        this.panel.remove(this);
-        CardLayout layout = (CardLayout) this.panel.getLayout();
-        layout.previous(panel);
+       this.panel.remove(this);
+        CardLayout layout = (CardLayout)this.panel.getLayout();
+        Component[] comps = this.panel.getComponents();
+        for (Component comp : comps){
+            if(comp instanceof ManageAirplanes){
+                ManageAirplanes rePopulateTable = (ManageAirplanes) comp;
+                rePopulateTable.populateAiplaneTable();
+            }
+        }
+        layout.previous(this.panel);
     }//GEN-LAST:event_backUpdateAirplaneActionPerformed
 
     private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
         // TODO add your handling code here:
-         populateAirplaneDetails();
+       
     }//GEN-LAST:event_formAncestorAdded
 
 

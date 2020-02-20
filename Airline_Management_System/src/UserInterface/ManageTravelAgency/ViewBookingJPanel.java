@@ -410,9 +410,20 @@ public class ViewBookingJPanel extends javax.swing.JPanel {
 //        CardLayout layout = (CardLayout) panel.getLayout();
 //        layout.next(panel);
 
-         this.panel.remove(this);
-        CardLayout layout = (CardLayout) this.panel.getLayout();
-        layout.previous(panel);
+//         this.panel.remove(this);
+//        CardLayout layout = (CardLayout) this.panel.getLayout();
+//        layout.previous(panel);
+
+this.panel.remove(this);
+        CardLayout layout = (CardLayout)this.panel.getLayout();
+        Component[] comps = this.panel.getComponents();
+        for (Component comp : comps){
+            if(comp instanceof ManageBookingJPanel){
+                ManageBookingJPanel rePopulateTable = (ManageBookingJPanel) comp;
+                rePopulateTable.populateManageBooking();
+            }
+        }
+        layout.previous(this.panel);
     }//GEN-LAST:event_bckViewBookingActionPerformed
 
     private void cancelFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelFlightActionPerformed

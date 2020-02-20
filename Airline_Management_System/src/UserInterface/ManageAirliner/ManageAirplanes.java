@@ -12,6 +12,7 @@ import Business.AirplaneDirectory;
 import Business.Flight;
 import Business.MasterTravelSchedule;
 import java.awt.CardLayout;
+import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -211,15 +212,25 @@ public class ManageAirplanes extends javax.swing.JPanel {
 //        AirlinerFunction airLinerFunction = new AirlinerFunction(this.panel,  airlineDirectory,  airplaneDirectory,  airliner,  masterTravelSchedule);
 //        this.panel.add(airLinerFunction, "AirlinerFunction");
 //        CardLayout layout = (CardLayout)this.panel.getLayout();
-//        layout.next(panel);
-        this.panel.remove(this);
-        CardLayout layout = (CardLayout) this.panel.getLayout();
-        layout.previous(panel);
+////        layout.next(panel);
+//        this.panel.remove(this);
+//        CardLayout layout = (CardLayout) this.panel.getLayout();
+//        layout.previous(panel);
+             this.panel.remove(this);
+        CardLayout layout = (CardLayout)this.panel.getLayout();
+        Component[] comps = this.panel.getComponents();
+        for (Component comp : comps){
+            if(comp instanceof AirlinerFunction){
+                AirlinerFunction rePopulateTable = (AirlinerFunction) comp;
+                rePopulateTable.populateAirlineFlights();
+            }
+        }
+        layout.previous(this.panel);
     }//GEN-LAST:event_backAirplaneListActionPerformed
 
     private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
         // TODO add your handling code here:
-        populateAiplaneTable();
+      
     }//GEN-LAST:event_formAncestorAdded
 
 

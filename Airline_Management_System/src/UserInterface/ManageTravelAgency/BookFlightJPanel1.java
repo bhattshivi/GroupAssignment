@@ -17,6 +17,7 @@ import Business.ReservationDirectory;
 import Business.Seat;
 import UserInterface.ManageAirliner.UpdateAirplane;
 import java.awt.CardLayout;
+import java.awt.Component;
 import static java.time.temporal.ChronoUnit.DAYS;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -503,12 +504,12 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
                                 .addComponent(customerCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(363, 363, 363)
-                                .addComponent(bookTicket)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnBackBookFlight)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(bookTicket))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnBackBookFlight)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -840,18 +841,26 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
 
     private void btnBackBookFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackBookFlightActionPerformed
         // TODO add your handling code here:
+//        this.panel.remove(this);
+//        CardLayout layout = (CardLayout) this.panel.getLayout();
+//        layout.previous(panel);
+
+        
         this.panel.remove(this);
-        CardLayout layout = (CardLayout) this.panel.getLayout();
-        layout.previous(panel);
+        CardLayout layout = (CardLayout)this.panel.getLayout();
+        Component[] comps = this.panel.getComponents();
+        for (Component comp : comps){
+            if(comp instanceof ManageTravelAgency){
+                ManageTravelAgency rePopulateTable = (ManageTravelAgency) comp;
+                //rePopulateTable.populate();
+            }
+        }
+        layout.previous(this.panel);
     }//GEN-LAST:event_btnBackBookFlightActionPerformed
 
     private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
         // TODO add your handling code here:
-        resetSeatLock();
-        populateFlightCombo(); 
-        populateUserCombo();
-        populateFlightDetails();
-        populateCustomerDetails();
+      
     }//GEN-LAST:event_formAncestorAdded
 
 

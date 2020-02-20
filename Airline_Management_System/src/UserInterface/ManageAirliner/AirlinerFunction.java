@@ -11,7 +11,9 @@ import Business.AirplaneDirectory;
 import Business.Flight;
 import Business.FlightSchedule;
 import Business.MasterTravelSchedule;
+import UserInterface.ManageTravelAgency.ManageTravelAgency;
 import java.awt.CardLayout;
+import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -264,14 +266,26 @@ public class AirlinerFunction extends javax.swing.JPanel {
 //        this.panel.add(manageAirliners, "ManageAirliners");
 //        CardLayout layout = (CardLayout)this.panel.getLayout();
 //        layout.next(panel);
+//        this.panel.remove(this);
+//        CardLayout layout = (CardLayout) this.panel.getLayout();
+//        layout.previous(panel);
+          
         this.panel.remove(this);
-        CardLayout layout = (CardLayout) this.panel.getLayout();
-        layout.previous(panel);
+        CardLayout layout = (CardLayout)this.panel.getLayout();
+        Component[] comps = this.panel.getComponents();
+        for (Component comp : comps){
+            if(comp instanceof ManageAirliners){
+                ManageAirliners rePopulateTable = (ManageAirliners) comp;
+                //rePopulateTable.populate();
+            }
+        }
+        layout.previous(this.panel);
+
     }//GEN-LAST:event_backFlightListActionPerformed
 
     private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
         // TODO add your handling code here:
-        populateAirlineFlights();
+       
     }//GEN-LAST:event_formAncestorAdded
 
 

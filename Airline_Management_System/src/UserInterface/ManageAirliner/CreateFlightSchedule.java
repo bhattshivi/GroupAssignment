@@ -12,6 +12,7 @@ import Business.Airplane;
 import Business.AirplaneDirectory;
 import Business.MasterTravelSchedule;
 import java.awt.CardLayout;
+import java.awt.Component;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
@@ -381,9 +382,20 @@ public class CreateFlightSchedule extends javax.swing.JPanel {
 //        this.panel.add(flightSchedulePanel, "FlightSchedule");
 //        CardLayout layout = (CardLayout)this.panel.getLayout();
 //        layout.next(panel);
-        this.panel.remove(this);
-        CardLayout layout = (CardLayout) this.panel.getLayout();
-        layout.previous(panel);
+//        this.panel.remove(this);
+//        CardLayout layout = (CardLayout) this.panel.getLayout();
+//        layout.previous(panel);
+
+         this.panel.remove(this);
+        CardLayout layout = (CardLayout)this.panel.getLayout();
+        Component[] comps = this.panel.getComponents();
+        for (Component comp : comps){
+            if(comp instanceof ManageFlightSchedules){
+                ManageFlightSchedules rePopulateTable = (ManageFlightSchedules) comp;
+                rePopulateTable.populateFlightSchedules();
+            }
+        }
+        layout.previous(this.panel);
     }//GEN-LAST:event_backCreateFlightScheduleActionPerformed
 
     private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded

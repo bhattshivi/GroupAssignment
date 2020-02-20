@@ -17,6 +17,7 @@ import Business.ReservationDirectory;
 import Business.Seat;
 import UserInterface.ManageAirliner.UpdateAirplane;
 import java.awt.CardLayout;
+import java.awt.Component;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
@@ -456,7 +457,7 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
 
         jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("FIND FLIGHTS");
+        jLabel3.setText("SEARCH FLIGHTS");
 
         btnBackSearchFlights.setText("<Back");
         btnBackSearchFlights.addActionListener(new java.awt.event.ActionListener() {
@@ -964,9 +965,20 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
 
     private void btnBackSearchFlightsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackSearchFlightsActionPerformed
         // TODO add your handling code here:
+//        this.panel.remove(this);
+//        CardLayout layout = (CardLayout) this.panel.getLayout();
+//        layout.previous(panel);
+
         this.panel.remove(this);
-        CardLayout layout = (CardLayout) this.panel.getLayout();
-        layout.previous(panel);
+        CardLayout layout = (CardLayout)this.panel.getLayout();
+        Component[] comps = this.panel.getComponents();
+        for (Component comp : comps){
+            if(comp instanceof ManageTravelAgency){
+                ManageTravelAgency rePopulateTable = (ManageTravelAgency) comp;
+                //rePopulateTable.populate();
+            }
+        }
+        layout.previous(this.panel);
         
     }//GEN-LAST:event_btnBackSearchFlightsActionPerformed
 

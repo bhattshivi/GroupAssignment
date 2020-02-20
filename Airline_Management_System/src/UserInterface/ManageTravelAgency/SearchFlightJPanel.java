@@ -11,6 +11,7 @@ import Business.Flight;
 import Business.MasterTravelSchedule;
 import Business.Seat;
 import java.awt.CardLayout;
+import java.awt.Component;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -344,6 +345,16 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
         this.panel.add(manageTravelAgency, "ManageTravelAgency");
         CardLayout layout = (CardLayout)this.panel.getLayout();
         layout.next(panel);*/
+          this.panel.remove(this);
+        CardLayout layout = (CardLayout)this.panel.getLayout();
+        Component[] comps = this.panel.getComponents();
+        for (Component comp : comps){
+            if(comp instanceof ManageTravelAgency){
+                ManageTravelAgency rePopulateTable = (ManageTravelAgency) comp;
+                //rePopulateTable.populate();
+            }
+        }
+        layout.previous(this.panel);
     }//GEN-LAST:event_bckSearchFlightActionPerformed
 
     private void btnBookFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookFlightActionPerformed
