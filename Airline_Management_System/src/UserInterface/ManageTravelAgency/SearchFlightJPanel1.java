@@ -1005,7 +1005,8 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
         //this.panel.remove(this);
         //CardLayout layout = (CardLayout) this.panel.getLayout();
         //layout.previous(panel);
-
+        /*
+System.out.println(">>>--- inside seach flight back btn >>>---");
         this.panel.remove(this);
         CardLayout layout = (CardLayout)this.panel.getLayout();
         Component[] comps = this.panel.getComponents();
@@ -1016,6 +1017,12 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
             }
         }
         layout.previous(panel);
+        System.out.println(">>>--- exit book flight back btn >>>---");
+        */
+        ManageTravelAgency manageTravelAgency = new ManageTravelAgency(panel, airlineDirectory, airplaneDirectory, masterTravelSchedule, custDir, cust, reservationDirectory, reservation);
+        this.panel.add(manageTravelAgency, "ManageTravelAgency");
+        CardLayout layout = (CardLayout)this.panel.getLayout();
+        layout.next(panel); 
         
     }//GEN-LAST:event_btnBackSearchFlightsActionPerformed
 

@@ -43,6 +43,7 @@ public class ManageTravelAgency extends javax.swing.JPanel {
         this.reservationDirectory = reservationDirectory;
         this.reservation = reservation;
         this.airplaneDirectory = airplaneDirectory;
+        System.out.println(">>>--- inside manage travel agencey back btn >>>---");
     }
 
     /**
@@ -128,6 +129,7 @@ public class ManageTravelAgency extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegisterAirlinersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterAirlinersActionPerformed
+        System.out.println(">>>--- inside register airline back btn >>>---");
         AddAirline addAirline = new AddAirline(this.panel,  airlineDirectory,  airplaneDirectory,  masterTravelSchedule);
         this.panel.add(addAirline, "AddAirline");
         CardLayout layout = (CardLayout)this.panel.getLayout();
@@ -137,6 +139,7 @@ public class ManageTravelAgency extends javax.swing.JPanel {
     private void btnBookFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookFlightActionPerformed
         // TODO add your handling code here:
         //SearchFlightJPanel1 searchFlightJPanel = new SearchFlightJPanel1(this.panel, airlineDirectory, masterTravelSchedule, custDir, reservationDirectory);
+        System.out.println(">>>--- inside search flight back btn >>>---");
         SearchFlightJPanel1 searchFlightJPanel = new SearchFlightJPanel1(this.panel, airlineDirectory, airplaneDirectory, masterTravelSchedule, custDir, cust, reservationDirectory, reservation);
         this.panel.add(searchFlightJPanel, "SearchFlightJPanel");
         CardLayout layout = (CardLayout)this.panel.getLayout();
@@ -145,6 +148,7 @@ public class ManageTravelAgency extends javax.swing.JPanel {
 
     private void btnManageCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageCustomerActionPerformed
         // TODO add your handling code here:
+        System.out.println(">>>--- inside manage cust back btn >>>---");
         ManageCustomerJPanel manageCustomerJPanel = new ManageCustomerJPanel(this.panel, airlineDirectory, custDir , cust);
         this.panel.add(manageCustomerJPanel, "ManageCustomerJPanel");
         CardLayout layout = (CardLayout)this.panel.getLayout();
@@ -152,6 +156,7 @@ public class ManageTravelAgency extends javax.swing.JPanel {
     }//GEN-LAST:event_btnManageCustomerActionPerformed
 
     private void viewFlightsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewFlightsBtnActionPerformed
+        System.out.println(">>>--- view flights >>>---");
         SearchFlightJPanel searchFlightJPanel = new SearchFlightJPanel(this.panel, airlineDirectory, masterTravelSchedule);
         this.panel.add(searchFlightJPanel, "SearchFlightJPanel");
         CardLayout layout = (CardLayout)this.panel.getLayout();
@@ -160,6 +165,7 @@ public class ManageTravelAgency extends javax.swing.JPanel {
 
     private void btnManageBooking1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageBooking1ActionPerformed
         // TODO add your handling code here
+        System.out.println(">>>--- inside manage bookign back btn >>>---");
         ManageBookingJPanel manageBookingJPanel = new ManageBookingJPanel( this.panel,  airlineDirectory,airplaneDirectory, masterTravelSchedule,  custDir,  cust,  reservationDirectory,  reservation);
         this.panel.add(manageBookingJPanel, "ManageBookingJPanel");
         CardLayout layout = (CardLayout) panel.getLayout();

@@ -846,23 +846,34 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
         //this.panel.remove(this);
         //CardLayout layout = (CardLayout) this.panel.getLayout();
         //layout.previous(panel);
-
         
+        /*
+        System.out.println(">>>--- inside book flight back btn >>>---");
         this.panel.remove(this);
         CardLayout layout = (CardLayout)this.panel.getLayout();
         Component[] comps = this.panel.getComponents();
         for (Component comp : comps){
-            if(comp instanceof SearchFlightJPanel1){
-                //ManageTravelAgency rePopulateTable = (ManageTravelAgency) comp;
-                SearchFlightJPanel1 rePopulateTable = (SearchFlightJPanel1) comp;
+            if(comp instanceof ManageTravelAgency){
+                ManageTravelAgency rePopulateTable = (ManageTravelAgency) comp;
+                //SearchFlightJPanel1 rePopulateTable = (SearchFlightJPanel1) comp;
                 //rePopulateTable.populate();
-                rePopulateTable.populate();
-                rePopulateTable.hideTables();
-                rePopulateTable.hideRoundTripFields();
-                rePopulateTable.hideMulticityFields();
+                
+                //rePopulateTable.populate();
+                //rePopulateTable.hideTables();
+                //rePopulateTable.hideRoundTripFields();
+                //rePopulateTable.hideMulticityFields();
+                
             }
         }
         layout.previous(panel);
+        */
+        //JPanel panel, AirlinerDirectory airlineDirectory, AirplaneDirectory airplaneDirectory, MasterTravelSchedule masterTravelSchedule, CustomerDirectory custDir, Customer cust, ReservationDirectory reservationDirectory, Reservation reservation
+        SearchFlightJPanel1 manageTravelAgency = new SearchFlightJPanel1(panel, airlineDirectory, airplaneDirectory, masterTravelSchedule, custDir, cust, reservationDirectory, reservation);
+        this.panel.add(manageTravelAgency, "SearchFlightJPanel1");
+        CardLayout layout = (CardLayout)this.panel.getLayout();
+        layout.next(panel);
+        
+        System.out.println(">>>--- exit book flight back btn >>>---");
     }//GEN-LAST:event_btnBackBookFlightActionPerformed
 
     private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
