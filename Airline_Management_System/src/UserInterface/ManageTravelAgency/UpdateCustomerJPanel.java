@@ -257,7 +257,7 @@ this.panel.remove(this);
                 rePopulateTable.populateManageCustomer();
             }
         }
-        layout.previous(this.panel);
+        layout.previous(panel);
     }//GEN-LAST:event_bkUpdateCustomerActionPerformed
 
     private void btnUpdateCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCustomerActionPerformed

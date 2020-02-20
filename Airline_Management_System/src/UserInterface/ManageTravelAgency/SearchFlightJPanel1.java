@@ -817,6 +817,7 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
 
     private void multiCityRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiCityRBActionPerformed
         dtmMultiCity = (DefaultTableModel) tblMultiCity.getModel();
+        dtmMultiCity.setRowCount(0);
         dtmMultiCity.setRowCount(1);
         dtmOneWay = (DefaultTableModel) tblSearchFlight.getModel();
         hideTables();
@@ -885,22 +886,58 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
             }
 
             if(multiCityRB.isSelected()) {
+                int readyToBookCount = 0;
                 int selectedRow1 = tblSearchFlight.getSelectedRow();
                 //ArrayList<Flight> flightToBook = new ArrayList<>();
 
                 if(selectedRow1 < 0) {
+                    //readyToBookCount = 0;
                     JOptionPane.showMessageDialog(null, "Please select atleast one flight");
                 }else {
+                    //readyToBookCount = 0;
                     int[] selectedRows = tblSearchFlight.getSelectedRows();
-                    for (int i = 0; i < selectedRows.length; i++) {
-
+                    outer : for(int i = 0; i < selectedRows.length; i++) {
+                        
                         Flight f = (Flight)tblSearchFlight.getValueAt(selectedRows[i], 0);
+                        
+                        for(int j = i+1; j < selectedRows.length; j++) {
+                            Flight f1 = (Flight)tblSearchFlight.getValueAt(selectedRows[j], 0);
+                            
+                            if(f1.getFlightSchedule().getSource().equals(f.getFlightSchedule().getSource())) {
+                                JOptionPane.showMessageDialog(null, "Two flights with same source and destination can not be selected");
+                                break outer;
+                            }
+                        }
+                        readyToBookCount++;
                         flightToBook.add(f);
-                        BookFlightJPanel1 searchFlightJPanel = new BookFlightJPanel1(this.panel, airlineDirectory, airplaneDirectory, masterTravelSchedule, flightToBook, custDir, cust, reservationDirectory, reservation);
-                        this.panel.add(searchFlightJPanel, "SearchFlightJPanel");
-                        CardLayout layout = (CardLayout)this.panel.getLayout();
-                        layout.next(panel);
+                        
+                        /*
+                        Flight f = (Flight)tblSearchFlight.getValueAt(selectedRows[i], 0);
+                        
+                        if( i > 0) {
+                            Flight f1 = (Flight)tblSearchFlight.getValueAt(selectedRows[i-1], 0);
+                            
+                            if(f1.getFlightSchedule().getSource().equals(f.getFlightSchedule().getSource())) {
+                                
+                            } else {
+                                flightToBook.add(f);
+                            }
+                            
+                        }else {
+                            flightToBook.add(f);
+                        }
+                        */
+
+                        
+                        
                     }
+                }
+                
+                if(readyToBookCount == tblSearchFlight.getSelectedRows().length) {
+                    BookFlightJPanel1 searchFlightJPanel = new BookFlightJPanel1(this.panel, airlineDirectory, airplaneDirectory, masterTravelSchedule, flightToBook, custDir, cust, reservationDirectory, reservation);
+                    this.panel.add(searchFlightJPanel, "SearchFlightJPanel");
+                    CardLayout layout = (CardLayout)this.panel.getLayout();
+                    layout.next(panel);
                 }
             }
         }else {
@@ -965,9 +1002,9 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
 
     private void btnBackSearchFlightsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackSearchFlightsActionPerformed
         // TODO add your handling code here:
-//        this.panel.remove(this);
-//        CardLayout layout = (CardLayout) this.panel.getLayout();
-//        layout.previous(panel);
+        //this.panel.remove(this);
+        //CardLayout layout = (CardLayout) this.panel.getLayout();
+        //layout.previous(panel);
 
         this.panel.remove(this);
         CardLayout layout = (CardLayout)this.panel.getLayout();
@@ -978,7 +1015,7 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
                 //rePopulateTable.populate();
             }
         }
-        layout.previous(this.panel);
+        layout.previous(panel);
         
     }//GEN-LAST:event_btnBackSearchFlightsActionPerformed
 

@@ -10,6 +10,7 @@ import Business.Airliner;
 import Business.Airplane;
 import Business.AirplaneDirectory;
 import Business.MasterTravelSchedule;
+import Business.ReservationDirectory;
 import UserInterface.ManageTravelAgency.ManageTravelAgency;
 import java.awt.CardLayout;
 import javax.swing.JComboBox;
@@ -27,15 +28,17 @@ public class ManageAirliners extends javax.swing.JPanel {
     private Airliner airliner;
     private JPanel panel;
     private MasterTravelSchedule masterTravelSchedule;
+    private ReservationDirectory reservationDirectory;
     /**
      * Creates new form ManageAirliners
      */
-    public ManageAirliners(JPanel panel, AirlinerDirectory airlineDirectory, AirplaneDirectory airplaneDirectory, MasterTravelSchedule masterTravelSchedule) {
+    public ManageAirliners(JPanel panel, AirlinerDirectory airlineDirectory, AirplaneDirectory airplaneDirectory, MasterTravelSchedule masterTravelSchedule, ReservationDirectory reservationDirectory) {
         initComponents();
         this.panel = panel;
         this.airlineDirectory = airlineDirectory;
         this.airplaneDirectory = airplaneDirectory;
         this.masterTravelSchedule = masterTravelSchedule;
+        this.reservationDirectory = reservationDirectory;
         populateAirlinersList(airlineDirectory);
     }
     
@@ -116,7 +119,7 @@ public class ManageAirliners extends javax.swing.JPanel {
         if(airliner == null) {
             JOptionPane.showMessageDialog(null, "Please select an airline to continue.");
         }else {
-            AirlinerFunction airlinerFuncPanel = new AirlinerFunction(this.panel, airlineDirectory, airplaneDirectory, airliner, masterTravelSchedule);
+            AirlinerFunction airlinerFuncPanel = new AirlinerFunction(this.panel, airlineDirectory, airplaneDirectory, airliner, masterTravelSchedule, reservationDirectory);
             this.panel.add(airlinerFuncPanel, "AirlinerFunction");
             CardLayout layout = (CardLayout)this.panel.getLayout();
             layout.next(panel);

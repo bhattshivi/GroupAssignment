@@ -225,7 +225,7 @@ public class ManageAirplanes extends javax.swing.JPanel {
                 rePopulateTable.populateAirlineFlights();
             }
         }
-        layout.previous(this.panel);
+        layout.previous(panel);
     }//GEN-LAST:event_backAirplaneListActionPerformed
 
     private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded

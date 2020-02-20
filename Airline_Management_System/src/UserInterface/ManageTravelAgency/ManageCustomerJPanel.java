@@ -57,10 +57,25 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "First Name", "Last Name", "Email ID", "Gender"
+                "Customer #", "First Name", "Last Name", "Email ID", "Gender"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblManageCust);
+        if (tblManageCust.getColumnModel().getColumnCount() > 0) {
+            tblManageCust.getColumnModel().getColumn(0).setResizable(false);
+            tblManageCust.getColumnModel().getColumn(1).setResizable(false);
+            tblManageCust.getColumnModel().getColumn(2).setResizable(false);
+            tblManageCust.getColumnModel().getColumn(3).setResizable(false);
+            tblManageCust.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -153,7 +168,7 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
                 //rePopulateTable.populate();
             }
         }
-        layout.previous(this.panel);
+        layout.previous(panel);
     }//GEN-LAST:event_btnBackManageCustActionPerformed
 
     private void btnAddCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCustomerActionPerformed
@@ -183,9 +198,10 @@ public void populateManageCustomer() {
         for(Customer cust : custDir.getCustomerList()){
             Object[] row = new Object[dtm.getColumnCount()];
             row[0] = cust;
-            row[1] = custDir.getCust().getLastName();
-            row[2] = custDir.getCust().getEmailId();
-            row[3] = custDir.getCust().getGender(); 
+            row[1] = custDir.getCust().getFirstName();
+            row[2] = custDir.getCust().getLastName();
+            row[3] = custDir.getCust().getEmailId();
+            row[4] = custDir.getCust().getGender(); 
             dtm.addRow(row);
         }
     }

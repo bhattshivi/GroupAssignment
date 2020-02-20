@@ -53,7 +53,7 @@ public class ViewBookingJPanel extends javax.swing.JPanel {
     
     private void displayBooking(){
  
-        
+        bookingStatus.setText(reservation.isIsBooked() ? "Active" : "Cancelled");
         viewFirstName.setText(reservation.getCustomer().getFirstName() + "");
         viewLastName.setText(reservation.getCustomer().getLastName() + "");
         viewEmailID.setText(reservation.getCustomer().getEmailId()+ "");
@@ -67,16 +67,22 @@ public class ViewBookingJPanel extends javax.swing.JPanel {
         viewDestination.setText(reservation.getFlight().getFlightSchedule().getDestination() + "");
         viewDate.setText(reservation.getFlight().getFlightSchedule().getDepartureDate().toString() + "");
         viewTime.setText(reservation.getFlight().getFlightSchedule().getDepartureTime().toString()+ "");
-       
-        viewSeatNumber.setText(reservation.getSeat().getSeatName() +"");
-        viewPrice.setText(reservation.getSeat().getPrice()+ "");
-        viewType.setText(reservation.getSeat().getType()+"");
-        System.out.println("Seat Status Active : "+ reservation.getSeat().getStatus());
-         if(reservation.getSeat().getStatus().equalsIgnoreCase("Not Available")){
-             viewSeatStatus.setText("Active");
-        }
-       // viewSeatStatus.setText(reservation.getSeat().getStatus()+"");
         
+        if(reservation.isIsBooked()) {
+            viewSeatNumber.setText(reservation.getSeat().getSeatName() +"");
+            viewPrice.setText(reservation.getSeat().getPrice()+ "");
+            viewType.setText(reservation.getSeat().getType()+"");
+            /*
+            System.out.println("Seat Status Active : "+ reservation.getSeat().getStatus());
+             if(reservation.getSeat().getStatus().equalsIgnoreCase("Not Available")){
+                 viewSeatStatus.setText("Active");
+            }
+            */
+           // viewSeatStatus.setText(reservation.getSeat().getStatus()+"");
+        }else {
+            seatPanel.setVisible(false);
+            cancelFlight.setVisible(false);
+        }
         
     }
 
@@ -102,6 +108,8 @@ public class ViewBookingJPanel extends javax.swing.JPanel {
         viewEmailID = new javax.swing.JLabel();
         viewPassportNum = new javax.swing.JLabel();
         viewGender = new javax.swing.JLabel();
+        bookingStatus = new javax.swing.JLabel();
+        jLabel40 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel31 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
@@ -120,11 +128,9 @@ public class ViewBookingJPanel extends javax.swing.JPanel {
         jLabel44 = new javax.swing.JLabel();
         jLabel45 = new javax.swing.JLabel();
         jLabel46 = new javax.swing.JLabel();
-        jLabel47 = new javax.swing.JLabel();
         viewSeatNumber = new javax.swing.JLabel();
         viewPrice = new javax.swing.JLabel();
         viewType = new javax.swing.JLabel();
-        viewSeatStatus = new javax.swing.JLabel();
 
         bckViewBooking.setText("<<Back");
         bckViewBooking.addAncestorListener(new javax.swing.event.AncestorListener() {
@@ -158,6 +164,8 @@ public class ViewBookingJPanel extends javax.swing.JPanel {
 
         jLabel36.setText("Gender");
 
+        jLabel40.setText("Booking Status");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -169,40 +177,46 @@ public class ViewBookingJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel30)
                     .addComponent(jLabel36)
                     .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(bookingStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(viewFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
                     .addComponent(viewLastName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(viewGender, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(viewEmailID, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(viewPassportNum, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bookingStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(viewFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(viewLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(viewEmailID, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(viewPassportNum, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(viewGender, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Flight Details"));
@@ -292,8 +306,6 @@ public class ViewBookingJPanel extends javax.swing.JPanel {
 
         jLabel46.setText("Ticket Price");
 
-        jLabel47.setText("SeatStatus");
-
         javax.swing.GroupLayout seatPanelLayout = new javax.swing.GroupLayout(seatPanel);
         seatPanel.setLayout(seatPanelLayout);
         seatPanelLayout.setHorizontalGroup(
@@ -301,7 +313,6 @@ public class ViewBookingJPanel extends javax.swing.JPanel {
             .addGroup(seatPanelLayout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addGroup(seatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel45)
                     .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -309,8 +320,7 @@ public class ViewBookingJPanel extends javax.swing.JPanel {
                 .addGroup(seatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(viewSeatNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
                     .addComponent(viewPrice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(viewType, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(viewSeatStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(viewType, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         seatPanelLayout.setVerticalGroup(
@@ -328,11 +338,7 @@ public class ViewBookingJPanel extends javax.swing.JPanel {
                 .addGroup(seatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(viewType, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
-                .addGroup(seatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(viewSeatStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0))
+                .addGap(40, 40, 40))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -368,11 +374,11 @@ public class ViewBookingJPanel extends javax.swing.JPanel {
                 .addComponent(viewBooking, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(seatPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(26, 26, 26))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -423,7 +429,7 @@ this.panel.remove(this);
                 rePopulateTable.populateManageBooking();
             }
         }
-        layout.previous(this.panel);
+        layout.previous(panel);
     }//GEN-LAST:event_bckViewBookingActionPerformed
 
     private void cancelFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelFlightActionPerformed
@@ -438,15 +444,16 @@ this.panel.remove(this);
            Seat s =  reservation.getSeat();
            s.setStatus("Available");
            reservation.setIsBooked(false);
-           viewSeatStatus.setText(reservation.getSeat().getStatus()+"");
+           //viewSeatStatus.setText(reservation.getSeat().getStatus()+"");
            System.out.println("Seat Status after cancellation = " + reservation.getSeat().getStatus());
           
            
         }
         seatPanel.setVisible(false);
+        cancelFlight.setVisible(false);
         this.viewBooking.setText("BOOKING CANCELLED");
         this.viewBooking.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-         JOptionPane.showMessageDialog(null, "Booking Cancelled Successfully", "Warning", JOptionPane.WARNING_MESSAGE);
+         JOptionPane.showMessageDialog(null, "Booking Cancelled Successfully");
     }//GEN-LAST:event_cancelFlightActionPerformed
 
     private void bckViewBookingAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_bckViewBookingAncestorAdded
@@ -457,6 +464,7 @@ this.panel.remove(this);
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bckViewBooking;
+    private javax.swing.JLabel bookingStatus;
     private javax.swing.JButton cancelFlight;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel30;
@@ -469,10 +477,10 @@ this.panel.remove(this);
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
+    private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel47;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel seatPanel;
@@ -488,7 +496,6 @@ this.panel.remove(this);
     private javax.swing.JLabel viewPrice;
     private javax.swing.JLabel viewReservationNum;
     private javax.swing.JLabel viewSeatNumber;
-    private javax.swing.JLabel viewSeatStatus;
     private javax.swing.JLabel viewSource;
     private javax.swing.JLabel viewTime;
     private javax.swing.JLabel viewType;

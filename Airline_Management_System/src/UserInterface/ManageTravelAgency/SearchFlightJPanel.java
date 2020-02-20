@@ -152,7 +152,7 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnBookFlight.setText("Book Flight");
+        btnBookFlight.setText("Reset Search Filters");
         btnBookFlight.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBookFlightActionPerformed(evt);
@@ -354,16 +354,21 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
                 //rePopulateTable.populate();
             }
         }
-        layout.previous(this.panel);
+        layout.previous(panel);
     }//GEN-LAST:event_bckSearchFlightActionPerformed
 
     private void btnBookFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookFlightActionPerformed
-        // TODO add your handling code here:
-        BookFlightJPanel bookFlightPanel = new BookFlightJPanel(this.panel, airlineDirectory);
-        this.panel.add(bookFlightPanel, "BookFlightJPanel");
-        CardLayout layout = (CardLayout) this.panel.getLayout();
-        layout.next(panel);
-
+        searchFlightNumber.setText("");
+        sourceCombo.setSelectedItem("-- None --");
+        destinationCombo.setSelectedItem("-- None --");
+        priceCombo.setSelectedItem("-- None --");
+        dDay.setSelectedItem("-- None --");
+        aDay.setSelectedItem("-- None --");
+        airlineCombo.setSelectedItem("-- None --");
+        flightStatus.setSelectedItem("-- None --");
+        dDate.setText("");
+        aDate.setText("");
+        populate();
     }//GEN-LAST:event_btnBookFlightActionPerformed
 
     private void searchFlightNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFlightNumberActionPerformed

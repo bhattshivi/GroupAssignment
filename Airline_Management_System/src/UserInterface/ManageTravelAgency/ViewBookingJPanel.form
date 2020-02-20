@@ -53,11 +53,11 @@
               <Component id="viewBooking" min="-2" pref="25" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace pref="35" max="32767" attributes="0"/>
               <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="seatPanel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -101,48 +101,55 @@
                       <Component id="jLabel36" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel32" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                       <Component id="jLabel29" alignment="0" min="-2" pref="110" max="-2" attributes="0"/>
+                      <Component id="jLabel40" min="-2" pref="110" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="bookingStatus" max="32767" attributes="0"/>
                       <Component id="viewFirstName" pref="310" max="32767" attributes="0"/>
                       <Component id="viewLastName" max="32767" attributes="0"/>
                       <Component id="viewGender" min="-2" pref="285" max="-2" attributes="0"/>
                       <Component id="viewEmailID" min="-2" pref="277" max="-2" attributes="0"/>
                       <Component id="viewPassportNum" alignment="1" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel40" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="bookingStatus" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel29" min="-2" pref="25" max="-2" attributes="0"/>
                       <Component id="viewFirstName" min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel32" min="-2" pref="25" max="-2" attributes="0"/>
                       <Component id="viewLastName" min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel30" min="-2" pref="25" max="-2" attributes="0"/>
                       <Component id="viewEmailID" min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel34" min="-2" pref="25" max="-2" attributes="0"/>
                       <Component id="viewPassportNum" min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel36" min="-2" pref="25" max="-2" attributes="0"/>
                       <Component id="viewGender" min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="42" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -182,6 +189,13 @@
         <Component class="javax.swing.JLabel" name="viewPassportNum">
         </Component>
         <Component class="javax.swing.JLabel" name="viewGender">
+        </Component>
+        <Component class="javax.swing.JLabel" name="bookingStatus">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel40">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Booking Status"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
@@ -335,7 +349,6 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="34" pref="34" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel47" alignment="0" min="-2" pref="80" max="-2" attributes="0"/>
                       <Component id="jLabel45" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel46" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                       <Component id="jLabel44" alignment="0" min="-2" pref="110" max="-2" attributes="0"/>
@@ -345,7 +358,6 @@
                       <Component id="viewSeatNumber" alignment="0" pref="310" max="32767" attributes="0"/>
                       <Component id="viewPrice" alignment="0" max="32767" attributes="0"/>
                       <Component id="viewType" alignment="0" min="-2" pref="277" max="-2" attributes="0"/>
-                      <Component id="viewSeatStatus" alignment="1" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -369,12 +381,7 @@
                       <Component id="jLabel45" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
                       <Component id="viewType" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel47" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="viewSeatStatus" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -395,18 +402,11 @@
             <Property name="text" type="java.lang.String" value="Ticket Price"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel47">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="SeatStatus"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="viewSeatNumber">
         </Component>
         <Component class="javax.swing.JLabel" name="viewPrice">
         </Component>
         <Component class="javax.swing.JLabel" name="viewType">
-        </Component>
-        <Component class="javax.swing.JLabel" name="viewSeatStatus">
         </Component>
       </SubComponents>
     </Container>

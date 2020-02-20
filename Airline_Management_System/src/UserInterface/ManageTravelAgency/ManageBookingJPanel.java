@@ -157,7 +157,7 @@ public class ManageBookingJPanel extends javax.swing.JPanel {
                 //rePopulateTable.populate();
             }
         }
-        layout.previous(this.panel);
+        layout.previous(panel);
     }//GEN-LAST:event_bckBookingActionPerformed
 
     private void btnViewBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewBookingActionPerformed
@@ -192,12 +192,14 @@ public class ManageBookingJPanel extends javax.swing.JPanel {
             row[0] = reservation;
             row[1] = reservation.getCustomer().getFirstName() + " " +reservation.getCustomer().getLastName();
             row[2] = reservation.getFlight().getFlightId();
+            row[3] = reservation.isIsBooked() ? "Active" : "Cancelled";
+            /*
              if(reservation.getSeat().getStatus().equalsIgnoreCase("Not Available")){
              row[3] = "Active";
             }else if(reservation.getSeat().getStatus().equalsIgnoreCase("Available")){
                  row[3] = "Cancelled";
              }
-        
+             */
             dtm.addRow(row);
         }
     }

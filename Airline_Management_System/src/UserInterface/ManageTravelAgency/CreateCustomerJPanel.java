@@ -210,7 +210,7 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
                 rePopulateTable.populateManageCustomer();
             }
         }
-        layout.previous(this.panel);
+        layout.previous(panel);
     }//GEN-LAST:event_bkCreateCustomerActionPerformed
 
     private void createFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createFirstNameActionPerformed

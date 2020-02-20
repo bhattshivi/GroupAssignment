@@ -224,7 +224,7 @@ public class UpdateAirplane extends javax.swing.JPanel {
                 rePopulateTable.populateAiplaneTable();
             }
         }
-        layout.previous(this.panel);
+        layout.previous(panel);
     }//GEN-LAST:event_backUpdateAirplaneActionPerformed
 
     private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded

@@ -207,7 +207,7 @@ public class UpdateAirliner extends javax.swing.JPanel {
                 rePopulateTable.populateAirliners();
             }
         }
-        layout.previous(this.panel);
+        layout.previous(panel);
     }//GEN-LAST:event_backUpdateAirlinerActionPerformed
     
 

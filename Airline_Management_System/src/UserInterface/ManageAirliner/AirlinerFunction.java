@@ -11,6 +11,7 @@ import Business.AirplaneDirectory;
 import Business.Flight;
 import Business.FlightSchedule;
 import Business.MasterTravelSchedule;
+import Business.ReservationDirectory;
 import UserInterface.ManageTravelAgency.ManageTravelAgency;
 import java.awt.CardLayout;
 import java.awt.Component;
@@ -29,16 +30,19 @@ public class AirlinerFunction extends javax.swing.JPanel {
     private JPanel panel;
     private Airliner airliner;
     private MasterTravelSchedule masterTravelSchedule;
+    private ReservationDirectory reservationDirectory;
+    
     /**
      * Creates new form AirlinerFunction
      */
-    public AirlinerFunction(JPanel panel, AirlinerDirectory airlineDirectory, AirplaneDirectory airplaneDirectory, Airliner airliner, MasterTravelSchedule masterTravelSchedule) {
+    public AirlinerFunction(JPanel panel, AirlinerDirectory airlineDirectory, AirplaneDirectory airplaneDirectory, Airliner airliner, MasterTravelSchedule masterTravelSchedule, ReservationDirectory reservationDirectory) {
         initComponents();
         this.panel = panel;
         this.airlineDirectory = airlineDirectory;
         this.airplaneDirectory = airplaneDirectory;
         this.airliner = airliner;
         this.masterTravelSchedule = masterTravelSchedule;
+        this.reservationDirectory = reservationDirectory;
         populateAirlineFlights();
     }
     
@@ -250,7 +254,7 @@ public class AirlinerFunction extends javax.swing.JPanel {
             if(selectedRow>=0){
                 Flight flight = (Flight)airlinerFlightTbl.getValueAt(selectedRow, 0);
 
-                UpdateFlight updateflightPanel = new UpdateFlight(this.panel, airlineDirectory, airplaneDirectory, airliner, flight, masterTravelSchedule);
+                UpdateFlight updateflightPanel = new UpdateFlight(this.panel, airlineDirectory, airplaneDirectory, airliner, flight, masterTravelSchedule, reservationDirectory);
                 this.panel.add(updateflightPanel, "UpdateFlight");
                 CardLayout layout = (CardLayout)this.panel.getLayout();
                 layout.next(panel);
@@ -279,7 +283,7 @@ public class AirlinerFunction extends javax.swing.JPanel {
                 //rePopulateTable.populate();
             }
         }
-        layout.previous(this.panel);
+        layout.previous(panel);
 
     }//GEN-LAST:event_backFlightListActionPerformed
 

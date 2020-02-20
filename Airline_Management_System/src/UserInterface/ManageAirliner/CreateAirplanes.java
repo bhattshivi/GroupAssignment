@@ -208,7 +208,7 @@ public class CreateAirplanes extends javax.swing.JPanel {
                 rePopulateTable.populateAiplaneTable();
             }
         }
-        layout.previous(this.panel);
+        layout.previous(panel);
     }//GEN-LAST:event_backCreateAirplaneActionPerformed
 
     private void clearFields() {

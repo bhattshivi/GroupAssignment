@@ -395,7 +395,7 @@ public class CreateFlightSchedule extends javax.swing.JPanel {
                 rePopulateTable.populateFlightSchedules();
             }
         }
-        layout.previous(this.panel);
+        layout.previous(panel);
     }//GEN-LAST:event_backCreateFlightScheduleActionPerformed
 
     private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded

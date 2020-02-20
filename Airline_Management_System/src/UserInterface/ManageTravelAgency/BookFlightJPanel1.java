@@ -71,7 +71,7 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
     
     public void resetSeatLock() {
         for(Flight f : flightSelectedList) {
-            f.setSeatLock(new Seat());
+            f.setSeatLock(null);
         }
     }
     
@@ -173,8 +173,6 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
         passportTxt = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         genderTxt = new javax.swing.JTextField();
-        jLabel16 = new javax.swing.JLabel();
-        custIdTxt = new javax.swing.JTextField();
         bookTicket = new javax.swing.JButton();
         btnBackBookFlight = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
@@ -403,10 +401,6 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
 
         genderTxt.setEditable(false);
 
-        jLabel16.setText("Customer Id");
-
-        custIdTxt.setEditable(false);
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -425,14 +419,12 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
                 .addGap(28, 28, 28)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel16))
-                .addGap(20, 20, 20)
+                    .addComponent(jLabel12))
+                .addGap(28, 28, 28)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(custIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lastNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(passportTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(305, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -450,13 +442,9 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
                     .addComponent(jLabel14)
                     .addComponent(passportTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel16)
-                        .addComponent(custIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel15)
-                        .addComponent(genderTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(genderTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -670,7 +658,7 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
         Flight flightMatched = null;
         
         for(Reservation r : reservationDirectory.getReservationList()) {
-            if(r.getCustomer() == (Customer)customerCombo.getSelectedItem()) {
+            if(r.getCustomer() == (Customer)customerCombo.getSelectedItem() && r.isIsBooked()) {
                 
                 if(r.getFlight().getFlightSchedule().getDepartureDate().isBefore(f.getFlightSchedule().getArrivalDate()) &&
                         f.getFlightSchedule().getDepartureDate().isBefore(r.getFlight().getFlightSchedule().getArrivalDate())) {
@@ -769,7 +757,7 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
                     seatVal.setStatus("Not Available");
                     r.setSeat(seatVal);  
                     
-                    f.setSeatLock(new Seat());
+                    f.setSeatLock(null);
                     
                     reservationDirectory.addReservation(r);
                 }
@@ -841,21 +829,26 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
 
     private void btnBackBookFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackBookFlightActionPerformed
         // TODO add your handling code here:
-//        this.panel.remove(this);
-//        CardLayout layout = (CardLayout) this.panel.getLayout();
-//        layout.previous(panel);
+        //this.panel.remove(this);
+        //CardLayout layout = (CardLayout) this.panel.getLayout();
+        //layout.previous(panel);
 
         
         this.panel.remove(this);
         CardLayout layout = (CardLayout)this.panel.getLayout();
         Component[] comps = this.panel.getComponents();
         for (Component comp : comps){
-            if(comp instanceof ManageTravelAgency){
-                ManageTravelAgency rePopulateTable = (ManageTravelAgency) comp;
+            if(comp instanceof SearchFlightJPanel1){
+                //ManageTravelAgency rePopulateTable = (ManageTravelAgency) comp;
+                SearchFlightJPanel1 rePopulateTable = (SearchFlightJPanel1) comp;
                 //rePopulateTable.populate();
+                rePopulateTable.populate();
+                rePopulateTable.hideTables();
+                rePopulateTable.hideRoundTripFields();
+                rePopulateTable.hideMulticityFields();
             }
         }
-        layout.previous(this.panel);
+        layout.previous(panel);
     }//GEN-LAST:event_btnBackBookFlightActionPerformed
 
     private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
@@ -870,7 +863,6 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
     private javax.swing.JButton bookTicket;
     private javax.swing.JButton btnBackBookFlight;
     private javax.swing.JTextField carrierTxt;
-    private javax.swing.JTextField custIdTxt;
     private javax.swing.JComboBox<Customer> customerCombo;
     private javax.swing.JTextField dDateTxt;
     private javax.swing.JTextField dTimeTxt;
@@ -886,7 +878,6 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

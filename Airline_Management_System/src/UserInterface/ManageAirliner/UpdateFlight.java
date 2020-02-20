@@ -12,6 +12,8 @@ import Business.Airplane;
 import Business.AirplaneDirectory;
 import Business.Flight;
 import Business.MasterTravelSchedule;
+import Business.Reservation;
+import Business.ReservationDirectory;
 import Business.Seat;
 import java.awt.CardLayout;
 import java.awt.Component;
@@ -36,10 +38,12 @@ public class UpdateFlight extends javax.swing.JPanel {
     private Airplane selectedAirplane;
     private MasterTravelSchedule masterTravelSchedule;
     private Flight flight;
+    private ReservationDirectory reservationDirectory;
+    
     /**
      * Creates new form CreateFlight
      */
-    public UpdateFlight(JPanel panel, AirlinerDirectory airlineDirectory, AirplaneDirectory airplaneDirectory, Airliner airliner, Flight flight, MasterTravelSchedule masterTravelSchedule) {
+    public UpdateFlight(JPanel panel, AirlinerDirectory airlineDirectory, AirplaneDirectory airplaneDirectory, Airliner airliner, Flight flight, MasterTravelSchedule masterTravelSchedule, ReservationDirectory reservationDirectory) {
         initComponents();
         this.panel = panel;
         this.airlineDirectory = airlineDirectory;
@@ -48,6 +52,7 @@ public class UpdateFlight extends javax.swing.JPanel {
         this.masterTravelSchedule = masterTravelSchedule;
         this.flight = flight;
         this.airliner = airliner;
+        this.reservationDirectory = reservationDirectory;
         dtm = (DefaultTableModel) flightSeatsTbl.getModel();
         populateAirplanes();
         populateFlightSchedules();
@@ -486,10 +491,20 @@ public class UpdateFlight extends javax.swing.JPanel {
             }
             
             if(!isFlightExist) {
+                
+                for(Seat ss : flight.getFlightSeatList()) {
+                    if(ss.getStatus().equals("Not Available")) {
+                        
+                    }
+                }
+                
                 int count = 0;
                 for(int i=0; i < nRow; i++) {
-                
-                    if(null == flightSeatsTbl.getValueAt(i, 0) || "".equals(flightSeatsTbl.getValueAt(i, 0))) {
+                    
+                    if(i<flight.getFlightSeatList().size() && null != flight.getFlightSeatList().get(i) && !(flight.getFlightSeatList().get(i).getStatus().equals(flightSeatsTbl.getValueAt(i, 3)))) {
+                        JOptionPane.showMessageDialog(null, "Seat Status cannot be changed at row" + (i+1) + " as this seat is already booked by a customer");
+                        break;
+                    }else if(null == flightSeatsTbl.getValueAt(i, 0) || "".equals(flightSeatsTbl.getValueAt(i, 0))) {
                         JOptionPane.showMessageDialog(null, "Please enter seat number at row " + (i+1));
                         break;
                     }else if(null == flightSeatsTbl.getValueAt(i, 1) || "".equals(flightSeatsTbl.getValueAt(i, 1))) {
@@ -520,6 +535,12 @@ public class UpdateFlight extends javax.swing.JPanel {
                     flight.setAirplane(selectedAirplane);    
                     flight.getFlightSeatList().clear();
                     flight.setFlightSeatList(seatList); 
+                    for(Reservation r: reservationDirectory.getReservationList()) {
+                        if(r.getFlight().getFlightId().equals(flight.getFlightId())) {
+                            r.setIsBooked(false);
+                            r.getSeat().setStatus("Available");
+                        }
+                    }
 
                     JOptionPane.showMessageDialog(null, "Flight is updated successfully");
                 } 
@@ -626,7 +647,7 @@ public class UpdateFlight extends javax.swing.JPanel {
         
         selectedAirplane = (Airplane)flightAirplaneCombo.getSelectedItem();
         dtm.setRowCount(0);
-        if(selectedAirplane == flight.getAirplane()) {
+        //if(selectedAirplane == flight.getAirplane()) {
             dtm = (DefaultTableModel)flightSeatsTbl.getModel();           
             for(Seat s : flight.getFlightSeatList()){
                 Object[] row = new Object[dtm.getColumnCount()];
@@ -644,10 +665,12 @@ public class UpdateFlight extends javax.swing.JPanel {
                 System.out.println("inside()()()()");
                 dtm.setRowCount((selectedAirplane.getSeatCol()*selectedAirplane.getSeatRow()));
             }
-        }else {
-            int totalSeats = (selectedAirplane.getSeatCol() * selectedAirplane.getSeatRow());
-            dtm.setRowCount(totalSeats);
-        }
+        //}else {
+            if(selectedAirplane != flight.getAirplane()) {
+                int totalSeats = (selectedAirplane.getSeatCol() * selectedAirplane.getSeatRow());
+                dtm.setRowCount(totalSeats);
+            }
+        //}
         
     }//GEN-LAST:event_flightAirplaneComboActionPerformed
 
@@ -684,7 +707,7 @@ public class UpdateFlight extends javax.swing.JPanel {
                 rePopulateTable.populateAirlineFlights();
             }
         }
-        layout.previous(this.panel);
+        layout.previous(panel);
 
     }//GEN-LAST:event_btnBackUpdateFlightActionPerformed
 

@@ -210,7 +210,7 @@ public class CreateAirliners extends javax.swing.JPanel {
                 rePopulateTable.populateAirliners();
             }
         }
-        layout.previous(this.panel);
+        layout.previous(panel);
 
 
     }//GEN-LAST:event_bckCreateAirlinerActionPerformed

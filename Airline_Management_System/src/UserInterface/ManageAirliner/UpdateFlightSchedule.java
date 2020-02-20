@@ -326,7 +326,7 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
                 rePopulateTable.populateFlightSchedules();
             }
         }
-        layout.previous(this.panel);
+        layout.previous(panel);
     }//GEN-LAST:event_backUpdateFSActionPerformed
 
     private void backUpdateFSAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_backUpdateFSAncestorAdded

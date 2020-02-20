@@ -215,7 +215,7 @@ public class AddAirline extends javax.swing.JPanel {
                 //rePopulateTable.populate();
             }
         }
-        layout.previous(this.panel);
+        layout.previous(panel);
     }//GEN-LAST:event_btnBackManageAirlineActionPerformed
 
     private void updateAirlineBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateAirlineBtnActionPerformed

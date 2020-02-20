@@ -125,7 +125,7 @@ public class TravelAgencyMain extends javax.swing.JFrame {
     }//GEN-LAST:event_btnManageTravelAgencyMainButtonActionPerformed
 
     private void btnManageAirlinerMainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageAirlinerMainButtonActionPerformed
-        ManageAirliners airlinerPanel = new ManageAirliners(this.rightPanel, airlineDirectory, airplaneDirectory, masterTravelSchedule);
+        ManageAirliners airlinerPanel = new ManageAirliners(this.rightPanel, airlineDirectory, airplaneDirectory, masterTravelSchedule, reservationDirectory);
         this.rightPanel.add(airlinerPanel, "ManageAirliners");
         CardLayout layout = (CardLayout)this.rightPanel.getLayout();
         layout.next(rightPanel);
