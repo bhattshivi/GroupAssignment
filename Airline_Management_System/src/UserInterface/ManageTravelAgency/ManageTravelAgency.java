@@ -136,7 +136,8 @@ public class ManageTravelAgency extends javax.swing.JPanel {
 
     private void btnBookFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookFlightActionPerformed
         // TODO add your handling code here:
-        SearchFlightJPanel1 searchFlightJPanel = new SearchFlightJPanel1(this.panel, airlineDirectory, masterTravelSchedule, custDir, reservationDirectory);
+        //SearchFlightJPanel1 searchFlightJPanel = new SearchFlightJPanel1(this.panel, airlineDirectory, masterTravelSchedule, custDir, reservationDirectory);
+        SearchFlightJPanel1 searchFlightJPanel = new SearchFlightJPanel1(this.panel, airlineDirectory, airplaneDirectory, masterTravelSchedule, custDir, cust, reservationDirectory, reservation);
         this.panel.add(searchFlightJPanel, "SearchFlightJPanel");
         CardLayout layout = (CardLayout)this.panel.getLayout();
         layout.next(panel);

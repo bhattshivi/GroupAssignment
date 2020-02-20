@@ -7,9 +7,12 @@ package UserInterface.ManageTravelAgency;
 
 import Business.AirlinerDirectory;
 import Business.Airplane;
+import Business.AirplaneDirectory;
+import Business.Customer;
 import Business.CustomerDirectory;
 import Business.Flight;
 import Business.MasterTravelSchedule;
+import Business.Reservation;
 import Business.ReservationDirectory;
 import Business.Seat;
 import UserInterface.ManageAirliner.UpdateAirplane;
@@ -41,6 +44,9 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
     private String source;
     private String destination;
     private CustomerDirectory custDir;
+    private Customer cust;
+
+    private Reservation reservation;
     private String searchType;
     private ReservationDirectory reservationDirectory;
     
@@ -48,8 +54,9 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
     private DefaultTableModel dtmOneWay;
     private DefaultTableModel dtmRoundTrip;
     private int multicityRowCount;
+    private AirplaneDirectory airplaneDirectory;
     
-    public SearchFlightJPanel1(JPanel panel, AirlinerDirectory airlineDirectory, MasterTravelSchedule masterTravelSchedule, CustomerDirectory custDir, ReservationDirectory reservationDirectory) {
+    public SearchFlightJPanel1(JPanel panel, AirlinerDirectory airlineDirectory, AirplaneDirectory airplaneDirectory, MasterTravelSchedule masterTravelSchedule, CustomerDirectory custDir, Customer cust, ReservationDirectory reservationDirectory, Reservation reservation) {
         initComponents();
         searchType = "one-way";
         dtmOneWay = (DefaultTableModel) tblSearchFlight.getModel();
@@ -58,7 +65,10 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
         this.airlineDirectory = airlineDirectory;
         this.masterTravelSchedule = masterTravelSchedule;
         this.custDir = custDir;
+        this.cust = cust;
+        this.reservation = reservation;
         this.reservationDirectory = reservationDirectory;
+        this.airplaneDirectory = airplaneDirectory;
         deleteRow.setEnabled(false);
         populate();
         hideTables();
@@ -806,7 +816,8 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
                 }else {
                     Flight f = (Flight)tblSearchFlight.getValueAt(selectedRow1, 0);
                     flightToBook.add(f);
-                    BookFlightJPanel1 searchFlightJPanel = new BookFlightJPanel1(this.panel, airlineDirectory, masterTravelSchedule, flightToBook, custDir, reservationDirectory);
+                    //BookFlightJPanel1 searchFlightJPanel = new BookFlightJPanel1(this.panel, airlineDirectory, masterTravelSchedule, flightToBook, custDir, reservationDirectory);
+                    BookFlightJPanel1 searchFlightJPanel = new BookFlightJPanel1(this.panel, airlineDirectory, airplaneDirectory, masterTravelSchedule, flightToBook, custDir, cust, reservationDirectory, reservation);
                     this.panel.add(searchFlightJPanel, "SearchFlightJPanel");
                     CardLayout layout = (CardLayout)this.panel.getLayout();
                     layout.next(panel);
@@ -832,7 +843,7 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
                         flightToBook.add(f1);
                     }
                     flightToBook.add(f);
-                    BookFlightJPanel1 searchFlightJPanel = new BookFlightJPanel1(this.panel, airlineDirectory, masterTravelSchedule, flightToBook, custDir, reservationDirectory);
+                    BookFlightJPanel1 searchFlightJPanel = new BookFlightJPanel1(this.panel, airlineDirectory, airplaneDirectory, masterTravelSchedule, flightToBook, custDir, cust, reservationDirectory, reservation);
                     this.panel.add(searchFlightJPanel, "SearchFlightJPanel");
                     CardLayout layout = (CardLayout)this.panel.getLayout();
                     layout.next(panel);
@@ -852,7 +863,7 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
 
                         Flight f = (Flight)tblSearchFlight.getValueAt(selectedRows[i], 0);
                         flightToBook.add(f);
-                        BookFlightJPanel1 searchFlightJPanel = new BookFlightJPanel1(this.panel, airlineDirectory, masterTravelSchedule, flightToBook, custDir, reservationDirectory);
+                        BookFlightJPanel1 searchFlightJPanel = new BookFlightJPanel1(this.panel, airlineDirectory, airplaneDirectory, masterTravelSchedule, flightToBook, custDir, cust, reservationDirectory, reservation);
                         this.panel.add(searchFlightJPanel, "SearchFlightJPanel");
                         CardLayout layout = (CardLayout)this.panel.getLayout();
                         layout.next(panel);

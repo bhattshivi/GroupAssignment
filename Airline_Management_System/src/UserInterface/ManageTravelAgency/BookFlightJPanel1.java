@@ -7,6 +7,7 @@ package UserInterface.ManageTravelAgency;
 
 import Business.AirlinerDirectory;
 import Business.Airplane;
+import Business.AirplaneDirectory;
 import Business.Customer;
 import Business.CustomerDirectory;
 import Business.Flight;
@@ -41,10 +42,13 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
     private ArrayList<Flight> flightSelectedList;
     private CustomerDirectory custDir;
     private ReservationDirectory reservationDirectory;
+    private Customer cust;
+    private Reservation reservation;
+    private AirplaneDirectory airplaneDirectory;
     private DefaultTableModel dtm;// = (DefaultTableModel) jTable1.getModel();
     private int indexCount;
    
-    public BookFlightJPanel1(JPanel panel, AirlinerDirectory airlineDirectory,  MasterTravelSchedule masterTravelSchedule, ArrayList<Flight> flightSelectedList, CustomerDirectory custDir, ReservationDirectory reservationDirectory) {
+    public BookFlightJPanel1(JPanel panel, AirlinerDirectory airlineDirectory, AirplaneDirectory airplaneDirectory, MasterTravelSchedule masterTravelSchedule, ArrayList<Flight> flightSelectedList, CustomerDirectory custDir, Customer cust, ReservationDirectory reservationDirectory, Reservation reservation) {
         initComponents();
         this.panel = panel;
         this.airlineDirectory = airlineDirectory;
@@ -52,6 +56,9 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
         this.flightSelectedList = flightSelectedList;
         this.custDir = custDir;
         this.reservationDirectory = reservationDirectory;
+        this.cust = cust;
+        this.reservation = reservation;
+        this.airplaneDirectory = airplaneDirectory;
         dtm = (DefaultTableModel) jTable1.getModel();
         indexCount = 0;
         resetSeatLock();
@@ -735,7 +742,11 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
                     reservationDirectory.addReservation(r);
                 }
                 JOptionPane.showMessageDialog(null,"Flight has been booked successfully. Go to Manage Booking panel to manage all the bookings.");
-            }
+                
+                ManageTravelAgency manageTravelAgency = new ManageTravelAgency(panel, airlineDirectory, airplaneDirectory, masterTravelSchedule, custDir, cust, reservationDirectory, reservation);
+                this.panel.add(manageTravelAgency, "ManageTravelAgency");
+                CardLayout layout = (CardLayout)this.panel.getLayout();
+                layout.next(panel);                                       
         //}
             
             /*
@@ -773,7 +784,7 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
             */
             
         
-        
+            }
         
         for(Reservation r : reservationDirectory.getReservationList()) {
             System.out.println("------ RESERVATION ----------");
