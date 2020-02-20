@@ -8,8 +8,12 @@ package UserInterface.ManageTravelAgency;
 import Business.AirlinerDirectory;
 import Business.Customer;
 import Business.CustomerDirectory;
+import Business.FlightSchedule;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -27,13 +31,14 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
     private CustomerDirectory custDir;
     private Customer cust;
     private String gender;
+
     public CreateCustomerJPanel(JPanel panel, AirlinerDirectory airlineDirectory, CustomerDirectory custDir) {
         initComponents();
         this.panel = panel;
         this.airlineDirectory = airlineDirectory;
-        this.custDir=custDir;
+        this.custDir = custDir;
         this.gender = "";
-       
+
     }
 
     /**
@@ -114,7 +119,7 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
             }
         });
 
-        createGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "[None]", "Male", "Female" }));
+        createGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--None--", "Male", "Female" }));
         createGender.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 createGenderActionPerformed(evt);
@@ -192,20 +197,12 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
 
     private void bkCreateCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bkCreateCustomerActionPerformed
         // TODO add your handling code here:
-//        ManageCustomerJPanel manageCustomerJPanel = new ManageCustomerJPanel(this.panel, airlineDirectory, custDir ,cust);
-//        this.panel.add(manageCustomerJPanel, "ManageCustomerJPanel");
-//        CardLayout layout = (CardLayout)this.panel.getLayout();
-//        layout.next(panel);
-//        this.panel.remove(this);
-//        CardLayout layout = (CardLayout) this.panel.getLayout();
-//        layout.previous(panel);
-
 
         this.panel.remove(this);
-        CardLayout layout = (CardLayout)this.panel.getLayout();
+        CardLayout layout = (CardLayout) this.panel.getLayout();
         Component[] comps = this.panel.getComponents();
-        for (Component comp : comps){
-            if(comp instanceof ManageCustomerJPanel){
+        for (Component comp : comps) {
+            if (comp instanceof ManageCustomerJPanel) {
                 ManageCustomerJPanel rePopulateTable = (ManageCustomerJPanel) comp;
                 rePopulateTable.populateManageCustomer();
             }
@@ -231,15 +228,13 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
 
     private void btnCreateCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateCustomerActionPerformed
         // TODO add your handling code here:
-        
-        String firstName =createFirstName.getText();
+//
+       String firstName =createFirstName.getText();
    
         if (firstName.isEmpty() ) {
             JOptionPane.showMessageDialog(null, "First Name Cannot be empty");
             return;
-        } else {
-            firstName = createFirstName.getText();
-        }
+        } 
         //Last Name
         String lastName = createLastName.getText();
         if (lastName.isEmpty() ) {
@@ -268,48 +263,45 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
         }
         
    
-        if(gender.isEmpty()){
-              JOptionPane.showMessageDialog(null, "Gender Cannot be empty");
+        if("--None--".equals(gender)){
+             JOptionPane.showMessageDialog(null, "Please Select a Gender");
             return;
-        } 
-        
-        
-        
-      
+        }       
+        else{
+            gender = (String) createGender.getSelectedItem();  
+        }
         Customer customer = new Customer();
-        //SetValues
         customer.setFirstName(firstName);
         customer.setLastName(lastName);
         customer.setEmailId(email);
         customer.setPassportNum(passport);
         customer.setGender(gender);
-        custDir.setCust(customer);
+        
+        //custDir.setCust(customer);
         custDir.addCustomer(customer);
-        //custDir.addCustomer(customer);
         
-        System.out.println("customer - " + customer.getFirstName());
-        
-        
-        
-       
-        
-       
-        
-
         JOptionPane.showMessageDialog(null, "Customer Created Successfully");
-             //Reseting fields
+        clearFields();
+  
+
+
+    }//GEN-LAST:event_btnCreateCustomerActionPerformed
+
+    private void clearFields() {
+
         createFirstName.setText("");
         createLastName.setText("");
         createEmailID.setText("");
         createPassport.setText("");
-        
-        
-    }//GEN-LAST:event_btnCreateCustomerActionPerformed
+        //gender.replace(gender, "-- None --");
+        //gender.contains("-- None --");
+        createGender.setSelectedItem(gender);
+    }
 
     private void createGenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createGenderActionPerformed
         // TODO add your handling code here:
-       
-      gender = (String) createGender.getSelectedItem();                                          
+
+         gender = (String) createGender.getSelectedItem();                                          
 
     }//GEN-LAST:event_createGenderActionPerformed
 

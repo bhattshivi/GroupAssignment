@@ -11,6 +11,7 @@ import Business.CustomerDirectory;
 
 import java.awt.CardLayout;
 import java.awt.Component;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -181,10 +182,16 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
 
     private void btnUpdateCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCustomerActionPerformed
         // TODO add your handling code here:
+        
+        int selectedRow = tblManageCust.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a Row to Update Details!!", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
         UpdateCustomerJPanel updateCustomerJPanel = new UpdateCustomerJPanel(this.panel, airlineDirectory, custDir, cust);
         this.panel.add(updateCustomerJPanel, "UpdateCustomerJPanel");
         CardLayout layout = (CardLayout)this.panel.getLayout();
         layout.next(panel);
+        }
     }//GEN-LAST:event_btnUpdateCustomerActionPerformed
 
     private void btnBackManageCustAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_btnBackManageCustAncestorAdded
@@ -198,10 +205,10 @@ public void populateManageCustomer() {
         for(Customer cust : custDir.getCustomerList()){
             Object[] row = new Object[dtm.getColumnCount()];
             row[0] = cust;
-            row[1] = custDir.getCust().getFirstName();
-            row[2] = custDir.getCust().getLastName();
-            row[3] = custDir.getCust().getEmailId();
-            row[4] = custDir.getCust().getGender(); 
+            row[1] = cust.getFirstName();
+            row[2] = cust.getLastName();
+            row[3] = cust.getPassportNum();
+            row[4] = cust.getGender(); 
             dtm.addRow(row);
         }
     }

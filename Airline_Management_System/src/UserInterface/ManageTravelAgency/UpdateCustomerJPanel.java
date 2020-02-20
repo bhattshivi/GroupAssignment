@@ -45,14 +45,19 @@ public class UpdateCustomerJPanel extends javax.swing.JPanel {
   
      private void displayProduct() {
          //Customer customer = new Customer();
-         //System.out.println(custDir.getCust().getFirstName() + "GET ");
-        updateFirstName.setText(custDir.getCust().getFirstName() + "");
-        updateLastName.setText(custDir.getCust().getLastName() + "");
-        updateEmailID.setText(custDir.getCust().getEmailId() + "");
-        updatePassport.setText(custDir.getCust().getPassportNum()+ "");
-        updateGender.setSelectedItem(custDir.getCust().getGender() + "");
-       
+         //System.out.println(custDir..getCust().getFirstName() + "GET ");
+//        updateFirstName.setText(custDir.getCust().getFirstName() + "");
+//        updateLastName.setText(custDir.getCust().getLastName() + "");
+//        updateEmailID.setText(custDir.getCust().getEmailId() + "");
+//        updatePassport.setText(custDir.getCust().getPassportNum()+ "");
+//        updateGender.setSelectedItem(custDir.getCust().getGender() + "");
         
+        updateFirstName.setText(cust.getFirstName()+ "");
+        updateLastName.setText(cust.getLastName() + "");
+        updateEmailID.setText(cust.getEmailId() + "");
+        updatePassport.setText(cust.getPassportNum()+ "");
+        updateGender.setSelectedItem(cust.getGender() + "");
+//        
   
     }
     @SuppressWarnings("unchecked")
@@ -146,7 +151,7 @@ public class UpdateCustomerJPanel extends javax.swing.JPanel {
             }
         });
 
-        updateGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "[None]", "Male", "Female" }));
+        updateGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--None--", "Male", "Female" }));
         updateGender.setEnabled(false);
         updateGender.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -306,7 +311,7 @@ this.panel.remove(this);
         }
         
        
-        if(gender.isEmpty()){
+        if(gender.isEmpty() || "--None--".equals(gender)){
               JOptionPane.showMessageDialog(null, "Gender Cannot be empty");
             return;
         }
@@ -319,7 +324,7 @@ this.panel.remove(this);
         customer.setPassportNum(passport);
         customer.setGender(gender);
         custDir.setCust(customer);
-        
+       // custDir.addCustomer(customer);
        
         
         btnSave.setEnabled(false);
