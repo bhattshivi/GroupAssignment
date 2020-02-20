@@ -576,7 +576,7 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
                 }
             }
         }        
-        if(count2 == nRow && nRow > 1) {
+        if(count2 > 1 && nRow > 1) {
             s = false;
             JOptionPane.showMessageDialog(null, "Please select only one seat");
         }else {
@@ -662,31 +662,45 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
                 
                 if(r.getFlight().getFlightSchedule().getDepartureDate().isBefore(f.getFlightSchedule().getArrivalDate()) &&
                         f.getFlightSchedule().getDepartureDate().isBefore(r.getFlight().getFlightSchedule().getArrivalDate())) {
+                    System.out.println(">>>>> iside 1 >>>>>>");
                     overlap = true;
                     flightMatched = r.getFlight();
                 }else if((f.getFlightSchedule().getArrivalDate().equals(r.getFlight().getFlightSchedule().getArrivalDate()) && 
                           f.getFlightSchedule().getDepartureDate().equals(r.getFlight().getFlightSchedule().getDepartureDate())) ||
                         f.getFlightSchedule().getArrivalDate().equals(r.getFlight().getFlightSchedule().getDepartureDate()) ||
                         f.getFlightSchedule().getDepartureDate().equals(r.getFlight().getFlightSchedule().getArrivalDate())
-                        ) {                    
+                        ) {    
+                    System.out.println(">>>>> iside 2 >>>>>>");
                     long diff1 = DAYS.between(r.getFlight().getFlightSchedule().getDepartureDate(), r.getFlight().getFlightSchedule().getArrivalDate());
                     long diff2 = DAYS.between(f.getFlightSchedule().getDepartureDate(), f.getFlightSchedule().getArrivalDate());
                     
                     if(diff2 > diff1) {
+                        System.out.println(">>>>> iside 3 >>>>>>");
                         if(r.getFlight().getFlightSchedule().getArrivalTime().isAfter(f.getFlightSchedule().getDepartureTime())) {
+                            System.out.println(">>>>> iside 4 >>>>>>");
                             overlap = true;
                             flightMatched = r.getFlight();
                         }
                     }
                     if(diff1 > diff2) {
+                        System.out.println(">>>>> iside 5 >>>>>>");
                         if(f.getFlightSchedule().getArrivalTime().isAfter(r.getFlight().getFlightSchedule().getDepartureTime())) {
+                            System.out.println(">>>>> iside 6 >>>>>>");
                             overlap = true;
                             flightMatched = r.getFlight();
                         }
                     }
                     if(diff1 == diff2) {
-                        if(r.getFlight().getFlightSchedule().getDepartureDate().isBefore(f.getFlightSchedule().getArrivalDate()) &&
-                                f.getFlightSchedule().getDepartureDate().isBefore(r.getFlight().getFlightSchedule().getArrivalDate())) {
+                        System.out.println(">>>>> iside 7 >>>>>>");
+                        if(r.getFlight().getFlightSchedule().getDepartureTime().isBefore(f.getFlightSchedule().getArrivalTime()) &&
+                            f.getFlightSchedule().getDepartureTime().isBefore(r.getFlight().getFlightSchedule().getArrivalTime())) {
+                            System.out.println(">>>>> iside 8 >>>>>>");
+                            overlap = true;
+                            flightMatched = r.getFlight();
+                        }
+                        if(f.getFlightSchedule().getDepartureTime().equals(r.getFlight().getFlightSchedule().getDepartureTime()) && 
+                          f.getFlightSchedule().getArrivalTime().equals(r.getFlight().getFlightSchedule().getArrivalTime())) {
+                            System.out.println(">>>>> iside 9 >>>>>>");
                             overlap = true;
                             flightMatched = r.getFlight();
                         }
