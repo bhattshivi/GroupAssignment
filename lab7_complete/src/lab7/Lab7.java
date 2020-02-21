@@ -105,5 +105,13 @@ public class Lab7 {
         
         // find top 5 inactive and proactive users overall (sum of comments, posts and likes)
         helper.topFiveUsersOverall();
+        
+        helper.averageNumberOfLikesPerComment();
+        
+        helper.postWithMostLikeComments();
+        
+        helper.postWithMostComments();
+        helper.topFiveProactiveUsers();
+        helper.topFiveInactiveUsers();
     }
 }
