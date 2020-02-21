@@ -103,4 +103,40 @@ public class AnalysisHelper {
             count++;
         }
     }
+    
+    public void topFiveInactiveUsersOnComments() {
+        
+        Map<Integer, Comment> commentsMap = DataStore.getInstance().getComments();
+        Map<Integer, User> usersMap = DataStore.getInstance().getUsers();
+        Map<Integer, Integer> inactiveUserCount = new HashMap<>();
+        
+        for(Comment c : commentsMap.values()) {
+            int comments = 0;
+            if (inactiveUserCount.containsKey(c.getUserId())) {
+                comments = inactiveUserCount.get(c.getUserId());
+            }
+            comments += 1;
+            inactiveUserCount.put(c.getUserId(), comments);
+        }
+        
+        List<Map.Entry<Integer, Integer> > list = 
+               new LinkedList<Map.Entry<Integer, Integer> >(inactiveUserCount.entrySet()); 
+  
+        Collections.sort(list, new Comparator<Map.Entry<Integer, Integer> >() { 
+            public int compare(Map.Entry<Integer, Integer> o1,  
+                               Map.Entry<Integer, Integer> o2) { 
+                return (o1.getValue()).compareTo(o2.getValue()); 
+            } 
+        }); 
+          
+        System.out.println("Top 5 inactive users based on total comments: ");
+        int count = 0;
+        for (Map.Entry<Integer, Integer> aa : list) { 
+            System.out.println(usersMap.get(aa.getKey()) + "; Comments: " + aa.getValue());
+            if(count == 5) {
+                break;
+            }
+            count++;
+        }
+    }
 }

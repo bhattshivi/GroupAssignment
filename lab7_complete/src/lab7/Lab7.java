@@ -99,5 +99,8 @@ public class Lab7 {
         
         // find top 5 inactive users based on total posts number 
         helper.topFiveInactiveUsersOnPostsNumber();
+        
+        // find top 5 inactive users based on total comments they created
+        helper.topFiveInactiveUsersOnComments();
     }
 }
