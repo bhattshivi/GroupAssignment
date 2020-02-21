@@ -139,4 +139,86 @@ public class AnalysisHelper {
             count++;
         }
     }
+    
+    public void topFiveUsersOverall() {
+        
+        Map<Integer, Comment> commentsMap = DataStore.getInstance().getComments();
+        Map<Integer, Post> postsMap = DataStore.getInstance().getPosts();
+        Map<Integer, User> usersMap = DataStore.getInstance().getUsers();
+        Map<Integer, Integer> inactiveUserCommentsCount = new HashMap<>();
+        Map<Integer, Integer> inactiveUserPostsCount = new HashMap<>();
+        Map<Integer, Integer> inactiveUserLikesCount = new HashMap<>();
+        Map<Integer, Integer> inactiveUserCount = new HashMap<>();
+        
+        for(Comment c : commentsMap.values()) {
+            int comments = 0;
+            if (inactiveUserCommentsCount.containsKey(c.getUserId())) {
+                comments = inactiveUserCommentsCount.get(c.getUserId());
+            }
+            comments += 1;
+            inactiveUserCommentsCount.put(c.getUserId(), comments);
+        }
+        for(Post p : postsMap.values()) {
+            int posts = 0;
+            if (inactiveUserPostsCount.containsKey(p.getUserId())) {
+                posts = inactiveUserPostsCount.get(p.getUserId());
+            }
+            posts += 1;
+            inactiveUserPostsCount.put(p.getUserId(), posts);
+        }
+        for (User user : usersMap.values()) {
+            for (Comment c : user.getComments()) {
+                int likes = 0;
+                if (inactiveUserLikesCount.containsKey(user.getId())) {
+                    likes = inactiveUserLikesCount.get(user.getId());
+                }
+                likes += c.getLikes();
+                inactiveUserLikesCount.put(user.getId(), likes);
+            }
+        }
+        
+        for(int u : inactiveUserCommentsCount.keySet()) {
+            inactiveUserCount.put(u, inactiveUserCommentsCount.get(u) + inactiveUserPostsCount.get(u) + inactiveUserLikesCount.get(u));
+        }        
+        
+        List<Map.Entry<Integer, Integer> > list = 
+               new LinkedList<Map.Entry<Integer, Integer> >(inactiveUserCount.entrySet()); 
+  
+        Collections.sort(list, new Comparator<Map.Entry<Integer, Integer> >() { 
+            public int compare(Map.Entry<Integer, Integer> o1,  
+                               Map.Entry<Integer, Integer> o2) { 
+                return (o1.getValue()).compareTo(o2.getValue()); 
+            } 
+        }); 
+          
+        System.out.println("Top 5 inactive users overall: ");
+        int count = 0;
+        for (Map.Entry<Integer, Integer> aa : list) { 
+            System.out.println(usersMap.get(aa.getKey()) + "; Overall Sum: " + aa.getValue());
+            if(count == 5) {
+                break;
+            }
+            count++;
+        }
+        
+        List<Map.Entry<Integer, Integer> > list1 = 
+               new LinkedList<Map.Entry<Integer, Integer> >(inactiveUserCount.entrySet()); 
+  
+        Collections.sort(list1, new Comparator<Map.Entry<Integer, Integer> >() { 
+            public int compare(Map.Entry<Integer, Integer> o1,  
+                               Map.Entry<Integer, Integer> o2) { 
+                return (o2.getValue()).compareTo(o1.getValue()); 
+            } 
+        }); 
+          
+        System.out.println("Top 5 proacive users overall: ");
+        int count1 = 0;
+        for (Map.Entry<Integer, Integer> aa : list1) { 
+            System.out.println(usersMap.get(aa.getKey()) + "; Overall Sum: " + aa.getValue());
+            if(count1 == 5) {
+                break;
+            }
+            count1++;
+        }
+    }
 }
