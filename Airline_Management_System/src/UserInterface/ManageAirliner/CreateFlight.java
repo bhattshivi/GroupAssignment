@@ -58,7 +58,9 @@ public class CreateFlight extends javax.swing.JPanel {
             flightAirplaneCombo.addItem(a);
         }        
         for(FlightSchedule s : airliner.getFlightScheduleList()) {
-            flightScheduleCombo.addItem(s);
+            if(s.isIsActive()) {
+                flightScheduleCombo.addItem(s);
+            }            
         }
     }
 

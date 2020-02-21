@@ -77,7 +77,10 @@ public class UpdateFlight extends javax.swing.JPanel {
         int count = 0, index = 0;
         
         for(FlightSchedule s : airliner.getFlightScheduleList()) {
-            flightScheduleCombo.addItem(s);
+            if(s.isIsActive()) {
+                flightScheduleCombo.addItem(s);
+            }
+            
             if(s == flight.getFlightSchedule()) {
                 index = count;
             }

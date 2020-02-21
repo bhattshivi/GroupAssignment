@@ -13,7 +13,16 @@ public class Airplane {
     private String airplaneName;
     private int seatCol;
     private int seatRow;
+    private boolean isActive;
 
+    public boolean isIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+    
     public String getAirplaneName() {
         return airplaneName;
     }

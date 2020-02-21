@@ -18,7 +18,21 @@ public class FlightSchedule {
     private LocalDate departureDate;
     private LocalTime arrivalTime;
     private LocalTime departureTime;
+    private boolean isActive;
+    
+    public FlightSchedule() {
+        //this.isActive = true;
+    }
+    
+    public boolean isIsActive() {
+        return isActive;
+    }
 
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+    
+            
     public String getFlightScheduleId() {
         return flightScheduleId;
     }

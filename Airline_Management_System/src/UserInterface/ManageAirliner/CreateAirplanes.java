@@ -60,6 +60,8 @@ public class CreateAirplanes extends javax.swing.JPanel {
         createAirplane = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         backCreateAirplane = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        aStatus = new javax.swing.JComboBox<>();
 
         jLabel1.setText("Airplane Name *");
 
@@ -84,6 +86,10 @@ public class CreateAirplanes extends javax.swing.JPanel {
             }
         });
 
+        jLabel5.setText("Status *");
+
+        aStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- None --", "Active", "Inactive" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,23 +99,23 @@ public class CreateAirplanes extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(123, 123, 123)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(airplaneRows)
-                                    .addComponent(airplaneName)
-                                    .addComponent(airplaneCol, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(90, 90, 90)
-                                .addComponent(createAirplane))))
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(airplaneRows)
+                            .addComponent(airplaneName)
+                            .addComponent(airplaneCol, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                            .addComponent(aStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(160, 160, 160)
                         .addComponent(jLabel4))
-                    .addComponent(backCreateAirplane))
+                    .addComponent(backCreateAirplane)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(211, 211, 211)
+                        .addComponent(createAirplane)))
                 .addContainerGap(132, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -131,9 +137,13 @@ public class CreateAirplanes extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(airplaneCol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(aStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(createAirplane)
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addGap(67, 67, 67))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -148,6 +158,9 @@ public class CreateAirplanes extends javax.swing.JPanel {
             
         }else if("".equals(airplaneRows.getText())) {
             JOptionPane.showMessageDialog(null, "Airplane Seat Rows is mandatory");
+            
+        }else if("-- None --".equals(aStatus.getSelectedItem())) {
+            JOptionPane.showMessageDialog(null, "Airplane status is mandatory");
             
         }else {
             
@@ -182,6 +195,7 @@ public class CreateAirplanes extends javax.swing.JPanel {
                 newAirplane.setAirplaneName(airplaneName.getText());
                 newAirplane.setSeatCol(seatCols);
                 newAirplane.setSeatRow(seatRows);
+                newAirplane.setIsActive(aStatus.getSelectedItem().toString() == "Active");
                 airliner.addAirplane(newAirplane);
                 clearFields();
                 JOptionPane.showMessageDialog(null, "Airplane Created Successfully"); 
@@ -215,9 +229,11 @@ public class CreateAirplanes extends javax.swing.JPanel {
         airplaneName.setText("");
         airplaneCol.setText("");
         airplaneRows.setText("");
+        aStatus.setSelectedItem("-- None --");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> aStatus;
     private javax.swing.JTextField airplaneCol;
     private javax.swing.JTextField airplaneName;
     private javax.swing.JTextField airplaneRows;
@@ -227,6 +243,7 @@ public class CreateAirplanes extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables
 
 }
