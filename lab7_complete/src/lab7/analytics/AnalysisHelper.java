@@ -10,9 +10,11 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import lab7.entities.Comment;
+import lab7.entities.Post;
 import lab7.entities.User;
 
 /**
@@ -63,6 +65,42 @@ public class AnalysisHelper {
         System.out.println("5 most likes comments: ");
         for (int i = 0; i < commentList.size() && i < 5; i++) {
             System.out.println(commentList.get(i));
+        }
+    }
+    
+    public void topFiveInactiveUsersOnPostsNumber() {
+        
+        Map<Integer, Post> postsMap = DataStore.getInstance().getPosts();
+        Map<Integer, User> usersMap = DataStore.getInstance().getUsers();
+        Map<Integer, Integer> inactiveUserCount = new HashMap<>();
+        
+        for(Post p : postsMap.values()) {
+            int posts = 0;
+            if (inactiveUserCount.containsKey(p.getUserId())) {
+                posts = inactiveUserCount.get(p.getUserId());
+            }
+            posts += 1;
+            inactiveUserCount.put(p.getUserId(), posts);
+        }
+        
+        List<Map.Entry<Integer, Integer> > list = 
+               new LinkedList<Map.Entry<Integer, Integer> >(inactiveUserCount.entrySet()); 
+  
+        Collections.sort(list, new Comparator<Map.Entry<Integer, Integer> >() { 
+            public int compare(Map.Entry<Integer, Integer> o1,  
+                               Map.Entry<Integer, Integer> o2) { 
+                return (o1.getValue()).compareTo(o2.getValue()); 
+            } 
+        }); 
+          
+        System.out.println("Top 5 inactive users based on total posts number: ");
+        int count = 0;
+        for (Map.Entry<Integer, Integer> aa : list) { 
+            System.out.println(usersMap.get(aa.getKey()) + "; Posts: " + aa.getValue());
+            if(count == 5) {
+                break;
+            }
+            count++;
         }
     }
 }

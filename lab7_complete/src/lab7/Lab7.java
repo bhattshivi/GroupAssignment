@@ -96,5 +96,8 @@ public class Lab7 {
         helper.userWithMostLikes();
         
         helper.getFiveMostLikedComment();
+        
+        // find top 5 inactive users based on total posts number 
+        helper.topFiveInactiveUsersOnPostsNumber();
     }
 }
