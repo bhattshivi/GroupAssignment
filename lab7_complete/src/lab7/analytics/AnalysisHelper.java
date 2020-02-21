@@ -154,7 +154,21 @@ public class AnalysisHelper {
             posts += 1;
             inactiveUserCount.put(p.getUserId(), posts);
         }
-
+        
+        AscendingMapComparator comp = new AscendingMapComparator(inactiveUserCount);
+        Map<Integer, Integer> proactiveMap = new TreeMap(comp);
+        proactiveMap.putAll(inactiveUserCount);
+        int i = 0;
+        System.out.println("------------topFiveInactiveUsersOnPosts START --------------------");
+        for(Integer userId : proactiveMap.keySet()){
+            i++;
+            System.out.println(usersMap.get(userId) + "; Posts: " + inactiveUserCount.get(userId));
+            if(i ==5){
+                break;
+            }
+        }
+        System.out.println("------------topFiveInactiveUsersOnPosts END --------------------");
+        
         List<Map.Entry<Integer, Integer>> list
                 = new LinkedList<Map.Entry<Integer, Integer>>(inactiveUserCount.entrySet());
 
@@ -190,26 +204,21 @@ public class AnalysisHelper {
             comments += 1;
             inactiveUserCount.put(c.getUserId(), comments);
         }
-
-        List<Map.Entry<Integer, Integer>> list
-                = new LinkedList<Map.Entry<Integer, Integer>>(inactiveUserCount.entrySet());
-
-        Collections.sort(list, new Comparator<Map.Entry<Integer, Integer>>() {
-            public int compare(Map.Entry<Integer, Integer> o1,
-                    Map.Entry<Integer, Integer> o2) {
-                return (o1.getValue()).compareTo(o2.getValue());
-            }
-        });
-
-        System.out.println("Top 5 inactive users based on total comments: ");
-        int count = 0;
-        for (Map.Entry<Integer, Integer> aa : list) {
-            System.out.println(usersMap.get(aa.getKey()) + "; Comments: " + aa.getValue());
-            if (count == 5) {
+        
+        AscendingMapComparator comp = new AscendingMapComparator(inactiveUserCount);
+        Map<Integer, Integer> proactiveMap = new TreeMap(comp);
+        proactiveMap.putAll(inactiveUserCount);
+        int i = 0;
+        System.out.println("------------topFiveInactiveUsersOnComments START --------------------");
+        for(Integer userId : proactiveMap.keySet()){
+            i++;
+            System.out.println(usersMap.get(userId) + "; Comments: " + inactiveUserCount.get(userId));
+            if(i ==5){
                 break;
             }
-            count++;
         }
+        System.out.println("------------topFiveInactiveUsersOnComments END --------------------");
+        
     }
 
     public void topFiveUsersOverall() {
