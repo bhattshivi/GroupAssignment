@@ -114,7 +114,18 @@ public class Lab7 {
         helper.postWithMostComments();
         helper.topFiveProactiveUsers();
         helper.topFiveInactiveUsers();
-*/
+
+        //helper.postWithMostLikeComments();
+        */
+        
+        helper.averageNumberOfLikesPerComment();        
+        helper.postWithMostLikeComments();        
+        helper.postWithMostComments();
         helper.topFiveInactiveUsersOnPostsNumber();
+        helper.topFiveInactiveUsersOnComments();
+        helper.topFiveInactiveUsersOverall();
+        helper.topFiveProactiveUsersOverall();
+
+        
     }
 }

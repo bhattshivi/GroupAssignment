@@ -22,7 +22,11 @@ public class DecreasingMapComparator implements Comparator {
 
     public int compare(Object o1, Object o2) {
 
-        return ((Integer) map.get(o2)).compareTo((Integer) map.get(o1));
+        int value = ((Integer) map.get(o2)).compareTo((Integer) map.get(o1));
+        if (value == 0){
+            return ((Integer) o2).compareTo((Integer) (o1));
+        }
+        return value;
 
     }
 }

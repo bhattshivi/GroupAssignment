@@ -22,7 +22,10 @@ public class AscendingMapComparator implements Comparator {
 
     public int compare(Object o1, Object o2) {
 
-        return ((Integer) map.get(o1)).compareTo((Integer) map.get(o2));
-
+        int value = ((Integer) map.get(o1)).compareTo((Integer) map.get(o2));
+        if (value == 0){
+            return ((Integer) o1).compareTo((Integer) (o2));
+        }
+        return value;
     }
 }

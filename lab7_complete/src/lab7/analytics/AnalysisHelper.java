@@ -115,7 +115,6 @@ public class AnalysisHelper {
         }
         System.out.println("------------postWithMostLikeComments END --------------------");
     }
-    //Post and Comments
 
     public void postWithMostComments() {
         Map<Integer, Post> postsMap = DataStore.getInstance().getPosts();
@@ -139,215 +138,10 @@ public class AnalysisHelper {
         }
         System.out.println("------------postWithMostComments END --------------------");
     }
-
-    public void topFiveInactiveUsersOnPostsNumber() {
-
-        Map<Integer, Post> postsMap = DataStore.getInstance().getPosts();
-        Map<Integer, User> usersMap = DataStore.getInstance().getUsers();
-        Map<Integer, Integer> inactiveUserCount = new HashMap<>();
-
-        for (Post p : postsMap.values()) {
-            int posts = 0;
-            if (inactiveUserCount.containsKey(p.getUserId())) {
-                posts = inactiveUserCount.get(p.getUserId());
-            }
-            posts += 1;
-            inactiveUserCount.put(p.getUserId(), posts);
-        }
-        
-        AscendingMapComparator comp = new AscendingMapComparator(inactiveUserCount);
-        Map<Integer, Integer> proactiveMap = new TreeMap(comp);
-        proactiveMap.putAll(inactiveUserCount);
-        int i = 0;
-        System.out.println("------------topFiveInactiveUsersOnPosts START --------------------");
-        for(Integer userId : proactiveMap.keySet()){
-            i++;
-            System.out.println(usersMap.get(userId) + "; Posts: " + inactiveUserCount.get(userId));
-            if(i ==5){
-                break;
-            }
-        }
-        System.out.println("------------topFiveInactiveUsersOnPosts END --------------------");
-        
-        List<Map.Entry<Integer, Integer>> list
-                = new LinkedList<Map.Entry<Integer, Integer>>(inactiveUserCount.entrySet());
-
-        Collections.sort(list, new Comparator<Map.Entry<Integer, Integer>>() {
-            public int compare(Map.Entry<Integer, Integer> o1,
-                    Map.Entry<Integer, Integer> o2) {
-                return (o1.getValue()).compareTo(o2.getValue());
-            }
-        });
-
-        System.out.println("Top 5 inactive users based on total posts number: ");
-        int count = 0;
-        for (Map.Entry<Integer, Integer> aa : list) {
-            System.out.println(usersMap.get(aa.getKey()) + "; Posts: " + aa.getValue());
-            if (count == 5) {
-                break;
-            }
-            count++;
-        }
-    }
-
-    public void topFiveInactiveUsersOnComments() {
-
-        Map<Integer, Comment> commentsMap = DataStore.getInstance().getComments();
-        Map<Integer, User> usersMap = DataStore.getInstance().getUsers();
-        Map<Integer, Integer> inactiveUserCount = new HashMap<>();
-
-        for (Comment c : commentsMap.values()) {
-            int comments = 0;
-            if (inactiveUserCount.containsKey(c.getUserId())) {
-                comments = inactiveUserCount.get(c.getUserId());
-            }
-            comments += 1;
-            inactiveUserCount.put(c.getUserId(), comments);
-        }
-        
-        AscendingMapComparator comp = new AscendingMapComparator(inactiveUserCount);
-        Map<Integer, Integer> proactiveMap = new TreeMap(comp);
-        proactiveMap.putAll(inactiveUserCount);
-        int i = 0;
-        System.out.println("------------topFiveInactiveUsersOnComments START --------------------");
-        for(Integer userId : proactiveMap.keySet()){
-            i++;
-            System.out.println(usersMap.get(userId) + "; Comments: " + inactiveUserCount.get(userId));
-            if(i ==5){
-                break;
-            }
-        }
-        System.out.println("------------topFiveInactiveUsersOnComments END --------------------");
-        
-    }
-
-    public void topFiveUsersOverall() {
-
-        Map<Integer, Comment> commentsMap = DataStore.getInstance().getComments();
-        Map<Integer, Post> postsMap = DataStore.getInstance().getPosts();
-        Map<Integer, User> usersMap = DataStore.getInstance().getUsers();
-        Map<Integer, Integer> inactiveUserCommentsCount = new HashMap<>();
-        Map<Integer, Integer> inactiveUserPostsCount = new HashMap<>();
-        Map<Integer, Integer> inactiveUserLikesCount = new HashMap<>();
-        Map<Integer, Integer> inactiveUserCount = new HashMap<>();
-
-        for (Comment c : commentsMap.values()) {
-            int comments = 0;
-            if (inactiveUserCommentsCount.containsKey(c.getUserId())) {
-                comments = inactiveUserCommentsCount.get(c.getUserId());
-            }
-            comments += 1;
-            inactiveUserCommentsCount.put(c.getUserId(), comments);
-        }
-        for (Post p : postsMap.values()) {
-            int posts = 0;
-            if (inactiveUserPostsCount.containsKey(p.getUserId())) {
-                posts = inactiveUserPostsCount.get(p.getUserId());
-            }
-            posts += 1;
-            inactiveUserPostsCount.put(p.getUserId(), posts);
-        }
-        for (User user : usersMap.values()) {
-            for (Comment c : user.getComments()) {
-                int likes = 0;
-                if (inactiveUserLikesCount.containsKey(user.getId())) {
-                    likes = inactiveUserLikesCount.get(user.getId());
-                }
-                likes += c.getLikes();
-                inactiveUserLikesCount.put(user.getId(), likes);
-            }
-        }
-//comments posts and likes can be a disjoint set for example if user has a comment doesn't assure user having a post or a like.
-        for (int u : inactiveUserCommentsCount.keySet()) {
-            inactiveUserCount.put(u, inactiveUserCommentsCount.get(u) + inactiveUserPostsCount.get(u) + inactiveUserLikesCount.get(u));
-        }
-
-        List<Map.Entry<Integer, Integer>> list
-                = new LinkedList<Map.Entry<Integer, Integer>>(inactiveUserCount.entrySet());
-
-        Collections.sort(list, new Comparator<Map.Entry<Integer, Integer>>() {
-            public int compare(Map.Entry<Integer, Integer> o1,
-                    Map.Entry<Integer, Integer> o2) {
-                return (o1.getValue()).compareTo(o2.getValue());
-            }
-        });
-
-        System.out.println("Top 5 inactive users overall: ");
-        int count = 0;
-        for (Map.Entry<Integer, Integer> aa : list) {
-            System.out.println(usersMap.get(aa.getKey()) + "; Overall Sum: " + aa.getValue());
-            if (count == 5) {
-                break;
-            }
-            count++;
-        }
-
-        List<Map.Entry<Integer, Integer>> list1
-                = new LinkedList<Map.Entry<Integer, Integer>>(inactiveUserCount.entrySet());
-
-        Collections.sort(list1, new Comparator<Map.Entry<Integer, Integer>>() {
-            public int compare(Map.Entry<Integer, Integer> o1,
-                    Map.Entry<Integer, Integer> o2) {
-                return (o2.getValue()).compareTo(o1.getValue());
-            }
-        });
-
-        System.out.println("Top 5 proacive users overall: ");
-        int count1 = 0;
-        for (Map.Entry<Integer, Integer> aa : list1) {
-            System.out.println(usersMap.get(aa.getKey()) + "; Overall Sum: " + aa.getValue());
-            if (count1 == 5) {
-                break;
-            }
-            count1++;
-        }
-    }
-
-    public void topFiveProactiveUsers() {
-        Map<Integer, Integer> userPointsMap = getOverAllUserPointsMap();
-        DecreasingMapComparator comp = new DecreasingMapComparator(userPointsMap);
-        Map<Integer, Integer> proactiveMap = new TreeMap(comp);
-        proactiveMap.putAll(userPointsMap);
-        int i = 0;
-        System.out.println("------------topFiveProactiveUsers START --------------------");
-        for(Integer  userId : proactiveMap.keySet()){
-            i++;
-            System.out.println("Proactive Users are : " + userId);
-            if(i ==5){
-                break;
-            }
-        }
-    }
     
-    
-    public void topFiveInactiveUsers() {
-        Map<Integer, Integer> userPointsMap = getOverAllUserPointsMap();
-        AscendingMapComparator comp = new AscendingMapComparator(userPointsMap);
-        Map<Integer, Integer> proactiveMap = new TreeMap(comp);
-        proactiveMap.putAll(userPointsMap);
-        int i = 0;
-        System.out.println("------------topFiveInactiveUsers START --------------------");
-        for(Integer  userId : proactiveMap.keySet()){
-            i++;
-            System.out.println("Inactive Users are : " + userId);
-            if(i ==5){
-                break;
-            }
-        }
-    }
-
-    private Map<Integer, Integer> getOverAllUserPointsMap() {
-        Map<Integer, Integer> userPointsMap = new HashMap<>();
-        Map<Integer, Comment> commentsMap = DataStore.getInstance().getComments();
-        Map<Integer, Post> postsMap = DataStore.getInstance().getPosts();
-        Map<Integer, User> usersMap = DataStore.getInstance().getUsers();
-        for (Comment c : commentsMap.values()) {
-            int comments = 0;
-            if (userPointsMap.containsKey(c.getUserId())) {
-                comments = userPointsMap.get(c.getUserId());
-            }
-            comments += 1;
-            userPointsMap.put(c.getUserId(), comments);
+    public Map<Integer, Integer> generateUserPostMap(Map<Integer, Integer> userPointsMap, Map<Integer, User> usersMap, Map<Integer, Post> postsMap) {
+        for(User u : usersMap.values()) {
+            userPointsMap.put(u.getId(), 0);
         }
         for (Post p : postsMap.values()) {
             int posts = 0;
@@ -357,6 +151,25 @@ public class AnalysisHelper {
             posts += 1;
             userPointsMap.put(p.getUserId(), posts);
         }
+        return userPointsMap;
+    }
+    
+    public Map<Integer, Integer> generateUserCommentMap(Map<Integer, Integer> userPointsMap, Map<Integer, User> usersMap, Map<Integer, Comment> commentsMap) {
+        for(User u : usersMap.values()) {
+            userPointsMap.put(u.getId(), 0);
+        }
+        for (Comment c : commentsMap.values()) {
+            int comments = 0;
+            if (userPointsMap.containsKey(c.getUserId())) {
+                comments = userPointsMap.get(c.getUserId());
+            }
+            comments += 1;
+            userPointsMap.put(c.getUserId(), comments);
+        }
+        return userPointsMap;
+    }
+    
+    public Map<Integer, Integer> generateUserLikeMap(Map<Integer, Integer> userPointsMap, Map<Integer, User> usersMap, Map<Integer, Comment> commentsMap) {
         for (User user : usersMap.values()) {
             for (Comment c : user.getComments()) {
                 int likes = 0;
@@ -368,5 +181,100 @@ public class AnalysisHelper {
             }
         }
         return userPointsMap;
+    }
+    
+    public void topFiveInactiveUsersOnPostsNumber() {
+        Map<Integer, Post> postsMap = DataStore.getInstance().getPosts();
+        Map<Integer, User> usersMap = DataStore.getInstance().getUsers();
+        Map<Integer, Integer> userPointsMap = new HashMap<>();
+        
+        userPointsMap = generateUserPostMap(userPointsMap, usersMap, postsMap);
+        
+        AscendingMapComparator comp = new AscendingMapComparator(userPointsMap);
+        Map<Integer, Integer> inactiveMap = new TreeMap(comp);
+        inactiveMap.putAll(userPointsMap);
+        int i = 0;
+        System.out.println("------------topFiveInactiveUsersOnPosts START --------------------");
+        for(Integer userId : inactiveMap.keySet()){
+            i++;
+            System.out.println(usersMap.get(userId) + "; Posts: " + userPointsMap.get(userId));
+            if(i ==5){
+                break;
+            }
+        }
+        System.out.println("------------topFiveInactiveUsersOnPosts END --------------------");        
+    }
+    
+    public void topFiveInactiveUsersOnComments() {
+        Map<Integer, Comment> commentsMap = DataStore.getInstance().getComments();
+        Map<Integer, User> usersMap = DataStore.getInstance().getUsers();
+        Map<Integer, Integer> userPointsMap = new HashMap<>();
+        
+        userPointsMap = generateUserCommentMap(userPointsMap, usersMap, commentsMap);
+        
+        AscendingMapComparator comp = new AscendingMapComparator(userPointsMap);
+        Map<Integer, Integer> inactiveMap = new TreeMap(comp);
+        inactiveMap.putAll(userPointsMap);
+        int i = 0;
+        System.out.println("------------topFiveInactiveUsersOnComments START --------------------");
+        for(Integer userId : inactiveMap.keySet()){
+            i++;
+            System.out.println(usersMap.get(userId) + "; Comments: " + userPointsMap.get(userId));
+            if(i ==5){
+                break;
+            }
+        }
+        System.out.println("------------topFiveInactiveUsersOnComments END --------------------");
+    }
+    
+    public void topFiveInactiveUsersOverall() {
+        Map<Integer, Integer> userPointsMap = new HashMap<>();
+        Map<Integer, Comment> commentsMap = DataStore.getInstance().getComments();
+        Map<Integer, Post> postsMap = DataStore.getInstance().getPosts();
+        Map<Integer, User> usersMap = DataStore.getInstance().getUsers();
+        
+        userPointsMap = generateUserPostMap(userPointsMap, usersMap, postsMap);
+        userPointsMap = generateUserCommentMap(userPointsMap, usersMap, commentsMap);
+        userPointsMap = generateUserLikeMap(userPointsMap, usersMap, commentsMap);
+        
+        AscendingMapComparator comp = new AscendingMapComparator(userPointsMap);
+        Map<Integer, Integer> inactiveMap = new TreeMap(comp);
+        inactiveMap.putAll(userPointsMap);
+        int i = 0;
+        System.out.println("------------topFiveInactiveUsersOverall START --------------------");
+        for(Integer userId : inactiveMap.keySet()){
+            i++;
+            System.out.println(usersMap.get(userId) + "; Sum: " + userPointsMap.get(userId));
+            if(i ==5){
+                break;
+            }
+        }
+        System.out.println("------------topFiveInactiveUsersOverall END --------------------");
+        
+    }
+    
+    public void topFiveProactiveUsersOverall() {
+        Map<Integer, Integer> userPointsMap = new HashMap<>();
+        Map<Integer, Comment> commentsMap = DataStore.getInstance().getComments();
+        Map<Integer, Post> postsMap = DataStore.getInstance().getPosts();
+        Map<Integer, User> usersMap = DataStore.getInstance().getUsers();
+        
+        userPointsMap = generateUserPostMap(userPointsMap, usersMap, postsMap);
+        userPointsMap = generateUserCommentMap(userPointsMap, usersMap, commentsMap);
+        userPointsMap = generateUserLikeMap(userPointsMap, usersMap, commentsMap);
+        
+        DecreasingMapComparator comp = new DecreasingMapComparator(userPointsMap);
+        Map<Integer, Integer> proactiveMap = new TreeMap(comp);
+        proactiveMap.putAll(userPointsMap);
+        int i = 0;
+        System.out.println("------------topFiveProactiveUsersOverall START --------------------");
+        for(Integer userId : proactiveMap.keySet()){
+            i++;
+            System.out.println(usersMap.get(userId) + "; Sum: " + userPointsMap.get(userId));
+            if(i ==5){
+                break;
+            }
+        }
+        System.out.println("------------topFiveProactiveUsersOverall END --------------------");
     }
 }
