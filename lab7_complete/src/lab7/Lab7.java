@@ -92,32 +92,8 @@ public class Lab7 {
     }
     
     private void runAnalysis(){
-        /*
-        // find user with Most Likes
-        helper.userWithMostLikes();
-        
+        helper.userWithMostLikes();        
         helper.getFiveMostLikedComment();
-        
-        // find top 5 inactive users based on total posts number 
-        helper.topFiveInactiveUsersOnPostsNumber();
-        
-        // find top 5 inactive users based on total comments they created
-        helper.topFiveInactiveUsersOnComments();
-        
-        // find top 5 inactive and proactive users overall (sum of comments, posts and likes)
-        helper.topFiveUsersOverall();
-        
-        helper.averageNumberOfLikesPerComment();
-        
-        helper.postWithMostLikeComments();
-        
-        helper.postWithMostComments();
-        helper.topFiveProactiveUsers();
-        helper.topFiveInactiveUsers();
-
-        //helper.postWithMostLikeComments();
-        */
-        
         helper.averageNumberOfLikesPerComment();        
         helper.postWithMostLikeComments();        
         helper.postWithMostComments();
@@ -125,7 +101,5 @@ public class Lab7 {
         helper.topFiveInactiveUsersOnComments();
         helper.topFiveInactiveUsersOverall();
         helper.topFiveProactiveUsersOverall();
-
-        
     }
 }

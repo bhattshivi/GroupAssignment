@@ -130,13 +130,13 @@ public class AnalysisHelper {
                 postWithMostCommentsSet.add(p);
             } else if (postWithMostCommentsCount == numberOfComments) {
                 postWithMostCommentsSet.add(p);
-            }
+           }
         }
         System.out.println("------------postWithMostComments START --------------------");
         for (Post p : postWithMostCommentsSet) {
             System.out.println("Post Id with Most Comments in a Post :  " + p.getPostId());
         }
-        System.out.println("------------postWithMostComments END --------------------");
+        System.out.println("------------postWithMostComments END --------------------");        
     }
     
     public Map<Integer, Integer> generateUserPostMap(Map<Integer, Integer> userPointsMap, Map<Integer, User> usersMap, Map<Integer, Post> postsMap) {
