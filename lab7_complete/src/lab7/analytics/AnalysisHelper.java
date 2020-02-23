@@ -170,6 +170,9 @@ public class AnalysisHelper {
     }
     
     public Map<Integer, Integer> generateUserLikeMap(Map<Integer, Integer> userPointsMap, Map<Integer, User> usersMap, Map<Integer, Comment> commentsMap) {
+        for(User u : usersMap.values()) {
+            userPointsMap.put(u.getId(), 0);
+        }
         for (User user : usersMap.values()) {
             for (Comment c : user.getComments()) {
                 int likes = 0;
