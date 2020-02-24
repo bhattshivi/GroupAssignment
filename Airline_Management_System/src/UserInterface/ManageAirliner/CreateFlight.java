@@ -110,6 +110,7 @@ public class CreateFlight extends javax.swing.JPanel {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Available", "Not Available" }));
 
+        setBackground(new java.awt.Color(174, 195, 195));
         setPreferredSize(new java.awt.Dimension(1300, 1020));
         addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
@@ -121,6 +122,9 @@ public class CreateFlight extends javax.swing.JPanel {
             }
         });
 
+        jPanel3.setBackground(new java.awt.Color(174, 195, 195));
+
+        jPanel1.setBackground(new java.awt.Color(174, 195, 195));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Flight Details"));
 
         jLabel1.setText("Flight Name *");
@@ -214,6 +218,7 @@ public class CreateFlight extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel2.setBackground(new java.awt.Color(174, 195, 195));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Flight Schedule Details"));
 
         jLabel11.setText("Select Flight Schedule to add to this Flight *");
@@ -338,7 +343,8 @@ public class CreateFlight extends javax.swing.JPanel {
             }
         });
 
-        btnBackAddFlight.setText("<<<Back");
+        btnBackAddFlight.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-back-30.png"))); // NOI18N
+        btnBackAddFlight.setText("Back");
         btnBackAddFlight.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackAddFlightActionPerformed(evt);
@@ -350,7 +356,7 @@ public class CreateFlight extends javax.swing.JPanel {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(btnBackAddFlight)
+                .addComponent(btnBackAddFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(407, 407, 407)
                 .addComponent(jLabel13)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))

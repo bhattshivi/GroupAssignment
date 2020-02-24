@@ -176,7 +176,9 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
         bookTicket = new javax.swing.JButton();
         btnBackBookFlight = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(174, 195, 195));
         setPreferredSize(new java.awt.Dimension(1300, 1020));
         addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
@@ -196,6 +198,7 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
 
         jLabel1.setText("Select Flight from the list for seat selection");
 
+        jPanel1.setBackground(new java.awt.Color(174, 195, 195));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Flight Details"));
 
         jLabel2.setText("Source");
@@ -318,6 +321,7 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
                 .addGap(23, 23, 23))
         );
 
+        jPanel2.setBackground(new java.awt.Color(174, 195, 195));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Available Seats Selection"));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -369,7 +373,7 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         jLabel10.setText("Select customer");
@@ -380,6 +384,7 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
             }
         });
 
+        jPanel3.setBackground(new java.awt.Color(174, 195, 195));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Customer Detials"));
 
         jLabel11.setText("First Name");
@@ -449,14 +454,15 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        bookTicket.setText("Book");
+        bookTicket.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-airport-60.png"))); // NOI18N
         bookTicket.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bookTicketActionPerformed(evt);
             }
         });
 
-        btnBackBookFlight.setText("<<Back");
+        btnBackBookFlight.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-back-30.png"))); // NOI18N
+        btnBackBookFlight.setText("Back");
         btnBackBookFlight.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackBookFlightActionPerformed(evt);
@@ -466,6 +472,8 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
         jLabel17.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel17.setText("BOOK FLIGHT ");
+
+        jLabel16.setText("Book");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -492,15 +500,17 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(customerCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnBackBookFlight)
+                                .addComponent(btnBackBookFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(245, 245, 245)
-                                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(578, 578, 578)
+                                .addComponent(bookTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(630, 630, 630)
+                                .addComponent(jLabel16)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(578, 578, 578)
-                .addComponent(bookTicket)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -525,7 +535,9 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(bookTicket)
-                .addContainerGap(224, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel16)
+                .addContainerGap(162, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -905,6 +917,7 @@ public class BookFlightJPanel1 extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

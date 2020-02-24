@@ -72,6 +72,7 @@ public class CreateFlightSchedule extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         fsStatus = new javax.swing.JComboBox<>();
 
+        setBackground(new java.awt.Color(174, 195, 195));
         setPreferredSize(new java.awt.Dimension(1300, 1020));
         addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
@@ -97,6 +98,7 @@ public class CreateFlightSchedule extends javax.swing.JPanel {
 
         jLabel4.setText("Arrival Date *");
 
+        createFlight.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-schedule-60.png"))); // NOI18N
         createFlight.setText("Create");
         createFlight.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,7 +131,8 @@ public class CreateFlightSchedule extends javax.swing.JPanel {
 
         jLabel11.setText("(HH:MM)");
 
-        backCreateFlightSchedule.setText("<<<Back");
+        backCreateFlightSchedule.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-back-30.png"))); // NOI18N
+        backCreateFlightSchedule.setText("Back");
         backCreateFlightSchedule.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backCreateFlightScheduleActionPerformed(evt);
@@ -146,8 +149,8 @@ public class CreateFlightSchedule extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(backCreateFlightSchedule)
-                .addContainerGap(1182, Short.MAX_VALUE))
+                .addComponent(backCreateFlightSchedule, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(1201, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
@@ -202,9 +205,9 @@ public class CreateFlightSchedule extends javax.swing.JPanel {
                     .addComponent(sourceCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(destinationCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(destinationCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -232,7 +235,7 @@ public class CreateFlightSchedule extends javax.swing.JPanel {
                     .addComponent(fsStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(createFlight)
-                .addContainerGap(531, Short.MAX_VALUE))
+                .addContainerGap(475, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     

@@ -68,7 +68,10 @@ public class ManageAirplanes extends javax.swing.JPanel {
         addAirplaneBtn = new javax.swing.JButton();
         updateAirplaneBtn = new javax.swing.JButton();
         backAirplaneList = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(174, 195, 195));
         setPreferredSize(new java.awt.Dimension(1300, 1020));
         addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
@@ -119,7 +122,7 @@ public class ManageAirplanes extends javax.swing.JPanel {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Airplanes List");
 
-        addAirplaneBtn.setText("Add Airplane");
+        addAirplaneBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/travel.png"))); // NOI18N
         addAirplaneBtn.setToolTipText("");
         addAirplaneBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,19 +130,25 @@ public class ManageAirplanes extends javax.swing.JPanel {
             }
         });
 
-        updateAirplaneBtn.setText("Update Airplane");
+        updateAirplaneBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/change.png"))); // NOI18N
         updateAirplaneBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateAirplaneBtnActionPerformed(evt);
             }
         });
 
-        backAirplaneList.setText("<<Back");
+        backAirplaneList.setBackground(new java.awt.Color(174, 195, 195));
+        backAirplaneList.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-back-30.png"))); // NOI18N
+        backAirplaneList.setText("Back");
         backAirplaneList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backAirplaneListActionPerformed(evt);
             }
         });
+
+        jLabel1.setText("Update Airplane");
+
+        jLabel2.setText("Add Airplane");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -151,15 +160,21 @@ public class ManageAirplanes extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1288, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(backAirplaneList)
+                        .addComponent(backAirplaneList, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(addAirplaneBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(updateAirplaneBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(addAirplaneBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(updateAirplaneBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(484, 484, 484)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(118, 118, 118)
+                .addComponent(jLabel1)
+                .addGap(507, 507, 507))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,7 +189,11 @@ public class ManageAirplanes extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(updateAirplaneBtn)
                     .addComponent(addAirplaneBtn))
-                .addGap(724, 724, 724))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addGap(702, 702, 702))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -236,6 +255,8 @@ public class ManageAirplanes extends javax.swing.JPanel {
     private javax.swing.JButton addAirplaneBtn;
     private javax.swing.JTable airplaneTbl;
     private javax.swing.JButton backAirplaneList;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton updateAirplaneBtn;

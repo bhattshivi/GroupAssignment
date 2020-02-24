@@ -65,6 +65,7 @@ public class UpdateAirliner extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         backUpdateAirliner = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(174, 195, 195));
         setPreferredSize(new java.awt.Dimension(1300, 1020));
 
         jLabel1.setText("Airliner Name *");
@@ -73,6 +74,7 @@ public class UpdateAirliner extends javax.swing.JPanel {
 
         jLabel3.setText("Headquarter *");
 
+        updateAirlinerBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/change.png"))); // NOI18N
         updateAirlinerBtn.setText("Update");
         updateAirlinerBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,7 +86,8 @@ public class UpdateAirliner extends javax.swing.JPanel {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Update Airliner");
 
-        backUpdateAirliner.setText("<<Back");
+        backUpdateAirliner.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-back-30.png"))); // NOI18N
+        backUpdateAirliner.setText("Back");
         backUpdateAirliner.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backUpdateAirlinerActionPerformed(evt);
@@ -99,7 +102,7 @@ public class UpdateAirliner extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(backUpdateAirliner))
+                        .addComponent(backUpdateAirliner, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(499, 499, 499)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)

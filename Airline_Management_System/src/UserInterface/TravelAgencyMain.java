@@ -76,7 +76,7 @@ public class TravelAgencyMain extends javax.swing.JFrame {
 
         leftPanel.setBackground(new java.awt.Color(174, 195, 195));
 
-        btnManageAirlinerMainButton.setIcon(new javax.swing.ImageIcon("/Users/shivibhatt/Documents/AED/GIT/GroupAssignment/GroupAssignment/Airline_Management_System/icons/global .png")); // NOI18N
+        btnManageAirlinerMainButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/global .png"))); // NOI18N
         btnManageAirlinerMainButton.setText("Manage Airliner");
         btnManageAirlinerMainButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,7 +84,7 @@ public class TravelAgencyMain extends javax.swing.JFrame {
             }
         });
 
-        btnManageTravelAgencyMainButton.setIcon(new javax.swing.ImageIcon("/Users/shivibhatt/Documents/AED/GIT/GroupAssignment/GroupAssignment/Airline_Management_System/icons/icons8-traveler-64.png")); // NOI18N
+        btnManageTravelAgencyMainButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-traveler-64.png"))); // NOI18N
         btnManageTravelAgencyMainButton.setText("Manage Travel Agency");
         btnManageTravelAgencyMainButton.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnManageTravelAgencyMainButton.addActionListener(new java.awt.event.ActionListener() {
@@ -93,7 +93,7 @@ public class TravelAgencyMain extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("/Users/shivibhatt/Documents/AED/GIT/GroupAssignment/GroupAssignment/Airline_Management_System/icons/icons8-airport-100.png")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-airport-100.png"))); // NOI18N
 
         javax.swing.GroupLayout leftPanelLayout = new javax.swing.GroupLayout(leftPanel);
         leftPanel.setLayout(leftPanelLayout);

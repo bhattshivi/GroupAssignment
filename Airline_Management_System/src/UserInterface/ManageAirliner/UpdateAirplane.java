@@ -70,6 +70,7 @@ public class UpdateAirplane extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         backUpdateAirplane = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(174, 195, 195));
         setPreferredSize(new java.awt.Dimension(1300, 1020));
         addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
@@ -87,6 +88,7 @@ public class UpdateAirplane extends javax.swing.JPanel {
 
         jLabel3.setText("# of Columns *");
 
+        updateAirplane.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/change.png"))); // NOI18N
         updateAirplane.setText("Update");
         updateAirplane.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,7 +99,8 @@ public class UpdateAirplane extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Segoe Print", 1, 24)); // NOI18N
         jLabel4.setText("Update Airplane");
 
-        backUpdateAirplane.setText("<<<Back");
+        backUpdateAirplane.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-back-30.png"))); // NOI18N
+        backUpdateAirplane.setText("Back");
         backUpdateAirplane.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backUpdateAirplaneActionPerformed(evt);
@@ -129,7 +132,7 @@ public class UpdateAirplane extends javax.swing.JPanel {
                                     .addComponent(airplaneCol, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(backUpdateAirplane))
+                        .addComponent(backUpdateAirplane, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(486, 486, 486)
                         .addComponent(jLabel4)))
@@ -159,7 +162,7 @@ public class UpdateAirplane extends javax.swing.JPanel {
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addComponent(updateAirplane)
-                .addContainerGap(679, Short.MAX_VALUE))
+                .addContainerGap(619, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

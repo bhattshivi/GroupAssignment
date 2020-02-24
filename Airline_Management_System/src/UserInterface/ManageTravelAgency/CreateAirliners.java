@@ -56,6 +56,7 @@ public class CreateAirliners extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         bckCreateAirliner = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(174, 195, 195));
         setPreferredSize(new java.awt.Dimension(1300, 1020));
         addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
@@ -79,6 +80,7 @@ public class CreateAirliners extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/travel (1).png"))); // NOI18N
         jButton1.setText("Create");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,7 +92,8 @@ public class CreateAirliners extends javax.swing.JPanel {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Create Airliner");
 
-        bckCreateAirliner.setText("<<Back");
+        bckCreateAirliner.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-back-30.png"))); // NOI18N
+        bckCreateAirliner.setText("Back");
         bckCreateAirliner.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bckCreateAirlinerActionPerformed(evt);
@@ -143,7 +146,7 @@ public class CreateAirliners extends javax.swing.JPanel {
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(643, Short.MAX_VALUE))
+                .addContainerGap(583, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

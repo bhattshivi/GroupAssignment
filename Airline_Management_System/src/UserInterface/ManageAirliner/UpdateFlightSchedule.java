@@ -85,6 +85,7 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         fsStatus = new javax.swing.JComboBox<>();
 
+        setBackground(new java.awt.Color(174, 195, 195));
         setPreferredSize(new java.awt.Dimension(1300, 1020));
 
         jLabel1.setText("Source *");
@@ -101,6 +102,7 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
 
         jLabel4.setText("Arrival Date *");
 
+        updateFlight.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/change.png"))); // NOI18N
         updateFlight.setText("Update");
         updateFlight.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,7 +129,8 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
 
         jLabel11.setText("(HH:MM)");
 
-        backUpdateFS.setText("<<<Back");
+        backUpdateFS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-back-30.png"))); // NOI18N
+        backUpdateFS.setText("Back");
         backUpdateFS.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -155,7 +158,7 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(backUpdateFS))
+                        .addComponent(backUpdateFS, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(468, 468, 468)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -242,7 +245,7 @@ public class UpdateFlightSchedule extends javax.swing.JPanel {
                         .addComponent(jLabel11)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(updateFlight)
-                .addContainerGap(571, Short.MAX_VALUE))
+                .addContainerGap(511, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

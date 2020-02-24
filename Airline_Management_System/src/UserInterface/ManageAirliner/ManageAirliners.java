@@ -65,11 +65,19 @@ public class ManageAirliners extends javax.swing.JPanel {
         continueBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(174, 195, 195));
         setPreferredSize(new java.awt.Dimension(1300, 1020));
         setRequestFocusEnabled(false);
 
-        continueBtn.setText("Continue");
+        airlinerComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                airlinerComboBoxActionPerformed(evt);
+            }
+        });
+
+        continueBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-next-page-30.png"))); // NOI18N
         continueBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 continueBtnActionPerformed(evt);
@@ -81,6 +89,8 @@ public class ManageAirliners extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("Segoe Script", 1, 24)); // NOI18N
         jLabel2.setText("Welcome to Airline Management");
+
+        jLabel3.setText("Continue");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -97,8 +107,11 @@ public class ManageAirliners extends javax.swing.JPanel {
                             .addComponent(airlinerComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(565, 565, 565)
-                        .addComponent(continueBtn)))
+                        .addGap(530, 530, 530)
+                        .addComponent(continueBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(576, 576, 576)
+                        .addComponent(jLabel3)))
                 .addContainerGap(463, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -109,10 +122,12 @@ public class ManageAirliners extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addGap(29, 29, 29)
-                .addComponent(airlinerComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(continueBtn)
-                .addContainerGap(780, Short.MAX_VALUE))
+                .addComponent(airlinerComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(continueBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addContainerGap(765, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -129,11 +144,16 @@ public class ManageAirliners extends javax.swing.JPanel {
         }        
     }//GEN-LAST:event_continueBtnActionPerformed
 
+    private void airlinerComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_airlinerComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_airlinerComboBoxActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<Airliner> airlinerComboBox;
     private javax.swing.JButton continueBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }

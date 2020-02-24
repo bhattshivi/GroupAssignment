@@ -180,6 +180,9 @@ public class UpdateFlight extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(1300, 1020));
 
+        jPanel3.setBackground(new java.awt.Color(174, 195, 195));
+
+        jPanel1.setBackground(new java.awt.Color(174, 195, 195));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Flight Details"));
 
         jLabel1.setText("Flight Name *");
@@ -270,6 +273,7 @@ public class UpdateFlight extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel2.setBackground(new java.awt.Color(174, 195, 195));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Flight Schedule Details"));
 
         jLabel11.setText("Select Flight Schedule to add to this Flight *");
@@ -349,8 +353,8 @@ public class UpdateFlight extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addGap(18, 18, 18)
-                        .addComponent(flightScheduleCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(553, Short.MAX_VALUE))))
+                        .addComponent(flightScheduleCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(180, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -390,7 +394,8 @@ public class UpdateFlight extends javax.swing.JPanel {
             }
         });
 
-        btnBackUpdateFlight.setText("<<<Back");
+        btnBackUpdateFlight.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-back-30.png"))); // NOI18N
+        btnBackUpdateFlight.setText("Back");
         btnBackUpdateFlight.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -414,7 +419,7 @@ public class UpdateFlight extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(btnBackUpdateFlight)
+                        .addComponent(btnBackUpdateFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(323, 323, 323)
                         .addComponent(jLabel13)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))

@@ -105,6 +105,9 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         flightStatus = new javax.swing.JComboBox<>();
 
+        setBackground(new java.awt.Color(174, 195, 195));
+        setPreferredSize(new java.awt.Dimension(1300, 1020));
+
         tblSearchFlight.setBackground(new java.awt.Color(255, 237, 218));
         tblSearchFlight.setFont(new java.awt.Font("Lucida Grande", 1, 12)); // NOI18N
         tblSearchFlight.setModel(new javax.swing.table.DefaultTableModel(
@@ -145,13 +148,15 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
             tblSearchFlight.getColumnModel().getColumn(8).setResizable(false);
         }
 
-        bckSearchFlight.setText("<<Back");
+        bckSearchFlight.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-back-30.png"))); // NOI18N
+        bckSearchFlight.setText("Back");
         bckSearchFlight.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bckSearchFlightActionPerformed(evt);
             }
         });
 
+        btnBookFlight.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/reset.png"))); // NOI18N
         btnBookFlight.setText("Reset Search Filters");
         btnBookFlight.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,6 +184,7 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Master Flights List");
 
+        btnSearchFlight.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/search.png"))); // NOI18N
         btnSearchFlight.setText("Search Flight");
         btnSearchFlight.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -274,8 +280,8 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
                                 .addComponent(jLabel6))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(bckSearchFlight)))
-                        .addGap(0, 145, Short.MAX_VALUE)))
+                                .addComponent(bckSearchFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 620, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -329,11 +335,11 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(flightStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSearchFlight)
-                .addGap(18, 18, 18)
-                .addComponent(btnBookFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnBookFlight)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

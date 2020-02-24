@@ -88,7 +88,7 @@
             <Component class="javax.swing.JButton" name="btnManageAirlinerMainButton">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="/Users/shivibhatt/Documents/AED/GIT/GroupAssignment/GroupAssignment/Airline_Management_System/icons/global .png"/>
+                  <Image iconType="3" name="/icons/global .png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Manage Airliner"/>
               </Properties>
@@ -99,7 +99,7 @@
             <Component class="javax.swing.JButton" name="btnManageTravelAgencyMainButton">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="/Users/shivibhatt/Documents/AED/GIT/GroupAssignment/GroupAssignment/Airline_Management_System/icons/icons8-traveler-64.png"/>
+                  <Image iconType="3" name="/icons/icons8-traveler-64.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Manage Travel Agency"/>
                 <Property name="horizontalTextPosition" type="int" value="4"/>
@@ -111,7 +111,7 @@
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="/Users/shivibhatt/Documents/AED/GIT/GroupAssignment/GroupAssignment/Airline_Management_System/icons/icons8-airport-100.png"/>
+                  <Image iconType="3" name="/icons/icons8-airport-100.png"/>
                 </Property>
               </Properties>
             </Component>
