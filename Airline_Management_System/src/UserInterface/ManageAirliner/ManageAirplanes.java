@@ -69,6 +69,7 @@ public class ManageAirplanes extends javax.swing.JPanel {
         updateAirplaneBtn = new javax.swing.JButton();
         backAirplaneList = new javax.swing.JButton();
 
+        setPreferredSize(new java.awt.Dimension(1300, 1020));
         addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -119,6 +120,7 @@ public class ManageAirplanes extends javax.swing.JPanel {
         jLabel4.setText("Airplanes List");
 
         addAirplaneBtn.setText("Add Airplane");
+        addAirplaneBtn.setToolTipText("");
         addAirplaneBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addAirplaneBtnActionPerformed(evt);
@@ -144,23 +146,19 @@ public class ManageAirplanes extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1288, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(backAirplaneList)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(226, 226, 226)
-                                .addComponent(addAirplaneBtn)
-                                .addGap(18, 18, 18)
-                                .addComponent(updateAirplaneBtn))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(backAirplaneList)))
-                        .addGap(0, 260, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(addAirplaneBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(updateAirplaneBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(484, 484, 484)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -172,11 +170,11 @@ public class ManageAirplanes extends javax.swing.JPanel {
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addAirplaneBtn)
-                    .addComponent(updateAirplaneBtn))
-                .addContainerGap(333, Short.MAX_VALUE))
+                    .addComponent(updateAirplaneBtn)
+                    .addComponent(addAirplaneBtn))
+                .addGap(724, 724, 724))
         );
     }// </editor-fold>//GEN-END:initComponents
 

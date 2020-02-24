@@ -68,7 +68,7 @@ public class TravelAgencyMain extends javax.swing.JFrame {
         rightPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(950, 650));
+        setPreferredSize(new java.awt.Dimension(1500, 1020));
 
         jSplitPane1.setDividerLocation(200);
 
@@ -94,7 +94,7 @@ public class TravelAgencyMain extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnManageAirlinerMainButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnManageTravelAgencyMainButton, javax.swing.GroupLayout.PREFERRED_SIZE, 175, Short.MAX_VALUE))
+                    .addComponent(btnManageTravelAgencyMainButton, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE))
                 .addContainerGap())
         );
         leftPanelLayout.setVerticalGroup(
@@ -104,7 +104,7 @@ public class TravelAgencyMain extends javax.swing.JFrame {
                 .addComponent(btnManageTravelAgencyMainButton)
                 .addGap(34, 34, 34)
                 .addComponent(btnManageAirlinerMainButton)
-                .addContainerGap(513, Short.MAX_VALUE))
+                .addContainerGap(873, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(leftPanel);
