@@ -81,7 +81,12 @@ public class AirlinerFunction extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         updateFlightBtn = new javax.swing.JButton();
         backFlightList = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(174, 195, 195));
         addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -92,14 +97,14 @@ public class AirlinerFunction extends javax.swing.JPanel {
             }
         });
 
-        manageAirplaneBtn.setText("Manage Airplane");
+        manageAirplaneBtn.setIcon(new javax.swing.ImageIcon("/Users/shivibhatt/Documents/AED/GIT/GroupAssignment/GroupAssignment/Airline_Management_System/icons/icons8-paper-plane-60.png")); // NOI18N
         manageAirplaneBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 manageAirplaneBtnActionPerformed(evt);
             }
         });
 
-        addFlightBtn.setText("Add Flight");
+        addFlightBtn.setIcon(new javax.swing.ImageIcon("/Users/shivibhatt/Documents/AED/GIT/GroupAssignment/GroupAssignment/Airline_Management_System/icons/travel (1).png")); // NOI18N
         addFlightBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addFlightBtnActionPerformed(evt);
@@ -148,7 +153,8 @@ public class AirlinerFunction extends javax.swing.JPanel {
             airlinerFlightTbl.getColumnModel().getColumn(8).setResizable(false);
         }
 
-        manageflightScheduleBtn.setText("ManageFlight Schedule");
+        manageflightScheduleBtn.setIcon(new javax.swing.ImageIcon("/Users/shivibhatt/Documents/AED/GIT/GroupAssignment/GroupAssignment/Airline_Management_System/icons/icons8-schedule-60.png")); // NOI18N
+        manageflightScheduleBtn.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         manageflightScheduleBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 manageflightScheduleBtnActionPerformed(evt);
@@ -158,19 +164,29 @@ public class AirlinerFunction extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Flights List");
 
-        updateFlightBtn.setText("Update Flight");
+        updateFlightBtn.setIcon(new javax.swing.ImageIcon("/Users/shivibhatt/Documents/AED/GIT/GroupAssignment/GroupAssignment/Airline_Management_System/icons/change.png")); // NOI18N
         updateFlightBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateFlightBtnActionPerformed(evt);
             }
         });
 
-        backFlightList.setText("<Back");
+        backFlightList.setIcon(new javax.swing.ImageIcon("/Users/shivibhatt/Documents/AED/GIT/GroupAssignment/GroupAssignment/Airline_Management_System/icons/icons8-back-30.png")); // NOI18N
+        backFlightList.setText("Back");
         backFlightList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backFlightListActionPerformed(evt);
             }
         });
+
+        jLabel2.setText("Manage Travel Schedule");
+
+        jLabel3.setText("Manage Airplane");
+
+        jLabel4.setText("Add Flight");
+
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Update Flight");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -188,18 +204,35 @@ public class AirlinerFunction extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(75, 75, 75)
-                                .addComponent(manageAirplaneBtn)
-                                .addGap(18, 18, 18)
-                                .addComponent(manageflightScheduleBtn)
-                                .addGap(18, 18, 18)
-                                .addComponent(addFlightBtn)
-                                .addGap(18, 18, 18)
-                                .addComponent(updateFlightBtn))
-                            .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(backFlightList)))
-                        .addGap(0, 113, Short.MAX_VALUE)))
+                                .addComponent(backFlightList))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(75, 75, 75)
+                                        .addComponent(manageAirplaneBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(jLabel3)
+                                        .addGap(50, 50, 50)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(manageflightScheduleBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(jLabel2)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(addFlightBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(53, 53, 53)
+                                        .addComponent(jLabel4)))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(updateFlightBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(269, 269, 269)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -212,12 +245,21 @@ public class AirlinerFunction extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(manageAirplaneBtn)
-                    .addComponent(addFlightBtn)
-                    .addComponent(manageflightScheduleBtn)
-                    .addComponent(updateFlightBtn))
-                .addContainerGap(262, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(manageAirplaneBtn)
+                            .addComponent(addFlightBtn)
+                            .addComponent(manageflightScheduleBtn))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(updateFlightBtn)
+                        .addGap(0, 0, 0)
+                        .addComponent(jLabel5)))
+                .addContainerGap(180, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -298,6 +340,10 @@ public class AirlinerFunction extends javax.swing.JPanel {
     private javax.swing.JTable airlinerFlightTbl;
     private javax.swing.JButton backFlightList;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton manageAirplaneBtn;
     private javax.swing.JButton manageflightScheduleBtn;

@@ -65,13 +65,18 @@ public class TravelAgencyMain extends javax.swing.JFrame {
         leftPanel = new javax.swing.JPanel();
         btnManageAirlinerMainButton = new javax.swing.JButton();
         btnManageTravelAgencyMainButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         rightPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1500, 1020));
 
         jSplitPane1.setDividerLocation(200);
 
+        leftPanel.setBackground(new java.awt.Color(174, 195, 195));
+
+        btnManageAirlinerMainButton.setIcon(new javax.swing.ImageIcon("/Users/shivibhatt/Documents/AED/GIT/GroupAssignment/GroupAssignment/Airline_Management_System/icons/global .png")); // NOI18N
         btnManageAirlinerMainButton.setText("Manage Airliner");
         btnManageAirlinerMainButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,37 +84,50 @@ public class TravelAgencyMain extends javax.swing.JFrame {
             }
         });
 
+        btnManageTravelAgencyMainButton.setIcon(new javax.swing.ImageIcon("/Users/shivibhatt/Documents/AED/GIT/GroupAssignment/GroupAssignment/Airline_Management_System/icons/icons8-traveler-64.png")); // NOI18N
         btnManageTravelAgencyMainButton.setText("Manage Travel Agency");
+        btnManageTravelAgencyMainButton.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnManageTravelAgencyMainButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnManageTravelAgencyMainButtonActionPerformed(evt);
             }
         });
 
+        jLabel2.setIcon(new javax.swing.ImageIcon("/Users/shivibhatt/Documents/AED/GIT/GroupAssignment/GroupAssignment/Airline_Management_System/icons/icons8-airport-100.png")); // NOI18N
+
         javax.swing.GroupLayout leftPanelLayout = new javax.swing.GroupLayout(leftPanel);
         leftPanel.setLayout(leftPanelLayout);
         leftPanelLayout.setHorizontalGroup(
             leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(leftPanelLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(leftPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnManageAirlinerMainButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnManageTravelAgencyMainButton, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE))
+                .addComponent(btnManageTravelAgencyMainButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addComponent(btnManageAirlinerMainButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         leftPanelLayout.setVerticalGroup(
             leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(leftPanelLayout.createSequentialGroup()
-                .addGap(51, 51, 51)
+                .addGap(19, 19, 19)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnManageTravelAgencyMainButton)
-                .addGap(34, 34, 34)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnManageAirlinerMainButton)
-                .addContainerGap(873, Short.MAX_VALUE))
+                .addContainerGap(745, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(leftPanel);
 
         rightPanel.setLayout(new java.awt.CardLayout());
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("/Users/shivibhatt/Documents/AED/GIT/GroupAssignment/GroupAssignment/Airline_Management_System/icons/Biplane-Vol-3-Vector.jpg")); // NOI18N
+        rightPanel.add(jLabel1, "card2");
+
         jSplitPane1.setRightComponent(rightPanel);
 
         getContentPane().add(jSplitPane1, java.awt.BorderLayout.CENTER);
@@ -170,6 +188,8 @@ public class TravelAgencyMain extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnManageAirlinerMainButton;
     private javax.swing.JButton btnManageTravelAgencyMainButton;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JPanel leftPanel;
     private javax.swing.JPanel rightPanel;
