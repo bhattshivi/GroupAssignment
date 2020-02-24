@@ -127,7 +127,7 @@ public class TravelAgencyMain extends javax.swing.JFrame {
 
         rightPanel.setLayout(new java.awt.CardLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("/Users/shivibhatt/Documents/AED/GIT/GroupAssignment/GroupAssignment/Airline_Management_System/icons/Biplane-Vol-3-Vector.jpg")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Biplane-Vol-3-Vector.jpg"))); // NOI18N
         rightPanel.add(jLabel1, "card2");
 
         jSplitPane1.setRightComponent(rightPanel);

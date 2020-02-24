@@ -129,7 +129,7 @@
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="/Users/shivibhatt/Documents/AED/GIT/GroupAssignment/GroupAssignment/Airline_Management_System/icons/Biplane-Vol-3-Vector.jpg"/>
+                  <Image iconType="3" name="/icons/Biplane-Vol-3-Vector.jpg"/>
                 </Property>
               </Properties>
               <Constraints>
