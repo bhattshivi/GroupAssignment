@@ -442,6 +442,7 @@ this.panel.remove(this);
            s.setStatus("Available");
            reservation.setIsBooked(false);
            //viewSeatStatus.setText(reservation.getSeat().getStatus()+"");
+           bookingStatus.setText(reservation.isIsBooked() ? "Active" : "Cancelled");
            System.out.println("Seat Status after cancellation = " + reservation.getSeat().getStatus());
           
            
