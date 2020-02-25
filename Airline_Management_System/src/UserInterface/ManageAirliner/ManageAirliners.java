@@ -45,9 +45,9 @@ public class ManageAirliners extends javax.swing.JPanel {
     public void populateAirlinersList(AirlinerDirectory airlineDirectory){
         System.out.println("===>> " + airlineDirectory.getAirlinerList());
         for(Airliner a : airlineDirectory.getAirlinerList()) {
-            
-            airlinerComboBox.addItem(a);
-            
+            if(a.isIsActive()) {
+                airlinerComboBox.addItem(a);
+            }
             //jComboBox1.addItem(a.getAirlinerName());
             //System.out.println("===>> " + a.getAirlinerName());
         }
@@ -65,10 +65,9 @@ public class ManageAirliners extends javax.swing.JPanel {
         continueBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(174, 195, 195));
-        setPreferredSize(new java.awt.Dimension(1300, 1020));
+        setPreferredSize(new java.awt.Dimension(1040, 1020));
         setRequestFocusEnabled(false);
 
         airlinerComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -78,56 +77,53 @@ public class ManageAirliners extends javax.swing.JPanel {
         });
 
         continueBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-next-page-30.png"))); // NOI18N
+        continueBtn.setText("Continue");
         continueBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 continueBtnActionPerformed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Select an Airline to continue:");
 
-        jLabel2.setFont(new java.awt.Font("Segoe Script", 1, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe Script", 1, 36)); // NOI18N
         jLabel2.setText("Welcome to Airline Management");
-
-        jLabel3.setText("Continue");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(218, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(437, 437, 437)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(507, 507, 507)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(191, 191, 191))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addComponent(airlinerComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(530, 530, 530)
-                        .addComponent(continueBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(576, 576, 576)
-                        .addComponent(jLabel3)))
-                .addContainerGap(463, Short.MAX_VALUE))
+                            .addGap(401, 401, 401))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addGap(358, 358, 358)))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(461, 461, 461)
+                .addComponent(continueBtn)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(67, 67, 67)
+                .addGap(80, 80, 80)
                 .addComponent(jLabel2)
-                .addGap(18, 18, 18)
+                .addGap(76, 76, 76)
                 .addComponent(jLabel1)
-                .addGap(29, 29, 29)
+                .addGap(49, 49, 49)
                 .addComponent(airlinerComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(continueBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addContainerGap(765, Short.MAX_VALUE))
+                .addGap(62, 62, 62)
+                .addComponent(continueBtn)
+                .addContainerGap(601, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -154,6 +150,5 @@ public class ManageAirliners extends javax.swing.JPanel {
     private javax.swing.JButton continueBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }

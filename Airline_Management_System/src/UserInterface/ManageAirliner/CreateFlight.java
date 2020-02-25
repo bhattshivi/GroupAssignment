@@ -55,7 +55,9 @@ public class CreateFlight extends javax.swing.JPanel {
     
     public void populateAirplanes() {
         for(Airplane a : airliner.getAirplaneList()) {
-            flightAirplaneCombo.addItem(a);
+            if(a.isIsActive()) {
+                flightAirplaneCombo.addItem(a);
+            }
         }        
         for(FlightSchedule s : airliner.getFlightScheduleList()) {
             if(s.isIsActive()) {
@@ -75,8 +77,6 @@ public class CreateFlight extends javax.swing.JPanel {
 
         jComboBox4 = new javax.swing.JComboBox<>();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         flightNameTxt = new javax.swing.JTextField();
@@ -111,7 +111,7 @@ public class CreateFlight extends javax.swing.JPanel {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Available", "Not Available" }));
 
         setBackground(new java.awt.Color(174, 195, 195));
-        setPreferredSize(new java.awt.Dimension(1300, 1020));
+        setPreferredSize(new java.awt.Dimension(1040, 1020));
         addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -121,8 +121,6 @@ public class CreateFlight extends javax.swing.JPanel {
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
-
-        jPanel3.setBackground(new java.awt.Color(174, 195, 195));
 
         jPanel1.setBackground(new java.awt.Color(174, 195, 195));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Flight Details"));
@@ -145,10 +143,7 @@ public class CreateFlight extends javax.swing.JPanel {
 
         flightSeatsTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Seat # *", "Price *", "Type *", "Status *"
@@ -191,9 +186,12 @@ public class CreateFlight extends javax.swing.JPanel {
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
-                    .addComponent(flightAirplaneCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(flightStatusCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(flightNameTxt))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(flightNameTxt)
+                            .addComponent(flightStatusCombo, 0, 211, Short.MAX_VALUE)
+                            .addComponent(flightAirplaneCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(52, 52, 52))
         );
         jPanel1Layout.setVerticalGroup(
@@ -275,35 +273,30 @@ public class CreateFlight extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(flightScheduleCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel2))
-                                .addGap(40, 40, 40)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(sourceTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(arrivalDateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel5))
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(arrivalTimeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sourceTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(arrivalDateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(arrivalTimeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jLabel6)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(departureDateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addGap(55, 55, 55)
-                                    .addComponent(destiationTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(departureDateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(55, 55, 55)
+                                .addComponent(destiationTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(departureTimeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(458, Short.MAX_VALUE))
+                .addContainerGap(187, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -333,9 +326,10 @@ public class CreateFlight extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel13.setFont(new java.awt.Font("Segoe Script", 1, 24)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Segoe Script", 1, 36)); // NOI18N
         jLabel13.setText("Add Flight");
 
+        addFlightBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-airplane-take-off-60.png"))); // NOI18N
         addFlightBtn.setText("Add Flight");
         addFlightBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -351,62 +345,44 @@ public class CreateFlight extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(btnBackAddFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(407, 407, 407)
-                .addComponent(jLabel13)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(addFlightBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 226, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13)
-                    .addComponent(btnBackAddFlight))
-                .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(addFlightBtn)
-                .addContainerGap())
-        );
-
-        jScrollPane4.setViewportView(jPanel3);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel13)
+                .addGap(406, 406, 406))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(addFlightBtn)
+                .addGap(441, 441, 441))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 749, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnBackAddFlight)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(btnBackAddFlight)
+                .addGap(15, 15, 15)
+                .addComponent(jLabel13)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(addFlightBtn)
+                .addContainerGap(179, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void departureTimeTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departureTimeTxtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_departureTimeTxtActionPerformed
     
     public void clearFields() {
         flightNameTxt.setText("");
@@ -420,123 +396,7 @@ public class CreateFlight extends javax.swing.JPanel {
             flightSeatsTbl.setValueAt(null, i, 3);               
         }
     }
-    
-    private void addFlightBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addFlightBtnActionPerformed
         
-        boolean isFlightExist = false;
-        
-        dtm = (DefaultTableModel) flightSeatsTbl.getModel();
-        int nRow = dtm.getRowCount();
-        ArrayList<Seat> seatList = new ArrayList<>();        
-        boolean createFlight = false;
-        if("".equals(flightNameTxt.getText())) {
-            JOptionPane.showMessageDialog(null, "Flight name is mandatory");
-            
-        }else if("-- None --".equals(flightStatusCombo.getSelectedItem())) {
-            JOptionPane.showMessageDialog(null, "Please select a status with respect to the flight");
-            
-        }else {  
-            
-            
-            for(Flight f : masterTravelSchedule.getMasterFlightList()) {
-                if(flightNameTxt.getText().equalsIgnoreCase(f.getFlightName())) {
-                    isFlightExist = true;
-                    JOptionPane.showMessageDialog(null, "Flight with name \"" + f.getFlightName() + "\" already exist. Please enter a different name.");
-                    break;
-                }
-            }
-            
-            if(!isFlightExist) {
-                int count = 0;
-                
-                for(int i=0; i < nRow; i++) {
-                
-                    if(null == flightSeatsTbl.getValueAt(i, 0) || "".equals(flightSeatsTbl.getValueAt(i, 0))) {
-                        JOptionPane.showMessageDialog(null, "Please enter seat number at row " + (i+1));
-                        break;
-                    }else if(null == flightSeatsTbl.getValueAt(i, 1) || "".equals(flightSeatsTbl.getValueAt(i, 1))) {
-                        JOptionPane.showMessageDialog(null, "Please enter price for the seat at row " + (i+1));
-                        break;
-                    }
-                    else if(0 >= (Double)flightSeatsTbl.getValueAt(i, 1)) {
-                        JOptionPane.showMessageDialog(null, "Price for the seat cannot be less than or equals to 0 at row " + (i+1));
-                        break;
-                    }
-                    else if(null == flightSeatsTbl.getValueAt(i, 2) || "".equals(flightSeatsTbl.getValueAt(i, 2))) {
-                        JOptionPane.showMessageDialog(null, "Please select the seat type at row " + (i+1));
-                        break;
-                    }else if(null == flightSeatsTbl.getValueAt(i, 3)|| "".equals(flightSeatsTbl.getValueAt(i, 3))) {
-                        JOptionPane.showMessageDialog(null, "Please select the availability of seat at row " + (i+1));
-                        break;
-                    }else {
-                        count++;
-                        createFlight = true;
-                        Seat flightSeat = new Seat();
-                        flightSeat.setSeatName(flightSeatsTbl.getValueAt(i, 0).toString());
-                        flightSeat.setPrice((Double)flightSeatsTbl.getValueAt(i, 1));
-                        flightSeat.setType(flightSeatsTbl.getValueAt(i, 2).toString());
-                        flightSeat.setStatus(flightSeatsTbl.getValueAt(i, 3).toString());
-                        seatList.add(flightSeat);
-                    }                
-                }
-                if(!checkForAirplaneOverlap() && count == nRow) {
-                    Flight newFlight = new Flight();
-                    newFlight.setFlightName(flightNameTxt.getText());
-                    newFlight.setIsActive((flightStatusCombo.getSelectedItem() == "Active"));
-                    newFlight.setAirliner(airliner);
-                    newFlight.setFlightSchedule(selectedFlightSchedule);
-                    newFlight.setAirplane(selectedAirplane);
-                    newFlight.setFlightSeatList(seatList);        
-
-                    airliner.addFlight(newFlight);
-                    masterTravelSchedule.addFLight(newFlight);
-                    clearFields();
-                    JOptionPane.showMessageDialog(null, "Flight is created successfully");
-                } 
-            }
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-        }
-        
-        /*
-        if(!checkForAirplaneOverlap()) {
-                Flight newFlight = new Flight();
-                newFlight.setFlightName(flightNameTxt.getText());
-                newFlight.setIsActive((flightStatusCombo.getSelectedItem() == "Active"));
-                newFlight.setAirliner(airliner);
-                newFlight.setFlightSchedule(selectedFlightSchedule);
-                newFlight.setAirplane(selectedAirplane);
-
-                ArrayList<Seat> seatList = new ArrayList<>();
-                dtm = (DefaultTableModel) flightSeatsTbl.getModel();
-                int nRow = dtm.getRowCount();
-                for(int i=0; i < nRow; i++) {
-                    Seat flightSeat = new Seat();
-                    flightSeat.setSeatName(flightSeatsTbl.getValueAt(i, 0).toString());
-                    flightSeat.setPrice((Double)flightSeatsTbl.getValueAt(i, 1));
-                    flightSeat.setType(flightSeatsTbl.getValueAt(i, 2).toString());
-                    flightSeat.setStatus(flightSeatsTbl.getValueAt(i, 3).toString());
-                    seatList.add(flightSeat);
-                }
-                newFlight.setFlightSeatList(seatList);        
-
-                airliner.addFlight(newFlight);
-                masterTravelSchedule.addFLight(newFlight);
-            } 
-        */
-        
-               
-        
-    }//GEN-LAST:event_addFlightBtnActionPerformed
-    
     private boolean checkForAirplaneOverlap() {
         
         boolean isOverlap = false;
@@ -586,38 +446,21 @@ public class CreateFlight extends javax.swing.JPanel {
         return isOverlap;        
     }
     
-    private void flightAirplaneComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_flightAirplaneComboActionPerformed
-        selectedAirplane = (Airplane)flightAirplaneCombo.getSelectedItem();
-        
-        int totalSeats = (selectedAirplane.getSeatCol() * selectedAirplane.getSeatRow());
-        dtm.setRowCount(totalSeats);
-    }//GEN-LAST:event_flightAirplaneComboActionPerformed
-
-    private void flightScheduleComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_flightScheduleComboActionPerformed
-        selectedFlightSchedule = (FlightSchedule)flightScheduleCombo.getSelectedItem();
-        
-        sourceTxt.setText(selectedFlightSchedule.getSource());
-        destiationTxt.setText(selectedFlightSchedule.getDestination());
-        arrivalDateTxt.setText((selectedFlightSchedule.getArrivalDate()).toString());
-        arrivalTimeTxt.setText((selectedFlightSchedule.getArrivalTime()).toString());
-        departureDateTxt.setText((selectedFlightSchedule.getDepartureDate()).toString());
-        departureTimeTxt.setText((selectedFlightSchedule.getDepartureTime()).toString());   
-    }//GEN-LAST:event_flightScheduleComboActionPerformed
-
-    private void arrivalDateTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_arrivalDateTxtActionPerformed
-        
-    }//GEN-LAST:event_arrivalDateTxtActionPerformed
+    private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
+        // TODO add your handling code here:
+   
+    }//GEN-LAST:event_formAncestorAdded
 
     private void btnBackAddFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackAddFlightActionPerformed
         // TODO add your handling code here:
-//        AirlinerFunction airLinerFunction = new AirlinerFunction(this.panel,  airlineDirectory,  airplaneDirectory,  airliner,  masterTravelSchedule);
-//        this.panel.add(airLinerFunction, "AirlinerFunction");
-//        CardLayout layout = (CardLayout)this.panel.getLayout();
-//        layout.next(panel);
-//        this.panel.remove(this);
-//        CardLayout layout = (CardLayout) this.panel.getLayout();
-//        layout.previous(panel);
-     this.panel.remove(this);
+        //        AirlinerFunction airLinerFunction = new AirlinerFunction(this.panel,  airlineDirectory,  airplaneDirectory,  airliner,  masterTravelSchedule);
+        //        this.panel.add(airLinerFunction, "AirlinerFunction");
+        //        CardLayout layout = (CardLayout)this.panel.getLayout();
+        //        layout.next(panel);
+        //        this.panel.remove(this);
+        //        CardLayout layout = (CardLayout) this.panel.getLayout();
+        //        layout.previous(panel);
+        this.panel.remove(this);
         CardLayout layout = (CardLayout)this.panel.getLayout();
         Component[] comps = this.panel.getComponents();
         for (Component comp : comps){
@@ -629,10 +472,134 @@ public class CreateFlight extends javax.swing.JPanel {
         layout.previous(panel);
     }//GEN-LAST:event_btnBackAddFlightActionPerformed
 
-    private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
+    private void addFlightBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addFlightBtnActionPerformed
+
+        boolean isFlightExist = false;
+
+        dtm = (DefaultTableModel) flightSeatsTbl.getModel();
+        int nRow = dtm.getRowCount();
+        ArrayList<Seat> seatList = new ArrayList<>();
+        boolean createFlight = false;
+        if("".equals(flightNameTxt.getText())) {
+            JOptionPane.showMessageDialog(null, "Flight name is mandatory");
+
+        }else if("-- None --".equals(flightStatusCombo.getSelectedItem())) {
+            JOptionPane.showMessageDialog(null, "Please select a status with respect to the flight");
+
+        }else {
+
+            for(Flight f : masterTravelSchedule.getMasterFlightList()) {
+                if(flightNameTxt.getText().equalsIgnoreCase(f.getFlightName())) {
+                    isFlightExist = true;
+                    JOptionPane.showMessageDialog(null, "Flight with name \"" + f.getFlightName() + "\" already exist. Please enter a different name.");
+                    break;
+                }
+            }
+
+            if(!isFlightExist) {
+                int count = 0;
+
+                for(int i=0; i < nRow; i++) {
+
+                    if(null == flightSeatsTbl.getValueAt(i, 0) || "".equals(flightSeatsTbl.getValueAt(i, 0))) {
+                        JOptionPane.showMessageDialog(null, "Please enter seat number at row " + (i+1));
+                        break;
+                    }else if(null == flightSeatsTbl.getValueAt(i, 1) || "".equals(flightSeatsTbl.getValueAt(i, 1))) {
+                        JOptionPane.showMessageDialog(null, "Please enter price for the seat at row " + (i+1));
+                        break;
+                    }
+                    else if(0 >= (Double)flightSeatsTbl.getValueAt(i, 1)) {
+                        JOptionPane.showMessageDialog(null, "Price for the seat cannot be less than or equals to 0 at row " + (i+1));
+                        break;
+                    }
+                    else if(null == flightSeatsTbl.getValueAt(i, 2) || "".equals(flightSeatsTbl.getValueAt(i, 2))) {
+                        JOptionPane.showMessageDialog(null, "Please select the seat type at row " + (i+1));
+                        break;
+                    }else if(null == flightSeatsTbl.getValueAt(i, 3)|| "".equals(flightSeatsTbl.getValueAt(i, 3))) {
+                        JOptionPane.showMessageDialog(null, "Please select the availability of seat at row " + (i+1));
+                        break;
+                    }else {
+                        count++;
+                        createFlight = true;
+                        Seat flightSeat = new Seat();
+                        flightSeat.setSeatName(flightSeatsTbl.getValueAt(i, 0).toString());
+                        flightSeat.setPrice((Double)flightSeatsTbl.getValueAt(i, 1));
+                        flightSeat.setType(flightSeatsTbl.getValueAt(i, 2).toString());
+                        flightSeat.setStatus(flightSeatsTbl.getValueAt(i, 3).toString());
+                        seatList.add(flightSeat);
+                    }
+                }
+                if(!checkForAirplaneOverlap() && count == nRow) {
+                    Flight newFlight = new Flight();
+                    newFlight.setFlightName(flightNameTxt.getText());
+                    newFlight.setIsActive((flightStatusCombo.getSelectedItem() == "Active"));
+                    newFlight.setAirliner(airliner);
+                    newFlight.setFlightSchedule(selectedFlightSchedule);
+                    newFlight.setAirplane(selectedAirplane);
+                    newFlight.setFlightSeatList(seatList);
+
+                    airliner.addFlight(newFlight);
+                    masterTravelSchedule.addFLight(newFlight);
+                    clearFields();
+                    JOptionPane.showMessageDialog(null, "Flight is created successfully");
+                }
+            }
+
+        }
+
+        /*
+        if(!checkForAirplaneOverlap()) {
+            Flight newFlight = new Flight();
+            newFlight.setFlightName(flightNameTxt.getText());
+            newFlight.setIsActive((flightStatusCombo.getSelectedItem() == "Active"));
+            newFlight.setAirliner(airliner);
+            newFlight.setFlightSchedule(selectedFlightSchedule);
+            newFlight.setAirplane(selectedAirplane);
+
+            ArrayList<Seat> seatList = new ArrayList<>();
+            dtm = (DefaultTableModel) flightSeatsTbl.getModel();
+            int nRow = dtm.getRowCount();
+            for(int i=0; i < nRow; i++) {
+                Seat flightSeat = new Seat();
+                flightSeat.setSeatName(flightSeatsTbl.getValueAt(i, 0).toString());
+                flightSeat.setPrice((Double)flightSeatsTbl.getValueAt(i, 1));
+                flightSeat.setType(flightSeatsTbl.getValueAt(i, 2).toString());
+                flightSeat.setStatus(flightSeatsTbl.getValueAt(i, 3).toString());
+                seatList.add(flightSeat);
+            }
+            newFlight.setFlightSeatList(seatList);
+
+            airliner.addFlight(newFlight);
+            masterTravelSchedule.addFLight(newFlight);
+        }
+        */
+    }//GEN-LAST:event_addFlightBtnActionPerformed
+
+    private void departureTimeTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departureTimeTxtActionPerformed
         // TODO add your handling code here:
-   
-    }//GEN-LAST:event_formAncestorAdded
+    }//GEN-LAST:event_departureTimeTxtActionPerformed
+
+    private void arrivalDateTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_arrivalDateTxtActionPerformed
+
+    }//GEN-LAST:event_arrivalDateTxtActionPerformed
+
+    private void flightScheduleComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_flightScheduleComboActionPerformed
+        selectedFlightSchedule = (FlightSchedule)flightScheduleCombo.getSelectedItem();
+
+        sourceTxt.setText(selectedFlightSchedule.getSource());
+        destiationTxt.setText(selectedFlightSchedule.getDestination());
+        arrivalDateTxt.setText((selectedFlightSchedule.getArrivalDate()).toString());
+        arrivalTimeTxt.setText((selectedFlightSchedule.getArrivalTime()).toString());
+        departureDateTxt.setText((selectedFlightSchedule.getDepartureDate()).toString());
+        departureTimeTxt.setText((selectedFlightSchedule.getDepartureTime()).toString());
+    }//GEN-LAST:event_flightScheduleComboActionPerformed
+
+    private void flightAirplaneComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_flightAirplaneComboActionPerformed
+        selectedAirplane = (Airplane)flightAirplaneCombo.getSelectedItem();
+
+        int totalSeats = (selectedAirplane.getSeatCol() * selectedAirplane.getSeatRow());
+        dtm.setRowCount(totalSeats);
+    }//GEN-LAST:event_flightAirplaneComboActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -664,9 +631,7 @@ public class CreateFlight extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextField sourceTxt;
     // End of variables declaration//GEN-END:variables
 }

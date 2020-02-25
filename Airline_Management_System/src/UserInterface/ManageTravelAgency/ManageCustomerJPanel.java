@@ -53,8 +53,6 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
         btnAddCustomer = new javax.swing.JButton();
         btnUpdateCustomer = new javax.swing.JButton();
         btnBackManageCust = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(174, 195, 195));
 
@@ -63,17 +61,19 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Customer #", "First Name", "Last Name", "Email ID", "Gender"
+                "Customer #", "First Name", "Last Name", "Email ID", "Gender", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        tblManageCust.setRowHeight(25);
+        tblManageCust.setRowMargin(3);
         jScrollPane1.setViewportView(tblManageCust);
         if (tblManageCust.getColumnModel().getColumnCount() > 0) {
             tblManageCust.getColumnModel().getColumn(0).setResizable(false);
@@ -81,13 +81,15 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
             tblManageCust.getColumnModel().getColumn(2).setResizable(false);
             tblManageCust.getColumnModel().getColumn(3).setResizable(false);
             tblManageCust.getColumnModel().getColumn(4).setResizable(false);
+            tblManageCust.getColumnModel().getColumn(5).setResizable(false);
         }
 
-        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe Print", 1, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("MANAGE CUSTOMER");
+        jLabel1.setText("Manage Customer");
 
         btnAddCustomer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-add-user-male-60.png"))); // NOI18N
+        btnAddCustomer.setText(" Add Customer");
         btnAddCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddCustomerActionPerformed(evt);
@@ -95,6 +97,7 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
         });
 
         btnUpdateCustomer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-edit-user-60.png"))); // NOI18N
+        btnUpdateCustomer.setText("Update Customer");
         btnUpdateCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUpdateCustomerActionPerformed(evt);
@@ -118,51 +121,44 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel2.setText("Add Customer Details");
-
-        jLabel3.setText("Edit Customer Details");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(346, 346, 346))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnBackManageCust, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(399, 399, 399)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btnAddCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnUpdateCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap()
+                        .addComponent(btnBackManageCust))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(471, 471, 471)
-                        .addComponent(jLabel2)
-                        .addGap(101, 101, 101)
-                        .addComponent(jLabel3)))
-                .addContainerGap(419, Short.MAX_VALUE))
+                        .addGap(285, 285, 285)
+                        .addComponent(btnAddCustomer)
+                        .addGap(86, 86, 86)
+                        .addComponent(btnUpdateCustomer)))
+                .addContainerGap(293, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnBackManageCust)
-                .addGap(121, 121, 121)
+                .addGap(21, 21, 21)
                 .addComponent(jLabel1)
-                .addGap(27, 27, 27)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(44, 44, 44)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAddCustomer)
-                    .addComponent(btnUpdateCustomer))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addContainerGap(434, Short.MAX_VALUE))
+                    .addComponent(btnUpdateCustomer)
+                    .addComponent(btnAddCustomer))
+                .addContainerGap(482, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -228,6 +224,7 @@ public void populateManageCustomer() {
             row[2] = cust.getLastName();
             row[3] = cust.getPassportNum();
             row[4] = cust.getGender(); 
+            row[5] = cust.getIsActive()? "Active" : "Inactive";
             dtm.addRow(row);
         }
     }
@@ -237,8 +234,6 @@ public void populateManageCustomer() {
     private javax.swing.JButton btnBackManageCust;
     private javax.swing.JButton btnUpdateCustomer;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblManageCust;
     // End of variables declaration//GEN-END:variables

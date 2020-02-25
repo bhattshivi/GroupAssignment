@@ -54,7 +54,7 @@ public class MasterTravelSchedule {
                 flight.getFlightSchedule().getDestination().equals(destination) &&
                     flight.getFlightSchedule().getDepartureDate().equals(dDate) &&
                         seatCount != flight.getFlightSeatList().size() &&
-                            flight.isIsActive()) {
+                            flight.isIsActive() && flight.getAirplane().isIsActive()) {
                 
                 oneWayFlightList.add(flight);          
             }
@@ -81,7 +81,7 @@ public class MasterTravelSchedule {
                     flight.getFlightSchedule().getDestination().equals(destination) &&
                         flight.getFlightSchedule().getDepartureDate().equals(dDate) &&
                             seatCount != flight.getFlightSeatList().size() &&
-                                flight.isIsActive()) {
+                                flight.isIsActive() && flight.getAirplane().isIsActive()) {
 
                     roundTripFlightList.add(flight);          
                 }
@@ -91,7 +91,7 @@ public class MasterTravelSchedule {
                     flight.getFlightSchedule().getDestination().equals(destination) &&
                         flight.getFlightSchedule().getArrivalDate().equals(aDate) &&
                             seatCount != flight.getFlightSeatList().size() &&
-                                flight.isIsActive()) {
+                                flight.isIsActive() && flight.getAirplane().isIsActive()) {
 
                     roundTripFlightList.add(flight);          
                 }
@@ -116,6 +116,9 @@ public class MasterTravelSchedule {
         System.out.println("SOURCE NO :  **" + source);
         System.out.println("DESTINATION NO :  **" + destination);
         System.out.println();
+        
+        System.out.println("Mayank Date**" + dDate + "==== " + aDate);
+        
         
         ArrayList<Flight> list = new ArrayList<Flight>();
         String[] priceRange = null;
@@ -149,6 +152,7 @@ public class MasterTravelSchedule {
         }
         
         for (Flight flight : this.masterFlightList) {
+            if(flight.getAirplane().isIsActive()) {
             int count = 0;
             
             ArrayList<Double> seatPriceList = new ArrayList<>();            
@@ -209,6 +213,7 @@ public class MasterTravelSchedule {
                 
             }
             */
+        }
         }
         
         return list;

@@ -79,19 +79,23 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
     }
     
     public void hideRoundTripFields() {
-        returningDate.setVisible(false);
-        returningDateLbl.setVisible(false);
+        //returningDate.setVisible(false);
+        //returningDateLbl.setVisible(false);
         tblSearchRoundTripFlights.setVisible(false);
         //jScrollPane2.setVisible(false);
         //jLabel2.setVisible(false);
+        rDateLabel.setVisible(false);
+        aDatePicker.setVisible(false);
     }
     
     public void showRoundTripFields() {
-        returningDate.setVisible(true);
-        returningDateLbl.setVisible(true);
+        //returningDate.setVisible(true);
+        //returningDateLbl.setVisible(true);
         tblSearchRoundTripFlights.setVisible(true);
         //jScrollPane2.setVisible(true);
         //jLabel2.setVisible(true);
+        rDateLabel.setVisible(true);
+        aDatePicker.setVisible(true);
     }
     
     public void hideMulticityFields() {
@@ -138,8 +142,8 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
     }
     
     public void showFields() {
-        returningDate.setVisible(true);
-        returningDateLbl.setVisible(true);        
+        //returningDate.setVisible(true);
+        //returningDateLbl.setVisible(true);        
     }
     
     public void populate() {
@@ -184,12 +188,12 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         sourceCombo = new javax.swing.JComboBox<>();
-        departingDate = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        returningDateLbl = new javax.swing.JLabel();
+        dDateLabel = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         destinationCombo = new javax.swing.JComboBox<>();
-        returningDate = new javax.swing.JTextField();
+        dDatePicker = new com.github.lgooddatepicker.components.DatePicker();
+        rDateLabel = new javax.swing.JLabel();
+        aDatePicker = new com.github.lgooddatepicker.components.DatePicker();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblMultiCity = new javax.swing.JTable();
@@ -197,15 +201,13 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
         deleteRow = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         btnBackSearchFlights = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
 
         sourceCombo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boston", "San Francisco", "Dallas", "San Jose", "Seattle", "New York", "Las Vegas", "Los Angeles", "Chicago", "Miami" }));
 
         destinationCombo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boston", "San Francisco", "Dallas", "San Jose", "Seattle", "New York", "Las Vegas", "Los Angeles", "Chicago", "Miami" }));
 
         setBackground(new java.awt.Color(174, 195, 195));
-        setPreferredSize(new java.awt.Dimension(1300, 1020));
+        setPreferredSize(new java.awt.Dimension(1040, 1020));
         addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -216,6 +218,7 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
             }
         });
 
+        oneWayRB.setBackground(new java.awt.Color(174, 195, 195));
         flightSearchOptions.add(oneWayRB);
         oneWayRB.setSelected(true);
         oneWayRB.setText("One-way");
@@ -225,6 +228,7 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
             }
         });
 
+        multiCityRB.setBackground(new java.awt.Color(174, 195, 195));
         flightSearchOptions.add(multiCityRB);
         multiCityRB.setText("Multi-destination");
         multiCityRB.addActionListener(new java.awt.event.ActionListener() {
@@ -233,6 +237,7 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
             }
         });
 
+        roundTripRB.setBackground(new java.awt.Color(174, 195, 195));
         flightSearchOptions.add(roundTripRB);
         roundTripRB.setText("Round-trip");
         roundTripRB.addActionListener(new java.awt.event.ActionListener() {
@@ -242,6 +247,7 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
         });
 
         searchFlight.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/search.png"))); // NOI18N
+        searchFlight.setText(" Search");
         searchFlight.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchFlightActionPerformed(evt);
@@ -286,10 +292,8 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
             tblSearchFlight.getColumnModel().getColumn(7).setResizable(false);
         }
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Flights List");
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Returning Flights List");
 
         tblSearchRoundTripFlights.setModel(new javax.swing.table.DefaultTableModel(
@@ -332,6 +336,7 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
         }
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-airport-60.png"))); // NOI18N
+        jButton1.setText("Book");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -345,13 +350,18 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
 
         sourceCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- None --", "Boston", "San Francisco", "Dallas", "San Jose", "Seattle", "New York", "Las Vegas", "Los Angeles", "Chicago", "Miami" }));
 
-        jLabel9.setText("Departing Date");
-
-        returningDateLbl.setText("Returning Date");
+        dDateLabel.setText("Departing Date");
 
         jLabel8.setText("Going to?");
 
         destinationCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- None --", "Boston", "San Francisco", "Dallas", "San Jose", "Seattle", "New York", "Las Vegas", "Los Angeles", "Chicago", "Miami" }));
+        destinationCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                destinationComboActionPerformed(evt);
+            }
+        });
+
+        rDateLabel.setText("Returning Date");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -361,20 +371,20 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
-                    .addComponent(jLabel9))
+                    .addComponent(dDateLabel))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(sourceCombo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dDatePicker, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
+                .addGap(206, 206, 206)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rDateLabel)
+                    .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(sourceCombo, 0, 407, Short.MAX_VALUE)
-                    .addComponent(departingDate))
-                .addGap(43, 43, 43)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(returningDateLbl))
-                .addGap(33, 33, 33)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(returningDate)
-                    .addComponent(destinationCombo, 0, 352, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(aDatePicker, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                    .addComponent(destinationCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(214, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -387,10 +397,10 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
                     .addComponent(destinationCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(departingDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(returningDateLbl)
-                    .addComponent(returningDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dDateLabel)
+                    .addComponent(dDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rDateLabel)
+                    .addComponent(aDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -443,7 +453,7 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 938, Short.MAX_VALUE)
+                .addComponent(jScrollPane3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(deleteRow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -463,73 +473,70 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("SEARCH FLIGHTS");
+        jLabel3.setText("Search Flights");
+        jLabel3.setFont(new java.awt.Font("Segoe Print", 1, 36)); // NOI18N
 
-        btnBackSearchFlights.setBackground(new java.awt.Color(174, 195, 195));
         btnBackSearchFlights.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-back-30.png"))); // NOI18N
         btnBackSearchFlights.setText("<Back");
+        btnBackSearchFlights.setBackground(new java.awt.Color(174, 195, 195));
         btnBackSearchFlights.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackSearchFlightsActionPerformed(evt);
             }
         });
 
-        jLabel4.setText("Search");
-
-        jLabel5.setText("Book");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(419, 419, 419)
-                        .addComponent(oneWayRB)
-                        .addGap(18, 18, 18)
-                        .addComponent(roundTripRB)
-                        .addGap(45, 45, 45)
-                        .addComponent(multiCityRB))
+                        .addComponent(btnBackSearchFlights)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(357, 357, 357))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(oneWayRB)
+                                .addGap(18, 18, 18)
+                                .addComponent(roundTripRB)
+                                .addGap(18, 18, 18)
+                                .addComponent(multiCityRB)
+                                .addGap(346, 346, 346))))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(btnBackSearchFlights, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 978, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1077, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1081, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(359, 359, 359)
-                        .addComponent(searchFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(401, 401, 401)
-                        .addComponent(jLabel4)
-                        .addGap(151, 151, 151)
-                        .addComponent(jLabel5))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1269, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(304, 304, 304)
+                .addComponent(searchFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(89, 89, 89)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnBackSearchFlights)
-                    .addComponent(jLabel3))
-                .addGap(38, 38, 38)
+                .addComponent(btnBackSearchFlights)
+                .addGap(8, 8, 8)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(oneWayRB)
                     .addComponent(roundTripRB)
@@ -538,23 +545,19 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(searchFlight)
-                    .addComponent(jButton1))
-                .addGap(2, 2, 2)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
+                    .addComponent(searchFlight)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addGap(12, 12, 12)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -576,12 +579,21 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Please select destination city");
             }else if(source.equals(destination)) {
                 JOptionPane.showMessageDialog(null, "Source and destination city cannot be same");
-            }else if("".equals(departingDate.getText())) {
+            }else if("".equals(dDatePicker.getText())) {
                 JOptionPane.showMessageDialog(null, "Please enter departing date");
-            }else {
+            }
+            
+            /*
+            else if("".equals(departingDate.getText())) {
+                JOptionPane.showMessageDialog(null, "Please enter departing date");
+            }
+            */
+            
+            else {
                 
                 try{
-                    dDate = LocalDate.parse(departingDate.getText());
+                    //dDate = LocalDate.parse(departingDate.getText());
+                    dDate = dDatePicker.getDate();
                 }catch(DateTimeParseException e){
                     JOptionPane.showMessageDialog(null, "Please enter a valid Departure date in YYYY-MM-DD format");
                     return;
@@ -641,21 +653,32 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Please select destination city");
             }else if(source.equals(destination)) {
                 JOptionPane.showMessageDialog(null, "Source and destination city cannot be same");
-            }else if("".equals(departingDate.getText())) {
+            }
+            else if("".equals(dDatePicker.getText())) {
+                JOptionPane.showMessageDialog(null, "Please enter departing date");
+            }
+            else if("".equals(aDatePicker.getText())) {
+                JOptionPane.showMessageDialog(null, "Please enter departing date");
+            }
+            /*
+            else if("".equals(departingDate.getText())) {
                 JOptionPane.showMessageDialog(null, "Please enter departing date");
             }else if("".equals(returningDate.getText())) {
                 JOptionPane.showMessageDialog(null, "Please select returning date");
-            }else {
+            }
+            */else {
                 
                 try{
-                    dDate = LocalDate.parse(departingDate.getText());
+                    //dDate = LocalDate.parse(departingDate.getText());
+                    dDate = dDatePicker.getDate();
                 }catch(DateTimeParseException e){
                     JOptionPane.showMessageDialog(null, "Please enter a valid Departure date in YYYY-MM-DD format");
                     return;
                 } 
 
                 try{
-                    rDate = LocalDate.parse(returningDate.getText());
+                    //rDate = LocalDate.parse(returningDate.getText());
+                    rDate = aDatePicker.getDate();
                 }catch(DateTimeParseException e){
                     JOptionPane.showMessageDialog(null, "Please enter a valid Returning date in YYYY-MM-DD format");
                     return;
@@ -858,8 +881,14 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
     }//GEN-LAST:event_roundTripRBActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        if(!custDir.getCustomerList().isEmpty()) {
+        boolean isActiveCust = false;
+        for(Customer c : custDir.getCustomerList()) {
+            if(c.getIsActive()) {
+                isActiveCust = true;
+                break;
+            }
+        }
+        if(isActiveCust == true) {
         
             ArrayList<Flight> flightToBook = new ArrayList<>();
 
@@ -963,7 +992,7 @@ public class SearchFlightJPanel1 extends javax.swing.JPanel {
                 }
             }
         }else {
-            JOptionPane.showMessageDialog(null, "Please create a customer before booking a flight");
+            JOptionPane.showMessageDialog(null, "Please create an active customer before booking a flight");
         }
         
         /*
@@ -1055,6 +1084,10 @@ System.out.println(">>>--- inside seach flight back btn >>>---");
         hideRoundTripFields();
         hideMulticityFields();
     }//GEN-LAST:event_formAncestorAdded
+
+    private void destinationComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_destinationComboActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_destinationComboActionPerformed
     
     private void populateSearch() {
         /*DefaultTableModel dtm = (DefaultTableModel) tblSearchFlight.getModel();
@@ -1073,10 +1106,12 @@ System.out.println(">>>--- inside seach flight back btn >>>---");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.github.lgooddatepicker.components.DatePicker aDatePicker;
     private javax.swing.JButton addRow;
     private javax.swing.JButton btnBackSearchFlights;
+    private javax.swing.JLabel dDateLabel;
+    private com.github.lgooddatepicker.components.DatePicker dDatePicker;
     private javax.swing.JButton deleteRow;
-    private javax.swing.JTextField departingDate;
     private javax.swing.JComboBox<String> destinationCombo;
     private javax.swing.JComboBox<String> destinationCombo1;
     private javax.swing.ButtonGroup flightSearchOptions;
@@ -1084,11 +1119,8 @@ System.out.println(">>>--- inside seach flight back btn >>>---");
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1096,8 +1128,7 @@ System.out.println(">>>--- inside seach flight back btn >>>---");
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JRadioButton multiCityRB;
     private javax.swing.JRadioButton oneWayRB;
-    private javax.swing.JTextField returningDate;
-    private javax.swing.JLabel returningDateLbl;
+    private javax.swing.JLabel rDateLabel;
     private javax.swing.JRadioButton roundTripRB;
     private javax.swing.JButton searchFlight;
     private javax.swing.JComboBox<String> sourceCombo;

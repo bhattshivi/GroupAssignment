@@ -20,6 +20,16 @@ public class Airliner {
     private ArrayList<Flight> flightList;
     private ArrayList<Airplane> airplaneList;
     private int count = 0;
+    public boolean isActive;
+
+    public boolean isIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+    
     
     public Airliner() {
         this.flightScheduleList = new ArrayList<>();

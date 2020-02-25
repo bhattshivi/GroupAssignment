@@ -10,6 +10,7 @@ import Business.Airliner;
 import Business.AirlinerDirectory;
 import Business.Airplane;
 import Business.AirplaneDirectory;
+import Business.Flight;
 import Business.MasterTravelSchedule;
 import java.awt.CardLayout;
 import java.awt.Component;
@@ -48,7 +49,7 @@ public class UpdateAirplane extends javax.swing.JPanel {
         airplaneName.setText(airplane.getAirplaneName());
         airplaneRows.setText(airplane.getSeatRow()+"");
         airplaneCol.setText(airplane.getSeatCol()+"");
-        
+        statusCombo.setSelectedItem(airplane.isIsActive() ? "Active" : "Inactive");
     }
 
     /** This method is called from within the constructor to
@@ -69,9 +70,12 @@ public class UpdateAirplane extends javax.swing.JPanel {
         updateAirplane = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         backUpdateAirplane = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        statusCombo = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(174, 195, 195));
-        setPreferredSize(new java.awt.Dimension(1300, 1020));
+        setPreferredSize(new java.awt.Dimension(1040, 1020));
+        setRequestFocusEnabled(false);
         addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -96,7 +100,7 @@ public class UpdateAirplane extends javax.swing.JPanel {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Segoe Print", 1, 24)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe Print", 1, 36)); // NOI18N
         jLabel4.setText("Update Airplane");
 
         backUpdateAirplane.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-back-30.png"))); // NOI18N
@@ -107,62 +111,72 @@ public class UpdateAirplane extends javax.swing.JPanel {
             }
         });
 
+        jLabel5.setText("Status *");
+
+        statusCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- None --", "Active", "Inactive" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 372, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(airplaneRows, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addGap(37, 37, 37)
+                            .addComponent(airplaneName, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel5))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(airplaneCol, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(statusCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jLabel4))
+                .addGap(369, 369, 369))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(442, 442, 442)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(airplaneRows, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(37, 37, 37)
-                                .addComponent(airplaneName, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(updateAirplane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(airplaneCol, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)))))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(backUpdateAirplane, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(backUpdateAirplane))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(486, 486, 486)
-                        .addComponent(jLabel4)))
-                .addContainerGap(559, Short.MAX_VALUE))
+                        .addGap(436, 436, 436)
+                        .addComponent(updateAirplane, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(backUpdateAirplane)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(jLabel4))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(137, 137, 137)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(airplaneName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))))
-                .addGap(18, 18, 18)
+                .addGap(35, 35, 35)
+                .addComponent(jLabel4)
+                .addGap(43, 43, 43)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(airplaneName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(airplaneRows, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(airplaneCol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(18, 18, 18)
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(statusCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(58, 58, 58)
                 .addComponent(updateAirplane)
-                .addContainerGap(619, Short.MAX_VALUE))
+                .addContainerGap(497, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -178,6 +192,9 @@ public class UpdateAirplane extends javax.swing.JPanel {
             
         }else if("".equals(airplaneRows.getText())) {
             JOptionPane.showMessageDialog(null, "Airplane Seat Rows is mandatory");
+            
+        }else if("-- None --".equals(statusCombo.getSelectedItem())) {
+            JOptionPane.showMessageDialog(null, "Airplane status is mandatory");
             
         }else {
             
@@ -208,11 +225,23 @@ public class UpdateAirplane extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Please enter a valid seat row number");
                     return;
                 }
-
-                airplane.setAirplaneName(airplaneName.getText());
-                airplane.setSeatCol(Integer.parseInt(airplaneCol.getText()));
-                airplane.setSeatRow(Integer.parseInt(airplaneRows.getText()));
-                JOptionPane.showMessageDialog(null, "Airplane Updated Successfully"); 
+                
+                boolean updateA = true;
+                for(Flight f : airliner.getFlightList()) {
+                    if(f.getAirplane().equals(airplane) && f.isIsActive() && statusCombo.getSelectedItem().toString() == "Inactive") {
+                        updateA = false;
+                        JOptionPane.showMessageDialog(null, "Flight number " + f.getFlightName() + " is already contain this airplane and is active. Please cancel the flight first to inactive the airplane");
+                        break;
+                    }
+                }
+                if(updateA == true) {
+                    airplane.setAirplaneName(airplaneName.getText());
+                    airplane.setSeatCol(Integer.parseInt(airplaneCol.getText()));
+                    airplane.setSeatRow(Integer.parseInt(airplaneRows.getText()));
+                    airplane.setIsActive(statusCombo.getSelectedItem().toString() == "Active");
+                    JOptionPane.showMessageDialog(null, "Airplane Updated Successfully");
+                }
+                 
             }
         }
     }//GEN-LAST:event_updateAirplaneActionPerformed
@@ -250,6 +279,8 @@ public class UpdateAirplane extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JComboBox<String> statusCombo;
     private javax.swing.JButton updateAirplane;
     // End of variables declaration//GEN-END:variables
 
